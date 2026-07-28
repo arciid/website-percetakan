@@ -1,3 +1,4 @@
+HTML
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -47,7 +48,6 @@
     </div>
   </div>
 
-
 <script>
   // ==== Data produk: setiap tombol = 1 tampilan visual ====
   const products = [
@@ -94,15 +94,17 @@
       el.style.opacity = i === current ? "1" : "0";
     });
 
-
+    document.querySelectorAll('.product-btn').forEach((el, i) => {
+      el.className = "product-btn text-[9px] font-medium px-2.5 py-1 rounded-full border transition active:scale-95 "
+        + (i === current
+            ? "bg-yellow-400 text-black border-yellow-400"
+            : "bg-white/5 text-white/70 border-white/20");
     });
 
     const p = products[current];
     document.getElementById('eyebrow').textContent = p.eyebrow;
     document.getElementById('title').innerHTML = `${p.title[0]} <br><span class="text-yellow-400">${p.title[1]}</span>`;
     document.getElementById('tag').textContent = p.tag;
-    document.getElementById('slideIndex').textContent =
-      String(current + 1).padStart(2, '0') + " / " + String(products.length).padStart(2, '0');
   }
 
   function goTo(index) {
