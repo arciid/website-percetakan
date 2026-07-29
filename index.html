@@ -6,6 +6,40 @@
 <title>ARCI — Cetak Stiker Kustom</title>
 <script src="https://cdn.tailwindcss.com"></script>
 <link rel="stylesheet" href="style.css">
+<style>
+  /* 3D POP-UP STYLES */
+  .perspective-container {
+    perspective: 800px;
+  }
+  
+  .popup-layer {
+    transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+    transform-style: preserve-3d;
+  }
+
+  /* Status State Pop-Up Cutting */
+  .cut-kisscut .popup-sticker {
+    transform: translateZ(24px) translateY(-6px) rotateX(12deg) rotateY(-8deg);
+    filter: drop-shadow(-8px 12px 10px rgba(0, 0, 0, 0.7));
+  }
+  .cut-kisscut .popup-liner {
+    opacity: 0.4;
+  }
+
+  .cut-diecut .popup-sticker {
+    transform: translateZ(36px) translateY(-10px) rotateX(18deg) rotateY(-12deg) scale(1.05);
+    filter: drop-shadow(-12px 18px 15px rgba(0, 0, 0, 0.85));
+  }
+  .cut-diecut .popup-liner {
+    opacity: 0.1;
+  }
+
+  .cut-cutter .popup-sticker {
+    transform: translateZ(18px) translateY(-4px) rotateX(8deg) rotateY(-4deg);
+    filter: drop-shadow(-5px 8px 8px rgba(0, 0, 0, 0.6));
+    border-radius: 4px !important;
+  }
+</style>
 </head>
 <body class="bg-neutral-950">
 
@@ -32,41 +66,48 @@
       </span>
     </div>
 
-    <!-- 2. AREA PREVIEW VISUAL 3 KOTAK BERDAMPINGAN -->
+    <!-- 2. AREA PREVIEW VISUAL BERDAMPINGAN (FOTO/TEKSTUR & POP-UP CUTTING) -->
     <div class="relative z-10 px-3 pt-1 pb-2 mt-1">
       <div class="flex items-center justify-between mb-2 px-1">
-        <p class="text-[10px] text-yellow-400 font-extrabold uppercase tracking-widest drop-shadow">Visual Detail & Cutting</p>
+        <p class="text-[10px] text-yellow-400 font-extrabold uppercase tracking-widest drop-shadow">Visual & Pop-Up Cutting</p>
         <span id="lamBadge" class="text-[8px] bg-yellow-400/20 text-yellow-300 border border-yellow-400/30 px-2 py-0.5 rounded-full font-semibold tracking-wider uppercase">Glossy • Kiss Cut</span>
       </div>
       
-      <!-- GRID 3 PREVIEW (Foto, Tekstur, Cutting) -->
-      <div class="grid grid-cols-3 gap-1.5">
+      <!-- GRID 2 KOLOM (KIRI: MEDIA BAHAN, KANAN: VISUAL POP-UP CUTTING 3D) -->
+      <div class="grid grid-cols-2 gap-2">
         
-        <!-- KOTAK 1: FOTO DETAIL -->
-        <div id="previewImgContainer" class="group relative h-[180px] rounded-xl overflow-hidden border border-white/20 bg-black/50 backdrop-blur-sm shadow-lg cursor-pointer">
-          <span class="absolute top-1.5 left-1.5 z-10 text-[7px] font-bold bg-black/80 text-white px-1.5 py-0.5 rounded border border-white/10 tracking-wider">FOTO</span>
-          <img id="previewImg" src="gbr-vinyl.JPG" class="w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-125">
-        </div>
-
-        <!-- KOTAK 2: VIDEO TEKSTUR & FINISHING -->
-        <div id="previewVideoContainer" class="group relative h-[180px] rounded-xl overflow-hidden border border-white/20 bg-black/50 backdrop-blur-sm shadow-lg cursor-pointer">
-          <span class="absolute top-1.5 left-1.5 z-10 text-[7px] font-bold bg-yellow-400 text-black px-1.5 py-0.5 rounded tracking-wider">TEKSTUR</span>
+        <!-- KOTAK 1: FOTO / VIDEO TEKSTUR BAHAN -->
+        <div id="previewVideoContainer" class="group relative h-[190px] rounded-xl overflow-hidden border border-white/20 bg-black/50 backdrop-blur-sm shadow-lg cursor-pointer">
+          <span class="absolute top-1.5 left-1.5 z-10 text-[7px] font-bold bg-black/80 text-white px-1.5 py-0.5 rounded border border-white/10 tracking-wider">TEKSTUR BAHAN</span>
           <video id="previewVideo" autoplay loop muted playsinline poster="gbr-vinyl.JPG" class="w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-125">
             <source id="videoSource" src="video-vinyl.mp4" type="video/mp4">
           </video>
         </div>
 
-        <!-- KOTAK 3: VIDEO CUTTING -->
-        <div id="previewCutContainer" class="group relative h-[180px] rounded-xl overflow-hidden border border-white/20 bg-black/50 backdrop-blur-sm shadow-lg cursor-pointer">
-          <span class="absolute top-1.5 left-1.5 z-10 text-[7px] font-bold bg-emerald-400 text-black px-1.5 py-0.5 rounded uppercase tracking-wider">CUTTING</span>
-          <video id="previewCutVideo" autoplay loop muted playsinline class="w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-125">
-            <source id="cutVideoSource" src="kisscut.mp4" type="video/mp4">
-          </video>
+        <!-- KOTAK 2: PREVIEW 3D POP-UP CUTTING -->
+        <div id="popupContainer" class="perspective-container cut-kisscut relative h-[190px] rounded-xl overflow-hidden border border-yellow-400/30 bg-neutral-900/80 backdrop-blur-md p-3 flex flex-col justify-center items-center shadow-2xl">
+          <span id="cutLabel" class="absolute top-1.5 left-1.5 z-20 text-[7px] font-extrabold bg-yellow-400 text-black px-1.5 py-0.5 rounded tracking-wider uppercase">3D CUT POP-UP</span>
+          
+          <!-- STAGE / CONTAINER ELEMEN POP-UP -->
+          <div class="relative w-28 h-28 flex items-center justify-center">
+            
+            <!-- LINER/BACKING PAPER (KERTAS ALAS BELAKANG) -->
+            <div class="popup-liner absolute inset-0 bg-neutral-700/60 rounded-xl border border-dashed border-white/30 transition-opacity duration-300"></div>
+
+            <!-- LAYER STIKER TERANGKAT (POP-UP) -->
+            <div class="popup-layer popup-sticker absolute w-24 h-24 rounded-2xl bg-gradient-to-tr from-yellow-500 via-amber-300 to-yellow-200 border-2 border-white shadow-2xl flex flex-col items-center justify-center p-2 text-black text-center font-black">
+              <span class="text-[10px] tracking-tighter uppercase leading-none">ARCI</span>
+              <span class="text-[7px] font-semibold opacity-80 mt-0.5">CUSTOM</span>
+            </div>
+
+          </div>
+
+          <span id="cutSubtext" class="absolute bottom-2 text-[8px] text-yellow-300/80 font-mono tracking-tight">Kiss Cut: Terkelupas dari Alas</span>
         </div>
 
       </div>
 
-      <!-- KETERANGAN BAHAN (DESAIN MODERN & SEIMBANG) -->
+      <!-- KETERANGAN BAHAN (DESAIN MODERN) -->
       <div id="bahanDescription" class="mt-2.5 p-3 rounded-xl bg-gradient-to-r from-neutral-900/90 to-black/80 backdrop-blur-md border border-white/15 text-[11px] leading-relaxed shadow-xl relative overflow-hidden">
         <div class="flex items-center justify-between mb-1 border-b border-white/10 pb-1">
           <span id="descTitle" class="font-extrabold text-yellow-400 uppercase tracking-wider text-[11px]">
@@ -212,13 +253,6 @@
     }
   };
 
-  // 2. DATA VIDEO UNTUK PILIHAN CUTTING
-  const cuttingVideoData = {
-    "Kiss Cut": "kisscut.mp4",
-    "Die Cut": "diecut.mp4",
-    "Potong Cutter": "potong-cutter.mp4"
-  };
-
   // Fungsi Utama Update Tampilan
   function updateVisuals() {
     const selectedBahan = document.querySelector('input[name="bahan"]:checked')?.value || "vinyl";
@@ -238,12 +272,9 @@
     const lamBadge = document.getElementById('lamBadge');
     if (lamBadge) lamBadge.textContent = selectedLam + ' • ' + selectedCut;
 
-    // 3. Update Foto & Video Texture (Kotak 1 & 2)
+    // 3. Update Video Texture Bahan
     const visual = bahanData.laminating[selectedLam];
     if (visual) {
-      const imgEl = document.getElementById('previewImg');
-      if (imgEl && visual.img) imgEl.src = visual.img;
-
       const videoEl = document.getElementById('previewVideo');
       const sourceEl = document.getElementById('videoSource');
       if (videoEl && sourceEl && visual.video) {
@@ -253,14 +284,23 @@
       }
     }
 
-    // 4. Update Video Cutting (Kotak 3)
-    const cutVideoPath = cuttingVideoData[selectedCut];
-    const cutVideoEl = document.getElementById('previewCutVideo');
-    const cutSourceEl = document.getElementById('cutVideoSource');
-    if (cutVideoEl && cutSourceEl && cutVideoPath) {
-      cutSourceEl.src = cutVideoPath;
-      cutVideoEl.load();
-      cutVideoEl.play().catch(err => console.log(err));
+    // 4. Update Efek Pop-Up Cutting 3D
+    const popupBox = document.getElementById('popupContainer');
+    const cutSubtext = document.getElementById('cutSubtext');
+
+    if (popupBox) {
+      popupBox.classList.remove('cut-kisscut', 'cut-diecut', 'cut-cutter');
+
+      if (selectedCut === 'Kiss Cut') {
+        popupBox.classList.add('cut-kisscut');
+        if (cutSubtext) cutSubtext.textContent = 'Kiss Cut: Terkelupas dari Alas';
+      } else if (selectedCut === 'Die Cut') {
+        popupBox.classList.add('cut-diecut');
+        if (cutSubtext) cutSubtext.textContent = 'Die Cut: Potong Putus Sesuai Pola';
+      } else {
+        popupBox.classList.add('cut-cutter');
+        if (cutSubtext) cutSubtext.textContent = 'Cutter: Potong Persegi/Kotak';
+      }
     }
   }
 
