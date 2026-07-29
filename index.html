@@ -159,110 +159,79 @@
   </div> <!-- Penutup Mobile Frame -->
 
 <script>
-  // 1. DATA MEDIA FOTO & VIDEO BAHAN
-  const mediaBahan = {
+  // PETA DATA MATRIKS (Bahan -> Jenis Laminating -> Foto & Video)
+  const productMatrix = {
     "vinyl": {
       title: "Stiker Vinyl:",
       desc: "Bahan plastik tahan air & lentur, tidak mudah robek. Cocok untuk kemasan outdoor & botol.",
-      img: "gbr-vinyl.JPG",
-      video: "video-vinyl.mp4"
+      laminating: {
+        "Glossy":  { img: "gbr-vinyl.JPG", video: "video-vinyl.mp4" },
+        "Doff":    { img: "doff.JPEG",    video: "doff_2.mp4" },
+        "Glitter": { img: "glitter.JPG", video: "glitter.mp4" }
+      }
     },
     "transparan": {
       title: "Stiker Transparan:",
       desc: "Bening tembus pandang. Ideal untuk kemasan botol kaca/jar yang ingin memperlihatkan isi produk.",
-      img: "stiker-transparan.jpg",
-      video: "stiker-transparan.mp4"
+      laminating: {
+        "Glossy":  { img: "stiker-transparan.jpg", video: "stiker-transparan.mp4" },
+        "Doff":    { img: "transparan-doff.jpg",   video: "transparan-doff.mp4" },   // 👈 Masukkan file transparan doff kamu
+        "Glitter": { img: "transparan-glitter.jpg",video: "transparan-glitter.mp4" } // 👈 Masukkan file transparan glitter kamu
+      }
     },
     "chromo": {
       title: "Stiker Chromo:",
       desc: "Bahan kertas mengkilap. Pilihan paling hemat untuk label kemasan kering & box pengiriman.",
-      img: "kromo.JPG",
-      video: "kromo.mp4"
+      laminating: {
+        "Glossy":  { img: "kromo.JPG",        video: "stiker-chromo.mp4" },
+        "Doff":    { img: "chromo-doff.jpg",   video: "chromo-doff.mp4" },     // 👈 Masukkan file chromo doff kamu
+        "Glitter": { img: "chromo-glitter.jpg",video: "chromo-glitter.mp4" }  // 👈 Masukkan file chromo glitter kamu
+      }
     }
   };
 
-  // 2. DATA MEDIA FOTO & VIDEO LAMINATING
-  const mediaLaminating = {
-    "Glossy": {
-      img: "gbr-vinyl.JPG",
-      video: "video-vinyl.mp4"
-    },
-    "Doff": {
-      img: "doff.JPEG",
-      video: "doff_2.mp4"
-    },
-    "Glitter": {
-      img: "glitter.JPG",
-      video: "glitter.mp4"
-    }
-  };
+  // Fungsi Utama Update Tampilan berdasarkan Pilihan Terkini (Bahan + Laminating)
+  function updateVisuals() {
+    // Ambil nilai radio button yang sedang aktif
+    const selectedBahan = document.querySelector('input[name="bahan"]:checked')?.value || "vinyl";
+    const selectedLam = document.querySelector('input[name="laminating"]:checked')?.value || "Glossy";
 
-  // Fungsi memastikan video jalan di kecepatan normal (1.0x / Speed Asli)
-  function playNormalSpeed(videoElement) {
-    if (videoElement) {
-      videoElement.playbackRate = 1.0; 
+    const bahanData = productMatrix[selectedBahan];
+    if (!bahanData) return;
+
+    // 1. Update Deskripsi Teks
+    const titleEl = document.getElementById('descTitle');
+    const textEl = document.getElementById('descText');
+    if (titleEl) titleEl.textContent = bahanData.title;
+    if (textEl) textEl.textContent = bahanData.desc;
+
+    // 2. Update Badge Status
+    const lamBadge = document.getElementById('lamBadge');
+    if (lamBadge) lamBadge.textContent = 'Laminating: ' + selectedLam;
+
+    // 3. Ambil Foto & Video spesifik kombinasi (Bahan + Laminating)
+    const visual = bahanData.laminating[selectedLam];
+    if (!visual) return;
+
+    // Update Foto
+    const imgEl = document.getElementById('previewImg');
+    if (imgEl && visual.img) {
+      imgEl.src = visual.img;
+    }
+
+    // Update Video
+    const videoEl = document.getElementById('previewVideo');
+    const sourceEl = document.getElementById('videoSource');
+    if (videoEl && sourceEl && visual.video) {
+      sourceEl.src = visual.video;
+      videoEl.load();
+      videoEl.play().catch(err => console.log("Autoplay error:", err));
     }
   }
 
-  // Set speed normal saat halaman pertama kali dimuat
-  window.addEventListener('DOMContentLoaded', () => {
-    const bgVid = document.getElementById('bgVideo');
-    const prevVid = document.getElementById('previewVideo');
-    if (bgVid) playNormalSpeed(bgVid);
-    if (prevVid) playNormalSpeed(prevVid);
-  });
-
-  // 1. EVENT LISTENER BAHAN
-  document.querySelectorAll('input[name="bahan"]').forEach(radio => {
-    radio.addEventListener('change', (e) => {
-      const bahan = e.target.value;
-      const data = mediaBahan[bahan];
-
-      if (!data) return;
-
-      const titleEl = document.getElementById('descTitle');
-      const textEl = document.getElementById('descText');
-      if (titleEl) titleEl.textContent = data.title;
-      if (textEl) textEl.textContent = data.desc;
-
-      // Update Foto
-      const imgEl = document.getElementById('previewImg');
-      if (imgEl && data.img) imgEl.src = data.img;
-
-      // Update Video
-      const videoEl = document.getElementById('previewVideo');
-      const sourceEl = document.getElementById('videoSource');
-      if (videoEl && sourceEl && data.video) {
-        sourceEl.src = data.video;
-        videoEl.load();
-        videoEl.play().then(() => playNormalSpeed(videoEl)).catch(err => console.log(err));
-      }
-    });
-  });
-
-  // 2. EVENT LISTENER LAMINATING
-  document.querySelectorAll('input[name="laminating"]').forEach(radio => {
-    radio.addEventListener('change', (e) => {
-      const lamType = e.target.value;
-      const data = mediaLaminating[lamType];
-      const lamBadge = document.getElementById('lamBadge');
-
-      if (lamBadge) lamBadge.textContent = 'Laminating: ' + lamType;
-      if (!data) return;
-
-      // Update Foto Preview
-      const imgEl = document.getElementById('previewImg');
-      if (imgEl && data.img) imgEl.src = data.img;
-
-      // Update Video Preview
-      const videoEl = document.getElementById('previewVideo');
-      const sourceEl = document.getElementById('videoSource');
-      if (videoEl && sourceEl && data.video) {
-        sourceEl.src = data.video;
-        videoEl.load();
-        videoEl.play().then(() => playNormalSpeed(videoEl)).catch(err => console.log(err));
-      }
-    });
+  // Pasang Listener ke semua tombol Bahan & Laminating
+  document.querySelectorAll('input[name="bahan"], input[name="laminating"]').forEach(radio => {
+    radio.addEventListener('change', updateVisuals);
   });
 </script>
 </body>
