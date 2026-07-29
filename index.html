@@ -16,13 +16,11 @@
     transform: translateX(-50%) translateY(8px) scale(0.9);
   }
 
-  /* KELAS ACTIVE SAAT DISENTUH/DIHOLD */
   .cut-popup-card.active {
     opacity: 1 !important;
     transform: translateX(-50%) translateY(0) scale(1) !important;
   }
   
-  /* Stiker Terangkat di dalam Pop-Up Tooltip */
   .popup-sticker-demo {
     transition: all 0.4s ease;
     transform-style: preserve-3d;
@@ -41,6 +39,23 @@
     border-radius: 2px !important;
     filter: drop-shadow(-2px 5px 4px rgba(0,0,0,0.5));
   }
+
+  /* MODAL LIGHTBOX ANIMATION */
+  #mediaModal {
+    transition: opacity 0.25s ease, visibility 0.25s ease;
+  }
+  #mediaModal.show {
+    opacity: 1 !important;
+    visibility: visible !important;
+    pointer-events: auto !important;
+  }
+  #modalContent {
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    transform: scale(0.85);
+  }
+  #mediaModal.show #modalContent {
+    transform: scale(1);
+  }
 </style>
 </head>
 <body class="bg-neutral-950">
@@ -48,7 +63,7 @@
   <!-- Mobile Frame Bingkai Utama -->
   <div class="w-[390px] h-[844px] mx-auto my-6 relative overflow-hidden rounded-[2rem] bg-black text-white font-sans select-none border border-white/10 flex flex-col justify-between">
 
-    <!-- 1. BACKGROUND UTAMA FRAME (KEMBALI ADA VIDEO BG) -->
+    <!-- 1. BACKGROUND UTAMA FRAME -->
     <div id="slides" class="absolute inset-0 z-0">
       <video id="bgVideo" autoplay loop muted playsinline poster="gbr-vinyl.JPG" class="w-full h-full object-cover opacity-85 transition-all duration-500">
         <source id="bgVideoSource" src="stiker-bg.mp4" type="video/mp4">
@@ -76,22 +91,26 @@
       </div>
       
       <div class="grid grid-cols-2 gap-2">
-        <!-- KOTAK 1: FOTO PREVIEW -->
-        <div id="previewImgContainer" class="group relative h-[200px] rounded-xl overflow-hidden border border-white/20 bg-black/70 shadow-lg cursor-pointer">
-          <span class="absolute top-1.5 left-1.5 z-10 text-[7px] font-bold bg-black/80 text-white px-1.5 py-0.5 rounded border border-white/10 tracking-wider">FOTO DETAIL</span>
+        <!-- KOTAK 1: FOTO PREVIEW (BISA DI-TAP BUAT POP OUT) -->
+        <div id="previewImgContainer" onclick="openMediaModal('img')" class="group relative h-[200px] rounded-xl overflow-hidden border border-white/20 bg-black/70 shadow-lg cursor-pointer">
+          <span class="absolute top-1.5 left-1.5 z-10 text-[7px] font-bold bg-black/80 text-white px-1.5 py-0.5 rounded border border-white/10 tracking-wider flex items-center gap-1">
+            FOTO 🔍
+          </span>
           <img id="previewImg" src="gbr-vinyl.JPG" class="w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-125">
         </div>
 
-        <!-- KOTAK 2: VIDEO TEKSTUR BAHAN -->
-        <div id="previewVideoContainer" class="group relative h-[200px] rounded-xl overflow-hidden border border-white/20 bg-black/70 shadow-lg cursor-pointer">
-          <span class="absolute top-1.5 left-1.5 z-10 text-[7px] font-bold bg-yellow-400 text-black px-1.5 py-0.5 rounded tracking-wider">TEKSTUR FINISHING</span>
+        <!-- KOTAK 2: VIDEO TEKSTUR BAHAN (BISA DI-TAP BUAT POP OUT) -->
+        <div id="previewVideoContainer" onclick="openMediaModal('video')" class="group relative h-[200px] rounded-xl overflow-hidden border border-white/20 bg-black/70 shadow-lg cursor-pointer">
+          <span class="absolute top-1.5 left-1.5 z-10 text-[7px] font-bold bg-yellow-400 text-black px-1.5 py-0.5 rounded tracking-wider flex items-center gap-1">
+            TEKSTUR 🔍
+          </span>
           <video id="previewVideo" autoplay loop muted playsinline poster="gbr-vinyl.JPG" class="w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-125">
             <source id="videoSource" src="video-vinyl.mp4" type="video/mp4">
           </video>
         </div>
       </div>
 
-      <!-- KETERANGAN BAHAN (DILAPISI BACKGROUND SOLID DARK TANPA BLUR) -->
+      <!-- KETERANGAN BAHAN -->
       <div id="bahanDescription" class="mt-2.5 p-3 rounded-xl bg-neutral-900/95 border border-white/15 text-[11px] leading-relaxed shadow-xl relative overflow-hidden">
         <div class="flex items-center justify-between mb-1 border-b border-white/10 pb-1">
           <span id="descTitle" class="font-extrabold text-yellow-400 uppercase tracking-wider text-[11px]">
@@ -167,7 +186,7 @@
           </div>
         </div>
 
-        <!-- 3. CUTTING (POP-UP STIKER 3D TETAP ADA) -->
+        <!-- 3. CUTTING -->
         <div class="mb-1.5 relative">
           <span class="text-[10px] text-gray-300 block mb-1 font-medium">3. Jenis Potong / Cutting</span>
           
@@ -246,6 +265,25 @@
         <span>DIGITAL VINYL PRINT</span>
         <span>EST. 2020</span>
       </div>
+    </div>
+
+    <!-- 4. MODAL LIGHTBOX POP-OUT FULLSCREEN -->
+    <div id="mediaModal" onclick="closeMediaModal()" class="invisible opacity-0 fixed inset-0 z-50 bg-black/90 backdrop-blur-md flex flex-col items-center justify-center p-4">
+      <button onclick="closeMediaModal()" class="absolute top-5 right-5 text-white/80 hover:text-white bg-white/10 rounded-full w-10 h-10 flex items-center justify-center text-lg font-bold border border-white/20">
+        ✕
+      </button>
+
+      <div id="modalContent" onclick="event.stopPropagation()" class="relative max-w-full max-h-[75vh] rounded-2xl overflow-hidden border border-yellow-400/40 shadow-2xl bg-neutral-900">
+        <img id="modalImg" src="" class="hidden w-auto h-auto max-h-[70vh] object-contain rounded-2xl">
+        <video id="modalVideo" autoplay loop muted playsinline class="hidden w-auto h-auto max-h-[70vh] object-contain rounded-2xl">
+          <source id="modalVideoSource" src="" type="video/mp4">
+        </video>
+      </div>
+
+      <span id="modalTitle" class="mt-4 text-xs font-bold text-yellow-400 uppercase tracking-widest border border-yellow-400/30 px-3 py-1 rounded-full bg-yellow-400/10">
+        POP-OUT PREVIEW
+      </span>
+      <p class="text-[9px] text-white/50 mt-1">Tap di luar gambar untuk menutup</p>
     </div>
 
   </div> <!-- Penutup Mobile Frame -->
@@ -353,6 +391,47 @@
     btn.addEventListener('pointerleave', hidePopup);
     btn.addEventListener('pointercancel', hidePopup);
   });
+
+  // LOGIKA MODAL LIGHTBOX POP-OUT FOTO & VIDEO
+  function openMediaModal(type) {
+    const modal = document.getElementById('mediaModal');
+    const modalImg = document.getElementById('modalImg');
+    const modalVideo = document.getElementById('modalVideo');
+    const modalVideoSource = document.getElementById('modalVideoSource');
+    const modalTitle = document.getElementById('modalTitle');
+
+    const activeBahan = document.querySelector('input[name="bahan"]:checked')?.value || 'vinyl';
+    const activeLam = document.querySelector('input[name="laminating"]:checked')?.value || 'Glossy';
+
+    if (type === 'img') {
+      const currentImgSrc = document.getElementById('previewImg').src;
+      modalImg.src = currentImgSrc;
+      modalImg.classList.remove('hidden');
+      modalVideo.classList.add('hidden');
+      modalTitle.textContent = `FOTO DETAIL — ${activeBahan.toUpperCase()} (${activeLam})`;
+    } else if (type === 'video') {
+      const currentVidSrc = document.getElementById('videoSource').src;
+      modalVideoSource.src = currentVidSrc;
+      modalVideo.load();
+      modalVideo.play().catch(err => console.log(err));
+      
+      modalVideo.classList.remove('hidden');
+      modalImg.classList.add('hidden');
+      modalTitle.textContent = `TEKSTUR FINISHING — ${activeLam.toUpperCase()}`;
+    }
+
+    modal.classList.add('show');
+  }
+
+  function closeMediaModal() {
+    const modal = document.getElementById('mediaModal');
+    const modalVideo = document.getElementById('modalVideo');
+    
+    modal.classList.remove('show');
+    if (modalVideo) {
+      modalVideo.pause();
+    }
+  }
 </script>
 </body>
 </html>
