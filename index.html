@@ -32,19 +32,22 @@
       </span>
     </div>
 
-    <!-- 2. AREA PREVIEW VISUAL BERDAMPINGAN (DENGAN EFEK ZOOM-IN) -->
+    <!-- 2. AREA PREVIEW VISUAL BERDAMPINGAN -->
     <div class="relative z-10 px-4 pt-1 pb-2 mt-1">
-      <p class="text-[10px] text-yellow-400 font-bold uppercase tracking-wider mb-2 text-center drop-shadow">Visual Detail Bahan</p>
+      <div class="flex items-center justify-between mb-2">
+        <p class="text-[10px] text-yellow-400 font-bold uppercase tracking-wider drop-shadow">Visual Detail Bahan</p>
+        <span id="lamBadge" class="text-[8px] bg-yellow-400/20 text-yellow-300 border border-yellow-400/30 px-2 py-0.5 rounded-full font-semibold">Laminating: Glossy</span>
+      </div>
       
       <div class="grid grid-cols-2 gap-2">
-        <!-- KOTAK FOTO PREVIEW (ZOOM HOVER) -->
-        <div class="group relative h-[210px] rounded-xl overflow-hidden border border-white/20 bg-black/50 backdrop-blur-sm shadow-lg cursor-pointer">
+        <!-- KOTAK FOTO PREVIEW -->
+        <div id="previewImgContainer" class="group relative h-[210px] rounded-xl overflow-hidden border border-white/20 bg-black/50 backdrop-blur-sm shadow-lg cursor-pointer">
           <span class="absolute top-2 left-2 z-10 text-[8px] font-bold bg-black/70 text-white px-2 py-0.5 rounded border border-white/10">FOTO</span>
           <img id="previewImg" src="gbr-vinyl.JPG" class="w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-125">
         </div>
 
-        <!-- KOTAK VIDEO PREVIEW TEKSTUR (ZOOM HOVER) -->
-        <div class="group relative h-[210px] rounded-xl overflow-hidden border border-white/20 bg-black/50 backdrop-blur-sm shadow-lg cursor-pointer">
+        <!-- KOTAK VIDEO PREVIEW TEKSTUR -->
+        <div id="previewVideoContainer" class="group relative h-[210px] rounded-xl overflow-hidden border border-white/20 bg-black/50 backdrop-blur-sm shadow-lg cursor-pointer">
           <span class="absolute top-2 left-2 z-10 text-[8px] font-bold bg-yellow-400 text-black px-2 py-0.5 rounded">VIDEO TEKSTUR</span>
           <video id="previewVideo" autoplay loop muted playsinline poster="gbr-vinyl.JPG" class="w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-125">
             <source id="videoSource" src="video-vinyl.mp4" type="video/mp4">
@@ -52,13 +55,13 @@
         </div>
       </div>
 
-      <!-- KETERANGAN BAHAN (Hanya 1 Kotak) -->
+      <!-- KETERANGAN BAHAN -->
       <div id="bahanDescription" class="mt-2 p-2 rounded-lg bg-black/60 backdrop-blur-md border border-white/10 text-[10px] text-gray-300 leading-relaxed">
         <p><strong class="text-yellow-400" id="descTitle">Stiker Vinyl:</strong> <span id="descText">Bahan plastik tahan air & lentur, tidak mudah robek. Cocok untuk kemasan outdoor & botol.</span></p>
       </div>
     </div>
 
-    <!-- 3. KONFIGURASI PILIHAN STIKER (KEMBALI DI DALAM FRAME HP) -->
+    <!-- 3. KONFIGURASI PILIHAN STIKER -->
     <div class="relative z-20 px-5 pb-4 max-h-[380px] overflow-y-auto">
 
       <h1 class="text-xl font-extrabold leading-tight mb-1">
@@ -109,7 +112,7 @@
               </div>
             </label>
             <label class="cursor-pointer">
-              <input type="radio" name="laminating" value="Tanpa Laminating" class="peer hidden">
+              <input type="radio" name="laminating" value="Glitter" class="peer hidden">
               <div class="text-[9px] py-1.5 px-1 rounded border border-white/20 bg-white/5 text-center peer-checked:border-yellow-400 peer-checked:bg-yellow-400/20 peer-checked:text-yellow-400 transition font-semibold">
                 Glitter
               </div>
@@ -136,7 +139,7 @@
             <label class="cursor-pointer">
               <input type="radio" name="cutting" value="Potong Kotak" class="peer hidden">
               <div class="text-[9px] py-1.5 px-1 rounded border border-white/20 bg-white/5 text-center peer-checked:border-yellow-400 peer-checked:bg-yellow-400/20 peer-checked:text-yellow-400 transition font-semibold">
-                Potong Cutter
+                Kotak
               </div>
             </label>
           </div>
@@ -156,8 +159,8 @@
   </div> <!-- Penutup Mobile Frame -->
 
 <script>
-  // Data Media + Deskripsi Keterangan Bahan
-  const mediaData = {
+  // 1. DATA MEDIA FOTO & VIDEO BAHAN
+  const mediaBahan = {
     "vinyl": {
       title: "Stiker Vinyl:",
       desc: "Bahan plastik tahan air & lentur, tidak mudah robek. Cocok untuk kemasan outdoor & botol.",
@@ -178,33 +181,86 @@
     }
   };
 
-  // Event Listener saat Tombol Bahan diklik
+  // 2. DATA MEDIA FOTO & VIDEO LAMINATING
+  const mediaLaminating = {
+    "Glossy": {
+      img: "gbr-vinyl.JPG",          // 👈 Isi nama file foto Glossy kamu
+      video: "video-vinyl.mp4"       // 👈 Isi nama file video Glossy kamu
+    },
+    "Doff": {
+      img: "doff.JPEG",          // 👈 Isi nama file foto Doff kamu
+      video: "doff_2.mp4"        // 👈 Isi nama file video Doff kamu
+    },
+    "Glitter": {
+      img: "glitter.JPG",       // 👈 Isi nama file foto Glitter kamu
+      video: "glitter.mp4"     // 👈 Isi nama file video Glitter kamu
+    }
+  };
+
+  // Fungsi Slowmo 30% (0.3x speed)
+  function applySlowMo(videoElement) {
+    if (videoElement) {
+      videoElement.playbackRate = 0.3;
+    }
+  }
+
+  // Play Slowmo di awal
+  window.addEventListener('DOMContentLoaded', () => {
+    const bgVid = document.getElementById('bgVideo');
+    const prevVid = document.getElementById('previewVideo');
+    if (bgVid) { bgVid.addEventListener('play', () => applySlowMo(bgVid)); applySlowMo(bgVid); }
+    if (prevVid) { prevVid.addEventListener('play', () => applySlowMo(prevVid)); applySlowMo(prevVid); }
+  });
+
+  // 1. EVENT LISTENER BAHAN
   document.querySelectorAll('input[name="bahan"]').forEach(radio => {
     radio.addEventListener('change', (e) => {
       const bahan = e.target.value;
-      const data = mediaData[bahan];
+      const data = mediaBahan[bahan];
 
       if (!data) return;
 
-      // 1. Update Teks Deskripsi
       const titleEl = document.getElementById('descTitle');
       const textEl = document.getElementById('descText');
       if (titleEl) titleEl.textContent = data.title;
       if (textEl) textEl.textContent = data.desc;
 
-      // 2. Update Preview Foto
+      // Update Foto
       const imgEl = document.getElementById('previewImg');
-      if (imgEl && data.img) {
-        imgEl.src = data.img;
-      }
+      if (imgEl && data.img) imgEl.src = data.img;
 
-      // 3. Update Preview Video Kotak
+      // Update Video
       const videoEl = document.getElementById('previewVideo');
       const sourceEl = document.getElementById('videoSource');
       if (videoEl && sourceEl && data.video) {
         sourceEl.src = data.video;
         videoEl.load();
-        videoEl.play().catch(err => console.log("Autoplay error:", err));
+        videoEl.play().then(() => applySlowMo(videoEl)).catch(err => console.log(err));
+      }
+    });
+  });
+
+  // 2. EVENT LISTENER LAMINATING (FOTO & VIDEO GANTI BERSAMAAN)
+  document.querySelectorAll('input[name="laminating"]').forEach(radio => {
+    radio.addEventListener('change', (e) => {
+      const lamType = e.target.value;
+      const data = mediaLaminating[lamType];
+      const lamBadge = document.getElementById('lamBadge');
+
+      if (lamBadge) lamBadge.textContent = 'Laminating: ' + lamType;
+      if (!data) return;
+
+      // Update Foto Preview berdasarkan Laminating
+      const imgEl = document.getElementById('previewImg');
+      if (imgEl && data.img) imgEl.src = data.img;
+
+      // Update Video Preview berdasarkan Laminating
+      const videoEl = document.getElementById('previewVideo');
+      const sourceEl = document.getElementById('videoSource');
+      if (videoEl && sourceEl && data.video) {
+        sourceEl.src = data.video;
+        videoEl.load();
+        videoEl.play().then(() => applySlowMo(videoEl)).catch(err => console.log(err));
       }
     });
   });
