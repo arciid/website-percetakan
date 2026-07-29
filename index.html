@@ -32,25 +32,31 @@
       </span>
     </div>
 
-    <!-- 2. AREA PREVIEW VISUAL BERDAMPINGAN (FOTO & VIDEO) -->
+   <!-- 2. AREA PREVIEW VISUAL BERDAMPINGAN (DENGAN EFEK ZOOM-IN) -->
     <div class="relative z-10 px-4 pt-1 pb-2 mt-1">
       <p class="text-[10px] text-yellow-400 font-bold uppercase tracking-wider mb-2 text-center drop-shadow">Visual Detail Bahan</p>
       
       <div class="grid grid-cols-2 gap-2">
-        <!-- KOTAK FOTO PREVIEW -->
-        <div class="relative h-[230px] rounded-xl overflow-hidden border border-white/20 bg-black/50 backdrop-blur-sm shadow-lg">
+        <!-- KOTAK FOTO PREVIEW (ZOOM ON HOVER/TOUCH) -->
+        <div class="group relative h-[230px] rounded-xl overflow-hidden border border-white/20 bg-black/50 backdrop-blur-sm shadow-lg cursor-pointer">
           <span class="absolute top-2 left-2 z-10 text-[8px] font-bold bg-black/70 text-white px-2 py-0.5 rounded border border-white/10">FOTO</span>
-          <img id="previewImg" src="gbr-vinyl.JPG" class="w-full h-full object-cover transition-all duration-300">
+          <img id="previewImg" src="gbr-vinyl.JPG" class="w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-125">
         </div>
 
-        <!-- KOTAK VIDEO PREVIEW TEKSTUR -->
-        <div class="relative h-[230px] rounded-xl overflow-hidden border border-white/20 bg-black/50 backdrop-blur-sm shadow-lg">
+        <!-- KOTAK VIDEO PREVIEW TEKSTUR (ZOOM ON HOVER/TOUCH) -->
+        <div class="group relative h-[230px] rounded-xl overflow-hidden border border-white/20 bg-black/50 backdrop-blur-sm shadow-lg cursor-pointer">
           <span class="absolute top-2 left-2 z-10 text-[8px] font-bold bg-yellow-400 text-black px-2 py-0.5 rounded">VIDEO TEKSTUR</span>
-          <video id="previewVideo" autoplay loop muted playsinline poster="gbr-vinyl.JPG" class="w-full h-full object-cover transition-all duration-300">
+          <video id="previewVideo" autoplay loop muted playsinline poster="gbr-vinyl.JPG" class="w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-125">
             <source id="videoSource" src="video-vinyl.mp4" type="video/mp4">
           </video>
         </div>
       </div>
+
+      <!-- KETERANGAN BAHAN -->
+      <div id="bahanDescription" class="mt-2 p-2 rounded-lg bg-black/60 backdrop-blur-md border border-white/10 text-[10px] text-gray-300 leading-relaxed">
+        <p><strong class="text-yellow-400" id="descTitle">Stiker Vinyl:</strong> <span id="descText">Bahan plastik tahan air & lentur, tidak mudah robek. Cocok untuk kemasan outdoor & botol.</span></p>
+      </div>
+    </div>
 
       <!-- KETERANGAN BAHAN (Sudah ditambahkan id descTitle & descText di sini) -->
       <div id="bahanDescription" class="mt-2 p-2 rounded-lg bg-black/60 backdrop-blur-md border border-white/10 text-[10px] text-gray-300 leading-relaxed">
