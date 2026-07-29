@@ -150,34 +150,44 @@
   </div>
 
 <script>
-  // Mapping Media sesuai Bahan
+  // Data Media + Deskripsi Keterangan Bahan
   const mediaData = {
     "vinyl": {
-      img: "gbr-vinyl.jpg",
-      video: "video-vinyl.mp4"
+      title: "Stiker Vinyl:",
+      desc: "Bahan plastik tahan air & lentur, tidak mudah robek. Cocok untuk kemasan outdoor & botol.",
+      img: "stiker.jpg",
+      video: "stiker-bg.mp4"
     },
     "transparan": {
+      title: "Stiker Transparan:",
+      desc: "Bening tembus pandang. Ideal untuk kemasan botol kaca/jar yang ingin memperlihatkan isi produk.",
       img: "stiker-transparan.jpg",
       video: "stiker-transparan.mp4"
     },
     "chromo": {
+      title: "Stiker Chromo:",
+      desc: "Bahan kertas mengkilap. Pilihan paling hemat untuk label kemasan kering & box pengiriman.",
       img: "stiker-chromo.jpg",
       video: "stiker-chromo.mp4"
     }
   };
 
-  // Event Listener pas Tombol Bahan diklik
+  // Event Listener saat Tombol Bahan diklik
   document.querySelectorAll('input[name="bahan"]').forEach(radio => {
     radio.addEventListener('change', (e) => {
       const bahan = e.target.value;
       const data = mediaData[bahan];
 
       if (data) {
-        // 1. Update Preview Foto
+        // 1. Update Keterangan Teks
+        document.getElementById('descTitle').textContent = data.title;
+        document.getElementById('descText').textContent = data.desc;
+
+        // 2. Update Foto Preview
         const imgEl = document.getElementById('previewImg');
         if (imgEl && data.img) imgEl.src = data.img;
 
-        // 2. Update Preview Video Kotak
+        // 3. Update Video Preview Kotak (Hanya video kecil di samping foto yang berubah!)
         const videoEl = document.getElementById('previewVideo');
         const sourceEl = document.getElementById('videoSource');
         if (videoEl && sourceEl && data.video) {
@@ -186,14 +196,7 @@
           videoEl.play();
         }
 
-        // 3. Update Background Utama Frame
-        const bgVideoEl = document.getElementById('bgVideo');
-        const bgSourceEl = document.getElementById('bgVideoSource');
-        if (bgVideoEl && bgSourceEl && data.video) {
-          bgSourceEl.src = data.video;
-          bgVideoEl.load();
-          bgVideoEl.play();
-        }
+        // (Bagian penukar background video utama sudah dihapus biar background tidak ikut berubah!)
       }
     });
   });
