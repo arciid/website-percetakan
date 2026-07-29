@@ -158,8 +158,7 @@
 
   </div> <!-- Penutup Mobile Frame -->
 
-<script>
-  // 1. DATA MEDIA FOTO & VIDEO BAHAN
+// 1. DATA MEDIA FOTO & VIDEO BAHAN
   const mediaBahan = {
     "vinyl": {
       title: "Stiker Vinyl:",
@@ -184,32 +183,32 @@
   // 2. DATA MEDIA FOTO & VIDEO LAMINATING
   const mediaLaminating = {
     "Glossy": {
-      img: "gbr-vinyl.JPG",          // 👈 Isi nama file foto Glossy kamu
-      video: "video-vinyl.mp4"       // 👈 Isi nama file video Glossy kamu
+      img: "gbr-vinyl.JPG",          // Foto Glossy
+      video: "video-vinyl.mp4"       // Video Glossy
     },
     "Doff": {
-      img: "doff.JPEG",          // 👈 Isi nama file foto Doff kamu
-      video: "doff_2.mp4"        // 👈 Isi nama file video Doff kamu
+      img: "foto-doff.jpg",          // Foto Doff
+      video: "video-doff.mp4"        // Video Doff
     },
     "Glitter": {
-      img: "glitter.JPG",       // 👈 Isi nama file foto Glitter kamu
-      video: "glitter.mp4"     // 👈 Isi nama file video Glitter kamu
+      img: "foto-glitter.jpg",       // Foto Glitter
+      video: "video-glitter.mp4"     // Video Glitter
     }
   };
 
-  // Fungsi Slowmo 30% (0.3x speed)
-  function applySlowMo(videoElement) {
+  // Fungsi memastikan video jalan di kecepatan normal (1.0x / Speed Asli)
+  function playNormalSpeed(videoElement) {
     if (videoElement) {
-      videoElement.playbackRate = 0.3;
+      videoElement.playbackRate = 1.0; 
     }
   }
 
-  // Play Slowmo di awal
+  // Set speed normal saat halaman pertama kali dimuat
   window.addEventListener('DOMContentLoaded', () => {
     const bgVid = document.getElementById('bgVideo');
     const prevVid = document.getElementById('previewVideo');
-    if (bgVid) { bgVid.addEventListener('play', () => applySlowMo(bgVid)); applySlowMo(bgVid); }
-    if (prevVid) { prevVid.addEventListener('play', () => applySlowMo(prevVid)); applySlowMo(prevVid); }
+    if (bgVid) playNormalSpeed(bgVid);
+    if (prevVid) playNormalSpeed(prevVid);
   });
 
   // 1. EVENT LISTENER BAHAN
@@ -235,12 +234,12 @@
       if (videoEl && sourceEl && data.video) {
         sourceEl.src = data.video;
         videoEl.load();
-        videoEl.play().then(() => applySlowMo(videoEl)).catch(err => console.log(err));
+        videoEl.play().then(() => playNormalSpeed(videoEl)).catch(err => console.log(err));
       }
     });
   });
 
-  // 2. EVENT LISTENER LAMINATING (FOTO & VIDEO GANTI BERSAMAAN)
+  // 2. EVENT LISTENER LAMINATING
   document.querySelectorAll('input[name="laminating"]').forEach(radio => {
     radio.addEventListener('change', (e) => {
       const lamType = e.target.value;
@@ -250,17 +249,17 @@
       if (lamBadge) lamBadge.textContent = 'Laminating: ' + lamType;
       if (!data) return;
 
-      // Update Foto Preview berdasarkan Laminating
+      // Update Foto Preview
       const imgEl = document.getElementById('previewImg');
       if (imgEl && data.img) imgEl.src = data.img;
 
-      // Update Video Preview berdasarkan Laminating
+      // Update Video Preview
       const videoEl = document.getElementById('previewVideo');
       const sourceEl = document.getElementById('videoSource');
       if (videoEl && sourceEl && data.video) {
         sourceEl.src = data.video;
         videoEl.load();
-        videoEl.play().then(() => applySlowMo(videoEl)).catch(err => console.log(err));
+        videoEl.play().then(() => playNormalSpeed(videoEl)).catch(err => console.log(err));
       }
     });
   });
