@@ -9,7 +9,7 @@
 </head>
 <body class="bg-neutral-950">
 
-  <!-- Mobile frame -->
+  <!-- Mobile Frame Bingkai Utama -->
   <div class="w-[390px] h-[844px] mx-auto my-6 relative overflow-hidden rounded-[2rem] bg-black text-white font-sans select-none border border-white/10 flex flex-col justify-between">
 
     <!-- 1. BACKGROUND UTAMA FRAME -->
@@ -32,19 +32,19 @@
       </span>
     </div>
 
-   <!-- 2. AREA PREVIEW VISUAL BERDAMPINGAN (DENGAN EFEK ZOOM-IN) -->
+    <!-- 2. AREA PREVIEW VISUAL BERDAMPINGAN (DENGAN EFEK ZOOM-IN) -->
     <div class="relative z-10 px-4 pt-1 pb-2 mt-1">
       <p class="text-[10px] text-yellow-400 font-bold uppercase tracking-wider mb-2 text-center drop-shadow">Visual Detail Bahan</p>
       
       <div class="grid grid-cols-2 gap-2">
-        <!-- KOTAK FOTO PREVIEW (ZOOM ON HOVER/TOUCH) -->
-        <div class="group relative h-[230px] rounded-xl overflow-hidden border border-white/20 bg-black/50 backdrop-blur-sm shadow-lg cursor-pointer">
+        <!-- KOTAK FOTO PREVIEW (ZOOM HOVER) -->
+        <div class="group relative h-[210px] rounded-xl overflow-hidden border border-white/20 bg-black/50 backdrop-blur-sm shadow-lg cursor-pointer">
           <span class="absolute top-2 left-2 z-10 text-[8px] font-bold bg-black/70 text-white px-2 py-0.5 rounded border border-white/10">FOTO</span>
           <img id="previewImg" src="gbr-vinyl.JPG" class="w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-125">
         </div>
 
-        <!-- KOTAK VIDEO PREVIEW TEKSTUR (ZOOM ON HOVER/TOUCH) -->
-        <div class="group relative h-[230px] rounded-xl overflow-hidden border border-white/20 bg-black/50 backdrop-blur-sm shadow-lg cursor-pointer">
+        <!-- KOTAK VIDEO PREVIEW TEKSTUR (ZOOM HOVER) -->
+        <div class="group relative h-[210px] rounded-xl overflow-hidden border border-white/20 bg-black/50 backdrop-blur-sm shadow-lg cursor-pointer">
           <span class="absolute top-2 left-2 z-10 text-[8px] font-bold bg-yellow-400 text-black px-2 py-0.5 rounded">VIDEO TEKSTUR</span>
           <video id="previewVideo" autoplay loop muted playsinline poster="gbr-vinyl.JPG" class="w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-125">
             <source id="videoSource" src="video-vinyl.mp4" type="video/mp4">
@@ -52,19 +52,13 @@
         </div>
       </div>
 
-      <!-- KETERANGAN BAHAN -->
+      <!-- KETERANGAN BAHAN (Hanya 1 Kotak) -->
       <div id="bahanDescription" class="mt-2 p-2 rounded-lg bg-black/60 backdrop-blur-md border border-white/10 text-[10px] text-gray-300 leading-relaxed">
         <p><strong class="text-yellow-400" id="descTitle">Stiker Vinyl:</strong> <span id="descText">Bahan plastik tahan air & lentur, tidak mudah robek. Cocok untuk kemasan outdoor & botol.</span></p>
       </div>
     </div>
 
-      <!-- KETERANGAN BAHAN (Sudah ditambahkan id descTitle & descText di sini) -->
-      <div id="bahanDescription" class="mt-2 p-2 rounded-lg bg-black/60 backdrop-blur-md border border-white/10 text-[10px] text-gray-300 leading-relaxed">
-        <p><strong class="text-yellow-400" id="descTitle">Stiker Vinyl:</strong> <span id="descText">Bahan plastik tahan air & lentur, tidak mudah robek. Cocok untuk kemasan outdoor & botol.</span></p>
-      </div>
-    </div>
-
-    <!-- 3. KONFIGURASI PILIHAN STIKER -->
+    <!-- 3. KONFIGURASI PILIHAN STIKER (KEMBALI DI DALAM FRAME HP) -->
     <div class="relative z-20 px-5 pb-4 max-h-[380px] overflow-y-auto">
 
       <h1 class="text-xl font-extrabold leading-tight mb-1">
@@ -158,7 +152,8 @@
         <span>EST. 2020</span>
       </div>
     </div>
-  </div>
+
+  </div> <!-- Penutup Mobile Frame -->
 
 <script>
   // Data Media + Deskripsi Keterangan Bahan
@@ -197,13 +192,13 @@
       if (titleEl) titleEl.textContent = data.title;
       if (textEl) textEl.textContent = data.desc;
 
-      // 2. Update Preview Foto (Ganti gambar kecil)
+      // 2. Update Preview Foto
       const imgEl = document.getElementById('previewImg');
       if (imgEl && data.img) {
         imgEl.src = data.img;
       }
 
-      // 3. Update Preview Video Kotak (Hanya video kecil di samping foto)
+      // 3. Update Preview Video Kotak
       const videoEl = document.getElementById('previewVideo');
       const sourceEl = document.getElementById('videoSource');
       if (videoEl && sourceEl && data.video) {
