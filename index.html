@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>ARCI — Cetak Stiker Kustom</title>
+<title>ARCI — Cetak Stiker Kustom A3+</title>
 <script src="https://cdn.tailwindcss.com"></script>
 <link rel="stylesheet" href="style.css">
 <style>
@@ -60,7 +60,7 @@
 </head>
 <body class="bg-neutral-950 flex items-center justify-center min-h-screen">
 
-  <!-- Mobile Frame Bingkai Utama (Fleksibel Mengikuti Layar HP Asli) -->
+  <!-- Mobile Frame Bingkai Utama -->
   <div class="w-full max-w-[414px] min-h-screen sm:min-h-0 sm:h-[844px] sm:my-6 relative overflow-hidden sm:rounded-[2.5rem] bg-black text-white font-sans select-none sm:border sm:border-white/10 flex flex-col justify-between shadow-2xl">
 
     <!-- 1. BACKGROUND UTAMA FRAME -->
@@ -79,7 +79,7 @@
         <span class="font-semibold text-sm tracking-wide">ARCI</span>
       </div>
       <span class="text-[10px] tracking-widest border border-white/30 rounded-full px-3 py-1 text-white/80 uppercase bg-black/60">
-        Sticker Studio
+        Sticker Studio A3+
       </span>
     </div>
 
@@ -131,19 +131,19 @@
     <div class="relative z-20 px-5 pb-4">
 
       <h1 class="text-xl font-extrabold leading-tight mb-1">
-        STICKER <span class="text-yellow-400">KUSTOM</span>
+        STICKER <span class="text-yellow-400">KUSTOM A3+</span>
       </h1>
 
       <div id="stickerOptions" class="my-2 pt-2 border-t border-white/10 text-left bg-neutral-900/95 p-2.5 rounded-xl border border-white/10 shadow-2xl">
         
-        <!-- 1. BAHAN STIKER -->
+        <!-- 1. BAHAN STIKER (GRID 3 KOLOM X 2 BARIS) -->
         <div class="mb-2.5">
-          <span class="text-[10px] text-gray-300 block mb-1 font-medium">1. Pilih Bahan Stiker</span>
+          <span class="text-[10px] text-gray-300 block mb-1 font-medium">1. Pilih Bahan Stiker (A3+)</span>
           <div class="grid grid-cols-3 gap-1.5">
             <label class="cursor-pointer">
-              <input type="radio" name="bahan" value="vinyl" class="peer hidden" checked>
+              <input type="radio" name="bahan" value="chromo" class="peer hidden">
               <div class="text-[9px] py-1.5 px-1 rounded border border-white/20 bg-white/5 text-center peer-checked:border-yellow-400 peer-checked:bg-yellow-400/20 peer-checked:text-yellow-400 transition font-semibold">
-                Vinyl
+                Kromo
               </div>
             </label>
             <label class="cursor-pointer">
@@ -153,9 +153,29 @@
               </div>
             </label>
             <label class="cursor-pointer">
-              <input type="radio" name="bahan" value="chromo" class="peer hidden">
+              <input type="radio" name="bahan" value="vinyl" class="peer hidden" checked>
               <div class="text-[9px] py-1.5 px-1 rounded border border-white/20 bg-white/5 text-center peer-checked:border-yellow-400 peer-checked:bg-yellow-400/20 peer-checked:text-yellow-400 transition font-semibold">
-                Chromo
+                Vinyl
+              </div>
+            </label>
+
+            <!-- OPSI BAHAN BARU -->
+            <label class="cursor-pointer">
+              <input type="radio" name="bahan" value="chrome" class="peer hidden">
+              <div class="text-[9px] py-1.5 px-1 rounded border border-white/20 bg-white/5 text-center peer-checked:border-yellow-400 peer-checked:bg-yellow-400/20 peer-checked:text-yellow-400 transition font-semibold">
+                Chrome
+              </div>
+            </label>
+            <label class="cursor-pointer">
+              <input type="radio" name="bahan" value="hologram" class="peer hidden">
+              <div class="text-[9px] py-1.5 px-1 rounded border border-white/20 bg-white/5 text-center peer-checked:border-yellow-400 peer-checked:bg-yellow-400/20 peer-checked:text-yellow-400 transition font-semibold">
+                Hologram
+              </div>
+            </label>
+            <label class="cursor-pointer">
+              <input type="radio" name="bahan" value="scotlite" class="peer hidden">
+              <div class="text-[9px] py-1.5 px-1 rounded border border-white/20 bg-white/5 text-center peer-checked:border-yellow-400 peer-checked:bg-yellow-400/20 peer-checked:text-yellow-400 transition font-semibold">
+                Scotlite
               </div>
             </label>
           </div>
@@ -289,33 +309,60 @@
   </div> <!-- Penutup Mobile Frame -->
 
 <script>
-  // PETA DATA BAHAN & LAMINATING
+  // PETA DATA BAHAN (A3+) & LAMINATING
   const productMatrix = {
-    "vinyl": {
-      title: "Stiker Vinyl",
-      desc: "Bahan plastik tahan air & lentur, tidak mudah robek. Cocok untuk kemasan outdoor & botol.",
+    "chromo": {
+      title: "Stiker Kromo (Chromo):",
+      desc: "Bahan kertas mengkilap. Pilihan paling ekonomis & favorit untuk label kemasan makanan kering/box.",
       laminating: {
-        "Glossy":  { img: "gbr-vinyl.JPG", video: "video-vinyl.mp4" },
-        "Doff":    { img: "doff.JPEG",    video: "doff_2.mp4" },
-        "Glitter": { img: "glitter.JPG", video: "glitter.mp4" }
+        "Glossy":  { img: "kromo.JPG",        video: "stiker-chromo.mp4" },
+        "Doff":    { img: "chromo-doff.jpg",   video: "chromo-doff.mp4" },
+        "Glitter": { img: "chromo-glitter.jpg",video: "chromo-glitter.mp4" }
       }
     },
     "transparan": {
-      title: "Stiker Transparan",
-      desc: "Bening tembus pandang. Ideal untuk kemasan botol kaca/jar yang ingin memperlihatkan isi produk.",
+      title: "Stiker Transparan:",
+      desc: "Bening tembus pandang. Ideal untuk kemasan botol kaca/jar agar warna isi produk tetap terlihat estetik.",
       laminating: {
         "Glossy":  { img: "stiker-transparan.jpg", video: "stiker-transparan.mp4" },
         "Doff":    { img: "transparan-doff.jpg",   video: "transparan-doff.mp4" },
         "Glitter": { img: "transparan-glitter.jpg",video: "transparan-glitter.mp4" }
       }
     },
-    "chromo": {
-      title: "Stiker Chromo",
-      desc: "Bahan kertas mengkilap. Pilihan paling hemat untuk label kemasan kering & box pengiriman.",
+    "vinyl": {
+      title: "Stiker Vinyl Premium:",
+      desc: "Bahan basis plastik tahan air & lentur, tidak mudah robek. Cocok untuk botol dingin & kemasan outdoor.",
       laminating: {
-        "Glossy":  { img: "kromo.JPG",        video: "stiker-chromo.mp4" },
-        "Doff":    { img: "chromo-doff.jpg",   video: "chromo-doff.mp4" },
-        "Glitter": { img: "chromo-glitter.jpg",video: "chromo-glitter.mp4" }
+        "Glossy":  { img: "gbr-vinyl.JPG", video: "video-vinyl.mp4" },
+        "Doff":    { img: "doff.JPEG",    video: "doff_2.mp4" },
+        "Glitter": { img: "glitter.JPG", video: "glitter.mp4" }
+      }
+    },
+    "chrome": {
+      title: "Stiker Chrome (Silver/Gold):",
+      desc: "Bahan metallic mengkilap seperti cermin/besi. Memberikan kesan mewah & eksklusif pada logo.",
+      laminating: {
+        "Glossy":  { img: "chrome-glossy.jpg",  video: "chrome-glossy.mp4" },
+        "Doff":    { img: "chrome-doff.jpg",    video: "chrome-doff.mp4" },
+        "Glitter": { img: "chrome-glitter.jpg", video: "chrome-glitter.mp4" }
+      }
+    },
+    "hologram": {
+      title: "Stiker Hologram:",
+      desc: "Efek pelangi 3D mengkilap saat terkena pantulan cahaya. Sangat mencolok & sering dipakai untuk stiker komunitas/brand premium.",
+      laminating: {
+        "Glossy":  { img: "hologram-glossy.jpg",  video: "hologram-glossy.mp4" },
+        "Doff":    { img: "hologram-doff.jpg",    video: "hologram-doff.mp4" },
+        "Glitter": { img: "hologram-glitter.jpg", video: "hologram-glitter.mp4" }
+      }
+    },
+    "scotlite": {
+      title: "Stiker Scotlite (Reflektif):",
+      desc: "Memantulkan cahaya terang jika terkena sorot lampu di tempat gelap. Populer untuk stiker kendaraan/warning label.",
+      laminating: {
+        "Glossy":  { img: "scotlite-glossy.jpg",  video: "scotlite-glossy.mp4" },
+        "Doff":    { img: "scotlite-doff.jpg",    video: "scotlite-doff.mp4" },
+        "Glitter": { img: "scotlite-glitter.jpg", video: "scotlite-glitter.mp4" }
       }
     }
   };
