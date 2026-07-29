@@ -25,7 +25,7 @@
     <div class="relative z-20 flex items-center justify-between px-5 pt-5 pb-2">
       <div class="flex items-center gap-2">
         <img src="logo test.png" alt="Logo" class="h-7 w-auto object-contain">
-        <span class="font-semibold text-sm">ARCI</span>
+        <span class="font-semibold text-sm tracking-wide">ARCI</span>
       </div>
       <span class="text-[10px] tracking-widest border border-white/30 rounded-full px-3 py-1 text-white/80 uppercase backdrop-blur-md bg-black/30">
         Sticker Studio
@@ -35,30 +35,30 @@
     <!-- 2. AREA PREVIEW VISUAL 3 KOTAK BERDAMPINGAN -->
     <div class="relative z-10 px-3 pt-1 pb-2 mt-1">
       <div class="flex items-center justify-between mb-2 px-1">
-        <p class="text-[10px] text-yellow-400 font-bold uppercase tracking-wider drop-shadow">Visual Detail & Cutting</p>
-        <span id="lamBadge" class="text-[8px] bg-yellow-400/20 text-yellow-300 border border-yellow-400/30 px-2 py-0.5 rounded-full font-semibold">Glossy • Kiss Cut</span>
+        <p class="text-[10px] text-yellow-400 font-extrabold uppercase tracking-widest drop-shadow">Visual Detail & Cutting</p>
+        <span id="lamBadge" class="text-[8px] bg-yellow-400/20 text-yellow-300 border border-yellow-400/30 px-2 py-0.5 rounded-full font-semibold tracking-wider uppercase">Glossy • Kiss Cut</span>
       </div>
       
-      <!-- GRID 3 PREVIEW -->
+      <!-- GRID 3 PREVIEW (Foto, Tekstur, Cutting) -->
       <div class="grid grid-cols-3 gap-1.5">
         
         <!-- KOTAK 1: FOTO DETAIL -->
         <div id="previewImgContainer" class="group relative h-[180px] rounded-xl overflow-hidden border border-white/20 bg-black/50 backdrop-blur-sm shadow-lg cursor-pointer">
-          <span class="absolute top-1.5 left-1.5 z-10 text-[7px] font-bold bg-black/80 text-white px-1.5 py-0.5 rounded border border-white/10">FOTO</span>
+          <span class="absolute top-1.5 left-1.5 z-10 text-[7px] font-bold bg-black/80 text-white px-1.5 py-0.5 rounded border border-white/10 tracking-wider">FOTO</span>
           <img id="previewImg" src="gbr-vinyl.JPG" class="w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-125">
         </div>
 
         <!-- KOTAK 2: VIDEO TEKSTUR & FINISHING -->
         <div id="previewVideoContainer" class="group relative h-[180px] rounded-xl overflow-hidden border border-white/20 bg-black/50 backdrop-blur-sm shadow-lg cursor-pointer">
-          <span class="absolute top-1.5 left-1.5 z-10 text-[7px] font-bold bg-yellow-400 text-black px-1.5 py-0.5 rounded">TEKSTUR</span>
+          <span class="absolute top-1.5 left-1.5 z-10 text-[7px] font-bold bg-yellow-400 text-black px-1.5 py-0.5 rounded tracking-wider">TEKSTUR</span>
           <video id="previewVideo" autoplay loop muted playsinline poster="gbr-vinyl.JPG" class="w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-125">
             <source id="videoSource" src="video-vinyl.mp4" type="video/mp4">
           </video>
         </div>
 
-        <!-- KOTAK 3: VIDEO CUTTING (KISS CUT / DIE CUT / CUTTER) -->
+        <!-- KOTAK 3: VIDEO CUTTING -->
         <div id="previewCutContainer" class="group relative h-[180px] rounded-xl overflow-hidden border border-white/20 bg-black/50 backdrop-blur-sm shadow-lg cursor-pointer">
-          <span class="absolute top-1.5 left-1.5 z-10 text-[7px] font-bold bg-emerald-400 text-black px-1.5 py-0.5 rounded uppercase">CUTTING</span>
+          <span class="absolute top-1.5 left-1.5 z-10 text-[7px] font-bold bg-emerald-400 text-black px-1.5 py-0.5 rounded uppercase tracking-wider">CUTTING</span>
           <video id="previewCutVideo" autoplay loop muted playsinline class="w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-125">
             <source id="cutVideoSource" src="kisscut.mp4" type="video/mp4">
           </video>
@@ -66,10 +66,21 @@
 
       </div>
 
-      <!-- KETERANGAN BAHAN & CUTTING -->
-      <div id="bahanDescription" class="mt-2 p-2 rounded-lg bg-black/60 backdrop-blur-md border border-white/10 text-[10px] text-gray-300 leading-relaxed">
-        <p><strong class="text-yellow-400" id="descTitle">Stiker Vinyl:</strong> <span id="descText">Bahan plastik tahan air & lentur, tidak mudah robek. Cocok untuk kemasan outdoor & botol.</span></p>
+      <!-- KETERANGAN BAHAN (DESAIN MODERN & SEIMBANG) -->
+      <div id="bahanDescription" class="mt-2.5 p-3 rounded-xl bg-gradient-to-r from-neutral-900/90 to-black/80 backdrop-blur-md border border-white/15 text-[11px] leading-relaxed shadow-xl relative overflow-hidden">
+        <div class="flex items-center justify-between mb-1 border-b border-white/10 pb-1">
+          <span id="descTitle" class="font-extrabold text-yellow-400 uppercase tracking-wider text-[11px]">
+            Stiker Vinyl
+          </span>
+          <span class="text-[8px] bg-white/10 text-neutral-300 px-1.5 py-0.5 rounded font-mono uppercase tracking-widest border border-white/10">
+            SPEC
+          </span>
+        </div>
+        <p id="descText" class="text-neutral-300 font-normal text-[10.5px] leading-snug tracking-normal">
+          Bahan plastik tahan air & lentur, tidak mudah robek. Cocok untuk kemasan outdoor & botol.
+        </p>
       </div>
+
     </div>
 
     <!-- 3. KONFIGURASI PILIHAN STIKER -->
@@ -173,7 +184,7 @@
   // 1. PETA DATA BAHAN & LAMINATING
   const productMatrix = {
     "vinyl": {
-      title: "Stiker Vinyl:",
+      title: "Stiker Vinyl",
       desc: "Bahan plastik tahan air & lentur, tidak mudah robek. Cocok untuk kemasan outdoor & botol.",
       laminating: {
         "Glossy":  { img: "gbr-vinyl.JPG", video: "video-vinyl.mp4" },
@@ -182,7 +193,7 @@
       }
     },
     "transparan": {
-      title: "Stiker Transparan:",
+      title: "Stiker Transparan",
       desc: "Bening tembus pandang. Ideal untuk kemasan botol kaca/jar yang ingin memperlihatkan isi produk.",
       laminating: {
         "Glossy":  { img: "stiker-transparan.jpg", video: "stiker-transparan.mp4" },
@@ -191,7 +202,7 @@
       }
     },
     "chromo": {
-      title: "Stiker Chromo:",
+      title: "Stiker Chromo",
       desc: "Bahan kertas mengkilap. Pilihan paling hemat untuk label kemasan kering & box pengiriman.",
       laminating: {
         "Glossy":  { img: "kromo.JPG",        video: "stiker-chromo.mp4" },
@@ -203,9 +214,9 @@
 
   // 2. DATA VIDEO UNTUK PILIHAN CUTTING
   const cuttingVideoData = {
-    "Kiss Cut": "kisscut.mp4",             // 👈 File video proses Kiss Cut
-    "Die Cut": "doff_2.mp4.mp4",               // 👈 File video proses Die Cut (upload ke GitHub)
-    "Potong Cutter": "potong-cutter.mp4"   // 👈 File video proses Potong Cutter (upload ke GitHub)
+    "Kiss Cut": "kisscut.mp4",
+    "Die Cut": "diecut.mp4",
+    "Potong Cutter": "potong-cutter.mp4"
   };
 
   // Fungsi Utama Update Tampilan
