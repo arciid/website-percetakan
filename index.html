@@ -7,32 +7,34 @@
 <script src="https://cdn.tailwindcss.com"></script>
 <link rel="stylesheet" href="style.css">
 <style>
-  /* 1. EFEK AMBIENT KUNING BERGERAK (SUPER RINGAN & SMOOTH) */
+  /* 1. LAYER CONTAINER HITAM PEKAT */
   .bg-ambient-black {
-    background-color: #070707;
+    background-color: #050505 !important;
     position: relative;
     overflow: hidden;
   }
 
+  /* 2. EFEK AMBIENT KUNING BERGERAK (CLEAR & HIGH CONTRAST) */
   .yellow-glow-layer {
     position: absolute;
-    width: 160%;
-    height: 160%;
-    top: -30%;
-    left: -30%;
-    background: radial-gradient(circle at 50% 50%, rgba(234, 179, 8, 0.15) 0%, rgba(234, 179, 8, 0.03) 45%, transparent 70%);
+    width: 170%;
+    height: 170%;
+    top: -35%;
+    left: -35%;
+    background: radial-gradient(circle at 50% 50%, rgba(250, 204, 21, 0.28) 0%, rgba(234, 179, 8, 0.08) 45%, transparent 70%);
     pointer-events: none;
+    z-index: 1;
     will-change: transform;
-    animation: moveGlow 12s ease-in-out infinite alternate;
+    animation: moveGlow 10s ease-in-out infinite alternate;
   }
 
   @keyframes moveGlow {
-    0% { transform: translate3d(-6%, -6%, 0) scale(1); }
-    50% { transform: translate3d(6%, 4%, 0) scale(1.1); }
-    100% { transform: translate3d(-4%, 6%, 0) scale(0.95); }
+    0% { transform: translate3d(-10%, -10%, 0) scale(1); }
+    50% { transform: translate3d(10%, 8%, 0) scale(1.15); }
+    100% { transform: translate3d(-6%, 10%, 0) scale(0.9); }
   }
 
-  /* 2. CONTAINER SCROLL SNAP SLIDE VERTICAL */
+  /* 3. CONTAINER SCROLL SNAP SLIDE VERTICAL */
   .scroll-snap-container {
     scroll-snap-type: y mandatory;
     overflow-y: scroll;
@@ -54,7 +56,7 @@
     flex-shrink: 0;
   }
 
-  /* 3. POP-UP CUTTING TOOLTIP */
+  /* 4. POP-UP CUTTING TOOLTIP */
   .cut-popup-card {
     transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
     transform-origin: bottom center;
@@ -87,7 +89,7 @@
     filter: drop-shadow(-2px 5px 4px rgba(0,0,0,0.5));
   }
 
-  /* 4. MODAL LIGHTBOX ANIMATION */
+  /* 5. MODAL LIGHTBOX ANIMATION */
   #mediaModal {
     transition: opacity 0.25s ease, visibility 0.25s ease;
   }
@@ -118,17 +120,8 @@
       <!-- ========================================== -->
       <div class="slide-section bg-ambient-black flex flex-col justify-between p-0 relative">
         
-        <!-- Ambient Yellow Glow (Bergerak Ringan) -->
+        <!-- Ambient Yellow Glow Layer (z-index: 1) -->
         <div class="yellow-glow-layer"></div>
-
-        <!-- Background Video/Foto Produk -->
-        <div id="slides" class="absolute inset-0 z-0 opacity-25">
-          <video id="bgVideo" autoplay loop muted playsinline poster="gbr-vinyl.JPG" class="w-full h-full object-cover">
-            <source id="bgVideoSource" src="stiker-bg.mp4" type="video/mp4">
-            <img src="gbr-vinyl.JPG" class="w-full h-full object-cover">
-          </video>
-          <div class="absolute inset-0 bg-gradient-to-b from-black/80 via-transparent to-black"></div>
-        </div>
 
         <!-- Header -->
         <div class="relative z-20 flex items-center justify-between px-5 pt-5 pb-2">
@@ -141,8 +134,8 @@
           </span>
         </div>
 
-        <!-- Preview Visual -->
-        <div class="relative z-10 px-4 pt-1 pb-2">
+        <!-- Preview Visual (Foto & Video Tekstur) -->
+        <div class="relative z-20 px-4 pt-1 pb-2">
           <div class="flex items-center justify-between mb-2 px-1">
             <p class="text-[10px] text-yellow-400 font-extrabold uppercase tracking-widest drop-shadow">Visual Detail & Tekstur</p>
             <span id="lamBadge" class="text-[8px] bg-yellow-400/20 text-yellow-300 border border-yellow-400/30 px-2 py-0.5 rounded-full font-semibold tracking-wider uppercase">Glossy • Kiss Cut</span>
@@ -349,7 +342,7 @@
         </div>
 
         <!-- Content Banner -->
-        <div class="relative z-10 flex-1 flex flex-col justify-center gap-3 overflow-y-auto py-3 pr-1">
+        <div class="relative z-20 flex-1 flex flex-col justify-center gap-3 overflow-y-auto py-3 pr-1">
           
           <div>
             <span class="text-[10px] text-yellow-400 font-extrabold uppercase tracking-widest block mb-0.5">Katalog Visual</span>
