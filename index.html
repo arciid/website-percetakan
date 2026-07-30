@@ -7,45 +7,39 @@
 <script src="https://cdn.tailwindcss.com"></script>
 <link rel="stylesheet" href="style.css">
 <style>
-  /* 0. ANIMATED AMBIENT YELLOW GRADIENT BACKGROUND */
-  @keyframes ambientMove {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
+  /* 1. EFEK AMBIENT KUNING BERGERAK (SUPER RINGAN & SMOOTH) */
+  .bg-ambient-black {
+    background-color: #070707;
+    position: relative;
+    overflow: hidden;
   }
 
-  @keyframes floatOrb {
-    0% { transform: translate(0px, 0px) scale(1); opacity: 0.15; }
-    50% { transform: translate(30px, -40px) scale(1.2); opacity: 0.28; }
-    100% { transform: translate(0px, 0px) scale(1); opacity: 0.15; }
-  }
-
-  .animated-yellow-bg {
-    background: linear-gradient(135deg, #0a0a0a, #1a1600, #0d0d0d, #261f00, #0a0a0a);
-    background-size: 300% 300%;
-    animation: ambientMove 14s ease infinite;
-  }
-
-  .glow-orb-yellow {
+  .yellow-glow-layer {
     position: absolute;
-    width: 250px;
-    height: 250px;
-    background: radial-gradient(circle, rgba(234, 179, 8, 0.22) 0%, rgba(234, 179, 8, 0) 70%);
-    border-radius: 50%;
-    filter: blur(40px);
+    width: 160%;
+    height: 160%;
+    top: -30%;
+    left: -30%;
+    background: radial-gradient(circle at 50% 50%, rgba(234, 179, 8, 0.15) 0%, rgba(234, 179, 8, 0.03) 45%, transparent 70%);
     pointer-events: none;
-    animation: floatOrb 8s ease-in-out infinite;
+    will-change: transform;
+    animation: moveGlow 12s ease-in-out infinite alternate;
   }
 
-  /* 1. SCROLL SNAP VERTICAL CONTAINER */
+  @keyframes moveGlow {
+    0% { transform: translate3d(-6%, -6%, 0) scale(1); }
+    50% { transform: translate3d(6%, 4%, 0) scale(1.1); }
+    100% { transform: translate3d(-4%, 6%, 0) scale(0.95); }
+  }
+
+  /* 2. CONTAINER SCROLL SNAP SLIDE VERTICAL */
   .scroll-snap-container {
     scroll-snap-type: y mandatory;
     overflow-y: scroll;
     height: 100%;
     scroll-behavior: smooth;
-    /* Hide scrollbar for Chrome, Safari and Opera */
-    -ms-overflow-style: none;  /* IE and Edge */
-    scrollbar-width: none;  /* Firefox */
+    -ms-overflow-style: none;
+    scrollbar-width: none;
   }
   .scroll-snap-container::-webkit-scrollbar {
     display: none;
@@ -60,7 +54,7 @@
     flex-shrink: 0;
   }
 
-  /* 2. EFEK POP-UP TOOLTIP DI ATAS BUTTON */
+  /* 3. POP-UP CUTTING TOOLTIP */
   .cut-popup-card {
     transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
     transform-origin: bottom center;
@@ -93,7 +87,7 @@
     filter: drop-shadow(-2px 5px 4px rgba(0,0,0,0.5));
   }
 
-  /* 3. MODAL LIGHTBOX ANIMATION */
+  /* 4. MODAL LIGHTBOX ANIMATION */
   #mediaModal {
     transition: opacity 0.25s ease, visibility 0.25s ease;
   }
@@ -113,31 +107,30 @@
 </head>
 <body class="bg-neutral-950 flex items-center justify-center min-h-screen">
 
-  <!-- Mobile Frame Bingkai Utama -->
+  <!-- Mobile Frame Utama -->
   <div class="w-full max-w-[414px] h-screen sm:h-[844px] sm:my-6 relative overflow-hidden sm:rounded-[2.5rem] bg-black text-white font-sans select-none sm:border sm:border-white/10 flex flex-col justify-between shadow-2xl">
 
-    <!-- CONTAINER SCROLL SNAP SLIDE LAYER -->
+    <!-- CONTAINER SLIDE VERTICAL -->
     <div class="scroll-snap-container w-full h-full">
 
       <!-- ========================================== -->
       <!-- SLIDE LAYER 1: STIKER A3+                  -->
       <!-- ========================================== -->
-      <div class="slide-section flex flex-col justify-between p-0 relative animated-yellow-bg">
+      <div class="slide-section bg-ambient-black flex flex-col justify-between p-0 relative">
         
-        <!-- Glow Orb Ambient Kuning Moving -->
-        <div class="glow-orb-yellow top-10 -left-10"></div>
-        <div class="glow-orb-yellow bottom-20 -right-10"></div>
+        <!-- Ambient Yellow Glow (Bergerak Ringan) -->
+        <div class="yellow-glow-layer"></div>
 
-        <!-- 1. BACKGROUND UTAMA FRAME -->
-        <div id="slides" class="absolute inset-0 z-0 opacity-40">
-          <video id="bgVideo" autoplay loop muted playsinline poster="gbr-vinyl.JPG" class="w-full h-full object-cover transition-all duration-500">
+        <!-- Background Video/Foto Produk -->
+        <div id="slides" class="absolute inset-0 z-0 opacity-25">
+          <video id="bgVideo" autoplay loop muted playsinline poster="gbr-vinyl.JPG" class="w-full h-full object-cover">
             <source id="bgVideoSource" src="stiker-bg.mp4" type="video/mp4">
             <img src="gbr-vinyl.JPG" class="w-full h-full object-cover">
           </video>
-          <div class="absolute inset-0 bg-gradient-to-b from-black/80 via-black/40 to-black/95"></div>
+          <div class="absolute inset-0 bg-gradient-to-b from-black/80 via-transparent to-black"></div>
         </div>
 
-        <!-- Top bar -->
+        <!-- Header -->
         <div class="relative z-20 flex items-center justify-between px-5 pt-5 pb-2">
           <div class="flex items-center gap-2">
             <img src="logo test.png" alt="Logo" class="h-7 w-auto object-contain" onerror="this.style.display='none'">
@@ -148,7 +141,7 @@
           </span>
         </div>
 
-        <!-- 2. AREA PREVIEW VISUAL -->
+        <!-- Preview Visual -->
         <div class="relative z-10 px-4 pt-1 pb-2">
           <div class="flex items-center justify-between mb-2 px-1">
             <p class="text-[10px] text-yellow-400 font-extrabold uppercase tracking-widest drop-shadow">Visual Detail & Tekstur</p>
@@ -156,16 +149,14 @@
           </div>
           
           <div class="grid grid-cols-2 gap-2">
-            <!-- KOTAK 1: FOTO PREVIEW -->
-            <div id="previewImgContainer" onclick="openMediaModal('img')" class="group relative h-[160px] xs:h-[180px] rounded-xl overflow-hidden border border-white/20 bg-black/70 shadow-lg cursor-pointer">
+            <div id="previewImgContainer" onclick="openMediaModal('img')" class="group relative h-[155px] xs:h-[175px] rounded-xl overflow-hidden border border-white/20 bg-black/80 shadow-lg cursor-pointer">
               <span class="absolute top-1.5 left-1.5 z-10 text-[7px] font-bold bg-black/80 text-white px-1.5 py-0.5 rounded border border-white/10 tracking-wider flex items-center gap-1">
                 FOTO 🔍
               </span>
               <img id="previewImg" src="gbr-vinyl.JPG" class="w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-125">
             </div>
 
-            <!-- KOTAK 2: VIDEO TEKSTUR BAHAN -->
-            <div id="previewVideoContainer" onclick="openMediaModal('video')" class="group relative h-[160px] xs:h-[180px] rounded-xl overflow-hidden border border-white/20 bg-black/70 shadow-lg cursor-pointer">
+            <div id="previewVideoContainer" onclick="openMediaModal('video')" class="group relative h-[155px] xs:h-[175px] rounded-xl overflow-hidden border border-white/20 bg-black/80 shadow-lg cursor-pointer">
               <span class="absolute top-1.5 left-1.5 z-10 text-[7px] font-bold bg-yellow-400 text-black px-1.5 py-0.5 rounded tracking-wider flex items-center gap-1">
                 TEKSTUR 🔍
               </span>
@@ -175,8 +166,8 @@
             </div>
           </div>
 
-          <!-- KETERANGAN BAHAN -->
-          <div id="bahanDescription" class="mt-2 p-2.5 rounded-xl bg-neutral-900/90 border border-white/15 text-[11px] leading-relaxed shadow-xl relative overflow-hidden">
+          <!-- Deskripsi Bahan -->
+          <div id="bahanDescription" class="mt-2 p-2.5 rounded-xl bg-neutral-900/90 border border-white/15 text-[11px] leading-relaxed shadow-xl relative overflow-hidden backdrop-blur-sm">
             <div class="flex items-center justify-between mb-1 border-b border-white/10 pb-1">
               <span id="descTitle" class="font-extrabold text-yellow-400 uppercase tracking-wider text-[11px]">
                 Stiker Vinyl
@@ -191,15 +182,15 @@
           </div>
         </div>
 
-        <!-- 3. KONFIGURASI PILIHAN STIKER -->
+        <!-- Options Menu -->
         <div class="relative z-20 px-5 pb-3">
           <h1 class="text-lg font-extrabold leading-tight mb-1">
             STICKER <span class="text-yellow-400">KUSTOM A3+</span>
           </h1>
 
-          <div id="stickerOptions" class="my-1.5 pt-2 border-t border-white/10 text-left bg-neutral-900/90 p-2.5 rounded-xl border border-white/10 shadow-2xl">
+          <div id="stickerOptions" class="my-1.5 pt-2 border-t border-white/10 text-left bg-neutral-900/90 p-2.5 rounded-xl border border-white/10 shadow-2xl backdrop-blur-sm">
             
-            <!-- 1. BAHAN STIKER (GRID 3 KOLOM X 2 BARIS) -->
+            <!-- 1. Bahan -->
             <div class="mb-2">
               <span class="text-[10px] text-gray-300 block mb-1 font-medium">1. Pilih Bahan Stiker (A3+)</span>
               <div class="grid grid-cols-3 gap-1.5">
@@ -242,7 +233,7 @@
               </div>
             </div>
 
-            <!-- 2. LAMINATING -->
+            <!-- 2. Laminating -->
             <div class="mb-2">
               <span class="text-[10px] text-gray-300 block mb-1 font-medium">2. Lapisan Laminating</span>
               <div class="grid grid-cols-3 gap-1.5">
@@ -267,7 +258,7 @@
               </div>
             </div>
 
-            <!-- 3. CUTTING -->
+            <!-- 3. Cutting -->
             <div class="mb-1 relative">
               <span class="text-[10px] text-gray-300 block mb-1 font-medium">3. Jenis Potong / Cutting</span>
               <div class="grid grid-cols-3 gap-1.5 relative">
@@ -329,7 +320,7 @@
 
           </div>
 
-          <!-- INDIKATOR SWIPE DOWN UNTUK BANNER -->
+          <!-- Petunjuk Scroll Down -->
           <div class="flex items-center justify-center gap-1.5 mt-2 text-yellow-400 text-[10px] font-semibold animate-bounce cursor-pointer">
             <span>Scroll ke bawah untuk Banner</span>
             <span>↓</span>
@@ -341,13 +332,13 @@
       <!-- ========================================== -->
       <!-- SLIDE LAYER 2: BANNER / SPANDUK FLEXI      -->
       <!-- ========================================== -->
-      <div class="slide-section flex flex-col justify-between p-5 relative animated-yellow-bg">
+      <div class="slide-section bg-ambient-black flex flex-col justify-between p-5 relative">
         
-        <div class="glow-orb-yellow top-20 -right-10"></div>
-        <div class="glow-orb-yellow bottom-10 -left-10"></div>
+        <!-- Ambient Yellow Glow Layer 2 -->
+        <div class="yellow-glow-layer"></div>
 
-        <!-- Top Bar Slide Banner -->
-        <div class="relative z-20 flex items-center justify-between pb-2">
+        <!-- Header Banner -->
+        <div class="relative z-20 flex items-center justify-between pb-2 border-b border-white/10">
           <div class="flex items-center gap-2">
             <img src="logo test.png" alt="Logo" class="h-7 w-auto object-contain" onerror="this.style.display='none'">
             <span class="font-semibold text-sm tracking-wide">ARCI</span>
@@ -357,8 +348,8 @@
           </span>
         </div>
 
-        <!-- Content Banner Visual -->
-        <div class="relative z-10 flex-1 flex flex-col justify-center gap-3 overflow-y-auto py-2 pr-1">
+        <!-- Content Banner -->
+        <div class="relative z-10 flex-1 flex flex-col justify-center gap-3 overflow-y-auto py-3 pr-1">
           
           <div>
             <span class="text-[10px] text-yellow-400 font-extrabold uppercase tracking-widest block mb-0.5">Katalog Visual</span>
@@ -366,10 +357,9 @@
             <p class="text-[10.5px] text-neutral-300 mt-1">Panduan memilih ketebalan cetak spanduk & baliho outdoor.</p>
           </div>
 
-          <!-- CARDS BAHAN BANNER -->
+          <!-- Cards Bahan Banner -->
           <div class="space-y-2.5">
-            <!-- Card 1 -->
-            <div class="bg-neutral-900/90 border border-white/15 p-3 rounded-xl shadow-lg relative overflow-hidden">
+            <div class="bg-neutral-900/90 border border-white/15 p-3 rounded-xl shadow-lg relative overflow-hidden backdrop-blur-sm">
               <div class="flex items-center justify-between mb-1">
                 <span class="font-extrabold text-xs text-yellow-400 uppercase">Flexi Standar 280gr</span>
                 <span class="text-[8px] bg-yellow-400/20 text-yellow-300 border border-yellow-400/30 px-2 py-0.5 rounded-full font-semibold">Ekonomis</span>
@@ -379,8 +369,7 @@
               </p>
             </div>
 
-            <!-- Card 2 -->
-            <div class="bg-neutral-900/90 border border-yellow-400/40 p-3 rounded-xl shadow-lg relative overflow-hidden">
+            <div class="bg-neutral-900/90 border border-yellow-400/50 p-3 rounded-xl shadow-lg relative overflow-hidden backdrop-blur-sm">
               <div class="flex items-center justify-between mb-1">
                 <span class="font-extrabold text-xs text-yellow-400 uppercase">Flexi High Res 340gr</span>
                 <span class="text-[8px] bg-yellow-400 text-black px-2 py-0.5 rounded-full font-bold">Best Seller</span>
@@ -390,8 +379,7 @@
               </p>
             </div>
 
-            <!-- Card 3 -->
-            <div class="bg-neutral-900/90 border border-white/15 p-3 rounded-xl shadow-lg relative overflow-hidden">
+            <div class="bg-neutral-900/90 border border-white/15 p-3 rounded-xl shadow-lg relative overflow-hidden backdrop-blur-sm">
               <div class="flex items-center justify-between mb-1">
                 <span class="font-extrabold text-xs text-yellow-400 uppercase">Flexi Korchin 440gr</span>
                 <span class="text-[8px] bg-white/10 text-neutral-300 border border-white/20 px-2 py-0.5 rounded-full font-semibold">Heavy Duty</span>
@@ -402,23 +390,23 @@
             </div>
           </div>
 
-          <!-- TIPE FINISHING PINGGIRAN -->
+          <!-- Tipe Finishing -->
           <div class="mt-1">
             <span class="text-[10px] text-yellow-400 font-extrabold uppercase tracking-widest block mb-1.5">Tipe Finishing Pinggiran</span>
             <div class="grid grid-cols-2 gap-2 text-[9.5px]">
-              <div class="bg-black/60 border border-white/10 p-2 rounded-lg">
+              <div class="bg-black/70 border border-white/10 p-2 rounded-lg">
                 <span class="font-bold text-white block">Mata Ayam</span>
                 <span class="text-neutral-400 text-[8.5px]">Lubang ring besi tiap pojok buat tali</span>
               </div>
-              <div class="bg-black/60 border border-white/10 p-2 rounded-lg">
+              <div class="bg-black/70 border border-white/10 p-2 rounded-lg">
                 <span class="font-bold text-white block">Selongsong</span>
                 <span class="text-neutral-400 text-[8.5px]">Lipatan lubang kayu/bambu gantung</span>
               </div>
-              <div class="bg-black/60 border border-white/10 p-2 rounded-lg">
+              <div class="bg-black/70 border border-white/10 p-2 rounded-lg">
                 <span class="font-bold text-white block">Lipat Pas / Press</span>
                 <span class="text-neutral-400 text-[8.5px]">Keliling dilipat rapi tanpa lubang</span>
               </div>
-              <div class="bg-black/60 border border-white/10 p-2 rounded-lg">
+              <div class="bg-black/70 border border-white/10 p-2 rounded-lg">
                 <span class="font-bold text-white block">Kosongan</span>
                 <span class="text-neutral-400 text-[8.5px]">Dibiarkan sisa putih tanpa lipatan</span>
               </div>
@@ -427,7 +415,7 @@
 
         </div>
 
-        <!-- Footer / Indikator Kembali ke Atas -->
+        <!-- Footer Banner -->
         <div class="relative z-20 pt-2 border-t border-white/10 flex items-center justify-between text-[10px] text-white/60">
           <span>ARCI PRINTING</span>
           <span class="text-yellow-400 font-semibold cursor-pointer" onclick="document.querySelector('.scroll-snap-container').scrollTo({top:0, behavior:'smooth'})">↑ Kembali ke Stiker</span>
@@ -437,7 +425,7 @@
 
     </div> <!-- End Scroll Snap Container -->
 
-    <!-- 4. MODAL LIGHTBOX POP-OUT FULLSCREEN -->
+    <!-- Modal Lightbox -->
     <div id="mediaModal" onclick="closeMediaModal()" class="invisible opacity-0 fixed inset-0 z-50 bg-black/90 backdrop-blur-md flex flex-col items-center justify-center p-4">
       <button onclick="closeMediaModal()" class="absolute top-5 right-5 text-white/80 hover:text-white bg-white/10 rounded-full w-10 h-10 flex items-center justify-center text-lg font-bold border border-white/20">
         ✕
@@ -459,7 +447,7 @@
   </div> <!-- Penutup Mobile Frame -->
 
 <script>
-  // PETA DATA BAHAN (A3+) & LAMINATING
+  // DATA BAHAN & LAMINATING STIKER
   const productMatrix = {
     "chromo": {
       title: "Stiker Kromo (Chromo):",
@@ -517,7 +505,7 @@
     }
   };
 
-  // Update Visual
+  // Update Visual Interaktif
   function updateVisuals() {
     const selectedBahan = document.querySelector('input[name="bahan"]:checked')?.value || "vinyl";
     const selectedLam = document.querySelector('input[name="laminating"]:checked')?.value || "Glossy";
@@ -526,17 +514,14 @@
     const bahanData = productMatrix[selectedBahan];
     if (!bahanData) return;
 
-    // 1. Update Deskripsi Teks
     const titleEl = document.getElementById('descTitle');
     const textEl = document.getElementById('descText');
     if (titleEl) titleEl.textContent = bahanData.title;
     if (textEl) textEl.textContent = bahanData.desc;
 
-    // 2. Update Badge Status
     const lamBadge = document.getElementById('lamBadge');
     if (lamBadge) lamBadge.textContent = selectedLam + ' • ' + selectedCut;
 
-    // 3. Update Foto & Video Texture
     const visual = bahanData.laminating[selectedLam];
     if (visual) {
       const imgEl = document.getElementById('previewImg');
@@ -552,12 +537,11 @@
     }
   }
 
-  // Listener Pilihan Radio
   document.querySelectorAll('input[name="bahan"], input[name="laminating"], input[name="cutting"]').forEach(radio => {
     radio.addEventListener('change', updateVisuals);
   });
 
-  // LOGIKA POP-UP CUTTING
+  // Logika Pop-up Cutting
   document.querySelectorAll('.cut-btn').forEach(btn => {
     let timer = null;
     const popup = btn.querySelector('.cut-popup-card');
@@ -589,7 +573,7 @@
     btn.addEventListener('pointercancel', hidePopup);
   });
 
-  // LOGIKA MODAL LIGHTBOX POP-OUT FOTO & VIDEO
+  // Lightbox Modal Foto & Video
   function openMediaModal(type) {
     const modal = document.getElementById('mediaModal');
     const modalImg = document.getElementById('modalImg');
