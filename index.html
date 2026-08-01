@@ -6,27 +6,33 @@
 <title>ARCI — Digital Print & Studio Catalog</title>
 <script src="https://cdn.tailwindcss.com"></script>
 <style>
+  /* Base Palette Setup */
+  body {
+    background-color: #040405;
+    color: #F4F4F5;
+  }
   .bg-ambient-black {
     background-color: #08080a !important;
     position: relative;
     overflow: hidden;
   }
+  /* Subtle Luxury Ambient Glow */
   .yellow-glow-layer {
     position: absolute;
     width: 100%;
     height: 100%;
     top: 0%;
     left: 0%;
-    background: radial-gradient(circle at 50% 35%, rgba(250, 204, 21, 0.22) 0%, rgba(234, 179, 8, 0.05) 45%, transparent 70%);
+    background: radial-gradient(circle at 50% 30%, rgba(250, 204, 21, 0.15) 0%, rgba(234, 179, 8, 0.03) 50%, transparent 75%);
     pointer-events: none;
     z-index: 1;
     will-change: transform;
     mix-blend-mode: screen;
-    animation: moveGlow 10s ease-in-out infinite alternate;
+    animation: moveGlow 12s ease-in-out infinite alternate;
   }
   @keyframes moveGlow {
-    0% { transform: translate3d(-3%, -3%, 0) scale(0.95); }
-    100% { transform: translate3d(3%, 3%, 0) scale(1.05); }
+    0% { transform: translate3d(-2%, -2%, 0) scale(0.98); }
+    100% { transform: translate3d(2%, 2%, 0) scale(1.02); }
   }
   .scroll-snap-container {
     scroll-snap-type: y mandatory;
@@ -47,27 +53,29 @@
   }
   .no-scrollbar::-webkit-scrollbar { display: none; }
   .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
-  #mediaModal, #orderModal, #sosmedModal {
+  
+  /* Modals Transition */
+  #orderModal, #sosmedModal {
     transition: opacity 0.25s ease, visibility 0.25s ease;
   }
-  #mediaModal.show, #orderModal.show, #sosmedModal.show {
+  #orderModal.show, #sosmedModal.show {
     opacity: 1 !important;
     visibility: visible !important;
     pointer-events: auto !important;
   }
-  #modalContent, #orderModalContent, #sosmedModalContent {
+  #orderModalContent, #sosmedModalContent {
     transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-    transform: scale(0.88);
+    transform: scale(0.90);
   }
-  #mediaModal.show #modalContent, #orderModal.show #orderModalContent, #sosmedModal.show #sosmedModalContent {
+  #orderModal.show #orderModalContent, #sosmedModal.show #sosmedModalContent {
     transform: scale(1);
   }
 </style>
 </head>
-<body class="bg-neutral-950 flex items-center justify-center min-h-screen">
+<body class="flex items-center justify-center min-h-screen">
 
   <!-- Frame Mobile Utama -->
-  <div class="w-full max-w-[414px] h-screen sm:h-[844px] sm:my-6 relative overflow-hidden sm:rounded-[2.5rem] bg-black text-white font-sans select-none sm:border sm:border-white/10 flex flex-col justify-between shadow-2xl">
+  <div class="w-full max-w-[414px] h-screen sm:h-[844px] sm:my-6 relative overflow-hidden sm:rounded-[2.5rem] bg-[#08080A] text-white font-sans select-none sm:border sm:border-zinc-800/80 flex flex-col justify-between shadow-2xl">
 
     <!-- CONTAINER SLIDE SCROLL VERTICAL -->
     <div class="scroll-snap-container w-full h-full pb-16">
@@ -81,20 +89,20 @@
         <!-- HEADER BRAND -->
         <div class="relative z-20 flex items-center justify-between pt-1 pb-2">
           <div class="flex items-center gap-3">
-            <img src="logo test.png" alt="Logo" class="h-14 w-auto object-contain drop-shadow-lg" onerror="this.style.display='none'">
+            <img src="logo test.png" alt="ARCI Logo" class="h-14 w-auto object-contain drop-shadow-md" onerror="this.style.display='none'">
             <div>
               <span class="font-extrabold text-lg tracking-wider text-white block leading-none">ARCI</span>
-              <span class="text-[9.5px] font-medium text-yellow-400 tracking-tight block mt-0.5">Solusi Cetak & Digital Studio</span>
+              <span class="text-[9.5px] font-semibold text-yellow-400 tracking-tight block mt-0.5">Solusi Cetak & Digital Studio</span>
             </div>
           </div>
-          <span class="text-[9px] tracking-widest border border-yellow-400/30 rounded-full px-2.5 py-1 text-yellow-300 font-semibold bg-black/50 backdrop-blur-md">
+          <span class="text-[9px] tracking-widest border border-yellow-400/30 rounded-full px-2.5 py-1 text-yellow-300 font-semibold bg-black/60 backdrop-blur-md">
             1/9 • STICKER
           </span>
         </div>
 
-        <!-- SINGLE MEDIA CONTAINER (TAB SWITCHER NIKE STYLE) -->
+        <!-- SINGLE MEDIA CONTAINER (TAB SWITCHER LUXURY) -->
         <div class="relative z-20 space-y-2">
-          <div class="relative h-[210px] w-full rounded-2xl overflow-hidden border border-white/15 bg-black/60 shadow-xl group">
+          <div class="relative h-[210px] w-full rounded-2xl overflow-hidden border border-zinc-800 bg-zinc-900/80 shadow-xl group">
             
             <!-- MEDIA PREVIEW -->
             <img id="prevImg1" src="gbr-vinyl.JPG" class="w-full h-full object-cover transition-all duration-300">
@@ -103,65 +111,65 @@
             </video>
 
             <!-- TAB SWITCHER FLOATING -->
-            <div class="absolute top-2.5 right-2.5 z-20 flex bg-black/70 p-0.5 rounded-xl border border-white/20 backdrop-blur-md shadow-lg">
+            <div class="absolute top-2.5 right-2.5 z-20 flex bg-black/80 p-0.5 rounded-xl border border-zinc-700/60 backdrop-blur-md shadow-lg">
               <button id="tabFoto1" onclick="switchMediaTab(1, 'foto')" class="px-2.5 py-1 rounded-lg text-[9px] font-bold bg-yellow-400 text-black shadow transition">📸 Foto</button>
-              <button id="tabVideo1" onclick="switchMediaTab(1, 'video')" class="px-2.5 py-1 rounded-lg text-[9px] font-bold text-gray-300 hover:text-white transition">🎥 Tekstur</button>
+              <button id="tabVideo1" onclick="switchMediaTab(1, 'video')" class="px-2.5 py-1 rounded-lg text-[9px] font-bold text-zinc-400 hover:text-white transition">🎥 Tekstur</button>
             </div>
 
             <!-- POP-OUT PREVIEW BUTTON -->
-            <button onclick="openCurrentMediaModal(1)" class="absolute bottom-2.5 right-2.5 z-20 bg-black/70 hover:bg-black text-white text-[8.5px] font-bold px-2 py-1 rounded-lg border border-white/20 backdrop-blur-md flex items-center gap-1">
+            <button onclick="alert('Membuka pratinjau media...')" class="absolute bottom-2.5 right-2.5 z-20 bg-black/80 hover:bg-black text-zinc-200 text-[8.5px] font-bold px-2 py-1 rounded-lg border border-zinc-700/60 backdrop-blur-md flex items-center gap-1 transition">
               <span>🔍 Perbesar</span>
             </button>
           </div>
 
           <!-- DESKRIPSI SINGKAT RINGKAS -->
-          <div class="p-2.5 rounded-xl bg-black/50 border border-white/10 text-[10.5px] leading-relaxed backdrop-blur-md">
+          <div class="p-2.5 rounded-xl bg-zinc-900/90 border border-zinc-800 text-[10.5px] leading-relaxed backdrop-blur-md">
             <span id="descTitle1" class="font-extrabold text-yellow-400 text-xs uppercase block mb-0.5">Stiker Vinyl Premium ⭐ REKOMENDASI</span>
-            <p id="descText1" class="text-neutral-300 font-normal text-[10px]">Bahan basis plastik lentur, 100% tahan air & tidak mudah robek. Paling ideal untuk botol dingin & kemasan outdoor.</p>
+            <p id="descText1" class="text-zinc-300 font-normal text-[10px]">Bahan basis plastik lentur, 100% tahan air & tidak mudah robek. Paling ideal untuk botol dingin & kemasan outdoor.</p>
           </div>
         </div>
 
-        <!-- CUSTOMIZER PANEL (HORIZONAL SCROLL PILLS) -->
+        <!-- CUSTOMIZER PANEL (HORIZONTAL SCROLL PILLS) -->
         <div class="relative z-20 space-y-2 pb-14">
           
           <!-- 1. BAHAN (HORIZONTAL SCROLL PILLS) -->
           <div>
             <div class="flex items-center justify-between mb-1">
               <span class="text-[9.5px] font-bold text-yellow-400 uppercase tracking-wider">1. Pilih Jenis Bahan:</span>
-              <span class="text-[8.5px] text-gray-400">Geser ➔</span>
+              <span class="text-[8.5px] text-zinc-500">Geser ➔</span>
             </div>
             <div class="flex gap-1.5 overflow-x-auto no-scrollbar py-0.5">
               <label class="flex-none cursor-pointer">
                 <input type="radio" name="bahan1" value="vinyl" class="peer hidden" checked>
-                <div class="px-3 py-1.5 rounded-xl border border-white/20 bg-white/5 peer-checked:border-yellow-400 peer-checked:bg-yellow-400 peer-checked:text-black text-white text-[9px] font-extrabold flex items-center gap-1 transition shadow">
+                <div class="px-3 py-1.5 rounded-xl border border-zinc-800 bg-zinc-900/90 peer-checked:border-yellow-400 peer-checked:bg-yellow-400 peer-checked:text-black text-zinc-200 text-[9px] font-extrabold flex items-center gap-1 transition shadow">
                   <span>Vinyl</span>
                   <span class="text-[7.5px] opacity-80 border border-current px-1 rounded">⭐ Favorit</span>
                 </div>
               </label>
               <label class="flex-none cursor-pointer">
                 <input type="radio" name="bahan1" value="chromo" class="peer hidden">
-                <div class="px-3 py-1.5 rounded-xl border border-white/20 bg-white/5 peer-checked:border-yellow-400 peer-checked:bg-yellow-400 peer-checked:text-black text-white text-[9px] font-extrabold flex items-center gap-1 transition">
+                <div class="px-3 py-1.5 rounded-xl border border-zinc-800 bg-zinc-900/90 peer-checked:border-yellow-400 peer-checked:bg-yellow-400 peer-checked:text-black text-zinc-200 text-[9px] font-extrabold flex items-center gap-1 transition">
                   <span>Kromo</span>
                   <span class="text-[7.5px] opacity-80 border border-current px-1 rounded">🏷️ Hemat</span>
                 </div>
               </label>
               <label class="flex-none cursor-pointer">
                 <input type="radio" name="bahan1" value="transparan" class="peer hidden">
-                <div class="px-3 py-1.5 rounded-xl border border-white/20 bg-white/5 peer-checked:border-yellow-400 peer-checked:bg-yellow-400 peer-checked:text-black text-white text-[9px] font-extrabold flex items-center gap-1 transition">
+                <div class="px-3 py-1.5 rounded-xl border border-zinc-800 bg-zinc-900/90 peer-checked:border-yellow-400 peer-checked:bg-yellow-400 peer-checked:text-black text-zinc-200 text-[9px] font-extrabold flex items-center gap-1 transition">
                   <span>Transparan</span>
                   <span class="text-[7.5px] opacity-80 border border-current px-1 rounded">✨ Bening</span>
                 </div>
               </label>
               <label class="flex-none cursor-pointer">
                 <input type="radio" name="bahan1" value="hologram" class="peer hidden">
-                <div class="px-3 py-1.5 rounded-xl border border-white/20 bg-white/5 peer-checked:border-yellow-400 peer-checked:bg-yellow-400 peer-checked:text-black text-white text-[9px] font-extrabold flex items-center gap-1 transition">
+                <div class="px-3 py-1.5 rounded-xl border border-zinc-800 bg-zinc-900/90 peer-checked:border-yellow-400 peer-checked:bg-yellow-400 peer-checked:text-black text-zinc-200 text-[9px] font-extrabold flex items-center gap-1 transition">
                   <span>Hologram</span>
                   <span class="text-[7.5px] opacity-80 border border-current px-1 rounded">🔥 Laris</span>
                 </div>
               </label>
               <label class="flex-none cursor-pointer">
                 <input type="radio" name="bahan1" value="chrome" class="peer hidden">
-                <div class="px-3 py-1.5 rounded-xl border border-white/20 bg-white/5 peer-checked:border-yellow-400 peer-checked:bg-yellow-400 peer-checked:text-black text-white text-[9px] font-extrabold flex items-center gap-1 transition">
+                <div class="px-3 py-1.5 rounded-xl border border-zinc-800 bg-zinc-900/90 peer-checked:border-yellow-400 peer-checked:bg-yellow-400 peer-checked:text-black text-zinc-200 text-[9px] font-extrabold flex items-center gap-1 transition">
                   <span>Chrome</span>
                   <span class="text-[7.5px] opacity-80 border border-current px-1 rounded">👑 Mewah</span>
                 </div>
@@ -169,34 +177,34 @@
             </div>
           </div>
 
-          <!-- 2. LAMINASI & CUTTING (GRID LEGA) -->
+          <!-- 2. LAMINASI & CUTTING -->
           <div class="grid grid-cols-2 gap-2">
             <div>
-              <span class="text-[9px] font-semibold text-gray-300 block mb-1">2. Finishing Surface:</span>
+              <span class="text-[9px] font-semibold text-zinc-400 block mb-1">2. Finishing Surface:</span>
               <div class="grid grid-cols-3 gap-1">
-                <label class="cursor-pointer"><input type="radio" name="lam1" value="Glossy" class="peer hidden" checked><div class="text-[8.5px] py-1 text-center rounded-lg border border-white/15 bg-white/5 peer-checked:border-yellow-400 peer-checked:bg-yellow-400/20 peer-checked:text-yellow-400 font-bold">Glossy</div></label>
-                <label class="cursor-pointer"><input type="radio" name="lam1" value="Doff" class="peer hidden"><div class="text-[8.5px] py-1 text-center rounded-lg border border-white/15 bg-white/5 peer-checked:border-yellow-400 peer-checked:bg-yellow-400/20 peer-checked:text-yellow-400 font-bold">Doff</div></label>
-                <label class="cursor-pointer"><input type="radio" name="lam1" value="Glitter" class="peer hidden"><div class="text-[8.5px] py-1 text-center rounded-lg border border-white/15 bg-white/5 peer-checked:border-yellow-400 peer-checked:bg-yellow-400/20 peer-checked:text-yellow-400 font-bold">Glitter</div></label>
+                <label class="cursor-pointer"><input type="radio" name="lam1" value="Glossy" class="peer hidden" checked><div class="text-[8.5px] py-1 text-center rounded-lg border border-zinc-800 bg-zinc-900/90 peer-checked:border-yellow-400 peer-checked:bg-yellow-400/10 peer-checked:text-yellow-400 font-bold transition">Glossy</div></label>
+                <label class="cursor-pointer"><input type="radio" name="lam1" value="Doff" class="peer hidden"><div class="text-[8.5px] py-1 text-center rounded-lg border border-zinc-800 bg-zinc-900/90 peer-checked:border-yellow-400 peer-checked:bg-yellow-400/10 peer-checked:text-yellow-400 font-bold transition">Doff</div></label>
+                <label class="cursor-pointer"><input type="radio" name="lam1" value="Glitter" class="peer hidden"><div class="text-[8.5px] py-1 text-center rounded-lg border border-zinc-800 bg-zinc-900/90 peer-checked:border-yellow-400 peer-checked:bg-yellow-400/10 peer-checked:text-yellow-400 font-bold transition">Glitter</div></label>
               </div>
             </div>
             <div>
-              <span class="text-[9px] font-semibold text-gray-300 block mb-1">3. Tipe Potong:</span>
+              <span class="text-[9px] font-semibold text-zinc-400 block mb-1">3. Tipe Potong:</span>
               <div class="grid grid-cols-2 gap-1">
-                <label class="cursor-pointer"><input type="radio" name="cut1" value="Kiss Cut" class="peer hidden" checked><div class="text-[8px] py-1 text-center rounded-lg border border-white/15 bg-white/5 peer-checked:border-yellow-400 peer-checked:bg-yellow-400/20 peer-checked:text-yellow-400 font-bold">Kiss Cut (Lembar)</div></label>
-                <label class="cursor-pointer"><input type="radio" name="cut1" value="Die Cut" class="peer hidden"><div class="text-[8px] py-1 text-center rounded-lg border border-white/15 bg-white/5 peer-checked:border-yellow-400 peer-checked:bg-yellow-400/20 peer-checked:text-yellow-400 font-bold">Die Cut (Putus)</div></label>
+                <label class="cursor-pointer"><input type="radio" name="cut1" value="Kiss Cut" class="peer hidden" checked><div class="text-[8px] py-1 text-center rounded-lg border border-zinc-800 bg-zinc-900/90 peer-checked:border-yellow-400 peer-checked:bg-yellow-400/10 peer-checked:text-yellow-400 font-bold transition">Kiss Cut</div></label>
+                <label class="cursor-pointer"><input type="radio" name="cut1" value="Die Cut" class="peer hidden"><div class="text-[8px] py-1 text-center rounded-lg border border-zinc-800 bg-zinc-900/90 peer-checked:border-yellow-400 peer-checked:bg-yellow-400/10 peer-checked:text-yellow-400 font-bold transition">Die Cut</div></label>
               </div>
             </div>
           </div>
 
           <!-- 3. INPUT UKURAN & JUMLAH -->
-          <div class="grid grid-cols-2 gap-2 pt-1 border-t border-white/10">
+          <div class="grid grid-cols-2 gap-2 pt-1.5 border-t border-zinc-800/80">
             <div>
               <span class="text-[9px] font-bold text-yellow-400 block mb-0.5">📏 Ukuran Stiker</span>
-              <input id="ukuran1" type="text" placeholder="A3+ / Diamtr 5cm / dll" class="w-full bg-neutral-900 border border-white/20 rounded-lg px-2 py-1 text-[10px] text-white focus:outline-none focus:border-yellow-400">
+              <input id="ukuran1" type="text" placeholder="A3+ / Diamtr 5cm / dll" class="w-full bg-zinc-900/90 border border-zinc-800 rounded-lg px-2 py-1 text-[10px] text-zinc-100 placeholder-zinc-600 focus:outline-none focus:border-yellow-400 transition">
             </div>
             <div>
               <span class="text-[9px] font-bold text-yellow-400 block mb-0.5">📦 Jumlah Order</span>
-              <input id="jumlah1" type="text" placeholder="10 Lembar / 100 pcs" class="w-full bg-neutral-900 border border-white/20 rounded-lg px-2 py-1 text-[10px] text-white focus:outline-none focus:border-yellow-400">
+              <input id="jumlah1" type="text" placeholder="10 Lembar / 100 pcs" class="w-full bg-zinc-900/90 border border-zinc-800 rounded-lg px-2 py-1 text-[10px] text-zinc-100 placeholder-zinc-600 focus:outline-none focus:border-yellow-400 transition">
             </div>
           </div>
 
@@ -208,17 +216,18 @@
     <!-- ========================================== -->
     <!-- FIXED BOTTOM BAR (FLOATING ACTION BAR)     -->
     <!-- ========================================== -->
-    <div class="absolute bottom-0 left-0 right-0 z-40 bg-neutral-900/95 border-t border-white/15 backdrop-blur-xl p-2.5 flex items-center justify-between gap-1.5 shadow-2xl">
-      <button onclick="toggleQuickMenu()" class="flex flex-col items-center justify-center w-11 h-11 rounded-xl bg-white/10 border border-white/15 text-white active:scale-95 transition">
+    <div class="absolute bottom-0 left-0 right-0 z-40 bg-[#0C0C0E]/95 border-t border-zinc-800/80 backdrop-blur-xl p-2.5 flex items-center justify-between gap-1.5 shadow-2xl">
+      <button onclick="alert('Menu Katalog Lengkap')" class="flex flex-col items-center justify-center w-11 h-11 rounded-xl bg-zinc-900 border border-zinc-800 text-zinc-300 hover:text-white active:scale-95 transition">
         <span class="text-base">☰</span>
         <span class="text-[7.5px] font-bold uppercase mt-0.5">Menu</span>
       </button>
 
-      <button onclick="openOrderModal()" class="flex-1 h-11 rounded-xl bg-gradient-to-r from-yellow-400 to-amber-500 text-black font-extrabold text-xs tracking-wider flex items-center justify-center gap-1.5 shadow-lg shadow-yellow-400/20 active:scale-95 transition uppercase">
+      <!-- PRIMARY ACTION ACCENT BUTTON -->
+      <button onclick="openOrderModal()" class="flex-1 h-11 rounded-xl bg-gradient-to-r from-yellow-400 via-amber-400 to-yellow-500 text-black font-extrabold text-xs tracking-wider flex items-center justify-center gap-1.5 shadow-lg shadow-yellow-500/10 active:scale-95 transition uppercase">
         <span>💬 PESAN VIA WA</span>
       </button>
 
-      <button onclick="openSosmedModal()" class="flex flex-col items-center justify-center w-11 h-11 rounded-xl bg-white/10 border border-white/15 text-white active:scale-95 transition">
+      <button onclick="openSosmedModal()" class="flex flex-col items-center justify-center w-11 h-11 rounded-xl bg-zinc-900 border border-zinc-800 text-zinc-300 hover:text-white active:scale-95 transition">
         <span class="text-base">📱</span>
         <span class="text-[7.5px] font-bold uppercase mt-0.5">Sosmed</span>
       </button>
@@ -226,28 +235,28 @@
 
     <!-- MODAL ORDER FORM VIA WA -->
     <div id="orderModal" onclick="closeOrderModal()" class="invisible opacity-0 fixed inset-0 z-50 bg-black/90 backdrop-blur-md flex flex-col items-center justify-center p-4">
-      <div id="orderModalContent" onclick="event.stopPropagation()" class="relative w-full max-w-sm rounded-2xl overflow-hidden border border-yellow-400/50 shadow-2xl bg-neutral-900 p-4 space-y-3">
-        <div class="flex items-center justify-between border-b border-white/10 pb-2">
+      <div id="orderModalContent" onclick="event.stopPropagation()" class="relative w-full max-w-sm rounded-2xl overflow-hidden border border-zinc-800 shadow-2xl bg-[#0C0C0E] p-4 space-y-3">
+        <div class="flex items-center justify-between border-b border-zinc-800 pb-2">
           <div>
             <h3 class="text-sm font-extrabold text-yellow-400 uppercase">Formulir Pemesanan</h3>
-            <p id="modalSlideTitle" class="text-[9.5px] text-neutral-300">Produk: Sticker Kustom A3+</p>
+            <p id="modalSlideTitle" class="text-[9.5px] text-zinc-400">Produk: Sticker Kustom A3+</p>
           </div>
-          <button onclick="closeOrderModal()" class="text-white/60 hover:text-white font-bold text-sm bg-white/10 w-7 h-7 rounded-full">✕</button>
+          <button onclick="closeOrderModal()" class="text-zinc-400 hover:text-white font-bold text-sm bg-zinc-900 w-7 h-7 rounded-full border border-zinc-800">✕</button>
         </div>
 
         <div class="space-y-2.5 text-left">
           <div>
             <label class="text-[10px] font-bold text-yellow-400 block mb-0.5">👤 Nama Pemesan / Olshop / Instansi *</label>
-            <input id="modalNama" type="text" placeholder="Masukkan nama pemesan" class="w-full bg-neutral-950 border border-white/20 rounded-lg p-2 text-xs text-white focus:outline-none focus:border-yellow-400">
+            <input id="modalNama" type="text" placeholder="Masukkan nama pemesan" class="w-full bg-zinc-900 border border-zinc-800 rounded-lg p-2 text-xs text-zinc-100 placeholder-zinc-600 focus:outline-none focus:border-yellow-400">
           </div>
 
           <div>
-            <label class="text-[10px] font-bold text-neutral-300 block mb-0.5">📝 Catatan Tambahan (Opsional)</label>
-            <textarea id="modalCatatan" rows="2" placeholder="Misal: Minta layout dulu / kirim file via email" class="w-full bg-neutral-950 border border-white/20 rounded-lg p-2 text-[10.5px] text-white focus:outline-none focus:border-yellow-400"></textarea>
+            <label class="text-[10px] font-bold text-zinc-300 block mb-0.5">📝 Catatan Tambahan (Opsional)</label>
+            <textarea id="modalCatatan" rows="2" placeholder="Misal: Minta layout dulu / kirim file via email" class="w-full bg-zinc-900 border border-zinc-800 rounded-lg p-2 text-[10.5px] text-zinc-100 placeholder-zinc-600 focus:outline-none focus:border-yellow-400"></textarea>
           </div>
 
           <!-- NOTE KIRIM FOTO VIA WA -->
-          <div class="p-2.5 rounded-xl bg-yellow-400/10 border border-yellow-400/30 text-[9.5px] leading-relaxed text-yellow-200">
+          <div class="p-2.5 rounded-xl bg-yellow-400/10 border border-yellow-400/20 text-[9.5px] leading-relaxed text-yellow-200/90">
             💡 <b>Punya Contoh Foto / Desain?</b><br>
             Cukup kirimkan formulir ini dulu, lalu langsung lampirkan gambar/file kamu di chat WhatsApp admin ya!
           </div>
@@ -261,35 +270,35 @@
 
     <!-- MODAL SOSMED -->
     <div id="sosmedModal" onclick="closeSosmedModal()" class="invisible opacity-0 fixed inset-0 z-50 bg-black/90 backdrop-blur-md flex flex-col items-center justify-center p-4">
-      <div id="sosmedModalContent" onclick="event.stopPropagation()" class="relative w-full max-w-sm rounded-2xl overflow-hidden border border-yellow-400/50 shadow-2xl bg-neutral-900 p-5 space-y-4">
-        <div class="flex items-center justify-between border-b border-white/10 pb-2">
+      <div id="sosmedModalContent" onclick="event.stopPropagation()" class="relative w-full max-w-sm rounded-2xl overflow-hidden border border-zinc-800 shadow-2xl bg-[#0C0C0E] p-5 space-y-4">
+        <div class="flex items-center justify-between border-b border-zinc-800 pb-2">
           <div>
             <h3 class="text-sm font-extrabold text-yellow-400 uppercase">Sosial Media ARCI</h3>
-            <p class="text-[9.5px] text-neutral-400">Ikuti & Hubungi Kami di Platform Resmi</p>
+            <p class="text-[9.5px] text-zinc-400">Ikuti & Hubungi Kami di Platform Resmi</p>
           </div>
-          <button onclick="closeSosmedModal()" class="text-white/60 hover:text-white font-bold text-sm bg-white/10 w-7 h-7 rounded-full">✕</button>
+          <button onclick="closeSosmedModal()" class="text-zinc-400 hover:text-white font-bold text-sm bg-zinc-900 w-7 h-7 rounded-full border border-zinc-800">✕</button>
         </div>
 
         <div class="grid grid-cols-1 gap-2.5">
-          <a href="https://instagram.com" target="_blank" class="flex items-center gap-3 p-3 rounded-xl bg-white/5 border border-white/10 hover:border-yellow-400 transition">
+          <a href="https://instagram.com" target="_blank" class="flex items-center gap-3 p-3 rounded-xl bg-zinc-900/80 border border-zinc-800 hover:border-yellow-400/50 transition">
             <span class="text-xl">📸</span>
             <div>
-              <span class="text-xs font-bold block text-white">Instagram</span>
-              <span class="text-[9px] text-gray-400">@arci.studio</span>
+              <span class="text-xs font-bold block text-zinc-100">Instagram</span>
+              <span class="text-[9px] text-zinc-400">@arci.studio</span>
             </div>
           </a>
-          <a href="https://tiktok.com" target="_blank" class="flex items-center gap-3 p-3 rounded-xl bg-white/5 border border-white/10 hover:border-yellow-400 transition">
+          <a href="https://tiktok.com" target="_blank" class="flex items-center gap-3 p-3 rounded-xl bg-zinc-900/80 border border-zinc-800 hover:border-yellow-400/50 transition">
             <span class="text-xl">🎵</span>
             <div>
-              <span class="text-xs font-bold block text-white">TikTok</span>
-              <span class="text-[9px] text-gray-400">@arci.studio</span>
+              <span class="text-xs font-bold block text-zinc-100">TikTok</span>
+              <span class="text-[9px] text-zinc-400">@arci.studio</span>
             </div>
           </a>
-          <a href="https://facebook.com" target="_blank" class="flex items-center gap-3 p-3 rounded-xl bg-white/5 border border-white/10 hover:border-yellow-400 transition">
+          <a href="https://facebook.com" target="_blank" class="flex items-center gap-3 p-3 rounded-xl bg-zinc-900/80 border border-zinc-800 hover:border-yellow-400/50 transition">
             <span class="text-xl">📘</span>
             <div>
-              <span class="text-xs font-bold block text-white">Facebook</span>
-              <span class="text-[9px] text-gray-400">ARCI Print Studio</span>
+              <span class="text-xs font-bold block text-zinc-100">Facebook</span>
+              <span class="text-[9px] text-zinc-400">ARCI Print Studio</span>
             </div>
           </a>
         </div>
@@ -319,12 +328,12 @@
       img.classList.remove('hidden');
       vid.classList.add('hidden');
       tabF.className = "px-2.5 py-1 rounded-lg text-[9px] font-bold bg-yellow-400 text-black shadow transition";
-      tabV.className = "px-2.5 py-1 rounded-lg text-[9px] font-bold text-gray-300 hover:text-white transition";
+      tabV.className = "px-2.5 py-1 rounded-lg text-[9px] font-bold text-zinc-400 hover:text-white transition";
     } else {
       img.classList.add('hidden');
       vid.classList.remove('hidden');
       tabV.className = "px-2.5 py-1 rounded-lg text-[9px] font-bold bg-yellow-400 text-black shadow transition";
-      tabF.className = "px-2.5 py-1 rounded-lg text-[9px] font-bold text-gray-300 hover:text-white transition";
+      tabF.className = "px-2.5 py-1 rounded-lg text-[9px] font-bold text-zinc-400 hover:text-white transition";
     }
   }
 
