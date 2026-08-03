@@ -8,19 +8,19 @@
 <style>
   .no-scrollbar::-webkit-scrollbar { display: none; }
   .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
-  #productDetailModal, #sosmedModal, #swatchModal {
+  #productDetailModal, #swatchModal {
     transition: opacity 0.25s ease, visibility 0.25s ease;
   }
-  #productDetailModal.show, #sosmedModal.show, #swatchModal.show {
+  #productDetailModal.show, #swatchModal.show {
     opacity: 1 !important;
     visibility: visible !important;
     pointer-events: auto !important;
   }
-  #detailModalContent, #sosmedModalContent, #swatchModalContent {
+  #detailModalContent, #swatchModalContent {
     transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
     transform: scale(0.9);
   }
-  #productDetailModal.show #detailModalContent, #sosmedModal.show #sosmedModalContent, #swatchModal.show #swatchModalContent {
+  #productDetailModal.show #detailModalContent, #swatchModal.show #swatchModalContent {
     transform: scale(1);
   }
 </style>
@@ -39,9 +39,6 @@
           <span class="text-[7.5px] font-semibold text-zinc-400 tracking-tight block mt-0.5">DIGITAL PRINT & STUDIO</span>
         </div>
       </div>
-      <div class="flex items-center gap-2">
-        <button onclick="openSosmedModal()" class="w-8 h-8 rounded-full bg-zinc-800 border border-zinc-700 flex items-center justify-center text-amber-400 text-xs shadow-sm">📱</button>
-      </div>
     </div>
 
     <!-- MAIN CONTENT SCROLLABLE FEED -->
@@ -49,7 +46,7 @@
 
       <!-- HERO BANNER LANDING PAGE UTAMA -->
       <div class="relative w-full rounded-2xl overflow-hidden bg-zinc-900 border border-amber-500/30 shadow-lg">
-        <img src="landing_page.jpg" alt="ARCI LANDING PAGE" class="w-full h-auto object-cover" onerror="this.src='https://via.placeholder.com/400x200?text=ARCI+STUDIO'">
+        <img src="landing page.jpg" alt="ARCI LANDING PAGE" class="w-full h-auto object-cover" onerror="this.src='https://via.placeholder.com/400x200?text=ARCI+STUDIO'">
       </div>
 
       <!-- KATEGORI PILLS -->
@@ -243,34 +240,6 @@
       </div>
     </div>
 
-    <!-- MODAL SOSMED -->
-    <div id="sosmedModal" onclick="closeSosmedModal()" class="invisible opacity-0 fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex flex-col items-center justify-center p-4">
-      <div id="sosmedModalContent" onclick="event.stopPropagation()" class="relative w-full max-w-sm rounded-2xl overflow-hidden border border-zinc-800 shadow-2xl bg-zinc-900 p-5 space-y-4 text-zinc-100 uppercase">
-        <div class="flex items-center justify-between border-b border-zinc-800 pb-2">
-          <div>
-            <h3 class="text-sm font-extrabold text-amber-400">SOSIAL MEDIA ARCI</h3>
-            <p class="text-[9.5px] text-zinc-400">IKUTI KAMI DI PLATFORM RESMI</p>
-          </div>
-          <button onclick="closeSosmedModal()" class="text-zinc-400 hover:text-zinc-100 font-bold text-sm bg-zinc-800 w-7 h-7 rounded-full flex items-center justify-center">✕</button>
-        </div>
-
-        <div class="grid grid-cols-1 gap-2.5">
-          <a href="https://instagram.com" target="_blank" class="flex items-center gap-3 p-3 rounded-xl bg-zinc-800 border border-zinc-700 hover:border-amber-400 transition">
-            <span class="text-xl">📸</span>
-            <div><span class="text-xs font-bold block text-zinc-100">INSTAGRAM</span><span class="text-[9px] text-zinc-400">@ARCI.STUDIO</span></div>
-          </a>
-          <a href="https://tiktok.com" target="_blank" class="flex items-center gap-3 p-3 rounded-xl bg-zinc-800 border border-zinc-700 hover:border-amber-400 transition">
-            <span class="text-xl">🎵</span>
-            <div><span class="text-xs font-bold block text-zinc-100">TIKTOK</span><span class="text-[9px] text-zinc-400">@ARCI.STUDIO</span></div>
-          </a>
-          <a href="https://facebook.com" target="_blank" class="flex items-center gap-3 p-3 rounded-xl bg-zinc-800 border border-zinc-700 hover:border-amber-400 transition">
-            <span class="text-xl">📘</span>
-            <div><span class="text-xs font-bold block text-zinc-100">FACEBOOK</span><span class="text-[9px] text-zinc-400">ARCI PRINT STUDIO</span></div>
-          </a>
-        </div>
-      </div>
-    </div>
-
   </div>
 
 <script>
@@ -286,14 +255,6 @@
         card.style.display = 'none';
       }
     });
-  }
-
-  function openSosmedModal() {
-    document.getElementById('sosmedModal').classList.add('show');
-  }
-
-  function closeSosmedModal() {
-    document.getElementById('sosmedModal').classList.remove('show');
   }
 
   function openSwatch(title, desc, imgSrc) {
