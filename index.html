@@ -227,7 +227,7 @@
       </div>
     </div>
 
-    <!-- POP-UP SWATCH / SAMPEL BAHAN MURNI -->
+    <!-- POP-UP SWATCH / SAMPEL BAHAN MURNI (TANPA TOMBOL TUTUP BAWAH) -->
     <div id="swatchModal" onclick="closeSwatchModal()" class="invisible opacity-0 fixed inset-0 z-[60] bg-black/85 backdrop-blur-md flex flex-col items-center justify-center p-4">
       <button onclick="closeSwatchModal()" class="absolute top-5 right-5 text-zinc-900 bg-amber-400 rounded-full w-10 h-10 flex items-center justify-center text-lg font-bold z-50 shadow-lg uppercase">✕</button>
       <div id="swatchModalContent" onclick="event.stopPropagation()" class="relative max-w-full max-w-sm rounded-2xl overflow-hidden border border-zinc-700 shadow-2xl bg-zinc-900 p-4 text-center space-y-3 text-zinc-100 uppercase">
@@ -236,7 +236,6 @@
           <img id="swatchImg" src="" class="w-full h-full object-cover" onerror="this.src='https://via.placeholder.com/150'">
         </div>
         <p id="swatchDesc" class="text-[10px] text-zinc-300 leading-relaxed">DESKRIPSI TEKSTUR BAHAN.</p>
-        <button onclick="closeSwatchModal()" class="w-full py-2 rounded-xl bg-zinc-800 text-amber-400 font-bold text-[10px] uppercase border border-zinc-700">TUTUP</button>
       </div>
     </div>
 
@@ -311,7 +310,7 @@
                 <option value="LAMINASI DOFF" class="bg-zinc-900">DOFF</option>
                 <option value="LAMINASI GLITTER" class="bg-zinc-900">GLITTER</option>
               </select>
-              <button type="button" onclick="const val=document.getElementById('detailSelectOpt').value; if(val.includes('GLOSSY')) openSwatch('GLOSSY', 'MENGKILAP TAJAM.', 'glossy.JPG'); else if(val.includes('DOFF')) openSwatch('DOFF', 'ELEGAN MATTE.', 'doff.JPEG'); else openSwatch('GLITTER', 'BERKILAU KERLAP-KERLIP.', 'glitter.JPG');" class="text-[7.5px] bg-amber-400 text-zinc-950 font-extrabold px-1.5 py-0.5 rounded ml-1">🔍 CEK</button>
+              <button type="button" onclick="const val=document.getElementById('detailSelectOpt').value; if(val.includes('GLOSSY')) openSwatch('GLOSSY', 'MENGKILAP TAJAM.', 'glossy.jpg'); else if(val.includes('DOFF')) openSwatch('DOFF', 'ELEGAN MATTE.', 'doff.jpeg'); else openSwatch('GLITTER', 'BERKILAU KERLAP-KERLIP.', 'glitter.jpg');" class="text-[7.5px] bg-amber-400 text-zinc-950 font-extrabold px-1.5 py-0.5 rounded ml-1">🔍 CEK</button>
             </div>
             <select id="detailPotong" class="bg-zinc-800 border border-zinc-700 text-zinc-200 rounded-lg p-1 text-[9.5px] font-semibold uppercase">
               <option value="POTONG KOTAK / STRIP" class="bg-zinc-900" selected>POTONG KOTAK</option>
@@ -408,7 +407,7 @@
                 <option value="GLOSSY" class="bg-zinc-900">GLOSSY</option>
                 <option value="DOFF" class="bg-zinc-900">DOFF</option>
               </select>
-              <button type="button" onclick="const val=document.getElementById('detailLaminasi').value; if(val=='GLOSSY') openSwatch('GLOSSY', 'MENGKILAP TAJAM.', 'glossy.JPG'); else if(val=='DOFF') openSwatch('DOFF', 'ELEGAN MATTE.', 'doff.JPEG'); else alert('PILIH GLOSSY / DOFF DULU!');" class="text-[7.5px] bg-amber-400 text-zinc-950 font-extrabold px-1.5 py-0.5 rounded ml-1">🔍 CEK</button>
+              <button type="button" onclick="const val=document.getElementById('detailLaminasi').value; if(val=='GLOSSY') openSwatch('GLOSSY', 'MENGKILAP TAJAM.', 'glossy.jpg'); else if(val=='DOFF') openSwatch('DOFF', 'ELEGAN MATTE.', 'doff.jpeg'); else alert('PILIH GLOSSY / DOFF DULU!');" class="text-[7.5px] bg-amber-400 text-zinc-950 font-extrabold px-1.5 py-0.5 rounded ml-1">🔍 CEK</button>
             </div>
           </div>
           <div>
