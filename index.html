@@ -6,793 +6,257 @@
 <title>ARCI — Digital Print & Studio Catalog</title>
 <script src="https://cdn.tailwindcss.com"></script>
 <style>
-  /* CLEAN LIGHT MODE SETUP */
-  .bg-ambient-white {
-    background-color: #F8F9FA !important;
-    position: relative;
-    overflow: hidden;
-  }
-  .yellow-glow-layer {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    top: 0%;
-    left: 0%;
-    background: radial-gradient(circle at 50% 30%, rgba(250, 204, 21, 0.12) 0%, rgba(234, 179, 8, 0.02) 50%, transparent 75%);
-    pointer-events: none;
-    z-index: 1;
-    will-change: transform;
-    mix-blend-mode: multiply;
-    animation: moveGlow 10s ease-in-out infinite alternate;
-  }
-  @keyframes moveGlow {
-    0% { transform: translate3d(-3%, -3%, 0) scale(0.95); }
-    100% { transform: translate3d(3%, 3%, 0) scale(1.05); }
-  }
-  .scroll-snap-container {
-    scroll-snap-type: y mandatory;
-    overflow-y: scroll;
-    height: 100%;
-    scroll-behavior: smooth;
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-  }
-  .scroll-snap-container::-webkit-scrollbar { display: none; }
-  .slide-section {
-    scroll-snap-align: start;
-    scroll-snap-stop: always;
-    height: 100%;
-    width: 100%;
-    position: relative;
-    flex-shrink: 0;
-  }
   .no-scrollbar::-webkit-scrollbar { display: none; }
   .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
-  #mediaModal, #orderModal, #sosmedModal {
+  #orderModal, #sosmedModal {
     transition: opacity 0.25s ease, visibility 0.25s ease;
   }
-  #mediaModal.show, #orderModal.show, #sosmedModal.show {
+  #orderModal.show, #sosmedModal.show {
     opacity: 1 !important;
     visibility: visible !important;
     pointer-events: auto !important;
   }
-  #modalContent, #orderModalContent, #sosmedModalContent {
+  #orderModalContent, #sosmedModalContent {
     transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
     transform: scale(0.88);
   }
-  #mediaModal.show #modalContent, #orderModal.show #orderModalContent, #sosmedModal.show #sosmedModalContent {
+  #orderModal.show #orderModalContent, #sosmedModal.show #sosmedModalContent {
     transform: scale(1);
   }
 </style>
 </head>
-<body class="bg-zinc-200 flex items-center justify-center min-h-screen">
+<body class="bg-zinc-100 flex items-center justify-center min-h-screen font-sans select-none">
 
   <!-- Frame Mobile Utama -->
-  <div class="w-full max-w-[414px] h-screen sm:h-[844px] sm:my-6 relative overflow-hidden sm:rounded-[2.5rem] bg-white text-zinc-900 font-sans select-none sm:border sm:border-zinc-300 flex flex-col justify-between shadow-2xl">
+  <div class="w-full max-w-[414px] h-screen sm:h-[844px] sm:my-6 relative overflow-hidden sm:rounded-[2.5rem] bg-white text-zinc-900 flex flex-col justify-between shadow-2xl border border-zinc-300">
 
-    <!-- CONTAINER SLIDE SCROLL VERTICAL (9 SLIDES) -->
-    <div class="scroll-snap-container w-full h-full pb-20">
-
-      <!-- SLIDE 1: STIKER KUSTOM A3+ -->
-      <div id="slide-1" class="slide-section bg-ambient-white flex flex-col justify-between p-4 relative">
-        <div class="yellow-glow-layer"></div>
-        <div class="relative z-20 flex items-center justify-between pt-1 pb-1">
-          <div class="flex items-center gap-2.5">
-            <img src="logo test.png" alt="Logo" class="h-10 w-auto object-contain drop-shadow-sm" onerror="this.style.display='none'">
-            <div>
-              <span class="font-extrabold text-base tracking-wider text-zinc-900 block leading-none">ARCI</span>
-              <span class="text-[9px] font-semibold text-amber-600 tracking-tight block mt-0.5">Solusi Cetak & Digital Studio</span>
-            </div>
-          </div>
-          <span class="text-[8.5px] tracking-widest border border-amber-500/30 rounded-full px-2.5 py-0.5 text-amber-700 font-bold bg-amber-50/80 backdrop-blur-md">1/9 • STICKER</span>
+    <!-- HEADER MARKETPLACE -->
+    <div class="sticky top-0 z-40 bg-white/95 border-b border-zinc-200 backdrop-blur-md px-4 py-3 flex items-center justify-between shadow-sm">
+      <div class="flex items-center gap-2">
+        <img src="logo test.png" alt="Logo" class="h-8 w-auto object-contain" onerror="this.style.display='none'">
+        <div>
+          <span class="font-extrabold text-sm tracking-wider text-zinc-900 block leading-none">ARCI</span>
+          <span class="text-[7.5px] font-semibold text-amber-600 tracking-tight block mt-0.5">Digital Print & Studio</span>
         </div>
+      </div>
+      <div class="flex items-center gap-2">
+        <button onclick="toggleQuickMenu()" class="w-8 h-8 rounded-full bg-zinc-100 border border-zinc-200 flex items-center justify-center text-zinc-800 text-xs shadow-sm">☰</button>
+        <button onclick="openSosmedModal()" class="w-8 h-8 rounded-full bg-zinc-100 border border-zinc-200 flex items-center justify-center text-zinc-800 text-xs shadow-sm">📱</button>
+      </div>
+    </div>
 
-        <div class="relative z-20 space-y-1.5">
-          <!-- FOTO UTAMA PERSEGI (SQUARE 1:1) -->
-          <div class="relative aspect-square w-full rounded-2xl overflow-hidden border border-zinc-200 bg-zinc-100 shadow-md group">
-            <img id="prevImg1" src="gbr-vinyl.JPG" class="w-full h-full object-cover transition-all duration-300">
-            <video id="prevVid1" autoplay loop muted playsinline poster="gbr-vinyl.JPG" class="hidden w-full h-full object-cover">
-              <source id="prevVidSrc1" src="video-vinyl.mp4" type="video/mp4">
-            </video>
+    <!-- MAIN CONTENT SCROLLABLE FEED -->
+    <div class="flex-1 overflow-y-auto overflow-x-hidden p-4 space-y-4 pb-24 no-scrollbar">
 
-            <div class="absolute top-2 right-2 z-20 flex bg-white/80 p-0.5 rounded-xl border border-zinc-200 backdrop-blur-md shadow-sm">
-              <button id="tabFoto1" onclick="switchMediaTab(1, 'foto')" class="px-2.5 py-0.5 rounded-lg text-[8.5px] font-bold bg-amber-400 text-zinc-900 shadow transition">📸 Foto</button>
-              <button id="tabVideo1" onclick="switchMediaTab(1, 'video')" class="px-2.5 py-0.5 rounded-lg text-[8.5px] font-bold text-zinc-600 hover:text-zinc-900 transition">🎥 Tekstur</button>
-            </div>
-
-            <button onclick="openModalFromSlide(1)" class="absolute bottom-2 right-2 z-20 bg-white/80 hover:bg-white text-zinc-800 text-[8px] font-bold px-2 py-0.5 rounded-lg border border-zinc-200 backdrop-blur-md shadow-sm">
-              🔍 Perbesar
-            </button>
-          </div>
-
-          <!-- MINI GALLERY 3 FOTO HASIL JADI DI BAWAH -->
-          <div class="grid grid-cols-3 gap-1.5">
-            <div class="h-14 rounded-xl overflow-hidden border border-zinc-200 bg-zinc-100 cursor-pointer shadow-sm hover:border-amber-400 transition">
-              <img src="gbr-vinyl.JPG" class="w-full h-full object-cover">
-            </div>
-            <div class="h-14 rounded-xl overflow-hidden border border-zinc-200 bg-zinc-100 cursor-pointer shadow-sm hover:border-amber-400 transition">
-              <img src="flexi-280.jpg" class="w-full h-full object-cover">
-            </div>
-            <div class="h-14 rounded-xl overflow-hidden border border-zinc-200 bg-zinc-100 cursor-pointer shadow-sm hover:border-amber-400 transition">
-              <img src="art-paper-260.jpg" class="w-full h-full object-cover">
-            </div>
-          </div>
-
-          <!-- KETERANGAN MENGAMBANG DETAIL BAHAN -->
-          <div id="infoBox1" class="p-2 rounded-lg bg-amber-50 border border-amber-200 text-[9px] text-amber-900 hidden">
-            <b id="infoTitle1" class="block font-bold text-[9.5px] mb-0.5">Info Bahan</b>
-            <span id="infoDesc1">Pilih jenis bahan di bawah untuk melihat detail karakternya.</span>
-          </div>
+      <!-- HERO BANNER PROMO UTAMA -->
+      <div class="relative w-full h-[160px] rounded-2xl overflow-hidden bg-gradient-to-r from-zinc-900 to-zinc-800 p-4 text-white shadow-md flex flex-col justify-between">
+        <div class="absolute inset-0 opacity-20 bg-[radial-gradient(#facc15_1px,transparent_1px)] [background-size:16px_16px]"></div>
+        <div class="relative z-10">
+          <span class="text-[8px] font-bold tracking-widest text-amber-400 uppercase bg-amber-400/10 border border-amber-400/30 px-2 py-0.5 rounded-full">PROMO SPESIAL</span>
+          <h2 class="text-base font-extrabold mt-1 leading-tight">Cetak Kebutuhan Bisnis & Event</h2>
+          <p class="text-[9.5px] text-zinc-300 mt-0.5 max-w-[200px]">Kualitas tajam, bahan premium, pengerjaan cepat dan tepat waktu.</p>
         </div>
+        <div class="relative z-10 flex items-center justify-between">
+          <button onclick="openOrderModal('Paket Promo Bisnis')" class="bg-amber-400 text-zinc-950 font-extrabold text-[9px] px-3 py-1.5 rounded-xl shadow active:scale-95 transition uppercase">
+            Pesan Sekarang ➔
+          </button>
+          <span class="text-[8px] text-zinc-400">ARCI Studio Pontianak</span>
+        </div>
+      </div>
 
-        <div class="relative z-20 space-y-1.5 pb-16">
-          <div>
-            <div class="flex items-center justify-between mb-0.5">
-              <span class="text-[9px] font-bold text-amber-700 uppercase tracking-wider">1. Pilih Jenis Bahan:</span>
-              <span class="text-[8px] text-zinc-500">Geser ➔</span>
-            </div>
-            <div class="flex gap-1 overflow-x-auto no-scrollbar py-0.5">
-              <label class="flex-none cursor-pointer"><input type="radio" name="bahan1" value="vinyl" onclick="showInfo(1, 'Stiker Vinyl Premium', 'Bahan basis plastik lentur, 100% tahan air & tidak mudah robek. Ideal untuk botol dingin & outdoor.')" class="peer hidden" checked><div class="px-2.5 py-1 rounded-xl border border-zinc-300 bg-white peer-checked:border-amber-500 peer-checked:bg-amber-400 peer-checked:text-zinc-950 text-zinc-800 text-[8.5px] font-extrabold flex items-center gap-1 shadow-sm transition"><span>Vinyl</span><span class="text-[7px] opacity-80 border border-current px-1 rounded">⭐ Favorit</span></div></label>
-              <label class="flex-none cursor-pointer"><input type="radio" name="bahan1" value="chromo" onclick="showInfo(1, 'Stiker Kromo (Chromo)', 'Bahan kertas mengkilap ekonomis. Cocok untuk label kemasan makanan kering & box.')" class="peer hidden"><div class="px-2.5 py-1 rounded-xl border border-zinc-300 bg-white peer-checked:border-amber-500 peer-checked:bg-amber-400 peer-checked:text-zinc-950 text-zinc-800 text-[8.5px] font-extrabold flex items-center gap-1 shadow-sm transition"><span>Kromo</span><span class="text-[7px] opacity-80 border border-current px-1 rounded">🏷️ Hemat</span></div></label>
-              <label class="flex-none cursor-pointer"><input type="radio" name="bahan1" value="transparan" onclick="showInfo(1, 'Stiker Transparan Bening', 'Bening tembus pandang estetik. Sangat anggun untuk botol kaca, jar, & kosmetik.')" class="peer hidden"><div class="px-2.5 py-1 rounded-xl border border-zinc-300 bg-white peer-checked:border-amber-500 peer-checked:bg-amber-400 peer-checked:text-zinc-950 text-zinc-800 text-[8.5px] font-extrabold flex items-center gap-1 shadow-sm transition"><span>Transparan</span><span class="text-[7px] opacity-80 border border-current px-1 rounded">✨ Bening</span></div></label>
-              <label class="flex-none cursor-pointer"><input type="radio" name="bahan1" value="hologram" onclick="showInfo(1, 'Stiker Hologram 3D', 'Efek pelangi 3D mengkilap mencolok saat memantul cahaya. Favorit stiker brand.')" class="peer hidden"><div class="px-2.5 py-1 rounded-xl border border-zinc-300 bg-white peer-checked:border-amber-500 peer-checked:bg-amber-400 peer-checked:text-zinc-950 text-zinc-800 text-[8.5px] font-extrabold flex items-center gap-1 shadow-sm transition"><span>Hologram</span><span class="text-[7px] opacity-80 border border-current px-1 rounded">🔥 Laris</span></div></label>
-              <label class="flex-none cursor-pointer"><input type="radio" name="bahan1" value="chrome" onclick="showInfo(1, 'Stiker Chrome Mewah', 'Bahan metallic mengkilap seperti cermin/besi. Kesan sangat eksklusif untuk logo.')" class="peer hidden"><div class="px-2.5 py-1 rounded-xl border border-zinc-300 bg-white peer-checked:border-amber-500 peer-checked:bg-amber-400 peer-checked:text-zinc-950 text-zinc-800 text-[8.5px] font-extrabold flex items-center gap-1 shadow-sm transition"><span>Chrome</span><span class="text-[7px] opacity-80 border border-current px-1 rounded">👑 Mewah</span></div></label>
-            </div>
-          </div>
+      <!-- BENEFIT ICONS BAR -->
+      <div class="grid grid-cols-4 gap-2 text-center py-1">
+        <div class="bg-zinc-50 border border-zinc-200 p-2 rounded-xl shadow-sm">
+          <span class="text-base block">⚡</span>
+          <span class="text-[7.5px] font-bold text-zinc-700 block mt-0.5">Cepat</span>
+        </div>
+        <div class="bg-zinc-50 border border-zinc-200 p-2 rounded-xl shadow-sm">
+          <span class="text-base block">💎</span>
+          <span class="text-[7.5px] font-bold text-zinc-700 block mt-0.5">Premium</span>
+        </div>
+        <div class="bg-zinc-50 border border-zinc-200 p-2 rounded-xl shadow-sm">
+          <span class="text-base block">🛡️</span>
+          <span class="text-[7.5px] font-bold text-zinc-700 block mt-0.5">Bergaransi</span>
+        </div>
+        <div class="bg-zinc-50 border border-zinc-200 p-2 rounded-xl shadow-sm">
+          <span class="text-base block">💬</span>
+          <span class="text-[7.5px] font-bold text-zinc-700 block mt-0.5">Konsultasi</span>
+        </div>
+      </div>
 
-          <div class="grid grid-cols-2 gap-1.5">
+      <!-- KATEGORI PILILLS (HORIZONTAL SCROLL) -->
+      <div>
+        <div class="flex items-center justify-between mb-2">
+          <h3 class="text-xs font-extrabold text-zinc-900 uppercase tracking-wide">Kategori Produk</h3>
+          <span class="text-[9px] text-amber-600 font-bold">Geser ➔</span>
+        </div>
+        <div class="flex gap-2 overflow-x-auto no-scrollbar py-1">
+          <button onclick="filterCategory('all')" class="flex-none px-3 py-1.5 rounded-xl bg-zinc-900 text-amber-400 text-[9px] font-bold shadow-sm">Semua Produk</button>
+          <button onclick="filterCategory('stiker')" class="flex-none px-3 py-1.5 rounded-xl bg-white border border-zinc-200 text-zinc-700 text-[9px] font-bold shadow-sm">Stiker A3+</button>
+          <button onclick="filterCategory('banner')" class="flex-none px-3 py-1.5 rounded-xl bg-white border border-zinc-200 text-zinc-700 text-[9px] font-bold shadow-sm">Banner & Spanduk</button>
+          <button onclick="filterCategory('kertas')" class="flex-none px-3 py-1.5 rounded-xl bg-white border border-zinc-200 text-zinc-700 text-[9px] font-bold shadow-sm">Kertas & Promosi</button>
+          <button onclick="filterCategory('akrilik')" class="flex-none px-3 py-1.5 rounded-xl bg-white border border-zinc-200 text-zinc-700 text-[9px] font-bold shadow-sm">Akrilik & Plakat</button>
+          <button onclick="filterCategory('merch')" class="flex-none px-3 py-1.5 rounded-xl bg-white border border-zinc-200 text-zinc-700 text-[9px] font-bold shadow-sm">Merchandise</button>
+          <button onclick="filterCategory('pack')" class="flex-none px-3 py-1.5 rounded-xl bg-white border border-zinc-200 text-zinc-700 text-[9px] font-bold shadow-sm">Packaging & Apparel</button>
+        </div>
+      </div>
+
+      <!-- PRODUCT GRID (MARKETPLACE CARD STYLE) -->
+      <div>
+        <h3 class="text-xs font-extrabold text-zinc-900 uppercase tracking-wide mb-2">Katalog Pilihan Populer</h3>
+        
+        <div class="grid grid-cols-2 gap-2.5" id="productGrid">
+          
+          <!-- ITEM 1 -->
+          <div class="product-card stiker bg-white border border-zinc-200 rounded-2xl p-2.5 shadow-sm flex flex-col justify-between">
             <div>
-              <span class="text-[8.5px] font-semibold text-zinc-700 block mb-0.5">2. Finishing Surface:</span>
-              <div class="grid grid-cols-3 gap-1">
-                <label class="cursor-pointer"><input type="radio" name="lam1" value="Glossy" class="peer hidden" checked><div class="text-[8px] py-1 text-center rounded-lg border border-zinc-300 bg-white peer-checked:border-amber-500 peer-checked:bg-amber-50 peer-checked:text-amber-800 font-bold shadow-sm">Glossy</div></label>
-                <label class="cursor-pointer"><input type="radio" name="lam1" value="Doff" class="peer hidden"><div class="text-[8px] py-1 text-center rounded-lg border border-zinc-300 bg-white peer-checked:border-amber-500 peer-checked:bg-amber-50 peer-checked:text-amber-800 font-bold shadow-sm">Doff</div></label>
-                <label class="cursor-pointer"><input type="radio" name="lam1" value="Glitter" class="peer hidden"><div class="text-[8px] py-1 text-center rounded-lg border border-zinc-300 bg-white peer-checked:border-amber-500 peer-checked:bg-amber-50 peer-checked:text-amber-800 font-bold shadow-sm">Glitter</div></label>
+              <div class="relative aspect-square rounded-xl overflow-hidden bg-zinc-100 border border-zinc-100 mb-2">
+                <img src="gbr-vinyl.JPG" class="w-full h-full object-cover" onerror="this.src='https://via.placeholder.com/150'">
+                <span class="absolute top-1.5 left-1.5 bg-amber-400 text-zinc-950 text-[7px] font-extrabold px-1.5 py-0.5 rounded shadow">⭐ Favorit</span>
               </div>
+              <span class="text-[7.5px] font-bold text-amber-600 uppercase">Stiker Kustom</span>
+              <h4 class="text-[11px] font-extrabold text-zinc-900 leading-tight line-clamp-1">Stiker Vinyl A3+ Premium</h4>
+              <p class="text-[8.5px] text-zinc-500 line-clamp-2 mt-0.5">Anti air, lentur, cocok untuk botol, kemasan & outdoor.</p>
             </div>
-            <div>
-              <span class="text-[8.5px] font-semibold text-zinc-700 block mb-0.5">3. Tipe Potong:</span>
-              <div class="grid grid-cols-2 gap-1">
-                <label class="cursor-pointer"><input type="radio" name="cut1" value="Kiss Cut" class="peer hidden" checked><div class="text-[7.5px] py-1 text-center rounded-lg border border-zinc-300 bg-white peer-checked:border-amber-500 peer-checked:bg-amber-50 peer-checked:text-amber-800 font-bold shadow-sm">Kiss Cut</div></label>
-                <label class="cursor-pointer"><input type="radio" name="cut1" value="Die Cut" class="peer hidden"><div class="text-[7.5px] py-1 text-center rounded-lg border border-zinc-300 bg-white peer-checked:border-amber-500 peer-checked:bg-amber-50 peer-checked:text-amber-800 font-bold shadow-sm">Die Cut</div></label>
+            <div class="mt-3 flex items-center justify-between">
+              <div>
+                <span class="text-[7px] text-zinc-400 block">Mulai dari</span>
+                <span class="text-[10px] font-extrabold text-amber-700">Rp 10.000/lbr</span>
               </div>
+              <button onclick="openOrderModal('Stiker Vinyl A3+')" class="bg-zinc-900 hover:bg-amber-400 text-amber-400 hover:text-zinc-950 font-bold text-[8px] px-2.5 py-1.5 rounded-xl transition shadow">
+                Pesan
+              </button>
             </div>
           </div>
 
-          <div class="grid grid-cols-2 gap-1.5 pt-1 border-t border-zinc-200">
+          <!-- ITEM 2 -->
+          <div class="product-card banner bg-white border border-zinc-200 rounded-2xl p-2.5 shadow-sm flex flex-col justify-between">
             <div>
-              <span class="text-[8.5px] font-bold text-amber-700 block mb-0.5">📏 Ukuran Stiker</span>
-              <input id="ukuran1" type="text" placeholder="A3+ / Diamtr 5cm" class="w-full bg-white border border-zinc-300 rounded-lg px-2 py-0.5 text-[9.5px] text-zinc-900 focus:outline-none focus:border-amber-500 shadow-inner">
-            </div>
-            <div>
-              <span class="text-[8.5px] font-bold text-amber-700 block mb-0.5">📦 Jumlah Order</span>
-              <input id="jumlah1" type="text" placeholder="10 Lembar / 100 pcs" class="w-full bg-white border border-zinc-300 rounded-lg px-2 py-0.5 text-[9.5px] text-zinc-900 focus:outline-none focus:border-amber-500 shadow-inner">
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- SLIDE 2: FLEXI BANNER (DENGAN 4 OPSI BAHAN OUTDOOR BARU) -->
-      <div id="slide-2" class="slide-section bg-ambient-white flex flex-col justify-between p-4 relative">
-        <div class="yellow-glow-layer"></div>
-        <div class="relative z-20 flex items-center justify-between pt-1 pb-1">
-          <div class="flex items-center gap-2.5">
-            <img src="logo test.png" alt="Logo" class="h-10 w-auto object-contain drop-shadow-sm" onerror="this.style.display='none'">
-            <div>
-              <span class="font-extrabold text-base tracking-wider text-zinc-900 block leading-none">ARCI</span>
-              <span class="text-[9px] font-semibold text-amber-600 tracking-tight block mt-0.5">Solusi Cetak & Digital Studio</span>
-            </div>
-          </div>
-          <span class="text-[8.5px] tracking-widest border border-amber-500/30 rounded-full px-2.5 py-0.5 text-amber-700 font-bold bg-amber-50/80 backdrop-blur-md">2/9 • BANNER OUTDOOR</span>
-        </div>
-
-        <div class="relative z-20 space-y-1.5">
-          <div class="relative aspect-square w-full rounded-2xl overflow-hidden border border-zinc-200 bg-zinc-100 shadow-md group">
-            <img id="bannerPrevImg" src="flexi-280.jpg" class="w-full h-full object-cover transition-all duration-300">
-            <video id="bannerPrevVid" autoplay loop muted playsinline poster="flexi-280.jpg" class="hidden w-full h-full object-cover">
-              <source id="bannerPrevVidSrc" src="video-flexi-280.mp4" type="video/mp4">
-            </video>
-
-            <div class="absolute top-2 right-2 z-20 flex bg-white/80 p-0.5 rounded-xl border border-zinc-200 backdrop-blur-md shadow-sm">
-              <button id="tabFoto2" onclick="switchMediaTab(2, 'foto')" class="px-2.5 py-0.5 rounded-lg text-[8.5px] font-bold bg-amber-400 text-zinc-900 shadow transition">📸 Foto</button>
-              <button id="tabVideo2" onclick="switchMediaTab(2, 'video')" class="px-2.5 py-0.5 rounded-lg text-[8.5px] font-bold text-zinc-600 hover:text-zinc-900 transition">🎥 Tekstur</button>
-            </div>
-
-            <button onclick="openModalFromSlide(2)" class="absolute bottom-2 right-2 z-20 bg-white/80 hover:bg-white text-zinc-800 text-[8px] font-bold px-2 py-0.5 rounded-lg border border-zinc-200 backdrop-blur-md shadow-sm">
-              🔍 Perbesar
-            </button>
-          </div>
-
-          <div class="grid grid-cols-3 gap-1.5">
-            <div class="h-14 rounded-xl overflow-hidden border border-zinc-200 bg-zinc-100 shadow-sm"><img src="flexi-280.jpg" class="w-full h-full object-cover"></div>
-            <div class="h-14 rounded-xl overflow-hidden border border-zinc-200 bg-zinc-100 shadow-sm"><img src="gbr-vinyl.JPG" class="w-full h-full object-cover"></div>
-            <div class="h-14 rounded-xl overflow-hidden border border-zinc-200 bg-zinc-100 shadow-sm"><img src="art-paper-260.jpg" class="w-full h-full object-cover"></div>
-          </div>
-
-          <div id="infoBox2" class="p-2 rounded-lg bg-amber-50 border border-amber-200 text-[9px] text-amber-900 hidden">
-            <b id="infoTitle2" class="block font-bold text-[9.5px] mb-0.5">Info Bahan Banner</b>
-            <span id="infoDesc2">Pilih bahan outdoor untuk melihat penjelasan.</span>
-          </div>
-        </div>
-
-        <div class="relative z-20 space-y-2 pb-16">
-          <div>
-            <span class="text-[9px] font-bold text-amber-700 block mb-1 uppercase tracking-wider">1. Pilih Bahan Mesin Outdoor:</span>
-            <div class="grid grid-cols-2 gap-1.5">
-              <label class="cursor-pointer"><input type="radio" name="bahanBanner" value="280gr" onclick="showInfo(2, 'Vinyl 280gr (Standar)', 'Tekstur berserat standar. Paling ramah di kantong untuk spanduk outdoor event singkat.')" class="peer hidden" checked><div class="text-[8px] py-1.5 text-center rounded-xl border border-zinc-300 bg-white peer-checked:border-amber-500 peer-checked:bg-amber-400 peer-checked:text-zinc-950 font-extrabold shadow-sm transition">Vinyl 280gr (Standar)</div></label>
-              <label class="cursor-pointer"><input type="radio" name="bahanBanner" value="korea440" onclick="showInfo(2, 'Korea 440gr ⭐ (Tebal)', 'Bahan sangat tebal, berserat halus, & permukaan smooth doff. Tahan hujan deras & angin kencang.')" class="peer hidden"><div class="text-[8px] py-1.5 text-center rounded-xl border border-zinc-300 bg-white peer-checked:border-amber-500 peer-checked:bg-amber-400 peer-checked:text-zinc-950 font-extrabold shadow-sm transition">Korea 440gr ⭐ (Tebal)</div></label>
-              <label class="cursor-pointer"><input type="radio" name="bahanBanner" value="backlite" onclick="showInfo(2, 'Backlite Outdoor 💡', 'Bahan khusus tembus cahaya lampu. Sangat ideal untuk visual neon box dan papan reklame malam hari.')" class="peer hidden"><div class="text-[8px] py-1.5 text-center rounded-xl border border-zinc-300 bg-white peer-checked:border-amber-500 peer-checked:bg-amber-400 peer-checked:text-zinc-950 font-extrabold shadow-sm transition">Backlite (Neon Box)</div></label>
-              <label class="cursor-pointer"><input type="radio" name="bahanBanner" value="cloth" onclick="showInfo(2, 'Cloth / Kain Spanduk Textile', 'Bahan berbasis kain fleksibel yang elegan, tidak mudah kusut, biasa dipakai untuk bendera atau spanduk kain.')" class="peer hidden"><div class="text-[8px] py-1.5 text-center rounded-xl border border-zinc-300 bg-white peer-checked:border-amber-500 peer-checked:bg-amber-400 peer-checked:text-zinc-950 font-extrabold shadow-sm transition">Cloth (Spanduk Kain)</div></label>
-            </div>
-          </div>
-
-          <div>
-            <span class="text-[9px] font-semibold text-zinc-700 block mb-1">2. Finishing Pinggiran:</span>
-            <div class="grid grid-cols-2 gap-1">
-              <label class="cursor-pointer"><input type="radio" name="finishingBanner" value="Mata Ayam" class="peer hidden" checked><div class="text-[8px] py-1 text-center rounded-lg border border-zinc-300 bg-white peer-checked:border-amber-500 peer-checked:bg-amber-50 peer-checked:text-amber-800 font-bold shadow-sm">Mata Ayam (Ring Besi)</div></label>
-              <label class="cursor-pointer"><input type="radio" name="finishingBanner" value="Lipat Keliling" class="peer hidden"><div class="text-[8px] py-1 text-center rounded-lg border border-zinc-300 bg-white peer-checked:border-amber-500 peer-checked:bg-amber-50 peer-checked:text-amber-800 font-bold shadow-sm">Lipat Keliling</div></label>
-              <label class="cursor-pointer"><input type="radio" name="finishingBanner" value="Selongsong" class="peer hidden"><div class="text-[8px] py-1 text-center rounded-lg border border-zinc-300 bg-white peer-checked:border-amber-500 peer-checked:bg-amber-50 peer-checked:text-amber-800 font-bold shadow-sm">Selongsong Tiang</div></label>
-              <label class="cursor-pointer"><input type="radio" name="finishingBanner" value="Les Putih" class="peer hidden"><div class="text-[8px] py-1 text-center rounded-lg border border-zinc-300 bg-white peer-checked:border-amber-500 peer-checked:bg-amber-50 peer-checked:text-amber-800 font-bold shadow-sm">Les Putih Saja</div></label>
-            </div>
-          </div>
-
-          <div class="grid grid-cols-2 gap-1.5 pt-1 border-t border-zinc-200">
-            <div>
-              <span class="text-[8.5px] font-bold text-amber-700 block mb-0.5">📏 Ukuran Spanduk</span>
-              <input id="ukuran2" type="text" placeholder="300 x 100 cm" class="w-full bg-white border border-zinc-300 rounded-lg px-2 py-0.5 text-[9.5px] text-zinc-900 focus:outline-none focus:border-amber-500 shadow-inner">
-            </div>
-            <div>
-              <span class="text-[8.5px] font-bold text-amber-700 block mb-0.5">📦 Jumlah Order</span>
-              <input id="jumlah2" type="text" placeholder="1 Pcs / 5 Pcs" class="w-full bg-white border border-zinc-300 rounded-lg px-2 py-0.5 text-[9.5px] text-zinc-900 focus:outline-none focus:border-amber-500 shadow-inner">
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- SLIDE 3: CETAK KERTAS A3+ (DENGAN OPSI FELT & IVORY/DUPLEX) -->
-      <div id="slide-3" class="slide-section bg-ambient-white flex flex-col justify-between p-4 relative">
-        <div class="yellow-glow-layer"></div>
-        <div class="relative z-20 flex items-center justify-between pt-1 pb-1">
-          <div class="flex items-center gap-2.5">
-            <img src="logo test.png" alt="Logo" class="h-10 w-auto object-contain drop-shadow-sm" onerror="this.style.display='none'">
-            <div>
-              <span class="font-extrabold text-base tracking-wider text-zinc-900 block leading-none">ARCI</span>
-              <span class="text-[9px] font-semibold text-amber-600 tracking-tight block mt-0.5">Solusi Cetak & Digital Studio</span>
-            </div>
-          </div>
-          <span class="text-[8.5px] tracking-widest border border-amber-500/30 rounded-full px-2.5 py-0.5 text-amber-700 font-bold bg-amber-50/80 backdrop-blur-md">3/9 • KERTAS & PROMOSI</span>
-        </div>
-
-        <div class="relative z-20 space-y-1.5">
-          <div class="relative aspect-square w-full rounded-2xl overflow-hidden border border-zinc-200 bg-zinc-100 shadow-md group">
-            <img id="paperPrevImg" src="art-paper-260.jpg" class="w-full h-full object-cover transition-all duration-300" onerror="this.src='gbr-vinyl.JPG'">
-            <video id="paperPrevVid" autoplay loop muted playsinline poster="art-paper-260.jpg" class="hidden w-full h-full object-cover">
-              <source id="paperPrevVidSrc" src="video-vinyl.mp4" type="video/mp4">
-            </video>
-
-            <div class="absolute top-2 right-2 z-20 flex bg-white/80 p-0.5 rounded-xl border border-zinc-200 backdrop-blur-md shadow-sm">
-              <button id="tabFoto3" onclick="switchMediaTab(3, 'foto')" class="px-2.5 py-0.5 rounded-lg text-[8.5px] font-bold bg-amber-400 text-zinc-900 shadow transition">📸 Foto</button>
-              <button id="tabVideo3" onclick="switchMediaTab(3, 'video')" class="px-2.5 py-0.5 rounded-lg text-[8.5px] font-bold text-zinc-600 hover:text-zinc-900 transition">🎥 Tekstur</button>
-            </div>
-
-            <button onclick="openModalFromSlide(3)" class="absolute bottom-2 right-2 z-20 bg-white/80 hover:bg-white text-zinc-800 text-[8px] font-bold px-2 py-0.5 rounded-lg border border-zinc-200 backdrop-blur-md shadow-sm">
-              🔍 Perbesar
-            </button>
-          </div>
-
-          <div class="grid grid-cols-3 gap-1.5">
-            <div class="h-14 rounded-xl overflow-hidden border border-zinc-200 bg-zinc-100 shadow-sm"><img src="art-paper-260.jpg" class="w-full h-full object-cover"></div>
-            <div class="h-14 rounded-xl overflow-hidden border border-zinc-200 bg-zinc-100 shadow-sm"><img src="flexi-280.jpg" class="w-full h-full object-cover"></div>
-            <div class="h-14 rounded-xl overflow-hidden border border-zinc-200 bg-zinc-100 shadow-sm"><img src="gbr-vinyl.JPG" class="w-full h-full object-cover"></div>
-          </div>
-
-          <div id="infoBox3" class="p-2 rounded-lg bg-amber-50 border border-amber-200 text-[9px] text-amber-900 hidden">
-            <b id="infoTitle3" class="block font-bold text-[9.5px] mb-0.5">Info Bahan Kertas</b>
-            <span id="infoDesc3">Pilih jenis kertas di bawah untuk melihat keunggulannya.</span>
-          </div>
-        </div>
-
-        <div class="relative z-20 space-y-1.5 pb-16">
-          <div>
-            <span class="text-[8.5px] font-bold text-amber-700 block mb-0.5 uppercase tracking-wider">1. Pilih Jenis Kertas:</span>
-            <select id="selectKertas" onchange="showPaperInfo(this.value)" class="w-full bg-white border border-zinc-300 rounded-lg text-[9px] px-2 py-1 text-zinc-900 focus:outline-none focus:border-amber-500 shadow-inner">
-              <optgroup label="Art Paper & Carton">
-                <option value="ap120">Art Paper 120gr / 150gr (Brosur / Flyer)</option>
-                <option value="ap260" selected>Art Carton 260gr / 300gr (Kartu Nama / Cover)</option>
-              </optgroup>
-              <optgroup label="Fancy & Special Texture">
-                <option value="felt">Paper Felt / Fancy Textured (Tekstur Kain Lembut Eksklusif)</option>
-                <option value="linen">Linen (Tekstur Garis Serat)</option>
-                <option value="concord">Concord (Tekstur Gelombang Elegan)</option>
-              </optgroup>
-              <optgroup label="Packaging & Box Material">
-                <option value="ivory">Ivory Paper (Putih Bersih Higienis untuk Box Makanan)</option>
-                <option value="duplex">Duplex (Sisi Luar Putih, Dalam Abu-abu untuk Box Produk)</option>
-              </optgroup>
-              <optgroup label="HVS & Sertifikat">
-                <option value="hvs100">HVS 100gr / 80gr (Dokumen / Buku)</option>
-                <option value="rajawali">Rajawali / Tik (Sertifikat Khas)</option>
-              </optgroup>
-            </select>
-          </div>
-
-          <div class="grid grid-cols-2 gap-1.5">
-            <div>
-              <span class="text-[8px] text-zinc-700 block mb-0.5 font-medium">2. Sisi Cetak</span>
-              <div class="grid grid-cols-2 gap-1">
-                <label class="cursor-pointer"><input type="radio" name="sisi" value="1sisi" class="peer hidden" checked><div class="text-[7.5px] py-1 text-center rounded border border-zinc-300 bg-white peer-checked:border-amber-500 peer-checked:bg-amber-50 peer-checked:text-amber-800 font-semibold shadow-sm">1 Sisi</div></label>
-                <label class="cursor-pointer"><input type="radio" name="sisi" value="2sisi" class="peer hidden"><div class="text-[7.5px] py-1 text-center rounded border border-zinc-300 bg-white peer-checked:border-amber-500 peer-checked:bg-amber-50 peer-checked:text-amber-800 font-semibold shadow-sm">2 Sisi</div></label>
+              <div class="relative aspect-square rounded-xl overflow-hidden bg-zinc-100 border border-zinc-100 mb-2">
+                <img src="flexi-280.jpg" class="w-full h-full object-cover" onerror="this.src='https://via.placeholder.com/150'">
+                <span class="absolute top-1.5 left-1.5 bg-amber-400 text-zinc-950 text-[7px] font-extrabold px-1.5 py-0.5 rounded shadow">🏷️ Hemat</span>
               </div>
+              <span class="text-[7.5px] font-bold text-amber-600 uppercase">Banner / Spanduk</span>
+              <h4 class="text-[11px] font-extrabold text-zinc-900 leading-tight line-clamp-1">Flexi Banner 280gr</h4>
+              <p class="text-[8.5px] text-zinc-500 line-clamp-2 mt-0.5">Spanduk warung, event, toko, sudah termasuk ring besi.</p>
             </div>
-            <div>
-              <span class="text-[8px] text-zinc-700 block mb-0.5 font-medium">3. Laminasi</span>
-              <div class="grid grid-cols-2 gap-1">
-                <label class="cursor-pointer"><input type="radio" name="lamKertas" value="glossy" class="peer hidden" checked><div class="text-[7.5px] py-1 text-center rounded border border-zinc-300 bg-white peer-checked:border-amber-500 peer-checked:bg-amber-50 peer-checked:text-amber-800 font-semibold shadow-sm">Glossy</div></label>
-                <label class="cursor-pointer"><input type="radio" name="lamKertas" value="doff" class="peer hidden"><div class="text-[7.5px] py-1 text-center rounded border border-zinc-300 bg-white peer-checked:border-amber-500 peer-checked:bg-amber-50 peer-checked:text-amber-800 font-semibold shadow-sm">Doff</div></label>
+            <div class="mt-3 flex items-center justify-between">
+              <div>
+                <span class="text-[7px] text-zinc-400 block">Mulai dari</span>
+                <span class="text-[10px] font-extrabold text-amber-700">Rp 20.000/m</span>
               </div>
+              <button onclick="openOrderModal('Flexi Banner Spanduk')" class="bg-zinc-900 hover:bg-amber-400 text-amber-400 hover:text-zinc-950 font-bold text-[8px] px-2.5 py-1.5 rounded-xl transition shadow">
+                Pesan
+              </button>
             </div>
           </div>
 
-          <div class="grid grid-cols-2 gap-1.5 pt-1 border-t border-zinc-200">
+          <!-- ITEM 3 -->
+          <div class="product-card kertas bg-white border border-zinc-200 rounded-2xl p-2.5 shadow-sm flex flex-col justify-between">
             <div>
-              <span class="text-[8.5px] font-bold text-amber-700 block mb-0.5">📏 Ukuran Kertas</span>
-              <input id="ukuran3" type="text" placeholder="A3+ / A4 / Kartu Nama" class="w-full bg-white border border-zinc-300 rounded-lg px-2 py-0.5 text-[9.5px] text-zinc-900 focus:outline-none focus:border-amber-500 shadow-inner">
+              <div class="relative aspect-square rounded-xl overflow-hidden bg-zinc-100 border border-zinc-100 mb-2">
+                <img src="art-paper-260.jpg" class="w-full h-full object-cover" onerror="this.src='https://via.placeholder.com/150'">
+                <span class="absolute top-1.5 left-1.5 bg-amber-400 text-zinc-950 text-[7px] font-extrabold px-1.5 py-0.5 rounded shadow">📋 Best Seller</span>
+              </div>
+              <span class="text-[7.5px] font-bold text-amber-600 uppercase">Cetak Kertas A3+</span>
+              <h4 class="text-[11px] font-extrabold text-zinc-900 leading-tight line-clamp-1">Art Carton 260gr</h4>
+              <p class="text-[8.5px] text-zinc-500 line-clamp-2 mt-0.5">Ideal untuk kartu nama profesional, sertifikat, & cover buku.</p>
             </div>
-            <div>
-              <span class="text-[8.5px] font-bold text-amber-700 block mb-0.5">📦 Jumlah Cetak</span>
-              <input id="jumlah3" type="text" placeholder="50 Lembar / 5 Box" class="w-full bg-white border border-zinc-300 rounded-lg px-2 py-0.5 text-[9.5px] text-zinc-900 focus:outline-none focus:border-amber-500 shadow-inner">
+            <div class="mt-3 flex items-center justify-between">
+              <div>
+                <span class="text-[7px] text-zinc-400 block">Mulai dari</span>
+                <span class="text-[10px] font-extrabold text-amber-700">Rp 5.000/lbr</span>
+              </div>
+              <button onclick="openOrderModal('Cetak Art Carton 260gr')" class="bg-zinc-900 hover:bg-amber-400 text-amber-400 hover:text-zinc-950 font-bold text-[8px] px-2.5 py-1.5 rounded-xl transition shadow">
+                Pesan
+              </button>
             </div>
           </div>
+
+          <!-- ITEM 4 -->
+          <div class="product-card akrilik bg-white border border-zinc-200 rounded-2xl p-2.5 shadow-sm flex flex-col justify-between">
+            <div>
+              <div class="relative aspect-square rounded-xl overflow-hidden bg-zinc-100 border border-zinc-100 mb-2">
+                <img src="gbr-vinyl.JPG" class="w-full h-full object-cover" onerror="this.src='https://via.placeholder.com/150'">
+                <span class="absolute top-1.5 left-1.5 bg-amber-400 text-zinc-950 text-[7px] font-extrabold px-1.5 py-0.5 rounded shadow">💎 Mewah</span>
+              </div>
+              <span class="text-[7.5px] font-bold text-amber-600 uppercase">Akrilik & Plakat</span>
+              <h4 class="text-[11px] font-extrabold text-zinc-900 leading-tight line-clamp-1">Plakat Akrilik Custom</h4>
+              <p class="text-[8.5px] text-zinc-500 line-clamp-2 mt-0.5">Laser cut presisi, bening kristal untuk penghargaan & kenang-kenangan.</p>
+            </div>
+            <div class="mt-3 flex items-center justify-between">
+              <div>
+                <span class="text-[7px] text-zinc-400 block">Mulai dari</span>
+                <span class="text-[10px] font-extrabold text-amber-700">Rp 55.000</span>
+              </div>
+              <button onclick="openOrderModal('Plakat Akrilik Custom')" class="bg-zinc-900 hover:bg-amber-400 text-amber-400 hover:text-zinc-950 font-bold text-[8px] px-2.5 py-1.5 rounded-xl transition shadow">
+                Pesan
+              </button>
+            </div>
+          </div>
+
+          <!-- ITEM 5 -->
+          <div class="product-card merch bg-white border border-zinc-200 rounded-2xl p-2.5 shadow-sm flex flex-col justify-between">
+            <div>
+              <div class="relative aspect-square rounded-xl overflow-hidden bg-zinc-100 border border-zinc-100 mb-2">
+                <img src="gbr-vinyl.JPG" class="w-full h-full object-cover" onerror="this.src='https://via.placeholder.com/150'">
+                <span class="absolute top-1.5 left-1.5 bg-amber-400 text-zinc-950 text-[7px] font-extrabold px-1.5 py-0.5 rounded shadow">🎁 Unik</span>
+              </div>
+              <span class="text-[7.5px] font-bold text-amber-600 uppercase">Merchandise</span>
+              <h4 class="text-[11px] font-extrabold text-zinc-900 leading-tight line-clamp-1">Mug & Medali Custom</h4>
+              <p class="text-[8.5px] text-zinc-500 line-clamp-2 mt-0.5">Mug keramik full color & medali wisuda/event eksklusif.</p>
+            </div>
+            <div class="mt-3 flex items-center justify-between">
+              <div>
+                <span class="text-[7px] text-zinc-400 block">Mulai dari</span>
+                <span class="text-[10px] font-extrabold text-amber-700">Rp 25.000</span>
+              </div>
+              <button onclick="openOrderModal('Merchandise / Mug / Medali')" class="bg-zinc-900 hover:bg-amber-400 text-amber-400 hover:text-zinc-950 font-bold text-[8px] px-2.5 py-1.5 rounded-xl transition shadow">
+                Pesan
+              </button>
+            </div>
+          </div>
+
+          <!-- ITEM 6 -->
+          <div class="product-card pack bg-white border border-zinc-200 rounded-2xl p-2.5 shadow-sm flex flex-col justify-between">
+            <div>
+              <div class="relative aspect-square rounded-xl overflow-hidden bg-zinc-100 border border-zinc-100 mb-2">
+                <img src="gbr-vinyl.JPG" class="w-full h-full object-cover" onerror="this.src='https://via.placeholder.com/150'">
+                <span class="absolute top-1.5 left-1.5 bg-amber-400 text-zinc-950 text-[7px] font-extrabold px-1.5 py-0.5 rounded shadow">📦 Bisnis</span>
+              </div>
+              <span class="text-[7.5px] font-bold text-amber-600 uppercase">Packaging & Apparel</span>
+              <h4 class="text-[11px] font-extrabold text-zinc-900 leading-tight line-clamp-1">Box Packaging & Kaos DTF</h4>
+              <p class="text-[8.5px] text-zinc-500 line-clamp-2 mt-0.5">Kotak kemasan produk UMKM & sablon kaos digital pekat.</p>
+            </div>
+            <div class="mt-3 flex items-center justify-between">
+              <div>
+                <span class="text-[7px] text-zinc-400 block">Mulai dari</span>
+                <span class="text-[10px] font-extrabold text-amber-700">Rp 3.500</span>
+              </div>
+              <button onclick="openOrderModal('Packaging / Kaos DTF')" class="bg-zinc-900 hover:bg-amber-400 text-amber-400 hover:text-zinc-950 font-bold text-[8px] px-2.5 py-1.5 rounded-xl transition shadow">
+                Pesan
+              </button>
+            </div>
+          </div>
+
         </div>
       </div>
 
-      <!-- SLIDE 4: INDOOR, SKOTLITE & CUTTING -->
-      <div id="slide-4" class="slide-section bg-ambient-white flex flex-col justify-between p-4 relative">
-        <div class="yellow-glow-layer"></div>
-        <div class="relative z-20 flex items-center justify-between pt-1 pb-1">
-          <div class="flex items-center gap-2.5">
-            <img src="logo test.png" alt="Logo" class="h-10 w-auto object-contain drop-shadow-sm" onerror="this.style.display='none'">
-            <div>
-              <span class="font-extrabold text-base tracking-wider text-zinc-900 block leading-none">ARCI</span>
-              <span class="text-[9px] font-semibold text-amber-600 tracking-tight block mt-0.5">Solusi Cetak & Digital Studio</span>
-            </div>
-          </div>
-          <span class="text-[8.5px] tracking-widest border border-amber-500/30 rounded-full px-2.5 py-0.5 text-amber-700 font-bold bg-amber-50/80 backdrop-blur-md">4/9 • INDOOR & SKOTLITE</span>
-        </div>
-
-        <div class="relative z-20 space-y-1.5">
-          <div class="relative aspect-square w-full rounded-2xl overflow-hidden border border-zinc-200 bg-zinc-100 shadow-md group">
-            <img id="indoorPrevImg" src="gbr-vinyl.JPG" class="w-full h-full object-cover transition-all duration-300">
-            <video id="indoorPrevVid" autoplay loop muted playsinline poster="gbr-vinyl.JPG" class="hidden w-full h-full object-cover">
-              <source id="indoorPrevVidSrc" src="video-vinyl.mp4" type="video/mp4">
-            </video>
-
-            <div class="absolute top-2 right-2 z-20 flex bg-white/80 p-0.5 rounded-xl border border-zinc-200 backdrop-blur-md shadow-sm">
-              <button id="tabFoto4" onclick="switchMediaTab(4, 'foto')" class="px-2.5 py-0.5 rounded-lg text-[8.5px] font-bold bg-amber-400 text-zinc-900 shadow transition">📸 Foto</button>
-              <button id="tabVideo4" onclick="switchMediaTab(4, 'video')" class="px-2.5 py-0.5 rounded-lg text-[8.5px] font-bold text-zinc-600 hover:text-zinc-900 transition">🎥 Tekstur</button>
-            </div>
-
-            <button onclick="openModalFromSlide(4)" class="absolute bottom-2 right-2 z-20 bg-white/80 hover:bg-white text-zinc-800 text-[8px] font-bold px-2 py-0.5 rounded-lg border border-zinc-200 backdrop-blur-md shadow-sm">
-              🔍 Perbesar
-            </button>
-          </div>
-
-          <div class="grid grid-cols-3 gap-1.5">
-            <div class="h-14 rounded-xl overflow-hidden border border-zinc-200 bg-zinc-100 shadow-sm"><img src="gbr-vinyl.JPG" class="w-full h-full object-cover"></div>
-            <div class="h-14 rounded-xl overflow-hidden border border-zinc-200 bg-zinc-100 shadow-sm"><img src="flexi-280.jpg" class="w-full h-full object-cover"></div>
-            <div class="h-14 rounded-xl overflow-hidden border border-zinc-200 bg-zinc-100 shadow-sm"><img src="art-paper-260.jpg" class="w-full h-full object-cover"></div>
-          </div>
-
-          <div id="infoBox4" class="p-2 rounded-lg bg-amber-50 border border-amber-200 text-[9px] text-amber-900 hidden">
-            <b id="infoTitle4" class="block font-bold text-[9.5px] mb-0.5">Info Layanan Indoor</b>
-            <span id="infoDesc4">Pilih opsi untuk melihat detail.</span>
-          </div>
-        </div>
-
-        <div class="relative z-20 space-y-1.5 pb-16">
-          <div>
-            <span class="text-[8.5px] font-bold text-amber-700 block mb-0.5 uppercase tracking-wider">1. Pilih Divisi & Material:</span>
-            <select id="selectIndoor" onchange="showIndoorInfo(this.value)" class="w-full bg-white border border-zinc-300 rounded-lg text-[9px] px-2 py-1 text-zinc-900 focus:outline-none focus:border-amber-500 shadow-inner">
-              <option value="maxdecal" selected>Maxdecal / Ritrama (Stiker Vinyl High-Res Indoor)</option>
-              <option value="skotlite">Skotlite / Oracal (Stiker Kaca & Cutting Motor/Mobil)</option>
-              <option value="cutter">Layanan Potong Cutter (Die-Cut & Plotter Presisi Tinggi)</option>
-              <option value="uv">UV Print Flatbed / Roll to Roll</option>
-              <option value="albatros">Albatros & Backlit (Roll Up & Neon Box)</option>
-            </select>
-          </div>
-
-          <div>
-            <span class="text-[8px] text-zinc-700 block mb-0.5 font-medium">2. Opsi Laminasi:</span>
-            <div class="grid grid-cols-4 gap-1">
-              <label class="cursor-pointer"><input type="radio" name="lamIndoor" value="glossy" class="peer hidden" checked><div class="text-[7.5px] py-1 text-center rounded border border-zinc-300 bg-white peer-checked:border-amber-500 peer-checked:bg-amber-50 peer-checked:text-amber-800 font-semibold shadow-sm">Glossy</div></label>
-              <label class="cursor-pointer"><input type="radio" name="lamIndoor" value="doff" class="peer hidden"><div class="text-[7.5px] py-1 text-center rounded border border-zinc-300 bg-white peer-checked:border-amber-500 peer-checked:bg-amber-50 peer-checked:text-amber-800 font-semibold shadow-sm">Doff</div></label>
-              <label class="cursor-pointer"><input type="radio" name="lamIndoor" value="superglossy" class="peer hidden"><div class="text-[7.5px] py-1 text-center rounded border border-zinc-300 bg-white peer-checked:border-amber-500 peer-checked:bg-amber-50 peer-checked:text-amber-800 font-semibold shadow-sm">Supergloss</div></label>
-              <label class="cursor-pointer"><input type="radio" name="lamIndoor" value="micron" class="peer hidden"><div class="text-[7.5px] py-1 text-center rounded border border-zinc-300 bg-white peer-checked:border-amber-500 peer-checked:bg-amber-50 peer-checked:text-amber-800 font-semibold shadow-sm">Micron</div></label>
-            </div>
-          </div>
-
-          <div class="grid grid-cols-2 gap-1.5 pt-1 border-t border-zinc-200">
-            <div>
-              <span class="text-[8.5px] font-bold text-amber-700 block mb-0.5">📏 Panjang x Lebar</span>
-              <input id="ukuran4" type="text" placeholder="100 x 100 cm" class="w-full bg-white border border-zinc-300 rounded-lg px-2 py-0.5 text-[9.5px] text-zinc-900 focus:outline-none focus:border-amber-500 shadow-inner">
-            </div>
-            <div>
-              <span class="text-[8.5px] font-bold text-amber-700 block mb-0.5">📦 Jumlah Order</span>
-              <input id="jumlah4" type="text" placeholder="2 Meter / 5 Pcs" class="w-full bg-white border border-zinc-300 rounded-lg px-2 py-0.5 text-[9.5px] text-zinc-900 focus:outline-none focus:border-amber-500 shadow-inner">
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- SLIDE 5: AKRILIK & PLAKAT -->
-      <div id="slide-5" class="slide-section bg-ambient-white flex flex-col justify-between p-4 relative">
-        <div class="yellow-glow-layer"></div>
-        <div class="relative z-20 flex items-center justify-between pt-1 pb-1">
-          <div class="flex items-center gap-2.5">
-            <img src="logo test.png" alt="Logo" class="h-10 w-auto object-contain drop-shadow-sm" onerror="this.style.display='none'">
-            <div>
-              <span class="font-extrabold text-base tracking-wider text-zinc-900 block leading-none">ARCI</span>
-              <span class="text-[9px] font-semibold text-amber-600 tracking-tight block mt-0.5">Solusi Cetak & Digital Studio</span>
-            </div>
-          </div>
-          <span class="text-[8.5px] tracking-widest border border-amber-500/30 rounded-full px-2.5 py-0.5 text-amber-700 font-bold bg-amber-50/80 backdrop-blur-md">5/9 • AKRILIK & PLAKAT</span>
-        </div>
-
-        <div class="relative z-20 space-y-1.5">
-          <div class="relative aspect-square w-full rounded-2xl overflow-hidden border border-zinc-200 bg-zinc-100 shadow-md group">
-            <img id="prevImg5" src="gbr-vinyl.JPG" class="w-full h-full object-cover">
-            <video id="prevVid5" autoplay loop muted playsinline poster="gbr-vinyl.JPG" class="hidden w-full h-full object-cover">
-              <source id="prevVidSrc5" src="video-vinyl.mp4" type="video/mp4">
-            </video>
-
-            <div class="absolute top-2 right-2 z-20 flex bg-white/80 p-0.5 rounded-xl border border-zinc-200 backdrop-blur-md shadow-sm">
-              <button id="tabFoto5" onclick="switchMediaTab(5, 'foto')" class="px-2.5 py-0.5 rounded-lg text-[8.5px] font-bold bg-amber-400 text-zinc-900 shadow transition">📸 Foto</button>
-              <button id="tabVideo5" onclick="switchMediaTab(5, 'video')" class="px-2.5 py-0.5 rounded-lg text-[8.5px] font-bold text-zinc-600 hover:text-zinc-900 transition">🎥 Tekstur</button>
-            </div>
-
-            <button onclick="openModalFromSlide(5)" class="absolute bottom-2 right-2 z-20 bg-white/80 hover:bg-white text-zinc-800 text-[8px] font-bold px-2 py-0.5 rounded-lg border border-zinc-200 backdrop-blur-md shadow-sm">
-              🔍 Perbesar
-            </button>
-          </div>
-
-          <div class="grid grid-cols-3 gap-1.5">
-            <div class="h-14 rounded-xl overflow-hidden border border-zinc-200 bg-zinc-100 shadow-sm"><img src="gbr-vinyl.JPG" class="w-full h-full object-cover"></div>
-            <div class="h-14 rounded-xl overflow-hidden border border-zinc-200 bg-zinc-100 shadow-sm"><img src="flexi-280.jpg" class="w-full h-full object-cover"></div>
-            <div class="h-14 rounded-xl overflow-hidden border border-zinc-200 bg-zinc-100 shadow-sm"><img src="art-paper-260.jpg" class="w-full h-full object-cover"></div>
-          </div>
-
-          <div id="infoBox5" class="p-2 rounded-lg bg-amber-50 border border-amber-200 text-[9px] text-amber-900 hidden">
-            <b id="infoTitle5" class="block font-bold text-[9.5px] mb-0.5">Info Akrilik</b>
-            <span id="infoDesc5">Pilih varian untuk melihat penjelasan.</span>
-          </div>
-        </div>
-
-        <div class="relative z-20 space-y-1.5 pb-16">
-          <div>
-            <span class="text-[8.5px] font-bold text-amber-700 block mb-0.5 uppercase tracking-wider">1. Varian Akrilik & Plakat:</span>
-            <select id="selectAkrilik" onchange="showAkrilikInfo(this.value)" class="w-full bg-white border border-zinc-300 rounded-lg text-[9px] px-2 py-1 text-zinc-900 focus:outline-none focus:border-amber-500 shadow-inner">
-              <option value="plakat3mm" selected>Plakat Standard (Bening 3mm / 5mm)</option>
-              <option value="plakat8mm">Plakat Tebal Eksklusif 8mm</option>
-              <option value="kakigold">Plakat Kaki Kotak + Aksen Gold</option>
-              <option value="bautdinding">Akrilik Signage Baut Dinding Stainless</option>
-              <option value="boxakrilik">Box Akrilik Custom (Kotak Amal / Kotak Saran / Display)</option>
-              <option value="tentcard">Tentcard Akrilik Meja Custom</option>
-            </select>
-          </div>
-
-          <div>
-            <span class="text-[8px] text-zinc-700 block mb-0.5 font-medium">2. Finishing Base / Kaki:</span>
-            <div class="grid grid-cols-3 gap-1">
-              <label class="cursor-pointer"><input type="radio" name="kaki" value="Kaki Timpa 2" class="peer hidden" checked><div class="text-[7.5px] py-1 text-center rounded border border-zinc-300 bg-white peer-checked:border-amber-500 peer-checked:bg-amber-50 peer-checked:text-amber-800 font-semibold shadow-sm">Kaki Timpa 2</div></label>
-              <label class="cursor-pointer"><input type="radio" name="kaki" value="Kaki Kotak Gold" class="peer hidden"><div class="text-[7.5px] py-1 text-center rounded border border-zinc-300 bg-white peer-checked:border-amber-500 peer-checked:bg-amber-50 peer-checked:text-amber-800 font-semibold shadow-sm">Kaki Kotak Gold</div></label>
-              <label class="cursor-pointer"><input type="radio" name="kaki" value="Box Beludru" class="peer hidden"><div class="text-[7.5px] py-1 text-center rounded border border-zinc-300 bg-white peer-checked:border-amber-500 peer-checked:bg-amber-50 peer-checked:text-amber-800 font-semibold shadow-sm">+ Box Beludru</div></label>
-            </div>
-          </div>
-
-          <div class="grid grid-cols-2 gap-1.5 pt-1 border-t border-zinc-200">
-            <div>
-              <span class="text-[8.5px] font-bold text-amber-700 block mb-0.5">📏 Ukuran Dimensi</span>
-              <input id="ukuran5" type="text" placeholder="20 x 15 cm" class="w-full bg-white border border-zinc-300 rounded-lg px-2 py-0.5 text-[9.5px] text-zinc-900 focus:outline-none focus:border-amber-500 shadow-inner">
-            </div>
-            <div>
-              <span class="text-[8.5px] font-bold text-amber-700 block mb-0.5">📦 Jumlah Plakat</span>
-              <input id="jumlah5" type="text" placeholder="1 Pcs / 10 Pcs" class="w-full bg-white border border-zinc-300 rounded-lg px-2 py-0.5 text-[9.5px] text-zinc-900 focus:outline-none focus:border-amber-500 shadow-inner">
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- SLIDE 6: MERCHANDISE, SOUVENIR & MEDALI -->
-      <div id="slide-6" class="slide-section bg-ambient-white flex flex-col justify-between p-4 relative">
-        <div class="yellow-glow-layer"></div>
-        <div class="relative z-20 flex items-center justify-between pt-1 pb-1">
-          <div class="flex items-center gap-2.5">
-            <img src="logo test.png" alt="Logo" class="h-10 w-auto object-contain drop-shadow-sm" onerror="this.style.display='none'">
-            <div>
-              <span class="font-extrabold text-base tracking-wider text-zinc-900 block leading-none">ARCI</span>
-              <span class="text-[9px] font-semibold text-amber-600 tracking-tight block mt-0.5">Solusi Cetak & Digital Studio</span>
-            </div>
-          </div>
-          <span class="text-[8.5px] tracking-widest border border-amber-500/30 rounded-full px-2.5 py-0.5 text-amber-700 font-bold bg-amber-50/80 backdrop-blur-md">6/9 • MERCHANDISE & SOUVENIR</span>
-        </div>
-
-        <div class="relative z-20 space-y-1.5">
-          <div class="relative aspect-square w-full rounded-2xl overflow-hidden border border-zinc-200 bg-zinc-100 shadow-md group">
-            <img id="prevImg6" src="gbr-vinyl.JPG" class="w-full h-full object-cover">
-            <video id="prevVid6" autoplay loop muted playsinline poster="gbr-vinyl.JPG" class="hidden w-full h-full object-cover">
-              <source id="prevVidSrc6" src="video-vinyl.mp4" type="video/mp4">
-            </video>
-
-            <div class="absolute top-2 right-2 z-20 flex bg-white/80 p-0.5 rounded-xl border border-zinc-200 backdrop-blur-md shadow-sm">
-              <button id="tabFoto6" onclick="switchMediaTab(6, 'foto')" class="px-2.5 py-0.5 rounded-lg text-[8.5px] font-bold bg-amber-400 text-zinc-900 shadow transition">📸 Foto</button>
-              <button id="tabVideo6" onclick="switchMediaTab(6, 'video')" class="px-2.5 py-0.5 rounded-lg text-[8.5px] font-bold text-zinc-600 hover:text-zinc-900 transition">🎥 Tekstur</button>
-            </div>
-
-            <button onclick="openModalFromSlide(6)" class="absolute bottom-2 right-2 z-20 bg-white/80 hover:bg-white text-zinc-800 text-[8px] font-bold px-2 py-0.5 rounded-lg border border-zinc-200 backdrop-blur-md shadow-sm">
-              🔍 Perbesar
-            </button>
-          </div>
-
-          <div class="grid grid-cols-3 gap-1.5">
-            <div class="h-14 rounded-xl overflow-hidden border border-zinc-200 bg-zinc-100 shadow-sm"><img src="gbr-vinyl.JPG" class="w-full h-full object-cover"></div>
-            <div class="h-14 rounded-xl overflow-hidden border border-zinc-200 bg-zinc-100 shadow-sm"><img src="flexi-280.jpg" class="w-full h-full object-cover"></div>
-            <div class="h-14 rounded-xl overflow-hidden border border-zinc-200 bg-zinc-100 shadow-sm"><img src="art-paper-260.jpg" class="w-full h-full object-cover"></div>
-          </div>
-
-          <div id="infoBox6" class="p-2 rounded-lg bg-amber-50 border border-amber-200 text-[9px] text-amber-900 hidden">
-            <b id="infoTitle6" class="block font-bold text-[9.5px] mb-0.5">Info Merchandise</b>
-            <span id="infoDesc6">Pilih produk untuk melihat penjelasan detail.</span>
-          </div>
-        </div>
-
-        <div class="relative z-20 space-y-1.5 pb-16">
-          <div>
-            <span class="text-[8.5px] font-bold text-amber-700 block mb-0.5 uppercase tracking-wider">1. Item Souvenir & Merchandise:</span>
-            <select id="selectMerch" onchange="showMerchInfo(this.value)" class="w-full bg-white border border-zinc-300 rounded-lg text-[9px] px-2 py-1 text-zinc-900 focus:outline-none focus:border-amber-500 shadow-inner">
-              <option value="mug" selected>Flatbed Mug Custom Full Color</option>
-              <option value="medali">Medali Wisuda / Event (Akrilik & Logam)</option>
-              <option value="ganciuv">Ganci UV (Gantungan Kunci Print UV Bolak-balik)</option>
-              <option value="stempel">Stempel Flash Otomatis (Tanpa Bantalan)</option>
-              <option value="kipas">Kipas Kerang / Kipas Promosi Event</option>
-              <option value="pin">Pin Bros / Gantungan Kunci Pin Bundar</option>
-            </select>
-          </div>
-
-          <div class="grid grid-cols-2 gap-1.5 pt-1 border-t border-zinc-200">
-            <div>
-              <span class="text-[8.5px] font-bold text-amber-700 block mb-0.5">📏 Model / Varian</span>
-              <input id="ukuran6" type="text" placeholder="Standard / Custom" class="w-full bg-white border border-zinc-300 rounded-lg px-2 py-0.5 text-[9.5px] text-zinc-900 focus:outline-none focus:border-amber-500 shadow-inner">
-            </div>
-            <div>
-              <span class="text-[8.5px] font-bold text-amber-700 block mb-0.5">📦 Jumlah Order</span>
-              <input id="jumlah6" type="text" placeholder="24 Pcs / 100 Pcs" class="w-full bg-white border border-zinc-300 rounded-lg px-2 py-0.5 text-[9.5px] text-zinc-900 focus:outline-none focus:border-amber-500 shadow-inner">
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- SLIDE 7: PACKAGING, BOX CUSTOM & APPAREL -->
-      <div id="slide-7" class="slide-section bg-ambient-white flex flex-col justify-between p-4 relative">
-        <div class="yellow-glow-layer"></div>
-        <div class="relative z-20 flex items-center justify-between pt-1 pb-1">
-          <div class="flex items-center gap-2.5">
-            <img src="logo test.png" alt="Logo" class="h-10 w-auto object-contain drop-shadow-sm" onerror="this.style.display='none'">
-            <div>
-              <span class="font-extrabold text-base tracking-wider text-zinc-900 block leading-none">ARCI</span>
-              <span class="text-[9px] font-semibold text-amber-600 tracking-tight block mt-0.5">Solusi Cetak & Digital Studio</span>
-            </div>
-          </div>
-          <span class="text-[8.5px] tracking-widest border border-amber-500/30 rounded-full px-2.5 py-0.5 text-amber-700 font-bold bg-amber-50/80 backdrop-blur-md">7/9 • PACKAGING & APPAREL</span>
-        </div>
-
-        <div class="relative z-20 space-y-1.5">
-          <div class="relative aspect-square w-full rounded-2xl overflow-hidden border border-zinc-200 bg-zinc-100 shadow-md group">
-            <img id="prevImg7" src="gbr-vinyl.JPG" class="w-full h-full object-cover">
-            <video id="prevVid7" autoplay loop muted playsinline poster="gbr-vinyl.JPG" class="hidden w-full h-full object-cover">
-              <source id="prevVidSrc7" src="video-vinyl.mp4" type="video/mp4">
-            </video>
-
-            <div class="absolute top-2 right-2 z-20 flex bg-white/80 p-0.5 rounded-xl border border-zinc-200 backdrop-blur-md shadow-sm">
-              <button id="tabFoto7" onclick="switchMediaTab(7, 'foto')" class="px-2.5 py-0.5 rounded-lg text-[8.5px] font-bold bg-amber-400 text-zinc-900 shadow transition">📸 Foto</button>
-              <button id="tabVideo7" onclick="switchMediaTab(7, 'video')" class="px-2.5 py-0.5 rounded-lg text-[8.5px] font-bold text-zinc-600 hover:text-zinc-900 transition">🎥 Tekstur</button>
-            </div>
-
-            <button onclick="openModalFromSlide(7)" class="absolute bottom-2 right-2 z-20 bg-white/80 hover:bg-white text-zinc-800 text-[8px] font-bold px-2 py-0.5 rounded-lg border border-zinc-200 backdrop-blur-md shadow-sm">
-              🔍 Perbesar
-            </button>
-          </div>
-
-          <div class="grid grid-cols-3 gap-1.5">
-            <div class="h-14 rounded-xl overflow-hidden border border-zinc-200 bg-zinc-100 shadow-sm"><img src="gbr-vinyl.JPG" class="w-full h-full object-cover"></div>
-            <div class="h-14 rounded-xl overflow-hidden border border-zinc-200 bg-zinc-100 shadow-sm"><img src="flexi-280.jpg" class="w-full h-full object-cover"></div>
-            <div class="h-14 rounded-xl overflow-hidden border border-zinc-200 bg-zinc-100 shadow-sm"><img src="art-paper-260.jpg" class="w-full h-full object-cover"></div>
-          </div>
-
-          <div id="infoBox7" class="p-2 rounded-lg bg-amber-50 border border-amber-200 text-[9px] text-amber-900 hidden">
-            <b id="infoTitle7" class="block font-bold text-[9.5px] mb-0.5">Info Packaging</b>
-            <span id="infoDesc7">Pilih produk untuk melihat penjelasan.</span>
-          </div>
-        </div>
-
-        <div class="relative z-20 space-y-1.5 pb-16">
-          <div>
-            <span class="text-[8.5px] font-bold text-amber-700 block mb-0.5 uppercase tracking-wider">1. Pilih Produk Packaging / Apparel:</span>
-            <select id="selectPack" onchange="showPackInfo(this.value)" class="w-full bg-white border border-zinc-300 rounded-lg text-[9px] px-2 py-1 text-zinc-900 focus:outline-none focus:border-amber-500 shadow-inner">
-              <option value="boxivory" selected>Box Packaging Custom Ivory / Duplex</option>
-              <option value="dtfuv">DTF UV (Stiker Transfer Timbul Berkilau untuk Hard Surface)</option>
-              <option value="kaos">Kaos Custom Sablon DTF</option>
-              <option value="topi">Topi Custom Sablon / Bordir</option>
-              <option value="lanyard">Lanyard Tali ID Card Printing 2 Sisi</option>
-              <option value="idcard">ID Card PVC Standar ATM</option>
-            </select>
-          </div>
-
-          <div class="grid grid-cols-2 gap-1.5 pt-1 border-t border-zinc-200">
-            <div>
-              <span class="text-[8.5px] font-bold text-amber-700 block mb-0.5">📏 Ukuran / Spesifikasi</span>
-              <input id="ukuran7" type="text" placeholder="Custom / Size L" class="w-full bg-white border border-zinc-300 rounded-lg px-2 py-0.5 text-[9.5px] text-zinc-900 focus:outline-none focus:border-amber-500 shadow-inner">
-            </div>
-            <div>
-              <span class="text-[8.5px] font-bold text-amber-700 block mb-0.5">📦 Jumlah Order</span>
-              <input id="jumlah7" type="text" placeholder="50 Pcs / 100 Pcs" class="w-full bg-white border border-zinc-300 rounded-lg px-2 py-0.5 text-[9.5px] text-zinc-900 focus:outline-none focus:border-amber-500 shadow-inner">
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- SLIDE 8: KANTOR, BUKU & ADMINISTRASI -->
-      <div id="slide-8" class="slide-section bg-ambient-white flex flex-col justify-between p-4 relative">
-        <div class="yellow-glow-layer"></div>
-        <div class="relative z-20 flex items-center justify-between pt-1 pb-1">
-          <div class="flex items-center gap-2.5">
-            <img src="logo test.png" alt="Logo" class="h-10 w-auto object-contain drop-shadow-sm" onerror="this.style.display='none'">
-            <div>
-              <span class="font-extrabold text-base tracking-wider text-zinc-900 block leading-none">ARCI</span>
-              <span class="text-[9px] font-semibold text-amber-600 tracking-tight block mt-0.5">Solusi Cetak & Digital Studio</span>
-            </div>
-          </div>
-          <span class="text-[8.5px] tracking-widest border border-amber-500/30 rounded-full px-2.5 py-0.5 text-amber-700 font-bold bg-amber-50/80 backdrop-blur-md">8/9 • KANTOR & BUKU</span>
-        </div>
-
-        <div class="relative z-20 space-y-1.5">
-          <div class="relative aspect-square w-full rounded-2xl overflow-hidden border border-zinc-200 bg-zinc-100 shadow-md group">
-            <img id="prevImg8" src="gbr-vinyl.JPG" class="w-full h-full object-cover">
-            <video id="prevVid8" autoplay loop muted playsinline poster="gbr-vinyl.JPG" class="hidden w-full h-full object-cover">
-              <source id="prevVidSrc8" src="video-vinyl.mp4" type="video/mp4">
-            </video>
-
-            <div class="absolute top-2 right-2 z-20 flex bg-white/80 p-0.5 rounded-xl border border-zinc-200 backdrop-blur-md shadow-sm">
-              <button id="tabFoto8" onclick="switchMediaTab(8, 'foto')" class="px-2.5 py-0.5 rounded-lg text-[8.5px] font-bold bg-amber-400 text-zinc-900 shadow transition">📸 Foto</button>
-              <button id="tabVideo8" onclick="switchMediaTab(8, 'video')" class="px-2.5 py-0.5 rounded-lg text-[8.5px] font-bold text-zinc-600 hover:text-zinc-900 transition">🎥 Tekstur</button>
-            </div>
-
-            <button onclick="openModalFromSlide(8)" class="absolute bottom-2 right-2 z-20 bg-white/80 hover:bg-white text-zinc-800 text-[8px] font-bold px-2 py-0.5 rounded-lg border border-zinc-200 backdrop-blur-md shadow-sm">
-              🔍 Perbesar
-            </button>
-          </div>
-
-          <div class="grid grid-cols-3 gap-1.5">
-            <div class="h-14 rounded-xl overflow-hidden border border-zinc-200 bg-zinc-100 shadow-sm"><img src="gbr-vinyl.JPG" class="w-full h-full object-cover"></div>
-            <div class="h-14 rounded-xl overflow-hidden border border-zinc-200 bg-zinc-100 shadow-sm"><img src="flexi-280.jpg" class="w-full h-full object-cover"></div>
-            <div class="h-14 rounded-xl overflow-hidden border border-zinc-200 bg-zinc-100 shadow-sm"><img src="art-paper-260.jpg" class="w-full h-full object-cover"></div>
-          </div>
-
-          <div id="infoBox8" class="p-2 rounded-lg bg-amber-50 border border-amber-200 text-[9px] text-amber-900 hidden">
-            <b id="infoTitle8" class="block font-bold text-[9.5px] mb-0.5">Info Administrasi</b>
-            <span id="infoDesc8">Pilih item untuk melihat penjelasan.</span>
-          </div>
-        </div>
-
-        <div class="relative z-20 space-y-1.5 pb-16">
-          <div>
-            <span class="text-[8.5px] font-bold text-amber-700 block mb-0.5 uppercase tracking-wider">1. Pilih Produk Kantor / Buku:</span>
-            <select id="selectOffice" onchange="showOfficeInfo(this.value)" class="w-full bg-white border border-zinc-300 rounded-lg text-[9px] px-2 py-1 text-zinc-900 focus:outline-none focus:border-amber-500 shadow-inner">
-              <option value="kartunama" selected>Kartu Nama Premium (Laminasi Doff/Glossy)</option>
-              <option value="map">Map Folder Dokumen Perusahaan</option>
-              <option value="amplop">Amplop Surat Dinas / Perusahaan</option>
-              <option value="buku">Cetak Buku & Majalah (Jilid Lem Panas / Hardcover)</option>
-              <option value="kalender">Kalender Meja & Dinding Custom</option>
-              <option value="bukutamu">Buku Tamu Hardcover Eksklusif</option>
-            </select>
-          </div>
-
-          <div class="grid grid-cols-2 gap-1.5 pt-1 border-t border-zinc-200">
-            <div>
-              <span class="text-[8.5px] font-bold text-amber-700 block mb-0.5">📏 Spesifikasi</span>
-              <input id="ukuran8" type="text" placeholder="Standar / Custom" class="w-full bg-white border border-zinc-300 rounded-lg px-2 py-0.5 text-[9.5px] text-zinc-900 focus:outline-none focus:border-amber-500 shadow-inner">
-            </div>
-            <div>
-              <span class="text-[8.5px] font-bold text-amber-700 block mb-0.5">📦 Jumlah Order</span>
-              <input id="jumlah8" type="text" placeholder="10 Buku / 5 Box" class="w-full bg-white border border-zinc-300 rounded-lg px-2 py-0.5 text-[9.5px] text-zinc-900 focus:outline-none focus:border-amber-500 shadow-inner">
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- SLIDE 9: KULINER, UNDANGAN & PROMOSI EVENT -->
-      <div id="slide-9" class="slide-section bg-ambient-white flex flex-col justify-between p-4 relative">
-        <div class="yellow-glow-layer"></div>
-        <div class="relative z-20 flex items-center justify-between pt-1 pb-1">
-          <div class="flex items-center gap-2.5">
-            <img src="logo test.png" alt="Logo" class="h-10 w-auto object-contain drop-shadow-sm" onerror="this.style.display='none'">
-            <div>
-              <span class="font-extrabold text-base tracking-wider text-zinc-900 block leading-none">ARCI</span>
-              <span class="text-[9px] font-semibold text-amber-600 tracking-tight block mt-0.5">Solusi Cetak & Digital Studio</span>
-            </div>
-          </div>
-          <span class="text-[8.5px] tracking-widest border border-amber-500/30 rounded-full px-2.5 py-0.5 text-amber-700 font-bold bg-amber-50/80 backdrop-blur-md">9/9 • KULINER & EVENT</span>
-        </div>
-
-        <div class="relative z-20 space-y-1.5">
-          <div class="relative aspect-square w-full rounded-2xl overflow-hidden border border-zinc-200 bg-zinc-100 shadow-md group">
-            <img id="prevImg9" src="gbr-vinyl.JPG" class="w-full h-full object-cover">
-            <video id="prevVid9" autoplay loop muted playsinline poster="gbr-vinyl.JPG" class="hidden w-full h-full object-cover">
-              <source id="prevVidSrc9" src="video-vinyl.mp4" type="video/mp4">
-            </video>
-
-            <div class="absolute top-2 right-2 z-20 flex bg-white/80 p-0.5 rounded-xl border border-zinc-200 backdrop-blur-md shadow-sm">
-              <button id="tabFoto9" onclick="switchMediaTab(9, 'foto')" class="px-2.5 py-0.5 rounded-lg text-[8.5px] font-bold bg-amber-400 text-zinc-900 shadow transition">📸 Foto</button>
-              <button id="tabVideo9" onclick="switchMediaTab(9, 'video')" class="px-2.5 py-0.5 rounded-lg text-[8.5px] font-bold text-zinc-600 hover:text-zinc-900 transition">🎥 Tekstur</button>
-            </div>
-
-            <button onclick="openModalFromSlide(9)" class="absolute bottom-2 right-2 z-20 bg-white/80 hover:bg-white text-zinc-800 text-[8px] font-bold px-2 py-0.5 rounded-lg border border-zinc-200 backdrop-blur-md shadow-sm">
-              🔍 Perbesar
-            </button>
-          </div>
-
-          <div class="grid grid-cols-3 gap-1.5">
-            <div class="h-14 rounded-xl overflow-hidden border border-zinc-200 bg-zinc-100 shadow-sm"><img src="gbr-vinyl.JPG" class="w-full h-full object-cover"></div>
-            <div class="h-14 rounded-xl overflow-hidden border border-zinc-200 bg-zinc-100 shadow-sm"><img src="flexi-280.jpg" class="w-full h-full object-cover"></div>
-            <div class="h-14 rounded-xl overflow-hidden border border-zinc-200 bg-zinc-100 shadow-sm"><img src="art-paper-260.jpg" class="w-full h-full object-cover"></div>
-          </div>
-
-          <div id="infoBox9" class="p-2 rounded-lg bg-amber-50 border border-amber-200 text-[9px] text-amber-900 hidden">
-            <b id="infoTitle9" class="block font-bold text-[9.5px] mb-0.5">Info Kuliner & Event</b>
-            <span id="infoDesc9">Pilih produk untuk melihat penjelasan.</span>
-          </div>
-        </div>
-
-        <div class="relative z-20 space-y-1.5 pb-16">
-          <div>
-            <span class="text-[8.5px] font-bold text-amber-700 block mb-0.5 uppercase tracking-wider">1. Pilih Menu / Undangan:</span>
-            <select id="selectEvent" onchange="showEventInfo(this.value)" class="w-full bg-white border border-zinc-300 rounded-lg text-[9px] px-2 py-1 text-zinc-900 focus:outline-none focus:border-amber-500 shadow-inner">
-              <option value="menu" selected>Menu Makanan / Kafe (Laminasi Anti Air)</option>
-              <option value="menuhard">Menu Hardcover Eksklusif Resto</option>
-              <option value="undangan">Undangan Pernikahan & Event Custom</option>
-              <option value="brosur">Brosur & Flyer Promosi Usaha</option>
-              <option value="poster">Poster Event / Toko Ukuran Besar</option>
-              <option value="sertifikat">Sertifikat / Piagam Penghargaan</option>
-              <option value="vouchertiket">Voucher Diskon & Tiket Masuk Event (Perforasi)</option>
-            </select>
-          </div>
-
-          <div class="grid grid-cols-2 gap-1.5 pt-1 border-t border-zinc-200">
-            <div>
-              <span class="text-[8.5px] font-bold text-amber-700 block mb-0.5">📏 Ukuran / Format</span>
-              <input id="ukuran9" type="text" placeholder="A4 / DL / Custom" class="w-full bg-white border border-zinc-300 rounded-lg px-2 py-0.5 text-[9.5px] text-zinc-900 focus:outline-none focus:border-amber-500 shadow-inner">
-            </div>
-            <div>
-              <span class="text-[8.5px] font-bold text-amber-700 block mb-0.5">📦 Jumlah Order</span>
-              <input id="jumlah9" type="text" placeholder="100 Lembar / 5 Buku" class="w-full bg-white border border-zinc-300 rounded-lg px-2 py-0.5 text-[9.5px] text-zinc-900 focus:outline-none focus:border-amber-500 shadow-inner">
-            </div>
-          </div>
-        </div>
-      </div>
-
-    </div> <!-- End Scroll Snap Container -->
+    </div> <!-- End Main Content Feed -->
 
     <!-- FIXED BOTTOM BAR (SAFE AREA PADDED FOR IPHONE HOME BAR) -->
-    <div class="absolute bottom-0 left-0 right-0 z-40 bg-white/95 border-t border-zinc-200 backdrop-blur-xl px-3 pt-2 pb-5 sm:pb-3 flex items-center justify-between gap-2 shadow-lg">
-      <button onclick="toggleQuickMenu()" class="flex flex-col items-center justify-center w-10 h-10 rounded-xl bg-zinc-100 border border-zinc-300 text-zinc-800 active:scale-95 transition shadow-sm">
-        <span class="text-sm">☰</span>
-        <span class="text-[7px] font-bold uppercase mt-0.5">Menu</span>
+    <div class="absolute bottom-0 left-0 right-0 z-40 bg-white/95 border-t border-zinc-200 backdrop-blur-xl px-4 pt-2.5 pb-6 sm:pb-3 flex items-center justify-between gap-3 shadow-lg">
+      <button onclick="toggleQuickMenu()" class="flex flex-col items-center justify-center w-11 h-11 rounded-xl bg-zinc-100 border border-zinc-300 text-zinc-800 active:scale-95 transition shadow-sm">
+        <span class="text-base">☰</span>
+        <span class="text-[7px] font-bold uppercase mt-0.5">Kategori</span>
       </button>
 
-      <button onclick="openOrderModal()" class="flex-1 h-11 rounded-xl bg-gradient-to-r from-amber-400 to-yellow-500 text-zinc-950 font-extrabold text-xs tracking-wider flex items-center justify-center gap-1.5 shadow-md active:scale-95 transition uppercase">
-        <span>💬 PESAN VIA WA</span>
+      <button onclick="openOrderModal('Custom Order Umum')" class="flex-1 h-11 rounded-xl bg-gradient-to-r from-amber-400 to-yellow-500 text-zinc-950 font-extrabold text-xs tracking-wider flex items-center justify-center gap-1.5 shadow-md active:scale-95 transition uppercase">
+        <span>💬 CHAT / PESAN VIA WA</span>
       </button>
 
-      <button onclick="openSosmedModal()" class="flex flex-col items-center justify-center w-10 h-10 rounded-xl bg-zinc-100 border border-zinc-300 text-zinc-800 active:scale-95 transition shadow-sm">
-        <span class="text-sm">📱</span>
+      <button onclick="openSosmedModal()" class="flex flex-col items-center justify-center w-11 h-11 rounded-xl bg-zinc-100 border border-zinc-300 text-zinc-800 active:scale-95 transition shadow-sm">
+        <span class="text-base">📱</span>
         <span class="text-[7px] font-bold uppercase mt-0.5">Sosmed</span>
       </button>
     </div>
@@ -800,19 +264,17 @@
     <!-- QUICK MENU DRAWER -->
     <div id="quickMenuDrawer" class="hidden absolute bottom-20 left-3 right-3 z-50 bg-white border border-amber-400/50 rounded-2xl p-3 backdrop-blur-2xl shadow-2xl space-y-1">
       <div class="flex items-center justify-between pb-1 border-b border-zinc-200 mb-1">
-        <span class="text-xs font-bold text-amber-700 uppercase tracking-wider">Lompat ke Slide Produk:</span>
+        <span class="text-xs font-bold text-amber-700 uppercase tracking-wider">Filter Kategori Katalog:</span>
         <button onclick="toggleQuickMenu()" class="text-zinc-500 text-xs font-bold px-1.5">✕ Close</button>
       </div>
-      <div class="grid grid-cols-3 gap-1.5 text-[9px] font-semibold">
-        <button onclick="scrollToSlide(1)" class="p-2 rounded-lg bg-zinc-50 border border-zinc-200 hover:border-amber-500 text-left text-zinc-800">1. Stiker Kustom</button>
-        <button onclick="scrollToSlide(2)" class="p-2 rounded-lg bg-zinc-50 border border-zinc-200 hover:border-amber-500 text-left text-zinc-800">2. Banner Spanduk</button>
-        <button onclick="scrollToSlide(3)" class="p-2 rounded-lg bg-zinc-50 border border-zinc-200 hover:border-amber-500 text-left text-zinc-800">3. Kertas & Promosi</button>
-        <button onclick="scrollToSlide(4)" class="p-2 rounded-lg bg-zinc-50 border border-zinc-200 hover:border-amber-500 text-left text-zinc-800">4. Indoor & Skotlite</button>
-        <button onclick="scrollToSlide(5)" class="p-2 rounded-lg bg-zinc-50 border border-zinc-200 hover:border-amber-500 text-left text-zinc-800">5. Akrilik & Plakat</button>
-        <button onclick="scrollToSlide(6)" class="p-2 rounded-lg bg-zinc-50 border border-zinc-200 hover:border-amber-500 text-left text-zinc-800">6. Merchandise</button>
-        <button onclick="scrollToSlide(7)" class="p-2 rounded-lg bg-zinc-50 border border-zinc-200 hover:border-amber-500 text-left text-zinc-800">7. Packaging & Apparel</button>
-        <button onclick="scrollToSlide(8)" class="p-2 rounded-lg bg-zinc-50 border border-zinc-200 hover:border-amber-500 text-left text-zinc-800">8. Kantor & Buku</button>
-        <button onclick="scrollToSlide(9)" class="p-2 rounded-lg bg-zinc-50 border border-zinc-200 hover:border-amber-500 text-left text-zinc-800">9. Kuliner & Event</button>
+      <div class="grid grid-cols-2 gap-1.5 text-[10px] font-semibold">
+        <button onclick="filterCategory('all'); toggleQuickMenu();" class="p-2 rounded-lg bg-zinc-50 border border-zinc-200 text-left text-zinc-800">✨ Semua Produk</button>
+        <button onclick="filterCategory('stiker'); toggleQuickMenu();" class="p-2 rounded-lg bg-zinc-50 border border-zinc-200 text-left text-zinc-800">🏷️ Stiker Kustom</button>
+        <button onclick="filterCategory('banner'); toggleQuickMenu();" class="p-2 rounded-lg bg-zinc-50 border border-zinc-200 text-left text-zinc-800">🖼️ Banner Spanduk</button>
+        <button onclick="filterCategory('kertas'); toggleQuickMenu();" class="p-2 rounded-lg bg-zinc-50 border border-zinc-200 text-left text-zinc-800">📋 Kertas & Promosi</button>
+        <button onclick="filterCategory('akrilik'); toggleQuickMenu();" class="p-2 rounded-lg bg-zinc-50 border border-zinc-200 text-left text-zinc-800">💎 Akrilik & Plakat</button>
+        <button onclick="filterCategory('merch'); toggleQuickMenu();" class="p-2 rounded-lg bg-zinc-50 border border-zinc-200 text-left text-zinc-800">🎁 Merchandise</button>
+        <button onclick="filterCategory('pack'); toggleQuickMenu();" class="p-2 rounded-lg bg-zinc-50 border border-zinc-200 text-left text-zinc-800">📦 Packaging & Apparel</button>
       </div>
     </div>
 
@@ -822,7 +284,7 @@
         <div class="flex items-center justify-between border-b border-zinc-200 pb-2">
           <div>
             <h3 class="text-sm font-extrabold text-amber-700 uppercase">Formulir Pemesanan</h3>
-            <p id="modalSlideTitle" class="text-[9.5px] text-zinc-500">Produk Katalog ARCI</p>
+            <p id="modalProductTitle" class="text-[9.5px] text-zinc-500">Produk: ARCI Studio</p>
           </div>
           <button onclick="closeOrderModal()" class="text-zinc-500 hover:text-zinc-900 font-bold text-sm bg-zinc-100 w-7 h-7 rounded-full">✕</button>
         </div>
@@ -834,13 +296,13 @@
           </div>
 
           <div>
-            <label class="text-[10px] font-bold text-zinc-700 block mb-0.5">📝 Catatan Tambahan (Opsional)</label>
-            <textarea id="modalCatatan" rows="2" placeholder="Misal: Minta layout dulu / kirim file via email" class="w-full bg-zinc-50 border border-zinc-300 rounded-lg p-2 text-[10.5px] text-zinc-900 focus:outline-none focus:border-amber-500"></textarea>
+            <label class="text-[10px] font-bold text-zinc-700 block mb-0.5">📝 Detail & Jumlah Pesanan *</label>
+            <textarea id="modalCatatan" rows="3" placeholder="Sebutkan ukuran, bahan, jumlah, atau catatan khusus..." class="w-full bg-zinc-50 border border-zinc-300 rounded-lg p-2 text-[10.5px] text-zinc-900 focus:outline-none focus:border-amber-500"></textarea>
           </div>
 
           <div class="p-2.5 rounded-xl bg-amber-50 border border-amber-200 text-[9.5px] leading-relaxed text-amber-900">
             💡 <b>Punya Contoh Foto / Desain?</b><br>
-            Cukup kirimkan formulir ini dulu, lalu langsung lampirkan gambar/file kamu di chat WhatsApp admin ya!
+            Kirimkan formulir ini, lalu lampirkan file kamu di chat WhatsApp admin ya!
           </div>
         </div>
 
@@ -880,21 +342,10 @@
             <span class="text-xl">📘</span>
             <div>
               <span class="text-xs font-bold block text-zinc-900">Facebook</span>
-              <span class="text-[9px] text-zinc-500">@arci.studio</span>
+              <span class="text-[9px] text-zinc-500">ARCI Print Studio</span>
             </div>
           </a>
         </div>
-      </div>
-    </div>
-
-    <!-- LIGHTBOX MEDIA MODAL -->
-    <div id="mediaModal" onclick="closeMediaModal()" class="invisible opacity-0 fixed inset-0 z-50 bg-black/80 backdrop-blur-md flex flex-col items-center justify-center p-4">
-      <button onclick="closeMediaModal()" class="absolute top-5 right-5 text-zinc-900 bg-white rounded-full w-10 h-10 flex items-center justify-center text-lg font-bold border border-zinc-200 z-50 shadow-lg">✕</button>
-      <div id="modalContent" onclick="event.stopPropagation()" class="relative max-w-full max-h-[85vh] rounded-2xl overflow-hidden border border-zinc-300 shadow-2xl bg-white flex items-center justify-center">
-        <img id="modalImg" src="" class="hidden w-auto h-auto max-h-[80vh] object-contain rounded-2xl">
-        <video id="modalVideo" autoplay loop muted playsinline class="hidden w-auto h-auto max-h-[80vh] object-contain rounded-2xl">
-          <source id="modalVideoSource" src="" type="video/mp4">
-        </video>
       </div>
     </div>
 
@@ -902,195 +353,39 @@
 
 <script>
   const WA_ADMIN_NUMBER = "6281234567890";
+  let selectedProduct = "Custom Order Umum";
 
-  function showInfo(slideNum, title, desc) {
-    const box = document.getElementById(`infoBox${slideNum}`);
-    const t = document.getElementById(`infoTitle${slideNum}`);
-    const d = document.getElementById(`infoDesc${slideNum}`);
-    if (box && t && d) {
-      t.textContent = title;
-      d.textContent = desc;
-      box.classList.remove('hidden');
-    }
+  function filterCategory(cat) {
+    const cards = document.querySelectorAll('.product-card');
+    cards.forEach(card => {
+      if (cat === 'all' || card.classList.contains(cat)) {
+        card.style.display = 'flex';
+      } else {
+        card.style.display = 'none';
+      }
+    });
   }
 
-  function showPaperInfo(val) {
-    const map = {
-      'ap120': ['Art Paper 120gr / 150gr', 'Kertas licin mengkilap gramatur tipis. Sangat ideal untuk brosur, flyer, dan poster sebaran.'],
-      'ap260': ['Art Carton 260gr / 300gr', 'Kertas tebal licin & kaku. Standar profesional untuk kartu nama, cover buku, dan hangtag.'],
-      'felt': ['Paper Felt / Fancy Textured', 'Kertas bertekstur rabaan kain/garis lembut yang sangat elegan. Pilihan favorit untuk undangan eksklusif & kartu nama mewah.'],
-      'linen': ['Fancy Paper Linen', 'Kertas bertekstur garis-garis silang menyerupai tenunan kain, memberikan kesan artistik dan berkelas.'],
-      'concord': ['Fancy Paper Concord', 'Kertas bertekstur gelombang halus yang elegan, cocok untuk sertifikat, piagam, dan kop surat khusus.'],
-      'ivory': ['Ivory Paper Packaging', 'Kertas tebal dengan satu sisi putih bersih higienis dan satu sisi kesat. Paling aman & ideal untuk box makanan kue.'],
-      'duplex': ['Duplex Paper Box', 'Kertas kokoh dengan permukaan luar putih halus dan bagian dalam abu-abu. Standar ekonomis untuk box kemasan produk.'],
-      'hvs100': ['HVS 100gr / 80gr', 'Kertas tulis standar bersih untuk dokumen kantor, buku agenda, lembar formulir, dan isi buku.'],
-      'rajawali': ['Rajawali / Kertas Sertifikat', 'Tekstur khas bergaris halus yang memberi kesan resmi dan formal untuk piagam penghargaan.']
-    };
-    if(map[val]) showInfo(3, map[val][0], map[val][1]);
+  function toggleQuickMenu() {
+    document.getElementById('quickMenuDrawer').classList.toggle('hidden');
   }
 
-  function showIndoorInfo(val) {
-    const map = {
-      'maxdecal': ['Maxdecal Vinyl Indoor', 'Stiker vinyl high-resolution cetak mesin indoor, lem rapat presisi tinggi & warna sangat tajam.'],
-      'skotlite': ['Skotlite / Oracal', 'Stiker vinyl warna solid/reflektif khusus untuk cutting stiker kaca toko, mobil, motor, dan plang nama.'],
-      'cutter': ['Layanan Potong Cutter', 'Cutting presisi menggunakan mesin plotter canggih untuk hasil potongan pola stiker/huruf yang rapi sempurna.'],
-      'uv': ['UV Print Flatbed', 'Teknologi cetak sinar ultraviolet langsung di atas berbagai media keras seperti akrilik, kayu, dan kacamata.'],
-      'albatros': ['Albatros & Backlit', 'Media khusus roll up banner, pameran event, dan visual lightbox neon box yang tembus cahaya lampu.']
-    };
-    if(map[val]) showInfo(4, map[val][0], map[val][1]);
-  }
-
-  function showAkrilikInfo(val) {
-    const map = {
-      'plakat3mm': ['Plakat Standar 3mm / 5mm', 'Akrilik bening kualitas terbaik, pemotongan laser halus untuk cinderamata dan plakat penghargaan.'],
-      'plakat8mm': ['Plakat Tebal 8mm', 'Akrilik ekstra tebal memberikan efek dimensi dan kemewahan tingkat tinggi saat dipajang.'],
-      'kakigold': ['Plakat Kaki Kotak + Gold', 'Kombinasi dudukan kaki elegan dengan sentuhan warna keemasan yang sangat mewah untuk instansi.'],
-      'bautdinding': ['Akrilik Baut Stainless', 'Signage kantor atau penunjuk arah lengkap dengan set baut stanless pengunci dinding.'],
-      'boxakrilik': ['Box Akrilik Custom', 'Kotak saran, kotak amal, atau tempat brosur transparan yang dirakit rapi dan kokoh.'],
-      'tentcard': ['Tentcard Akrilik Meja', 'Media promosi berdiri di atas meja kasir atau restoran, mudah diganti isinya dari samping.']
-    };
-    if(map[val]) showInfo(5, map[val][0], map[val][1]);
-  }
-
-  function showMerchInfo(val) {
-    const map = {
-      'mug': ['Flatbed Mug Custom', 'Mug keramik putih berkualitas tinggi dengan hasil cetak gambar full color tahan cuci.'],
-      'medali': ['Medali Wisuda / Event', 'Medali custom bahan akrilik atau logam lengkap dengan tali pita eksklusif untuk kelulusan dan kejuaraan.'],
-      'ganciuv': ['Gantungan Kunci UV', 'Ganci cetak print UV bolak-balik di atas akrilik bening, warna pekat tidak mudah terkelupas.'],
-      'stempel': ['Stempel Flash Otomatis', 'Stempel warna praktis tanpa colok bantalan tinta di luar, langsung cap dan tahan lama.'],
-      'kipas': ['Kipas Kerang Promosi', 'Kipas tangan plastik/pvc bergambar promosi event, kampanye, atau souvenir pernikahan unik.'],
-      'pin': ['Pin Bros / Gantungan Kunci', 'Pin bundar peniti atau ganci belakang dilapisi laminasi glossy/doff yang cerah mengkilap.']
-    };
-    if(map[val]) showInfo(6, map[val][0], map[val][1]);
-  }
-
-  function showPackInfo(val) {
-    const map = {
-      'boxivory': ['Box Packaging Custom', 'Kotak kemasan produk dari bahan ivory/duplex cetak full color, dicetak dan dilipat presisi.'],
-      'dtfuv': ['Stiker DTF UV Timbul', 'Stiker transfer print UV dengan efek pernis mengkilap timbul. Bisa ditempel di permukaan keras apa saja.'],
-      'kaos': ['Kaos Custom Sablon DTF', 'Kaos katun adem dengan sablon digital transfer film pekat, elastis, dan tidak mudah pecah.'],
-      'topi': ['Topi Custom Sablon/Bordir', 'Topi trucker/baseball dengan aplikasi cetak logo brand atau tulisan custom di bagian depan.'],
-      'lanyard': ['Lanyard Tali ID Card', 'Tali gantungan ID card bahan lembut cetak bolak-balik full color lengkap stopper & kait.'],
-      'idcard': ['ID Card PVC Standar ATM', 'Kartu identitas karyawan atau member berbahan PVC padat tebal anti air.'],
-      'stikerroll': ['Stiker Roll Label', 'Stiker gulungan mesin otomatis untuk label kemasan botol atau jar produk UMKM.']
-    };
-    if(map[val]) showInfo(7, map[val][0], map[val][1]);
-  }
-
-  function showOfficeInfo(val) {
-    const map = {
-      'kartunama': ['Kartu Nama Profesional', 'Cetak kartu nama tajam berkelas dengan pilihan laminasi doff atau glossy yang elegan.'],
-      'map': ['Map Folder Dokumen', 'Map kantor tebal untuk menyimpan berkas penawaran, kontrak, atau profil perusahaan.'],
-      'amplop': ['Amplop Surat Dinas', 'Amplop kop surat perusahaan dengan cetak logo rapi dan profesional.'],
-      'buku': ['Cetak Buku & Majalah', 'Pencetakan buku majalah atau modul dengan pilihan jilid lem panas (perfect binding) atau jilid kawat.'],
-      'kalender': ['Kalender Meja & Dinding', 'Kalender custom isi foto perusahaan atau keluarga lengkap spiral besi dan duplek tebal.'],
-      'bukutamu': ['Buku Tamu Hardcover', 'Buku tamu eksklusif jilid hardcover untuk resepsi pernikahan, hotel, atau acara instansi.']
-    };
-    if(map[val]) showInfo(8, map[val][0], map[val][1]);
-  }
-
-  function showEventInfo(val) {
-    const map = {
-      'menu': ['Menu Makanan / Kafe', 'Cetak menu tebal dilaminasi anti air, tahan tumpahan minyak dan mudah dibersihkan.'],
-      'menuhard': ['Menu Hardcover Eksklusif', 'Buku menu resto mewah dengan sampul tebal kaku berlapis bahan berkualitas tinggi.'],
-      'undangan': ['Undangan Pernikahan & Event', 'Undangan custom berbagai model elegan dengan opsi hot print emas atau emboss.'],
-      'brosur': ['Brosur & Flyer Promosi', 'Media sebar informasi usaha cetak lipat 2 atau lipat 3 dengan warna cemerlang.'],
-      'poster': ['Poster Ukuran Besar', 'Poster visual promosi toko atau event dengan ketajaman warna tinggi cetak mesin besar.'],
-      'sertifikat': ['Sertifikat / Piagam', 'Cetak sertifikat seminar atau kelulusan di atas kertas tebal bertekstur resmi.'],
-      'vouchertiket': ['Voucher & Tiket Perforasi', 'Voucher diskon atau tiket masuk event dilengkapi garis robek (perforasi) mudah sobek rapi.']
-    };
-    if(map[val]) showInfo(9, map[val][0], map[val][1]);
-  }
-
-  function getCurrentActiveSlide() {
-    const container = document.querySelector('.scroll-snap-container');
-    const scrollPos = container.scrollTop;
-    const slideHeight = container.clientHeight;
-    return Math.round(scrollPos / slideHeight) + 1;
-  }
-
-  function getMediaElements(slideNum) {
-    return { 
-      img: document.getElementById(slideNum === 1 ? 'prevImg1' : slideNum === 2 ? 'bannerPrevImg' : slideNum === 3 ? 'paperPrevImg' : slideNum === 4 ? 'indoorPrevImg' : `prevImg${slideNum}`), 
-      vid: document.getElementById(slideNum === 1 ? 'prevVid1' : slideNum === 2 ? 'bannerPrevVid' : slideNum === 3 ? 'paperPrevVid' : slideNum === 4 ? 'indoorPrevVid' : `prevVid${slideNum}`), 
-      vidSrc: document.getElementById(slideNum === 1 ? 'prevVidSrc1' : slideNum === 2 ? 'bannerPrevVidSrc' : slideNum === 3 ? 'paperPrevVidSrc' : slideNum === 4 ? 'indoorPrevVidSrc' : `prevVidSrc${slideNum}`), 
-      tabF: document.getElementById(`tabFoto${slideNum}`), 
-      tabV: document.getElementById(`tabVideo${slideNum}`) 
-    };
-  }
-
-  function switchMediaTab(slideNum, type) {
-    const els = getMediaElements(slideNum);
-    if (!els.img || !els.vid) return;
-
-    if (type === 'foto') {
-      els.img.classList.remove('hidden');
-      els.vid.classList.add('hidden');
-      if(els.tabF) els.tabF.className = "px-2.5 py-0.5 rounded-lg text-[8.5px] font-bold bg-amber-400 text-zinc-900 shadow transition";
-      if(els.tabV) els.tabV.className = "px-2.5 py-0.5 rounded-lg text-[8.5px] font-bold text-zinc-600 hover:text-zinc-900 transition";
-    } else {
-      els.img.classList.add('hidden');
-      els.vid.classList.remove('hidden');
-      if(els.tabV) els.tabV.className = "px-2.5 py-0.5 rounded-lg text-[8.5px] font-bold bg-amber-400 text-zinc-900 shadow transition";
-      if(els.tabF) els.tabF.className = "px-2.5 py-0.5 rounded-lg text-[8.5px] font-bold text-zinc-600 hover:text-zinc-900 transition";
-    }
-  }
-
-  function toggleQuickMenu() { document.getElementById('quickMenuDrawer').classList.toggle('hidden'); }
-  function scrollToSlide(num) {
-    const container = document.querySelector('.scroll-snap-container');
-    const slides = document.querySelectorAll('.slide-section');
-    if (slides[num - 1]) {
-      container.scrollTo({ top: slides[num - 1].offsetTop, behavior: 'smooth' });
-      toggleQuickMenu();
-    }
-  }
-
-  function openOrderModal() {
-    const activeSlide = getCurrentActiveSlide();
-    const names = ["Sticker Kustom A3+", "Banner Spanduk Flexi", "Cetak Kertas & Promosi", "Indoor & Skotlite", "Akrilik & Plakat", "Merchandise & Souvenir", "Packaging & Apparel", "Kantor & Buku", "Kuliner & Event"];
-    document.getElementById('modalSlideTitle').textContent = "Produk: " + names[activeSlide - 1];
+  function openOrderModal(productName) {
+    selectedProduct = productName;
+    document.getElementById('modalProductTitle').textContent = "Produk: " + productName;
     document.getElementById('orderModal').classList.add('show');
   }
 
-  function closeOrderModal() { document.getElementById('orderModal').classList.remove('show'); }
-  function openSosmedModal() { document.getElementById('sosmedModal').classList.add('show'); }
-  function closeSosmedModal() { document.getElementById('sosmedModal').classList.remove('show'); }
-
-  function openModalFromSlide(slideNum) {
-    const modal = document.getElementById('mediaModal');
-    const modalImg = document.getElementById('modalImg');
-    const modalVid = document.getElementById('modalVideo');
-    const modalVidSrc = document.getElementById('modalVideoSource');
-
-    const els = getMediaElements(slideNum);
-
-    modalImg.classList.add('hidden');
-    modalVid.classList.add('hidden');
-
-    const isVideoActive = els.vid && !els.vid.classList.contains('hidden');
-
-    if (isVideoActive) {
-      const srcUrl = els.vidSrc ? els.vidSrc.src : els.vid.querySelector('source')?.src;
-      if (srcUrl) {
-        modalVidSrc.src = srcUrl;
-        modalVid.load();
-        modalVid.play();
-        modalVid.classList.remove('hidden');
-        modal.classList.add('show');
-      }
-    } else if (els.img) {
-      modalImg.src = els.img.src;
-      modalImg.classList.remove('hidden');
-      modal.classList.add('show');
-    }
+  function closeOrderModal() {
+    document.getElementById('orderModal').classList.remove('show');
   }
 
-  function closeMediaModal() {
-    const modal = document.getElementById('mediaModal');
-    const modalVid = document.getElementById('modalVideo');
-    if (modalVid) modalVid.pause();
-    modal.classList.remove('show');
+  function openSosmedModal() {
+    document.getElementById('sosmedModal').classList.add('show');
+  }
+
+  function closeSosmedModal() {
+    document.getElementById('sosmedModal').classList.remove('show');
   }
 
   function submitWAOrder() {
@@ -1098,49 +393,13 @@
     if (!nama) { alert("Mohon isi Nama Pemesan terlebih dahulu!"); return; }
 
     const catatan = document.getElementById('modalCatatan').value.trim();
-    const activeSlide = getCurrentActiveSlide();
-    let detailsText = `📌 *PRODUK:* Slide Katalog #${activeSlide}`;
-
-    if (activeSlide === 1) {
-      const b = document.querySelector('input[name="bahan1"]:checked')?.value || "vinyl";
-      const l = document.querySelector('input[name="lam1"]:checked')?.value || "Glossy";
-      const c = document.querySelector('input[name="cut1"]:checked')?.value || "Kiss Cut";
-      const uk = document.getElementById('ukuran1').value.trim() || "Standar A3+";
-      const qty = document.getElementById('jumlah1').value.trim() || "1 Lembar";
-      detailsText = `📌 *PRODUK:* Sticker Kustom A3+\n🔹 *Bahan:* ${b.toUpperCase()}\n🔹 *Laminasi:* ${l}\n🔹 *Cutting:* ${c}\n📏 *Ukuran:* ${uk}\n📦 *Jumlah:* ${qty}`;
-    } else if (activeSlide === 2) {
-      const b = document.querySelector('input[name="bahanBanner"]:checked')?.value || "280gr";
-      const f = document.querySelector('input[name="finishingBanner"]:checked')?.value || "Mata Ayam";
-      const uk = document.getElementById('ukuran2').value.trim() || "300 x 100 cm";
-      const qty = document.getElementById('jumlah2').value.trim() || "1 Pcs";
-      detailsText = `📌 *PRODUK:* Banner Outdoor\n🔹 *Bahan:* ${b.toUpperCase()}\n🔹 *Finishing:* ${f}\n📏 *Ukuran:* ${uk}\n📦 *Jumlah:* ${qty}`;
-    } else if (activeSlide === 3) {
-      const paperOpt = document.getElementById('selectKertas').value;
-      const uk = document.getElementById('ukuran3').value.trim() || "Standar";
-      const qty = document.getElementById('jumlah3').value.trim() || "1";
-      detailsText = `📌 *PRODUK:* Cetak Kertas & Promosi\n🔹 *Pilihan:* ${paperOpt}\n📏 *Ukuran:* ${uk}\n📦 *Jumlah:* ${qty}`;
-    }
-
-    let msg = `📋 *FORM ORDER ARCI STUDIO*\n━━━━━━━━━━━━━━━━━━\n👤 *Nama Pemesan:* ${nama}\n${detailsText}`;
-    if (catatan) msg += `\n📝 *Catatan:* ${catatan}`;
+    let msg = `📋 *ORDER MARKETPLACE ARCI STUDIO*\n━━━━━━━━━━━━━━━━━━\n👤 *Nama:* ${nama}\n📌 *Produk:* ${selectedProduct}`;
+    if (catatan) msg += `\n📝 *Detail Pesanan:* ${catatan}`;
     msg += `\n━━━━━━━━━━━━━━━━━━\n*Mohon info total estimasi harga & instruksi kirim file. Terima kasih!*`;
 
     window.open(`https://wa.me/${WA_ADMIN_NUMBER}?text=${encodeURIComponent(msg)}`, '_blank');
     closeOrderModal();
   }
-
-  // Trigger default info on load
-  window.onload = function() {
-    showInfo(1, 'Stiker Vinyl Premium', 'Bahan basis plastik lentur, 100% tahan air & tidak mudah robek. Ideal untuk botol dingin & outdoor.');
-    showInfo(2, 'Vinyl 280gr (Standar)', 'Tekstur berserat standar. Paling ramah di kantong untuk spanduk outdoor event singkat.');
-    showPaperInfo('ap260');
-    showIndoorInfo('maxdecal');
-    showAkrilikInfo('plakat3mm');
-    showMerchInfo('mug');
-    showPackInfo('boxivory');
-    showOfficeInfo('kartunama');
-    showEventInfo('menu');
-  };
 </script>
 </body>
 </html>
