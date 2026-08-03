@@ -2,12 +2,13 @@
 <html lang="id">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
 <title>ARCI — Digital Print & Studio Catalog</title>
 <script src="https://cdn.tailwindcss.com"></script>
 <style>
-  .bg-ambient-black {
-    background-color: #08080a !important;
+  /* CLEAN LIGHT MODE SETUP */
+  .bg-ambient-white {
+    background-color: #F8F9FA !important;
     position: relative;
     overflow: hidden;
   }
@@ -17,11 +18,11 @@
     height: 100%;
     top: 0%;
     left: 0%;
-    background: radial-gradient(circle at 50% 35%, rgba(250, 204, 21, 0.22) 0%, rgba(234, 179, 8, 0.05) 45%, transparent 70%);
+    background: radial-gradient(circle at 50% 30%, rgba(250, 204, 21, 0.12) 0%, rgba(234, 179, 8, 0.02) 50%, transparent 75%);
     pointer-events: none;
     z-index: 1;
     will-change: transform;
-    mix-blend-mode: screen;
+    mix-blend-mode: multiply;
     animation: moveGlow 10s ease-in-out infinite alternate;
   }
   @keyframes moveGlow {
@@ -64,207 +65,256 @@
   }
 </style>
 </head>
-<body class="bg-neutral-950 flex items-center justify-center min-h-screen">
+<body class="bg-zinc-200 flex items-center justify-center min-h-screen">
 
   <!-- Frame Mobile Utama -->
-  <div class="w-full max-w-[414px] h-screen sm:h-[844px] sm:my-6 relative overflow-hidden sm:rounded-[2.5rem] bg-black text-white font-sans select-none sm:border sm:border-white/10 flex flex-col justify-between shadow-2xl">
+  <div class="w-full max-w-[414px] h-screen sm:h-[844px] sm:my-6 relative overflow-hidden sm:rounded-[2.5rem] bg-white text-zinc-900 font-sans select-none sm:border sm:border-zinc-300 flex flex-col justify-between shadow-2xl">
 
     <!-- CONTAINER SLIDE SCROLL VERTICAL (9 SLIDES) -->
-    <div class="scroll-snap-container w-full h-full pb-16">
+    <div class="scroll-snap-container w-full h-full pb-20">
 
       <!-- SLIDE 1: STIKER KUSTOM A3+ -->
-      <div id="slide-1" class="slide-section bg-ambient-black flex flex-col justify-between p-4 relative">
+      <div id="slide-1" class="slide-section bg-ambient-white flex flex-col justify-between p-4 relative">
         <div class="yellow-glow-layer"></div>
         <div class="relative z-20 flex items-center justify-between pt-1 pb-1">
           <div class="flex items-center gap-2.5">
-            <img src="logo test.png" alt="Logo" class="h-10 w-auto object-contain drop-shadow" onerror="this.style.display='none'">
+            <img src="logo test.png" alt="Logo" class="h-10 w-auto object-contain drop-shadow-sm" onerror="this.style.display='none'">
             <div>
-              <span class="font-extrabold text-base tracking-wider text-white block leading-none">ARCI</span>
-              <span class="text-[9px] font-medium text-yellow-400 tracking-tight block mt-0.5">Solusi Cetak & Digital Studio</span>
+              <span class="font-extrabold text-base tracking-wider text-zinc-900 block leading-none">ARCI</span>
+              <span class="text-[9px] font-semibold text-amber-600 tracking-tight block mt-0.5">Solusi Cetak & Digital Studio</span>
             </div>
           </div>
-          <span class="text-[8.5px] tracking-widest border border-yellow-400/30 rounded-full px-2.5 py-0.5 text-yellow-300 font-semibold bg-black/50 backdrop-blur-md">1/9 • STICKER</span>
+          <span class="text-[8.5px] tracking-widest border border-amber-500/30 rounded-full px-2.5 py-0.5 text-amber-700 font-bold bg-amber-50/80 backdrop-blur-md">1/9 • STICKER</span>
         </div>
 
         <div class="relative z-20 space-y-1.5">
-          <div class="relative h-[180px] w-full rounded-2xl overflow-hidden border border-white/15 bg-black/60 shadow-xl group">
+          <div class="relative h-[175px] w-full rounded-2xl overflow-hidden border border-zinc-200 bg-zinc-100 shadow-md group">
             <img id="prevImg1" src="gbr-vinyl.JPG" class="w-full h-full object-cover transition-all duration-300">
             <video id="prevVid1" autoplay loop muted playsinline poster="gbr-vinyl.JPG" class="hidden w-full h-full object-cover">
               <source id="prevVidSrc1" src="video-vinyl.mp4" type="video/mp4">
             </video>
 
-            <div class="absolute top-2 right-2 z-20 flex bg-black/70 p-0.5 rounded-xl border border-white/20 backdrop-blur-md shadow">
-              <button id="tabFoto1" onclick="switchMediaTab(1, 'foto')" class="px-2.5 py-0.5 rounded-lg text-[8.5px] font-bold bg-yellow-400 text-black shadow transition">📸 Foto</button>
-              <button id="tabVideo1" onclick="switchMediaTab(1, 'video')" class="px-2.5 py-0.5 rounded-lg text-[8.5px] font-bold text-gray-300 hover:text-white transition">🎥 Tekstur</button>
+            <div class="absolute top-2 right-2 z-20 flex bg-white/80 p-0.5 rounded-xl border border-zinc-200 backdrop-blur-md shadow-sm">
+              <button id="tabFoto1" onclick="switchMediaTab(1, 'foto')" class="px-2.5 py-0.5 rounded-lg text-[8.5px] font-bold bg-amber-400 text-zinc-900 shadow transition">📸 Foto</button>
+              <button id="tabVideo1" onclick="switchMediaTab(1, 'video')" class="px-2.5 py-0.5 rounded-lg text-[8.5px] font-bold text-zinc-600 hover:text-zinc-900 transition">🎥 Tekstur</button>
             </div>
 
-            <button onclick="openModalFromSlide(1)" class="absolute bottom-2 right-2 z-20 bg-black/70 hover:bg-black text-white text-[8px] font-bold px-2 py-0.5 rounded-lg border border-white/20 backdrop-blur-md">
+            <button onclick="openModalFromSlide(1)" class="absolute bottom-2 right-2 z-20 bg-white/80 hover:bg-white text-zinc-800 text-[8px] font-bold px-2 py-0.5 rounded-lg border border-zinc-200 backdrop-blur-md shadow-sm">
               🔍 Perbesar
             </button>
           </div>
 
-          <div class="p-2 rounded-xl bg-black/50 border border-white/10 text-[10px] leading-relaxed backdrop-blur-md">
-            <span id="descTitle1" class="font-extrabold text-yellow-400 text-[11px] uppercase block mb-0.5">Stiker Vinyl Premium ⭐ REKOMENDASI</span>
-            <p id="descText1" class="text-neutral-300 font-normal">Bahan basis plastik lentur, 100% tahan air & tidak mudah robek. Paling ideal untuk botol dingin & kemasan outdoor.</p>
+          <!-- KARTU 3 SHAPE INTERACTIVE (EDUKASI BAHAN) -->
+          <div class="space-y-1">
+            <div class="grid grid-cols-3 gap-1.5">
+              <button onclick="showInfo(1, 'Tahan Air & Cuaca', 'Material dasar plastik premium, 100% aman terkena air, minyak, dan cuaca outdoor tanpa luntur.')" class="p-1.5 rounded-xl bg-white border border-zinc-200 hover:border-amber-400 shadow-sm flex flex-col items-center gap-0.5 transition">
+                <span class="text-sm">💧</span>
+                <span class="text-[7.5px] font-bold uppercase text-zinc-700">Tahan Air</span>
+              </button>
+              <button onclick="showInfo(1, 'Ketajaman Warna Tinggi', 'Pigmen pekat resolusi tinggi, hasil cetak tajam, detail huruf kecil tetap terbaca jelas.')" class="p-1.5 rounded-xl bg-white border border-zinc-200 hover:border-amber-400 shadow-sm flex flex-col items-center gap-0.5 transition">
+                <span class="text-sm">🎨</span>
+                <span class="text-[7.5px] font-bold uppercase text-zinc-700">Warna Pekat</span>
+              </button>
+              <button onclick="showInfo(1, 'Finishing Permukaan', 'Permukaan halus dengan opsi pelindung doff/glossy untuk kesan eksklusif & mewah.')" class="p-1.5 rounded-xl bg-white border border-zinc-200 hover:border-amber-400 shadow-sm flex flex-col items-center gap-0.5 transition">
+                <span class="text-sm">✨</span>
+                <span class="text-[7.5px] font-bold uppercase text-zinc-700">Eksklusif</span>
+              </button>
+            </div>
+            <div id="infoBox1" class="p-2 rounded-lg bg-amber-50 border border-amber-200 text-[9px] text-amber-900 hidden">
+              <b id="infoTitle1" class="block font-bold text-[9.5px] mb-0.5">Info Bahan</b>
+              <span id="infoDesc1">Sentuh ikon di atas untuk melihat detail keunggulan bahan.</span>
+            </div>
           </div>
         </div>
 
-        <div class="relative z-20 space-y-1.5 pb-14">
+        <div class="relative z-20 space-y-1.5 pb-16">
           <div>
             <div class="flex items-center justify-between mb-0.5">
-              <span class="text-[9px] font-bold text-yellow-400 uppercase tracking-wider">1. Pilih Jenis Bahan:</span>
-              <span class="text-[8px] text-gray-400">Geser ➔</span>
+              <span class="text-[9px] font-bold text-amber-700 uppercase tracking-wider">1. Pilih Jenis Bahan:</span>
+              <span class="text-[8px] text-zinc-500">Geser ➔</span>
             </div>
             <div class="flex gap-1 overflow-x-auto no-scrollbar py-0.5">
-              <label class="flex-none cursor-pointer"><input type="radio" name="bahan1" value="vinyl" class="peer hidden" checked><div class="px-2.5 py-1 rounded-xl border border-white/20 bg-white/5 peer-checked:border-yellow-400 peer-checked:bg-yellow-400 peer-checked:text-black text-white text-[8.5px] font-extrabold flex items-center gap-1 transition shadow"><span>Vinyl</span><span class="text-[7px] opacity-80 border border-current px-1 rounded">⭐ Favorit</span></div></label>
-              <label class="flex-none cursor-pointer"><input type="radio" name="bahan1" value="chromo" class="peer hidden"><div class="px-2.5 py-1 rounded-xl border border-white/20 bg-white/5 peer-checked:border-yellow-400 peer-checked:bg-yellow-400 peer-checked:text-black text-white text-[8.5px] font-extrabold flex items-center gap-1 transition"><span>Kromo</span><span class="text-[7px] opacity-80 border border-current px-1 rounded">🏷️ Hemat</span></div></label>
-              <label class="flex-none cursor-pointer"><input type="radio" name="bahan1" value="transparan" class="peer hidden"><div class="px-2.5 py-1 rounded-xl border border-white/20 bg-white/5 peer-checked:border-yellow-400 peer-checked:bg-yellow-400 peer-checked:text-black text-white text-[8.5px] font-extrabold flex items-center gap-1 transition"><span>Transparan</span><span class="text-[7px] opacity-80 border border-current px-1 rounded">✨ Bening</span></div></label>
-              <label class="flex-none cursor-pointer"><input type="radio" name="bahan1" value="hologram" class="peer hidden"><div class="px-2.5 py-1 rounded-xl border border-white/20 bg-white/5 peer-checked:border-yellow-400 peer-checked:bg-yellow-400 peer-checked:text-black text-white text-[8.5px] font-extrabold flex items-center gap-1 transition"><span>Hologram</span><span class="text-[7px] opacity-80 border border-current px-1 rounded">🔥 Laris</span></div></label>
-              <label class="flex-none cursor-pointer"><input type="radio" name="bahan1" value="chrome" class="peer hidden"><div class="px-2.5 py-1 rounded-xl border border-white/20 bg-white/5 peer-checked:border-yellow-400 peer-checked:bg-yellow-400 peer-checked:text-black text-white text-[8.5px] font-extrabold flex items-center gap-1 transition"><span>Chrome</span><span class="text-[7px] opacity-80 border border-current px-1 rounded">👑 Mewah</span></div></label>
+              <label class="flex-none cursor-pointer"><input type="radio" name="bahan1" value="vinyl" class="peer hidden" checked><div class="px-2.5 py-1 rounded-xl border border-zinc-300 bg-white peer-checked:border-amber-500 peer-checked:bg-amber-400 peer-checked:text-zinc-950 text-zinc-800 text-[8.5px] font-extrabold flex items-center gap-1 shadow-sm transition"><span>Vinyl</span><span class="text-[7px] opacity-80 border border-current px-1 rounded">⭐ Favorit</span></div></label>
+              <label class="flex-none cursor-pointer"><input type="radio" name="bahan1" value="chromo" class="peer hidden"><div class="px-2.5 py-1 rounded-xl border border-zinc-300 bg-white peer-checked:border-amber-500 peer-checked:bg-amber-400 peer-checked:text-zinc-950 text-zinc-800 text-[8.5px] font-extrabold flex items-center gap-1 shadow-sm transition"><span>Kromo</span><span class="text-[7px] opacity-80 border border-current px-1 rounded">🏷️ Hemat</span></div></label>
+              <label class="flex-none cursor-pointer"><input type="radio" name="bahan1" value="transparan" class="peer hidden"><div class="px-2.5 py-1 rounded-xl border border-zinc-300 bg-white peer-checked:border-amber-500 peer-checked:bg-amber-400 peer-checked:text-zinc-950 text-zinc-800 text-[8.5px] font-extrabold flex items-center gap-1 shadow-sm transition"><span>Transparan</span><span class="text-[7px] opacity-80 border border-current px-1 rounded">✨ Bening</span></div></label>
+              <label class="flex-none cursor-pointer"><input type="radio" name="bahan1" value="hologram" class="peer hidden"><div class="px-2.5 py-1 rounded-xl border border-zinc-300 bg-white peer-checked:border-amber-500 peer-checked:bg-amber-400 peer-checked:text-zinc-950 text-zinc-800 text-[8.5px] font-extrabold flex items-center gap-1 shadow-sm transition"><span>Hologram</span><span class="text-[7px] opacity-80 border border-current px-1 rounded">🔥 Laris</span></div></label>
+              <label class="flex-none cursor-pointer"><input type="radio" name="bahan1" value="chrome" class="peer hidden"><div class="px-2.5 py-1 rounded-xl border border-zinc-300 bg-white peer-checked:border-amber-500 peer-checked:bg-amber-400 peer-checked:text-zinc-950 text-zinc-800 text-[8.5px] font-extrabold flex items-center gap-1 shadow-sm transition"><span>Chrome</span><span class="text-[7px] opacity-80 border border-current px-1 rounded">👑 Mewah</span></div></label>
             </div>
           </div>
 
           <div class="grid grid-cols-2 gap-1.5">
             <div>
-              <span class="text-[8.5px] font-semibold text-gray-300 block mb-0.5">2. Finishing Surface:</span>
+              <span class="text-[8.5px] font-semibold text-zinc-700 block mb-0.5">2. Finishing Surface:</span>
               <div class="grid grid-cols-3 gap-1">
-                <label class="cursor-pointer"><input type="radio" name="lam1" value="Glossy" class="peer hidden" checked><div class="text-[8px] py-1 text-center rounded-lg border border-white/15 bg-white/5 peer-checked:border-yellow-400 peer-checked:bg-yellow-400/20 peer-checked:text-yellow-400 font-bold">Glossy</div></label>
-                <label class="cursor-pointer"><input type="radio" name="lam1" value="Doff" class="peer hidden"><div class="text-[8px] py-1 text-center rounded-lg border border-white/15 bg-white/5 peer-checked:border-yellow-400 peer-checked:bg-yellow-400/20 peer-checked:text-yellow-400 font-bold">Doff</div></label>
-                <label class="cursor-pointer"><input type="radio" name="lam1" value="Glitter" class="peer hidden"><div class="text-[8px] py-1 text-center rounded-lg border border-white/15 bg-white/5 peer-checked:border-yellow-400 peer-checked:bg-yellow-400/20 peer-checked:text-yellow-400 font-bold">Glitter</div></label>
+                <label class="cursor-pointer"><input type="radio" name="lam1" value="Glossy" class="peer hidden" checked><div class="text-[8px] py-1 text-center rounded-lg border border-zinc-300 bg-white peer-checked:border-amber-500 peer-checked:bg-amber-50 peer-checked:text-amber-800 font-bold shadow-sm">Glossy</div></label>
+                <label class="cursor-pointer"><input type="radio" name="lam1" value="Doff" class="peer hidden"><div class="text-[8px] py-1 text-center rounded-lg border border-zinc-300 bg-white peer-checked:border-amber-500 peer-checked:bg-amber-50 peer-checked:text-amber-800 font-bold shadow-sm">Doff</div></label>
+                <label class="cursor-pointer"><input type="radio" name="lam1" value="Glitter" class="peer hidden"><div class="text-[8px] py-1 text-center rounded-lg border border-zinc-300 bg-white peer-checked:border-amber-500 peer-checked:bg-amber-50 peer-checked:text-amber-800 font-bold shadow-sm">Glitter</div></label>
               </div>
             </div>
             <div>
-              <span class="text-[8.5px] font-semibold text-gray-300 block mb-0.5">3. Tipe Potong:</span>
+              <span class="text-[8.5px] font-semibold text-zinc-700 block mb-0.5">3. Tipe Potong:</span>
               <div class="grid grid-cols-2 gap-1">
-                <label class="cursor-pointer"><input type="radio" name="cut1" value="Kiss Cut" class="peer hidden" checked><div class="text-[7.5px] py-1 text-center rounded-lg border border-white/15 bg-white/5 peer-checked:border-yellow-400 peer-checked:bg-yellow-400/20 peer-checked:text-yellow-400 font-bold">Kiss Cut</div></label>
-                <label class="cursor-pointer"><input type="radio" name="cut1" value="Die Cut" class="peer hidden"><div class="text-[7.5px] py-1 text-center rounded-lg border border-white/15 bg-white/5 peer-checked:border-yellow-400 peer-checked:bg-yellow-400/20 peer-checked:text-yellow-400 font-bold">Die Cut</div></label>
+                <label class="cursor-pointer"><input type="radio" name="cut1" value="Kiss Cut" class="peer hidden" checked><div class="text-[7.5px] py-1 text-center rounded-lg border border-zinc-300 bg-white peer-checked:border-amber-500 peer-checked:bg-amber-50 peer-checked:text-amber-800 font-bold shadow-sm">Kiss Cut</div></label>
+                <label class="cursor-pointer"><input type="radio" name="cut1" value="Die Cut" class="peer hidden"><div class="text-[7.5px] py-1 text-center rounded-lg border border-zinc-300 bg-white peer-checked:border-amber-500 peer-checked:bg-amber-50 peer-checked:text-amber-800 font-bold shadow-sm">Die Cut</div></label>
               </div>
             </div>
           </div>
 
-          <div class="grid grid-cols-2 gap-1.5 pt-1 border-t border-white/10">
+          <div class="grid grid-cols-2 gap-1.5 pt-1 border-t border-zinc-200">
             <div>
-              <span class="text-[8.5px] font-bold text-yellow-400 block mb-0.5">📏 Ukuran Stiker</span>
-              <input id="ukuran1" type="text" placeholder="A3+ / Diamtr 5cm" class="w-full bg-neutral-900 border border-white/20 rounded-lg px-2 py-0.5 text-[9.5px] text-white focus:outline-none focus:border-yellow-400">
+              <span class="text-[8.5px] font-bold text-amber-700 block mb-0.5">📏 Ukuran Stiker</span>
+              <input id="ukuran1" type="text" placeholder="A3+ / Diamtr 5cm" class="w-full bg-white border border-zinc-300 rounded-lg px-2 py-0.5 text-[9.5px] text-zinc-900 focus:outline-none focus:border-amber-500 shadow-inner">
             </div>
             <div>
-              <span class="text-[8.5px] font-bold text-yellow-400 block mb-0.5">📦 Jumlah Order</span>
-              <input id="jumlah1" type="text" placeholder="10 Lembar / 100 pcs" class="w-full bg-neutral-900 border border-white/20 rounded-lg px-2 py-0.5 text-[9.5px] text-white focus:outline-none focus:border-yellow-400">
+              <span class="text-[8.5px] font-bold text-amber-700 block mb-0.5">📦 Jumlah Order</span>
+              <input id="jumlah1" type="text" placeholder="10 Lembar / 100 pcs" class="w-full bg-white border border-zinc-300 rounded-lg px-2 py-0.5 text-[9.5px] text-zinc-900 focus:outline-none focus:border-amber-500 shadow-inner">
             </div>
           </div>
         </div>
       </div>
 
       <!-- SLIDE 2: FLEXI BANNER -->
-      <div id="slide-2" class="slide-section bg-ambient-black flex flex-col justify-between p-4 relative">
+      <div id="slide-2" class="slide-section bg-ambient-white flex flex-col justify-between p-4 relative">
         <div class="yellow-glow-layer"></div>
         <div class="relative z-20 flex items-center justify-between pt-1 pb-1">
           <div class="flex items-center gap-2.5">
-            <img src="logo test.png" alt="Logo" class="h-10 w-auto object-contain drop-shadow" onerror="this.style.display='none'">
+            <img src="logo test.png" alt="Logo" class="h-10 w-auto object-contain drop-shadow-sm" onerror="this.style.display='none'">
             <div>
-              <span class="font-extrabold text-base tracking-wider text-white block leading-none">ARCI</span>
-              <span class="text-[9px] font-medium text-yellow-400 tracking-tight block mt-0.5">Solusi Cetak & Digital Studio</span>
+              <span class="font-extrabold text-base tracking-wider text-zinc-900 block leading-none">ARCI</span>
+              <span class="text-[9px] font-semibold text-amber-600 tracking-tight block mt-0.5">Solusi Cetak & Digital Studio</span>
             </div>
           </div>
-          <span class="text-[8.5px] tracking-widest border border-yellow-400/30 rounded-full px-2.5 py-0.5 text-yellow-300 font-semibold bg-black/50 backdrop-blur-md">2/9 • BANNER</span>
+          <span class="text-[8.5px] tracking-widest border border-amber-500/30 rounded-full px-2.5 py-0.5 text-amber-700 font-bold bg-amber-50/80 backdrop-blur-md">2/9 • BANNER</span>
         </div>
 
         <div class="relative z-20 space-y-1.5">
-          <div class="relative h-[180px] w-full rounded-2xl overflow-hidden border border-white/15 bg-black/60 shadow-xl group">
+          <div class="relative h-[175px] w-full rounded-2xl overflow-hidden border border-zinc-200 bg-zinc-100 shadow-md group">
             <img id="bannerPrevImg" src="flexi-280.jpg" class="w-full h-full object-cover transition-all duration-300">
             <video id="bannerPrevVid" autoplay loop muted playsinline poster="flexi-280.jpg" class="hidden w-full h-full object-cover">
               <source id="bannerPrevVidSrc" src="video-flexi-280.mp4" type="video/mp4">
             </video>
 
-            <div class="absolute top-2 right-2 z-20 flex bg-black/70 p-0.5 rounded-xl border border-white/20 backdrop-blur-md shadow">
-              <button id="tabFoto2" onclick="switchMediaTab(2, 'foto')" class="px-2.5 py-0.5 rounded-lg text-[8.5px] font-bold bg-yellow-400 text-black shadow transition">📸 Foto</button>
-              <button id="tabVideo2" onclick="switchMediaTab(2, 'video')" class="px-2.5 py-0.5 rounded-lg text-[8.5px] font-bold text-gray-300 hover:text-white transition">🎥 Tekstur</button>
+            <div class="absolute top-2 right-2 z-20 flex bg-white/80 p-0.5 rounded-xl border border-zinc-200 backdrop-blur-md shadow-sm">
+              <button id="tabFoto2" onclick="switchMediaTab(2, 'foto')" class="px-2.5 py-0.5 rounded-lg text-[8.5px] font-bold bg-amber-400 text-zinc-900 shadow transition">📸 Foto</button>
+              <button id="tabVideo2" onclick="switchMediaTab(2, 'video')" class="px-2.5 py-0.5 rounded-lg text-[8.5px] font-bold text-zinc-600 hover:text-zinc-900 transition">🎥 Tekstur</button>
             </div>
 
-            <button onclick="openModalFromSlide(2)" class="absolute bottom-2 right-2 z-20 bg-black/70 hover:bg-black text-white text-[8px] font-bold px-2 py-0.5 rounded-lg border border-white/20 backdrop-blur-md">
+            <button onclick="openModalFromSlide(2)" class="absolute bottom-2 right-2 z-20 bg-white/80 hover:bg-white text-zinc-800 text-[8px] font-bold px-2 py-0.5 rounded-lg border border-zinc-200 backdrop-blur-md shadow-sm">
               🔍 Perbesar
             </button>
           </div>
 
-          <div class="p-2 rounded-xl bg-black/50 border border-white/10 text-[10px] leading-relaxed backdrop-blur-md">
-            <span id="bannerDescTitle" class="font-extrabold text-yellow-400 text-[11px] uppercase block mb-0.5">Flexi Standar 280gr 🏷️ HEMAT</span>
-            <p id="bannerDescText" class="text-neutral-300 font-normal">Tekstur berserat standar. Pilihan paling ramah di kantong untuk spanduk outdoor event singkat & acara toko.</p>
+          <div class="space-y-1">
+            <div class="grid grid-cols-3 gap-1.5">
+              <button onclick="showInfo(2, 'Anti Sobek Outdoor', 'Bahan terpal fleksibel berlapis serat benang kuat, tahan tarikan angin kencang.')" class="p-1.5 rounded-xl bg-white border border-zinc-200 hover:border-amber-400 shadow-sm flex flex-col items-center gap-0.5 transition">
+                <span class="text-sm">🛡️</span>
+                <span class="text-[7.5px] font-bold uppercase text-zinc-700">Anti Sobek</span>
+              </button>
+              <button onclick="showInfo(2, 'Tahan Panas & Hujan', 'Tinta solvent khusus outdoor yang tidak luntur meski terkena terik matahari langsung.')" class="p-1.5 rounded-xl bg-white border border-zinc-200 hover:border-amber-400 shadow-sm flex flex-col items-center gap-0.5 transition">
+                <span class="text-sm">☀️</span>
+                <span class="text-[7.5px] font-bold uppercase text-zinc-700">Tahan Cuaca</span>
+              </button>
+              <button onclick="showInfo(2, 'Finishing Kuat', 'Dilengkapi mata ayam (ring besi) di setiap sudut untuk kemudahan pemasangan tali.')" class="p-1.5 rounded-xl bg-white border border-zinc-200 hover:border-amber-400 shadow-sm flex flex-col items-center gap-0.5 transition">
+                <span class="text-sm">🔗</span>
+                <span class="text-[7.5px] font-bold uppercase text-zinc-700">Ring Besi</span>
+              </button>
+            </div>
+            <div id="infoBox2" class="p-2 rounded-lg bg-amber-50 border border-amber-200 text-[9px] text-amber-900 hidden">
+              <b id="infoTitle2" class="block font-bold text-[9.5px] mb-0.5">Info Bahan</b>
+              <span id="infoDesc2">Sentuh ikon di atas untuk melihat detail keunggulan bahan.</span>
+            </div>
           </div>
         </div>
 
-        <div class="relative z-20 space-y-2 pb-14">
+        <div class="relative z-20 space-y-2 pb-16">
           <div>
-            <span class="text-[9px] font-bold text-yellow-400 block mb-1 uppercase tracking-wider">1. Bahan Flexi Banner:</span>
+            <span class="text-[9px] font-bold text-amber-700 block mb-1 uppercase tracking-wider">1. Bahan Flexi Banner:</span>
             <div class="grid grid-cols-2 gap-1.5">
-              <label class="cursor-pointer"><input type="radio" name="bahanBanner" value="standar" class="peer hidden" checked><div class="text-[8.5px] py-1.5 text-center rounded-xl border border-white/20 bg-white/5 peer-checked:border-yellow-400 peer-checked:bg-yellow-400 peer-checked:text-black font-extrabold transition">Flexi Standar 280gr</div></label>
-              <label class="cursor-pointer"><input type="radio" name="bahanBanner" value="korea" class="peer hidden"><div class="text-[8.5px] py-1.5 text-center rounded-xl border border-white/20 bg-white/5 peer-checked:border-yellow-400 peer-checked:bg-yellow-400 peer-checked:text-black font-extrabold transition">Flexi Korea 440gr ⭐</div></label>
+              <label class="cursor-pointer"><input type="radio" name="bahanBanner" value="standar" class="peer hidden" checked><div class="text-[8.5px] py-1.5 text-center rounded-xl border border-zinc-300 bg-white peer-checked:border-amber-500 peer-checked:bg-amber-400 peer-checked:text-zinc-950 font-extrabold shadow-sm transition">Flexi Standar 280gr</div></label>
+              <label class="cursor-pointer"><input type="radio" name="bahanBanner" value="korea" class="peer hidden"><div class="text-[8.5px] py-1.5 text-center rounded-xl border border-zinc-300 bg-white peer-checked:border-amber-500 peer-checked:bg-amber-400 peer-checked:text-zinc-950 font-extrabold shadow-sm transition">Flexi Korea 440gr ⭐</div></label>
             </div>
           </div>
 
           <div>
-            <span class="text-[9px] font-semibold text-gray-300 block mb-1">2. Finishing Pinggiran:</span>
+            <span class="text-[9px] font-semibold text-zinc-700 block mb-1">2. Finishing Pinggiran:</span>
             <div class="grid grid-cols-2 gap-1">
-              <label class="cursor-pointer"><input type="radio" name="finishingBanner" value="Mata Ayam" class="peer hidden" checked><div class="text-[8px] py-1 text-center rounded-lg border border-white/15 bg-white/5 peer-checked:border-yellow-400 peer-checked:bg-yellow-400/20 peer-checked:text-yellow-400 font-bold">Mata Ayam (Ring Besi)</div></label>
-              <label class="cursor-pointer"><input type="radio" name="finishingBanner" value="Lipat Keliling" class="peer hidden"><div class="text-[8px] py-1 text-center rounded-lg border border-white/15 bg-white/5 peer-checked:border-yellow-400 peer-checked:bg-yellow-400/20 peer-checked:text-yellow-400 font-bold">Lipat Keliling</div></label>
-              <label class="cursor-pointer"><input type="radio" name="finishingBanner" value="Selongsong" class="peer hidden"><div class="text-[8px] py-1 text-center rounded-lg border border-white/15 bg-white/5 peer-checked:border-yellow-400 peer-checked:bg-yellow-400/20 peer-checked:text-yellow-400 font-bold">Selongsong Tiang</div></label>
-              <label class="cursor-pointer"><input type="radio" name="finishingBanner" value="Les Putih" class="peer hidden"><div class="text-[8px] py-1 text-center rounded-lg border border-white/15 bg-white/5 peer-checked:border-yellow-400 peer-checked:bg-yellow-400/20 peer-checked:text-yellow-400 font-bold">Les Putih Saja</div></label>
+              <label class="cursor-pointer"><input type="radio" name="finishingBanner" value="Mata Ayam" class="peer hidden" checked><div class="text-[8px] py-1 text-center rounded-lg border border-zinc-300 bg-white peer-checked:border-amber-500 peer-checked:bg-amber-50 peer-checked:text-amber-800 font-bold shadow-sm">Mata Ayam (Ring Besi)</div></label>
+              <label class="cursor-pointer"><input type="radio" name="finishingBanner" value="Lipat Keliling" class="peer hidden"><div class="text-[8px] py-1 text-center rounded-lg border border-zinc-300 bg-white peer-checked:border-amber-500 peer-checked:bg-amber-50 peer-checked:text-amber-800 font-bold shadow-sm">Lipat Keliling</div></label>
+              <label class="cursor-pointer"><input type="radio" name="finishingBanner" value="Selongsong" class="peer hidden"><div class="text-[8px] py-1 text-center rounded-lg border border-zinc-300 bg-white peer-checked:border-amber-500 peer-checked:bg-amber-50 peer-checked:text-amber-800 font-bold shadow-sm">Selongsong Tiang</div></label>
+              <label class="cursor-pointer"><input type="radio" name="finishingBanner" value="Les Putih" class="peer hidden"><div class="text-[8px] py-1 text-center rounded-lg border border-zinc-300 bg-white peer-checked:border-amber-500 peer-checked:bg-amber-50 peer-checked:text-amber-800 font-bold shadow-sm">Les Putih Saja</div></label>
             </div>
           </div>
 
-          <div class="grid grid-cols-2 gap-1.5 pt-1 border-t border-white/10">
+          <div class="grid grid-cols-2 gap-1.5 pt-1 border-t border-zinc-200">
             <div>
-              <span class="text-[8.5px] font-bold text-yellow-400 block mb-0.5">📏 Ukuran Spanduk</span>
-              <input id="ukuran2" type="text" placeholder="300 x 100 cm" class="w-full bg-neutral-900 border border-white/20 rounded-lg px-2 py-0.5 text-[9.5px] text-white focus:outline-none focus:border-yellow-400">
+              <span class="text-[8.5px] font-bold text-amber-700 block mb-0.5">📏 Ukuran Spanduk</span>
+              <input id="ukuran2" type="text" placeholder="300 x 100 cm" class="w-full bg-white border border-zinc-300 rounded-lg px-2 py-0.5 text-[9.5px] text-zinc-900 focus:outline-none focus:border-amber-500 shadow-inner">
             </div>
             <div>
-              <span class="text-[8.5px] font-bold text-yellow-400 block mb-0.5">📦 Jumlah Order</span>
-              <input id="jumlah2" type="text" placeholder="1 Pcs / 5 Pcs" class="w-full bg-neutral-900 border border-white/20 rounded-lg px-2 py-0.5 text-[9.5px] text-white focus:outline-none focus:border-yellow-400">
+              <span class="text-[8.5px] font-bold text-amber-700 block mb-0.5">📦 Jumlah Order</span>
+              <input id="jumlah2" type="text" placeholder="1 Pcs / 5 Pcs" class="w-full bg-white border border-zinc-300 rounded-lg px-2 py-0.5 text-[9.5px] text-zinc-900 focus:outline-none focus:border-amber-500 shadow-inner">
             </div>
           </div>
         </div>
       </div>
 
       <!-- SLIDE 3: CETAK KERTAS A3+ -->
-      <div id="slide-3" class="slide-section bg-ambient-black flex flex-col justify-between p-4 relative">
+      <div id="slide-3" class="slide-section bg-ambient-white flex flex-col justify-between p-4 relative">
         <div class="yellow-glow-layer"></div>
         <div class="relative z-20 flex items-center justify-between pt-1 pb-1">
           <div class="flex items-center gap-2.5">
-            <img src="logo test.png" alt="Logo" class="h-10 w-auto object-contain drop-shadow" onerror="this.style.display='none'">
+            <img src="logo test.png" alt="Logo" class="h-10 w-auto object-contain drop-shadow-sm" onerror="this.style.display='none'">
             <div>
-              <span class="font-extrabold text-base tracking-wider text-white block leading-none">ARCI</span>
-              <span class="text-[9px] font-medium text-yellow-400 tracking-tight block mt-0.5">Solusi Cetak & Digital Studio</span>
+              <span class="font-extrabold text-base tracking-wider text-zinc-900 block leading-none">ARCI</span>
+              <span class="text-[9px] font-semibold text-amber-600 tracking-tight block mt-0.5">Solusi Cetak & Digital Studio</span>
             </div>
           </div>
-          <span class="text-[8.5px] tracking-widest border border-yellow-400/30 rounded-full px-2.5 py-0.5 text-yellow-300 font-semibold bg-black/50 backdrop-blur-md">3/9 • KERTAS A3+</span>
+          <span class="text-[8.5px] tracking-widest border border-amber-500/30 rounded-full px-2.5 py-0.5 text-amber-700 font-bold bg-amber-50/80 backdrop-blur-md">3/9 • KERTAS A3+</span>
         </div>
 
         <div class="relative z-20 space-y-1.5">
-          <div class="relative h-[180px] w-full rounded-2xl overflow-hidden border border-white/15 bg-black/60 shadow-xl group">
+          <div class="relative h-[175px] w-full rounded-2xl overflow-hidden border border-zinc-200 bg-zinc-100 shadow-md group">
             <img id="paperPrevImg" src="art-paper-260.jpg" class="w-full h-full object-cover transition-all duration-300" onerror="this.src='gbr-vinyl.JPG'">
             <video id="paperPrevVid" autoplay loop muted playsinline poster="art-paper-260.jpg" class="hidden w-full h-full object-cover">
               <source id="paperPrevVidSrc" src="video-vinyl.mp4" type="video/mp4">
             </video>
 
-            <div class="absolute top-2 right-2 z-20 flex bg-black/70 p-0.5 rounded-xl border border-white/20 backdrop-blur-md shadow">
-              <button id="tabFoto3" onclick="switchMediaTab(3, 'foto')" class="px-2.5 py-0.5 rounded-lg text-[8.5px] font-bold bg-yellow-400 text-black shadow transition">📸 Foto</button>
-              <button id="tabVideo3" onclick="switchMediaTab(3, 'video')" class="px-2.5 py-0.5 rounded-lg text-[8.5px] font-bold text-gray-300 hover:text-white transition">🎥 Tekstur</button>
+            <div class="absolute top-2 right-2 z-20 flex bg-white/80 p-0.5 rounded-xl border border-zinc-200 backdrop-blur-md shadow-sm">
+              <button id="tabFoto3" onclick="switchMediaTab(3, 'foto')" class="px-2.5 py-0.5 rounded-lg text-[8.5px] font-bold bg-amber-400 text-zinc-900 shadow transition">📸 Foto</button>
+              <button id="tabVideo3" onclick="switchMediaTab(3, 'video')" class="px-2.5 py-0.5 rounded-lg text-[8.5px] font-bold text-zinc-600 hover:text-zinc-900 transition">🎥 Tekstur</button>
             </div>
 
-            <button onclick="openModalFromSlide(3)" class="absolute bottom-2 right-2 z-20 bg-black/70 hover:bg-black text-white text-[8px] font-bold px-2 py-0.5 rounded-lg border border-white/20 backdrop-blur-md">
+            <button onclick="openModalFromSlide(3)" class="absolute bottom-2 right-2 z-20 bg-white/80 hover:bg-white text-zinc-800 text-[8px] font-bold px-2 py-0.5 rounded-lg border border-zinc-200 backdrop-blur-md shadow-sm">
               🔍 Perbesar
             </button>
           </div>
 
-          <div class="p-2 rounded-xl bg-black/50 border border-white/10 text-[10px] leading-relaxed backdrop-blur-md">
-            <span id="paperDescTitle" class="font-extrabold text-yellow-400 text-[11px] uppercase block mb-0.5">Art Carton 260gr ⭐ REKOMENDASI</span>
-            <p id="paperDescText" class="text-neutral-300 font-normal">Kertas tebal licin & kaku. Ideal untuk kartu nama profesional, cover buku, sertifikat, & hangtag.</p>
+          <div class="space-y-1">
+            <div class="grid grid-cols-3 gap-1.5">
+              <button onclick="showInfo(3, 'Kaku & Kokoh', 'Ketebalan gramatur tinggi membuat kertas tidak mudah letoy, ideal untuk kartu nama.')" class="p-1.5 rounded-xl bg-white border border-zinc-200 hover:border-amber-400 shadow-sm flex flex-col items-center gap-0.5 transition">
+                <span class="text-sm">📋</span>
+                <span class="text-[7.5px] font-bold uppercase text-zinc-700">Kaku & Kokoh</span>
+              </button>
+              <button onclick="showInfo(3, 'Licin & Mengkilap', 'Permukaan art paper/carton memantulkan cahaya lembut, membuat foto produk terlihat hidup.')" class="p-1.5 rounded-xl bg-white border border-zinc-200 hover:border-amber-400 shadow-sm flex flex-col items-center gap-0.5 transition">
+                <span class="text-sm">🌟</span>
+                <span class="text-[7.5px] font-bold uppercase text-zinc-700">Licin Elegan</span>
+              </button>
+              <button onclick="showInfo(3, 'Hasil Presisi', 'Potongan mesin presisi tinggi, sudut siku rapi tanpa ada bagian kertas yang terkelupas.')" class="p-1.5 rounded-xl bg-white border border-zinc-200 hover:border-amber-400 shadow-sm flex flex-col items-center gap-0.5 transition">
+                <span class="text-sm">🎯</span>
+                <span class="text-[7.5px] font-bold uppercase text-zinc-700">Presisi Rapi</span>
+              </button>
+            </div>
+            <div id="infoBox3" class="p-2 rounded-lg bg-amber-50 border border-amber-200 text-[9px] text-amber-900 hidden">
+              <b id="infoTitle3" class="block font-bold text-[9.5px] mb-0.5">Info Bahan</b>
+              <span id="infoDesc3">Sentuh ikon di atas untuk melihat detail keunggulan bahan.</span>
+            </div>
           </div>
         </div>
 
-        <div class="relative z-20 space-y-1.5 pb-14">
+        <div class="relative z-20 space-y-1.5 pb-16">
           <div>
-            <span class="text-[8.5px] font-bold text-yellow-400 block mb-0.5 uppercase tracking-wider">1. Pilih Jenis Kertas:</span>
-            <select id="selectKertas" class="w-full bg-neutral-900 border border-white/20 rounded-lg text-[9px] px-2 py-1 text-white focus:outline-none focus:border-yellow-400">
+            <span class="text-[8.5px] font-bold text-amber-700 block mb-0.5 uppercase tracking-wider">1. Pilih Jenis Kertas:</span>
+            <select id="selectKertas" class="w-full bg-white border border-zinc-300 rounded-lg text-[9px] px-2 py-1 text-zinc-900 focus:outline-none focus:border-amber-500 shadow-inner">
               <optgroup label="Art Paper / Carton">
                 <option value="ap120">Art Paper 120gr (Brosur / Flyer)</option>
                 <option value="ap150">Art Paper 150gr (Flyer Premium)</option>
@@ -285,75 +335,91 @@
 
           <div class="grid grid-cols-2 gap-1.5">
             <div>
-              <span class="text-[8px] text-gray-300 block mb-0.5 font-medium">2. Sisi Cetak</span>
+              <span class="text-[8px] text-zinc-700 block mb-0.5 font-medium">2. Sisi Cetak</span>
               <div class="grid grid-cols-2 gap-1">
-                <label class="cursor-pointer"><input type="radio" name="sisi" value="1sisi" class="peer hidden" checked><div class="text-[7.5px] py-1 text-center rounded border border-white/15 bg-white/5 peer-checked:border-yellow-400 peer-checked:bg-yellow-400/20 peer-checked:text-yellow-400 font-semibold">1 Sisi</div></label>
-                <label class="cursor-pointer"><input type="radio" name="sisi" value="2sisi" class="peer hidden"><div class="text-[7.5px] py-1 text-center rounded border border-white/15 bg-white/5 peer-checked:border-yellow-400 peer-checked:bg-yellow-400/20 peer-checked:text-yellow-400 font-semibold">2 Sisi</div></label>
+                <label class="cursor-pointer"><input type="radio" name="sisi" value="1sisi" class="peer hidden" checked><div class="text-[7.5px] py-1 text-center rounded border border-zinc-300 bg-white peer-checked:border-amber-500 peer-checked:bg-amber-50 peer-checked:text-amber-800 font-semibold shadow-sm">1 Sisi</div></label>
+                <label class="cursor-pointer"><input type="radio" name="sisi" value="2sisi" class="peer hidden"><div class="text-[7.5px] py-1 text-center rounded border border-zinc-300 bg-white peer-checked:border-amber-500 peer-checked:bg-amber-50 peer-checked:text-amber-800 font-semibold shadow-sm">2 Sisi</div></label>
               </div>
             </div>
             <div>
-              <span class="text-[8px] text-gray-300 block mb-0.5 font-medium">3. Laminasi</span>
+              <span class="text-[8px] text-zinc-700 block mb-0.5 font-medium">3. Laminasi</span>
               <div class="grid grid-cols-2 gap-1">
-                <label class="cursor-pointer"><input type="radio" name="lamKertas" value="glossy" class="peer hidden" checked><div class="text-[7.5px] py-1 text-center rounded border border-white/15 bg-white/5 peer-checked:border-yellow-400 peer-checked:bg-yellow-400/20 peer-checked:text-yellow-400 font-semibold">Glossy</div></label>
-                <label class="cursor-pointer"><input type="radio" name="lamKertas" value="doff" class="peer hidden"><div class="text-[7.5px] py-1 text-center rounded border border-white/15 bg-white/5 peer-checked:border-yellow-400 peer-checked:bg-yellow-400/20 peer-checked:text-yellow-400 font-semibold">Doff</div></label>
+                <label class="cursor-pointer"><input type="radio" name="lamKertas" value="glossy" class="peer hidden" checked><div class="text-[7.5px] py-1 text-center rounded border border-zinc-300 bg-white peer-checked:border-amber-500 peer-checked:bg-amber-50 peer-checked:text-amber-800 font-semibold shadow-sm">Glossy</div></label>
+                <label class="cursor-pointer"><input type="radio" name="lamKertas" value="doff" class="peer hidden"><div class="text-[7.5px] py-1 text-center rounded border border-zinc-300 bg-white peer-checked:border-amber-500 peer-checked:bg-amber-50 peer-checked:text-amber-800 font-semibold shadow-sm">Doff</div></label>
               </div>
             </div>
           </div>
 
-          <div class="grid grid-cols-2 gap-1.5 pt-1 border-t border-white/10">
+          <div class="grid grid-cols-2 gap-1.5 pt-1 border-t border-zinc-200">
             <div>
-              <span class="text-[8.5px] font-bold text-yellow-400 block mb-0.5">📏 Ukuran Kertas</span>
-              <input id="ukuran3" type="text" placeholder="A3+ / A4 / Kartu Nama" class="w-full bg-neutral-900 border border-white/20 rounded-lg px-2 py-0.5 text-[9.5px] text-white focus:outline-none focus:border-yellow-400">
+              <span class="text-[8.5px] font-bold text-amber-700 block mb-0.5">📏 Ukuran Kertas</span>
+              <input id="ukuran3" type="text" placeholder="A3+ / A4 / Kartu Nama" class="w-full bg-white border border-zinc-300 rounded-lg px-2 py-0.5 text-[9.5px] text-zinc-900 focus:outline-none focus:border-amber-500 shadow-inner">
             </div>
             <div>
-              <span class="text-[8.5px] font-bold text-yellow-400 block mb-0.5">📦 Jumlah Cetak</span>
-              <input id="jumlah3" type="text" placeholder="50 Lembar / 5 Box" class="w-full bg-neutral-900 border border-white/20 rounded-lg px-2 py-0.5 text-[9.5px] text-white focus:outline-none focus:border-yellow-400">
+              <span class="text-[8.5px] font-bold text-amber-700 block mb-0.5">📦 Jumlah Cetak</span>
+              <input id="jumlah3" type="text" placeholder="50 Lembar / 5 Box" class="w-full bg-white border border-zinc-300 rounded-lg px-2 py-0.5 text-[9.5px] text-zinc-900 focus:outline-none focus:border-amber-500 shadow-inner">
             </div>
           </div>
         </div>
       </div>
 
       <!-- SLIDE 4: INDOOR METERAN -->
-      <div id="slide-4" class="slide-section bg-ambient-black flex flex-col justify-between p-4 relative">
+      <div id="slide-4" class="slide-section bg-ambient-white flex flex-col justify-between p-4 relative">
         <div class="yellow-glow-layer"></div>
         <div class="relative z-20 flex items-center justify-between pt-1 pb-1">
           <div class="flex items-center gap-2.5">
-            <img src="logo test.png" alt="Logo" class="h-10 w-auto object-contain drop-shadow" onerror="this.style.display='none'">
+            <img src="logo test.png" alt="Logo" class="h-10 w-auto object-contain drop-shadow-sm" onerror="this.style.display='none'">
             <div>
-              <span class="font-extrabold text-base tracking-wider text-white block leading-none">ARCI</span>
-              <span class="text-[9px] font-medium text-yellow-400 tracking-tight block mt-0.5">Solusi Cetak & Digital Studio</span>
+              <span class="font-extrabold text-base tracking-wider text-zinc-900 block leading-none">ARCI</span>
+              <span class="text-[9px] font-semibold text-amber-600 tracking-tight block mt-0.5">Solusi Cetak & Digital Studio</span>
             </div>
           </div>
-          <span class="text-[8.5px] tracking-widest border border-yellow-400/30 rounded-full px-2.5 py-0.5 text-yellow-300 font-semibold bg-black/50 backdrop-blur-md">4/9 • INDOOR</span>
+          <span class="text-[8.5px] tracking-widest border border-amber-500/30 rounded-full px-2.5 py-0.5 text-amber-700 font-bold bg-amber-50/80 backdrop-blur-md">4/9 • INDOOR</span>
         </div>
 
         <div class="relative z-20 space-y-1.5">
-          <div class="relative h-[180px] w-full rounded-2xl overflow-hidden border border-white/15 bg-black/60 shadow-xl group">
+          <div class="relative h-[175px] w-full rounded-2xl overflow-hidden border border-zinc-200 bg-zinc-100 shadow-md group">
             <img id="indoorPrevImg" src="gbr-vinyl.JPG" class="w-full h-full object-cover transition-all duration-300">
             <video id="indoorPrevVid" autoplay loop muted playsinline poster="gbr-vinyl.JPG" class="hidden w-full h-full object-cover">
               <source id="indoorPrevVidSrc" src="video-vinyl.mp4" type="video/mp4">
             </video>
 
-            <div class="absolute top-2 right-2 z-20 flex bg-black/70 p-0.5 rounded-xl border border-white/20 backdrop-blur-md shadow">
-              <button id="tabFoto4" onclick="switchMediaTab(4, 'foto')" class="px-2.5 py-0.5 rounded-lg text-[8.5px] font-bold bg-yellow-400 text-black shadow transition">📸 Foto</button>
-              <button id="tabVideo4" onclick="switchMediaTab(4, 'video')" class="px-2.5 py-0.5 rounded-lg text-[8.5px] font-bold text-gray-300 hover:text-white transition">🎥 Tekstur</button>
+            <div class="absolute top-2 right-2 z-20 flex bg-white/80 p-0.5 rounded-xl border border-zinc-200 backdrop-blur-md shadow-sm">
+              <button id="tabFoto4" onclick="switchMediaTab(4, 'foto')" class="px-2.5 py-0.5 rounded-lg text-[8.5px] font-bold bg-amber-400 text-zinc-900 shadow transition">📸 Foto</button>
+              <button id="tabVideo4" onclick="switchMediaTab(4, 'video')" class="px-2.5 py-0.5 rounded-lg text-[8.5px] font-bold text-zinc-600 hover:text-zinc-900 transition">🎥 Tekstur</button>
             </div>
 
-            <button onclick="openModalFromSlide(4)" class="absolute bottom-2 right-2 z-20 bg-black/70 hover:bg-black text-white text-[8px] font-bold px-2 py-0.5 rounded-lg border border-white/20 backdrop-blur-md">
+            <button onclick="openModalFromSlide(4)" class="absolute bottom-2 right-2 z-20 bg-white/80 hover:bg-white text-zinc-800 text-[8px] font-bold px-2 py-0.5 rounded-lg border border-zinc-200 backdrop-blur-md shadow-sm">
               🔍 Perbesar
             </button>
           </div>
 
-          <div class="p-2 rounded-xl bg-black/50 border border-white/10 text-[10px] leading-relaxed backdrop-blur-md">
-            <span id="indoorDescTitle" class="font-extrabold text-yellow-400 text-[11px] uppercase block mb-0.5">Maxdecal Indoor Meteran ⭐ REKOMENDASI</span>
-            <p id="indoorDescText" class="text-neutral-300 font-normal">Stiker vinyl high-resolution cetak mesin indoor, lem rapat presisi tinggi & daya tahan warna terbaik.</p>
+          <div class="space-y-1">
+            <div class="grid grid-cols-3 gap-1.5">
+              <button onclick="showInfo(4, 'Resolusi Foto Max', 'Mesin cetak indoor high-res mencetak titik terkecil dengan sangat tajam tanpa garis cetak.')" class="p-1.5 rounded-xl bg-white border border-zinc-200 hover:border-amber-400 shadow-sm flex flex-col items-center gap-0.5 transition">
+                <span class="text-sm">📸</span>
+                <span class="text-[7.5px] font-bold uppercase text-zinc-700">High-Res</span>
+              </button>
+              <button onclick="showInfo(4, 'Lem Presisi Rapat', 'Daya rekat lem merata di seluruh permukaan, mudah diaplikasikan tanpa menimbulkan gelembung.')" class="p-1.5 rounded-xl bg-white border border-zinc-200 hover:border-amber-400 shadow-sm flex flex-col items-center gap-0.5 transition">
+                <span class="text-sm">📐</span>
+                <span class="text-[7.5px] font-bold uppercase text-zinc-700">Lem Rapat</span>
+              </button>
+              <button onclick="showInfo(4, 'Warna Awet', 'Pigmen tahan terhadap perubahan suhu ruangan dalam jangka panjang, warna tidak pudar.')" class="p-1.5 rounded-xl bg-white border border-zinc-200 hover:border-amber-400 shadow-sm flex flex-col items-center gap-0.5 transition">
+                <span class="text-sm">⏳</span>
+                <span class="text-[7.5px] font-bold uppercase text-zinc-700">Awet Lama</span>
+              </button>
+            </div>
+            <div id="infoBox4" class="p-2 rounded-lg bg-amber-50 border border-amber-200 text-[9px] text-amber-900 hidden">
+              <b id="infoTitle4" class="block font-bold text-[9.5px] mb-0.5">Info Bahan</b>
+              <span id="infoDesc4">Sentuh ikon di atas untuk melihat detail keunggulan bahan.</span>
+            </div>
           </div>
         </div>
 
-        <div class="relative z-20 space-y-1.5 pb-14">
+        <div class="relative z-20 space-y-1.5 pb-16">
           <div>
-            <span class="text-[8.5px] font-bold text-yellow-400 block mb-0.5 uppercase tracking-wider">1. Pilih Bahan Indoor Meteran:</span>
-            <select id="selectIndoor" class="w-full bg-neutral-900 border border-white/20 rounded-lg text-[9px] px-2 py-1 text-white focus:outline-none focus:border-yellow-400">
+            <span class="text-[8.5px] font-bold text-amber-700 block mb-0.5 uppercase tracking-wider">1. Pilih Bahan Indoor Meteran:</span>
+            <select id="selectIndoor" class="w-full bg-white border border-zinc-300 rounded-lg text-[9px] px-2 py-1 text-zinc-900 focus:outline-none focus:border-amber-500 shadow-inner">
               <option value="maxdecal" selected>Maxdecal (Stiker Vinyl High-Res)</option>
               <option value="ritrama">Ritrama (Stiker Vinyl Standar)</option>
               <option value="transparan">Transparan Indoor Meteran</option>
@@ -367,69 +433,85 @@
           </div>
 
           <div>
-            <span class="text-[8px] text-gray-300 block mb-0.5 font-medium">2. Opsi Laminasi:</span>
+            <span class="text-[8px] text-zinc-700 block mb-0.5 font-medium">2. Opsi Laminasi:</span>
             <div class="grid grid-cols-4 gap-1">
-              <label class="cursor-pointer"><input type="radio" name="lamIndoor" value="glossy" class="peer hidden" checked><div class="text-[7.5px] py-1 text-center rounded border border-white/15 bg-white/5 peer-checked:border-yellow-400 peer-checked:bg-yellow-400/20 peer-checked:text-yellow-400 font-semibold">Glossy</div></label>
-              <label class="cursor-pointer"><input type="radio" name="lamIndoor" value="doff" class="peer hidden"><div class="text-[7.5px] py-1 text-center rounded border border-white/15 bg-white/5 peer-checked:border-yellow-400 peer-checked:bg-yellow-400/20 peer-checked:text-yellow-400 font-semibold">Doff</div></label>
-              <label class="cursor-pointer"><input type="radio" name="lamIndoor" value="superglossy" class="peer hidden"><div class="text-[7.5px] py-1 text-center rounded border border-white/15 bg-white/5 peer-checked:border-yellow-400 peer-checked:bg-yellow-400/20 peer-checked:text-yellow-400 font-semibold">Supergloss</div></label>
-              <label class="cursor-pointer"><input type="radio" name="lamIndoor" value="micron" class="peer hidden"><div class="text-[7.5px] py-1 text-center rounded border border-white/15 bg-white/5 peer-checked:border-yellow-400 peer-checked:bg-yellow-400/20 peer-checked:text-yellow-400 font-semibold">Micron</div></label>
+              <label class="cursor-pointer"><input type="radio" name="lamIndoor" value="glossy" class="peer hidden" checked><div class="text-[7.5px] py-1 text-center rounded border border-zinc-300 bg-white peer-checked:border-amber-500 peer-checked:bg-amber-50 peer-checked:text-amber-800 font-semibold shadow-sm">Glossy</div></label>
+              <label class="cursor-pointer"><input type="radio" name="lamIndoor" value="doff" class="peer hidden"><div class="text-[7.5px] py-1 text-center rounded border border-zinc-300 bg-white peer-checked:border-amber-500 peer-checked:bg-amber-50 peer-checked:text-amber-800 font-semibold shadow-sm">Doff</div></label>
+              <label class="cursor-pointer"><input type="radio" name="lamIndoor" value="superglossy" class="peer hidden"><div class="text-[7.5px] py-1 text-center rounded border border-zinc-300 bg-white peer-checked:border-amber-500 peer-checked:bg-amber-50 peer-checked:text-amber-800 font-semibold shadow-sm">Supergloss</div></label>
+              <label class="cursor-pointer"><input type="radio" name="lamIndoor" value="micron" class="peer hidden"><div class="text-[7.5px] py-1 text-center rounded border border-zinc-300 bg-white peer-checked:border-amber-500 peer-checked:bg-amber-50 peer-checked:text-amber-800 font-semibold shadow-sm">Micron</div></label>
             </div>
           </div>
 
-          <div class="grid grid-cols-2 gap-1.5 pt-1 border-t border-white/10">
+          <div class="grid grid-cols-2 gap-1.5 pt-1 border-t border-zinc-200">
             <div>
-              <span class="text-[8.5px] font-bold text-yellow-400 block mb-0.5">📏 Panjang x Lebar</span>
-              <input id="ukuran4" type="text" placeholder="100 x 100 cm" class="w-full bg-neutral-900 border border-white/20 rounded-lg px-2 py-0.5 text-[9.5px] text-white focus:outline-none focus:border-yellow-400">
+              <span class="text-[8.5px] font-bold text-amber-700 block mb-0.5">📏 Panjang x Lebar</span>
+              <input id="ukuran4" type="text" placeholder="100 x 100 cm" class="w-full bg-white border border-zinc-300 rounded-lg px-2 py-0.5 text-[9.5px] text-zinc-900 focus:outline-none focus:border-amber-500 shadow-inner">
             </div>
             <div>
-              <span class="text-[8.5px] font-bold text-yellow-400 block mb-0.5">📦 Jumlah Order</span>
-              <input id="jumlah4" type="text" placeholder="2 Meter / 5 Pcs" class="w-full bg-neutral-900 border border-white/20 rounded-lg px-2 py-0.5 text-[9.5px] text-white focus:outline-none focus:border-yellow-400">
+              <span class="text-[8.5px] font-bold text-amber-700 block mb-0.5">📦 Jumlah Order</span>
+              <input id="jumlah4" type="text" placeholder="2 Meter / 5 Pcs" class="w-full bg-white border border-zinc-300 rounded-lg px-2 py-0.5 text-[9.5px] text-zinc-900 focus:outline-none focus:border-amber-500 shadow-inner">
             </div>
           </div>
         </div>
       </div>
 
       <!-- SLIDE 5: AKRILIK & PLAKAT -->
-      <div id="slide-5" class="slide-section bg-ambient-black flex flex-col justify-between p-4 relative">
+      <div id="slide-5" class="slide-section bg-ambient-white flex flex-col justify-between p-4 relative">
         <div class="yellow-glow-layer"></div>
         <div class="relative z-20 flex items-center justify-between pt-1 pb-1">
           <div class="flex items-center gap-2.5">
-            <img src="logo test.png" alt="Logo" class="h-10 w-auto object-contain drop-shadow" onerror="this.style.display='none'">
+            <img src="logo test.png" alt="Logo" class="h-10 w-auto object-contain drop-shadow-sm" onerror="this.style.display='none'">
             <div>
-              <span class="font-extrabold text-base tracking-wider text-white block leading-none">ARCI</span>
-              <span class="text-[9px] font-medium text-yellow-400 tracking-tight block mt-0.5">Solusi Cetak & Digital Studio</span>
+              <span class="font-extrabold text-base tracking-wider text-zinc-900 block leading-none">ARCI</span>
+              <span class="text-[9px] font-semibold text-amber-600 tracking-tight block mt-0.5">Solusi Cetak & Digital Studio</span>
             </div>
           </div>
-          <span class="text-[8.5px] tracking-widest border border-yellow-400/30 rounded-full px-2.5 py-0.5 text-yellow-300 font-semibold bg-black/50 backdrop-blur-md">5/9 • AKRILIK</span>
+          <span class="text-[8.5px] tracking-widest border border-amber-500/30 rounded-full px-2.5 py-0.5 text-amber-700 font-bold bg-amber-50/80 backdrop-blur-md">5/9 • AKRILIK</span>
         </div>
 
         <div class="relative z-20 space-y-1.5">
-          <div class="relative h-[180px] w-full rounded-2xl overflow-hidden border border-white/15 bg-black/60 shadow-xl group">
+          <div class="relative h-[175px] w-full rounded-2xl overflow-hidden border border-zinc-200 bg-zinc-100 shadow-md group">
             <img id="prevImg5" src="gbr-vinyl.JPG" class="w-full h-full object-cover">
             <video id="prevVid5" autoplay loop muted playsinline poster="gbr-vinyl.JPG" class="hidden w-full h-full object-cover">
               <source id="prevVidSrc5" src="video-vinyl.mp4" type="video/mp4">
             </video>
 
-            <div class="absolute top-2 right-2 z-20 flex bg-black/70 p-0.5 rounded-xl border border-white/20 backdrop-blur-md shadow">
-              <button id="tabFoto5" onclick="switchMediaTab(5, 'foto')" class="px-2.5 py-0.5 rounded-lg text-[8.5px] font-bold bg-yellow-400 text-black shadow transition">📸 Foto</button>
-              <button id="tabVideo5" onclick="switchMediaTab(5, 'video')" class="px-2.5 py-0.5 rounded-lg text-[8.5px] font-bold text-gray-300 hover:text-white transition">🎥 Tekstur</button>
+            <div class="absolute top-2 right-2 z-20 flex bg-white/80 p-0.5 rounded-xl border border-zinc-200 backdrop-blur-md shadow-sm">
+              <button id="tabFoto5" onclick="switchMediaTab(5, 'foto')" class="px-2.5 py-0.5 rounded-lg text-[8.5px] font-bold bg-amber-400 text-zinc-900 shadow transition">📸 Foto</button>
+              <button id="tabVideo5" onclick="switchMediaTab(5, 'video')" class="px-2.5 py-0.5 rounded-lg text-[8.5px] font-bold text-zinc-600 hover:text-zinc-900 transition">🎥 Tekstur</button>
             </div>
 
-            <button onclick="openModalFromSlide(5)" class="absolute bottom-2 right-2 z-20 bg-black/70 hover:bg-black text-white text-[8px] font-bold px-2 py-0.5 rounded-lg border border-white/20 backdrop-blur-md">
+            <button onclick="openModalFromSlide(5)" class="absolute bottom-2 right-2 z-20 bg-white/80 hover:bg-white text-zinc-800 text-[8px] font-bold px-2 py-0.5 rounded-lg border border-zinc-200 backdrop-blur-md shadow-sm">
               🔍 Perbesar
             </button>
           </div>
 
-          <div class="p-2 rounded-xl bg-black/50 border border-white/10 text-[10px] leading-relaxed backdrop-blur-md">
-            <span class="font-extrabold text-yellow-400 text-[11px] uppercase block mb-0.5">Akrilik Display & Plakat Custom</span>
-            <p class="text-neutral-300 font-normal">Pemotongan laser presisi tinggi, bening mengkilap untuk plakat penghargaan & display logo.</p>
+          <div class="space-y-1">
+            <div class="grid grid-cols-3 gap-1.5">
+              <button onclick="showInfo(5, 'Laser Cut Presisi', 'Potongan sudut menggunakan teknologi laser komputer, hasil pinggiran sangat halus & mulus.')" class="p-1.5 rounded-xl bg-white border border-zinc-200 hover:border-amber-400 shadow-sm flex flex-col items-center gap-0.5 transition">
+                <span class="text-sm">⚡</span>
+                <span class="text-[7.5px] font-bold uppercase text-zinc-700">Laser Cut</span>
+              </button>
+              <button onclick="showInfo(5, 'Bening Kristal', 'Bahan akrilik murni grade A yang jernih berkilau seperti kaca namun tidak mudah pecah.')" class="p-1.5 rounded-xl bg-white border border-zinc-200 hover:border-amber-400 shadow-sm flex flex-col items-center gap-0.5 transition">
+                <span class="text-sm">💎</span>
+                <span class="text-[7.5px] font-bold uppercase text-zinc-700">Bening Kristal</span>
+              </button>
+              <button onclick="showInfo(5, 'Kokoh & Tebal', 'Pilihan ketebalan bervariasi (2mm hingga 5mm) memberikan kesan mewah dan kokoh saat dipajang.')" class="p-1.5 rounded-xl bg-white border border-zinc-200 hover:border-amber-400 shadow-sm flex flex-col items-center gap-0.5 transition">
+                <span class="text-sm">🛡️</span>
+                <span class="text-[7.5px] font-bold uppercase text-zinc-700">Kokoh Tebal</span>
+              </button>
+            </div>
+            <div id="infoBox5" class="p-2 rounded-lg bg-amber-50 border border-amber-200 text-[9px] text-amber-900 hidden">
+              <b id="infoTitle5" class="block font-bold text-[9.5px] mb-0.5">Info Bahan</b>
+              <span id="infoDesc5">Sentuh ikon di atas untuk melihat detail keunggulan bahan.</span>
+            </div>
           </div>
         </div>
 
-        <div class="relative z-20 space-y-1.5 pb-14">
+        <div class="relative z-20 space-y-1.5 pb-16">
           <div>
-            <span class="text-[8.5px] font-bold text-yellow-400 block mb-0.5 uppercase tracking-wider">1. Varian Akrilik:</span>
-            <select id="selectAkrilik" class="w-full bg-neutral-900 border border-white/20 rounded-lg text-[9px] px-2 py-1 text-white focus:outline-none focus:border-yellow-400">
+            <span class="text-[8.5px] font-bold text-amber-700 block mb-0.5 uppercase tracking-wider">1. Varian Akrilik:</span>
+            <select id="selectAkrilik" class="w-full bg-white border border-zinc-300 rounded-lg text-[9px] px-2 py-1 text-zinc-900 focus:outline-none focus:border-amber-500 shadow-inner">
               <option value="Bening 3mm" selected>Akrilik Bening 3mm (Standard Best Seller)</option>
               <option value="Bening 2mm">Akrilik Bening 2mm</option>
               <option value="Bening 5mm">Akrilik Bening 5mm (Tebal Kokoh)</option>
@@ -440,248 +522,312 @@
           </div>
 
           <div>
-            <span class="text-[8px] text-gray-300 block mb-0.5 font-medium">2. Finishing Base / Kaki:</span>
+            <span class="text-[8px] text-zinc-700 block mb-0.5 font-medium">2. Finishing Base / Kaki:</span>
             <div class="grid grid-cols-3 gap-1">
-              <label class="cursor-pointer"><input type="radio" name="kaki" value="Kaki Timpa 2" class="peer hidden" checked><div class="text-[7.5px] py-1 text-center rounded border border-white/15 bg-white/5 peer-checked:border-yellow-400 peer-checked:bg-yellow-400/20 peer-checked:text-yellow-400 font-semibold">Kaki Timpa 2</div></label>
-              <label class="cursor-pointer"><input type="radio" name="kaki" value="Kaki Kotak Hitam" class="peer hidden"><div class="text-[7.5px] py-1 text-center rounded border border-white/15 bg-white/5 peer-checked:border-yellow-400 peer-checked:bg-yellow-400/20 peer-checked:text-yellow-400 font-semibold">Kaki Kotak</div></label>
-              <label class="cursor-pointer"><input type="radio" name="kaki" value="Box Khusus" class="peer hidden"><div class="text-[7.5px] py-1 text-center rounded border border-white/15 bg-white/5 peer-checked:border-yellow-400 peer-checked:bg-yellow-400/20 peer-checked:text-yellow-400 font-semibold">+ Box Beludru</div></label>
+              <label class="cursor-pointer"><input type="radio" name="kaki" value="Kaki Timpa 2" class="peer hidden" checked><div class="text-[7.5px] py-1 text-center rounded border border-zinc-300 bg-white peer-checked:border-amber-500 peer-checked:bg-amber-50 peer-checked:text-amber-800 font-semibold shadow-sm">Kaki Timpa 2</div></label>
+              <label class="cursor-pointer"><input type="radio" name="kaki" value="Kaki Kotak Hitam" class="peer hidden"><div class="text-[7.5px] py-1 text-center rounded border border-zinc-300 bg-white peer-checked:border-amber-500 peer-checked:bg-amber-50 peer-checked:text-amber-800 font-semibold shadow-sm">Kaki Kotak</div></label>
+              <label class="cursor-pointer"><input type="radio" name="kaki" value="Box Khusus" class="peer hidden"><div class="text-[7.5px] py-1 text-center rounded border border-zinc-300 bg-white peer-checked:border-amber-500 peer-checked:bg-amber-50 peer-checked:text-amber-800 font-semibold shadow-sm">+ Box Beludru</div></label>
             </div>
           </div>
 
-          <div class="grid grid-cols-2 gap-1.5 pt-1 border-t border-white/10">
+          <div class="grid grid-cols-2 gap-1.5 pt-1 border-t border-zinc-200">
             <div>
-              <span class="text-[8.5px] font-bold text-yellow-400 block mb-0.5">📏 Ukuran Dimensi</span>
-              <input id="ukuran5" type="text" placeholder="20 x 15 cm" class="w-full bg-neutral-900 border border-white/20 rounded-lg px-2 py-0.5 text-[9.5px] text-white focus:outline-none focus:border-yellow-400">
+              <span class="text-[8.5px] font-bold text-amber-700 block mb-0.5">📏 Ukuran Dimensi</span>
+              <input id="ukuran5" type="text" placeholder="20 x 15 cm" class="w-full bg-white border border-zinc-300 rounded-lg px-2 py-0.5 text-[9.5px] text-zinc-900 focus:outline-none focus:border-amber-500 shadow-inner">
             </div>
             <div>
-              <span class="text-[8.5px] font-bold text-yellow-400 block mb-0.5">📦 Jumlah Plakat</span>
-              <input id="jumlah5" type="text" placeholder="1 Pcs / 10 Pcs" class="w-full bg-neutral-900 border border-white/20 rounded-lg px-2 py-0.5 text-[9.5px] text-white focus:outline-none focus:border-yellow-400">
+              <span class="text-[8.5px] font-bold text-amber-700 block mb-0.5">📦 Jumlah Plakat</span>
+              <input id="jumlah5" type="text" placeholder="1 Pcs / 10 Pcs" class="w-full bg-white border border-zinc-300 rounded-lg px-2 py-0.5 text-[9.5px] text-zinc-900 focus:outline-none focus:border-amber-500 shadow-inner">
             </div>
           </div>
         </div>
       </div>
 
       <!-- SLIDE 6: APPAREL & ID CARD -->
-      <div id="slide-6" class="slide-section bg-ambient-black flex flex-col justify-between p-4 relative">
+      <div id="slide-6" class="slide-section bg-ambient-white flex flex-col justify-between p-4 relative">
         <div class="yellow-glow-layer"></div>
         <div class="relative z-20 flex items-center justify-between pt-1 pb-1">
           <div class="flex items-center gap-2.5">
-            <img src="logo test.png" alt="Logo" class="h-10 w-auto object-contain drop-shadow" onerror="this.style.display='none'">
+            <img src="logo test.png" alt="Logo" class="h-10 w-auto object-contain drop-shadow-sm" onerror="this.style.display='none'">
             <div>
-              <span class="font-extrabold text-base tracking-wider text-white block leading-none">ARCI</span>
-              <span class="text-[9px] font-medium text-yellow-400 tracking-tight block mt-0.5">Solusi Cetak & Digital Studio</span>
+              <span class="font-extrabold text-base tracking-wider text-zinc-900 block leading-none">ARCI</span>
+              <span class="text-[9px] font-semibold text-amber-600 tracking-tight block mt-0.5">Solusi Cetak & Digital Studio</span>
             </div>
           </div>
-          <span class="text-[8.5px] tracking-widest border border-yellow-400/30 rounded-full px-2.5 py-0.5 text-yellow-300 font-semibold bg-black/50 backdrop-blur-md">6/9 • APPAREL</span>
+          <span class="text-[8.5px] tracking-widest border border-amber-500/30 rounded-full px-2.5 py-0.5 text-amber-700 font-bold bg-amber-50/80 backdrop-blur-md">6/9 • APPAREL</span>
         </div>
 
         <div class="relative z-20 space-y-1.5">
-          <div class="relative h-[180px] w-full rounded-2xl overflow-hidden border border-white/15 bg-black/60 shadow-xl group">
+          <div class="relative h-[175px] w-full rounded-2xl overflow-hidden border border-zinc-200 bg-zinc-100 shadow-md group">
             <img id="prevImg6" src="gbr-vinyl.JPG" class="w-full h-full object-cover">
             <video id="prevVid6" autoplay loop muted playsinline poster="gbr-vinyl.JPG" class="hidden w-full h-full object-cover">
               <source id="prevVidSrc6" src="video-vinyl.mp4" type="video/mp4">
             </video>
 
-            <div class="absolute top-2 right-2 z-20 flex bg-black/70 p-0.5 rounded-xl border border-white/20 backdrop-blur-md shadow">
-              <button id="tabFoto6" onclick="switchMediaTab(6, 'foto')" class="px-2.5 py-0.5 rounded-lg text-[8.5px] font-bold bg-yellow-400 text-black shadow transition">📸 Foto</button>
-              <button id="tabVideo6" onclick="switchMediaTab(6, 'video')" class="px-2.5 py-0.5 rounded-lg text-[8.5px] font-bold text-gray-300 hover:text-white transition">🎥 Tekstur</button>
+            <div class="absolute top-2 right-2 z-20 flex bg-white/80 p-0.5 rounded-xl border border-zinc-200 backdrop-blur-md shadow-sm">
+              <button id="tabFoto6" onclick="switchMediaTab(6, 'foto')" class="px-2.5 py-0.5 rounded-lg text-[8.5px] font-bold bg-amber-400 text-zinc-900 shadow transition">📸 Foto</button>
+              <button id="tabVideo6" onclick="switchMediaTab(6, 'video')" class="px-2.5 py-0.5 rounded-lg text-[8.5px] font-bold text-zinc-600 hover:text-zinc-900 transition">🎥 Tekstur</button>
             </div>
 
-            <button onclick="openModalFromSlide(6)" class="absolute bottom-2 right-2 z-20 bg-black/70 hover:bg-black text-white text-[8px] font-bold px-2 py-0.5 rounded-lg border border-white/20 backdrop-blur-md">
+            <button onclick="openModalFromSlide(6)" class="absolute bottom-2 right-2 z-20 bg-white/80 hover:bg-white text-zinc-800 text-[8px] font-bold px-2 py-0.5 rounded-lg border border-zinc-200 backdrop-blur-md shadow-sm">
               🔍 Perbesar
             </button>
           </div>
 
-          <div class="p-2 rounded-xl bg-black/50 border border-white/10 text-[10px] leading-relaxed backdrop-blur-md">
-            <span class="font-extrabold text-yellow-400 text-[11px] uppercase block mb-0.5">Kaos Custom & ID Card Lanyard</span>
-            <p class="text-neutral-300 font-normal">Sablon DTF pekat tahan cuci, tali lanyard printing 2 sisi, & ID Card PVC tebal standar ATM.</p>
+          <div class="space-y-1">
+            <div class="grid grid-cols-3 gap-1.5">
+              <button onclick="showInfo(6, 'Sablon DTF Elastis', 'Tinta transfer film elastis menyatu sempurna ke serat kain, tidak pecah ditarik & tahan cuci mesin.')" class="p-1.5 rounded-xl bg-white border border-zinc-200 hover:border-amber-400 shadow-sm flex flex-col items-center gap-0.5 transition">
+                <span class="text-sm">👕</span>
+                <span class="text-[7.5px] font-bold uppercase text-zinc-700">DTF Anti Pecah</span>
+              </button>
+              <button onclick="showInfo(6, 'Tali Lanyard Halus', 'Bahan kain lembut di kulit leher, hasil cetak 2 sisi bolak-balik tidak mudah pudar.')" class="p-1.5 rounded-xl bg-white border border-zinc-200 hover:border-amber-400 shadow-sm flex flex-col items-center gap-0.5 transition">
+                <span class="text-sm">🎗️</span>
+                <span class="text-[7.5px] font-bold uppercase text-zinc-700">Lanyard Halus</span>
+              </button>
+              <button onclick="showInfo(6, 'ID Card Tebal ATM', 'Bahan PVC padat standar kartu bank, anti air & awet untuk penggunaan kartu identitas harian.')" class="p-1.5 rounded-xl bg-white border border-zinc-200 hover:border-amber-400 shadow-sm flex flex-col items-center gap-0.5 transition">
+                <span class="text-sm">💳</span>
+                <span class="text-[7.5px] font-bold uppercase text-zinc-700">Standar ATM</span>
+              </button>
+            </div>
+            <div id="infoBox6" class="p-2 rounded-lg bg-amber-50 border border-amber-200 text-[9px] text-amber-900 hidden">
+              <b id="infoTitle6" class="block font-bold text-[9.5px] mb-0.5">Info Bahan</b>
+              <span id="infoDesc6">Sentuh ikon di atas untuk melihat detail keunggulan bahan.</span>
+            </div>
           </div>
         </div>
 
-        <div class="relative z-20 space-y-1.5 pb-14">
+        <div class="relative z-20 space-y-1.5 pb-16">
           <div>
-            <span class="text-[8.5px] font-bold text-yellow-400 block mb-0.5 uppercase tracking-wider">1. Pilih Produk:</span>
+            <span class="text-[8.5px] font-bold text-amber-700 block mb-0.5 uppercase tracking-wider">1. Pilih Produk:</span>
             <div class="grid grid-cols-3 gap-1">
-              <label class="cursor-pointer"><input type="radio" name="prodApparel" value="Kaos Custom DTF" class="peer hidden" checked><div class="text-[7.5px] py-1.5 text-center rounded-xl border border-white/20 bg-white/5 peer-checked:border-yellow-400 peer-checked:bg-yellow-400 peer-checked:text-black font-extrabold">Kaos DTF</div></label>
-              <label class="cursor-pointer"><input type="radio" name="prodApparel" value="Lanyard ID" class="peer hidden"><div class="text-[7.5px] py-1.5 text-center rounded-xl border border-white/20 bg-white/5 peer-checked:border-yellow-400 peer-checked:bg-yellow-400 peer-checked:text-black font-extrabold">Lanyard Tali</div></label>
-              <label class="cursor-pointer"><input type="radio" name="prodApparel" value="ID Card PVC" class="peer hidden"><div class="text-[7.5px] py-1.5 text-center rounded-xl border border-white/20 bg-white/5 peer-checked:border-yellow-400 peer-checked:bg-yellow-400 peer-checked:text-black font-extrabold">ID Card PVC</div></label>
+              <label class="cursor-pointer"><input type="radio" name="prodApparel" value="Kaos Custom DTF" class="peer hidden" checked><div class="text-[7.5px] py-1.5 text-center rounded-xl border border-zinc-300 bg-white peer-checked:border-amber-500 peer-checked:bg-amber-400 peer-checked:text-zinc-950 font-extrabold shadow-sm">Kaos DTF</div></label>
+              <label class="cursor-pointer"><input type="radio" name="prodApparel" value="Lanyard ID" class="peer hidden"><div class="text-[7.5px] py-1.5 text-center rounded-xl border border-zinc-300 bg-white peer-checked:border-amber-500 peer-checked:bg-amber-400 peer-checked:text-zinc-950 font-extrabold shadow-sm">Lanyard Tali</div></label>
+              <label class="cursor-pointer"><input type="radio" name="prodApparel" value="ID Card PVC" class="peer hidden"><div class="text-[7.5px] py-1.5 text-center rounded-xl border border-zinc-300 bg-white peer-checked:border-amber-500 peer-checked:bg-amber-400 peer-checked:text-zinc-950 font-extrabold shadow-sm">ID Card PVC</div></label>
             </div>
           </div>
 
-          <div class="grid grid-cols-2 gap-1.5 pt-1 border-t border-white/10">
+          <div class="grid grid-cols-2 gap-1.5 pt-1 border-t border-zinc-200">
             <div>
-              <span class="text-[8.5px] font-bold text-yellow-400 block mb-0.5">📏 Size / Ukuran Tali</span>
-              <input id="ukuran6" type="text" placeholder="Size L / 2 cm" class="w-full bg-neutral-900 border border-white/20 rounded-lg px-2 py-0.5 text-[9.5px] text-white focus:outline-none focus:border-yellow-400">
+              <span class="text-[8.5px] font-bold text-amber-700 block mb-0.5">📏 Size / Ukuran Tali</span>
+              <input id="ukuran6" type="text" placeholder="Size L / 2 cm" class="w-full bg-white border border-zinc-300 rounded-lg px-2 py-0.5 text-[9.5px] text-zinc-900 focus:outline-none focus:border-amber-500 shadow-inner">
             </div>
             <div>
-              <span class="text-[8.5px] font-bold text-yellow-400 block mb-0.5">📦 Jumlah Order</span>
-              <input id="jumlah6" type="text" placeholder="12 Pcs / 50 Pcs" class="w-full bg-neutral-900 border border-white/20 rounded-lg px-2 py-0.5 text-[9.5px] text-white focus:outline-none focus:border-yellow-400">
+              <span class="text-[8.5px] font-bold text-amber-700 block mb-0.5">📦 Jumlah Order</span>
+              <input id="jumlah6" type="text" placeholder="12 Pcs / 50 Pcs" class="w-full bg-white border border-zinc-300 rounded-lg px-2 py-0.5 text-[9.5px] text-zinc-900 focus:outline-none focus:border-amber-500 shadow-inner">
             </div>
           </div>
         </div>
       </div>
 
       <!-- SLIDE 7: MERCHANDISE -->
-      <div id="slide-7" class="slide-section bg-ambient-black flex flex-col justify-between p-4 relative">
+      <div id="slide-7" class="slide-section bg-ambient-white flex flex-col justify-between p-4 relative">
         <div class="yellow-glow-layer"></div>
         <div class="relative z-20 flex items-center justify-between pt-1 pb-1">
           <div class="flex items-center gap-2.5">
-            <img src="logo test.png" alt="Logo" class="h-10 w-auto object-contain drop-shadow" onerror="this.style.display='none'">
+            <img src="logo test.png" alt="Logo" class="h-10 w-auto object-contain drop-shadow-sm" onerror="this.style.display='none'">
             <div>
-              <span class="font-extrabold text-base tracking-wider text-white block leading-none">ARCI</span>
-              <span class="text-[9px] font-medium text-yellow-400 tracking-tight block mt-0.5">Solusi Cetak & Digital Studio</span>
+              <span class="font-extrabold text-base tracking-wider text-zinc-900 block leading-none">ARCI</span>
+              <span class="text-[9px] font-semibold text-amber-600 tracking-tight block mt-0.5">Solusi Cetak & Digital Studio</span>
             </div>
           </div>
-          <span class="text-[8.5px] tracking-widest border border-yellow-400/30 rounded-full px-2.5 py-0.5 text-yellow-300 font-semibold bg-black/50 backdrop-blur-md">7/9 • SOUVENIR</span>
+          <span class="text-[8.5px] tracking-widest border border-amber-500/30 rounded-full px-2.5 py-0.5 text-amber-700 font-bold bg-amber-50/80 backdrop-blur-md">7/9 • SOUVENIR</span>
         </div>
 
         <div class="relative z-20 space-y-1.5">
-          <div class="relative h-[180px] w-full rounded-2xl overflow-hidden border border-white/15 bg-black/60 shadow-xl group">
+          <div class="relative h-[175px] w-full rounded-2xl overflow-hidden border border-zinc-200 bg-zinc-100 shadow-md group">
             <img id="prevImg7" src="gbr-vinyl.JPG" class="w-full h-full object-cover">
             <video id="prevVid7" autoplay loop muted playsinline poster="gbr-vinyl.JPG" class="hidden w-full h-full object-cover">
               <source id="prevVidSrc7" src="video-vinyl.mp4" type="video/mp4">
             </video>
 
-            <div class="absolute top-2 right-2 z-20 flex bg-black/70 p-0.5 rounded-xl border border-white/20 backdrop-blur-md shadow">
-              <button id="tabFoto7" onclick="switchMediaTab(7, 'foto')" class="px-2.5 py-0.5 rounded-lg text-[8.5px] font-bold bg-yellow-400 text-black shadow transition">📸 Foto</button>
-              <button id="tabVideo7" onclick="switchMediaTab(7, 'video')" class="px-2.5 py-0.5 rounded-lg text-[8.5px] font-bold text-gray-300 hover:text-white transition">🎥 Tekstur</button>
+            <div class="absolute top-2 right-2 z-20 flex bg-white/80 p-0.5 rounded-xl border border-zinc-200 backdrop-blur-md shadow-sm">
+              <button id="tabFoto7" onclick="switchMediaTab(7, 'foto')" class="px-2.5 py-0.5 rounded-lg text-[8.5px] font-bold bg-amber-400 text-zinc-900 shadow transition">📸 Foto</button>
+              <button id="tabVideo7" onclick="switchMediaTab(7, 'video')" class="px-2.5 py-0.5 rounded-lg text-[8.5px] font-bold text-zinc-600 hover:text-zinc-900 transition">🎥 Tekstur</button>
             </div>
 
-            <button onclick="openModalFromSlide(7)" class="absolute bottom-2 right-2 z-20 bg-black/70 hover:bg-black text-white text-[8px] font-bold px-2 py-0.5 rounded-lg border border-white/20 backdrop-blur-md">
+            <button onclick="openModalFromSlide(7)" class="absolute bottom-2 right-2 z-20 bg-white/80 hover:bg-white text-zinc-800 text-[8px] font-bold px-2 py-0.5 rounded-lg border border-zinc-200 backdrop-blur-md shadow-sm">
               🔍 Perbesar
             </button>
           </div>
 
-          <div class="p-2 rounded-xl bg-black/50 border border-white/10 text-[10px] leading-relaxed backdrop-blur-md">
-            <span class="font-extrabold text-yellow-400 text-[11px] uppercase block mb-0.5">Merchandise & Souvenir Promosi</span>
-            <p class="text-neutral-300 font-normal">Tumbler stainless grafir laser, print UV flatbed berwarna, & paper bag promosi kantor.</p>
+          <div class="space-y-1">
+            <div class="grid grid-cols-3 gap-1.5">
+              <button onclick="showInfo(7, 'Stainless Vakum', 'Menjaga suhu air panas/dingin lebih lama, dilapisi cat anti gores dan grafir laser tajam.')" class="p-1.5 rounded-xl bg-white border border-zinc-200 hover:border-amber-400 shadow-sm flex flex-col items-center gap-0.5 transition">
+                <span class="text-sm">🥤</span>
+                <span class="text-[7.5px] font-bold uppercase text-zinc-700">Tahan Suhu</span>
+              </button>
+              <button onclick="showInfo(7, 'Grafir Laser Abadi', 'Ukiran laser pada bodi tumbler mengikis permukaan logam, tidak akan pernah luntur selamanya.')" class="p-1.5 rounded-xl bg-white border border-zinc-200 hover:border-amber-400 shadow-sm flex flex-col items-center gap-0.5 transition">
+                <span class="text-sm">🔥</span>
+                <span class="text-[7.5px] font-bold uppercase text-zinc-700">Grafir Abadi</span>
+              </button>
+              <button onclick="showInfo(7, 'Kertas Kraft Tebal', 'Paper bag menggunakan kertas kraft tebal kokoh dengan tali pegangan kuat untuk membawa hadiah.')" class="p-1.5 rounded-xl bg-white border border-zinc-200 hover:border-amber-400 shadow-sm flex flex-col items-center gap-0.5 transition">
+                <span class="text-sm">🛍️</span>
+                <span class="text-[7.5px] font-bold uppercase text-zinc-700">Kraft Kokoh</span>
+              </button>
+            </div>
+            <div id="infoBox7" class="p-2 rounded-lg bg-amber-50 border border-amber-200 text-[9px] text-amber-900 hidden">
+              <b id="infoTitle7" class="block font-bold text-[9.5px] mb-0.5">Info Bahan</b>
+              <span id="infoDesc7">Sentuh ikon di atas untuk melihat detail keunggulan bahan.</span>
+            </div>
           </div>
         </div>
 
-        <div class="relative z-20 space-y-1.5 pb-14">
+        <div class="relative z-20 space-y-1.5 pb-16">
           <div>
-            <span class="text-[8.5px] font-bold text-yellow-400 block mb-0.5 uppercase tracking-wider">1. Item Souvenir:</span>
+            <span class="text-[8.5px] font-bold text-amber-700 block mb-0.5 uppercase tracking-wider">1. Item Souvenir:</span>
             <div class="grid grid-cols-2 gap-1">
-              <label class="cursor-pointer"><input type="radio" name="prodMerch" value="Tumbler Custom" class="peer hidden" checked><div class="text-[7.5px] py-1 text-center rounded-xl border border-white/20 bg-white/5 peer-checked:border-yellow-400 peer-checked:bg-yellow-400 peer-checked:text-black font-extrabold">Tumbler Stainless</div></label>
-              <label class="cursor-pointer"><input type="radio" name="prodMerch" value="Pulpen Custom" class="peer hidden"><div class="text-[7.5px] py-1 text-center rounded-xl border border-white/20 bg-white/5 peer-checked:border-yellow-400 peer-checked:bg-yellow-400 peer-checked:text-black font-extrabold">Pulpen Promosi</div></label>
-              <label class="cursor-pointer"><input type="radio" name="prodMerch" value="Paper Bag" class="peer hidden"><div class="text-[7.5px] py-1 text-center rounded-xl border border-white/20 bg-white/5 peer-checked:border-yellow-400 peer-checked:bg-yellow-400 peer-checked:text-black font-extrabold">Paper Bag Custom</div></label>
-              <label class="cursor-pointer"><input type="radio" name="prodMerch" value="Pouch Canvas" class="peer hidden"><div class="text-[7.5px] py-1 text-center rounded-xl border border-white/20 bg-white/5 peer-checked:border-yellow-400 peer-checked:bg-yellow-400 peer-checked:text-black font-extrabold">Pouch Kanvas</div></label>
+              <label class="cursor-pointer"><input type="radio" name="prodMerch" value="Tumbler Custom" class="peer hidden" checked><div class="text-[7.5px] py-1 text-center rounded-xl border border-zinc-300 bg-white peer-checked:border-amber-500 peer-checked:bg-amber-400 peer-checked:text-zinc-950 font-extrabold shadow-sm">Tumbler Stainless</div></label>
+              <label class="cursor-pointer"><input type="radio" name="prodMerch" value="Pulpen Custom" class="peer hidden"><div class="text-[7.5px] py-1 text-center rounded-xl border border-zinc-300 bg-white peer-checked:border-amber-500 peer-checked:bg-amber-400 peer-checked:text-zinc-950 font-extrabold shadow-sm">Pulpen Promosi</div></label>
+              <label class="cursor-pointer"><input type="radio" name="prodMerch" value="Paper Bag" class="peer hidden"><div class="text-[7.5px] py-1 text-center rounded-xl border border-zinc-300 bg-white peer-checked:border-amber-500 peer-checked:bg-amber-400 peer-checked:text-zinc-950 font-extrabold shadow-sm">Paper Bag Custom</div></label>
+              <label class="cursor-pointer"><input type="radio" name="prodMerch" value="Pouch Canvas" class="peer hidden"><div class="text-[7.5px] py-1 text-center rounded-xl border border-zinc-300 bg-white peer-checked:border-amber-500 peer-checked:bg-amber-400 peer-checked:text-zinc-950 font-extrabold shadow-sm">Pouch Kanvas</div></label>
             </div>
           </div>
 
-          <div class="grid grid-cols-2 gap-1.5 pt-1 border-t border-white/10">
+          <div class="grid grid-cols-2 gap-1.5 pt-1 border-t border-zinc-200">
             <div>
-              <span class="text-[8.5px] font-bold text-yellow-400 block mb-0.5">📏 Kapasitas / Dimensi</span>
-              <input id="ukuran7" type="text" placeholder="500ml / 20x25 cm" class="w-full bg-neutral-900 border border-white/20 rounded-lg px-2 py-0.5 text-[9.5px] text-white focus:outline-none focus:border-yellow-400">
+              <span class="text-[8.5px] font-bold text-amber-700 block mb-0.5">📏 Kapasitas / Dimensi</span>
+              <input id="ukuran7" type="text" placeholder="500ml / 20x25 cm" class="w-full bg-white border border-zinc-300 rounded-lg px-2 py-0.5 text-[9.5px] text-zinc-900 focus:outline-none focus:border-amber-500 shadow-inner">
             </div>
             <div>
-              <span class="text-[8.5px] font-bold text-yellow-400 block mb-0.5">📦 Jumlah Order</span>
-              <input id="jumlah7" type="text" placeholder="24 Pcs / 100 Pcs" class="w-full bg-neutral-900 border border-white/20 rounded-lg px-2 py-0.5 text-[9.5px] text-white focus:outline-none focus:border-yellow-400">
+              <span class="text-[8.5px] font-bold text-amber-700 block mb-0.5">📦 Jumlah Order</span>
+              <input id="jumlah7" type="text" placeholder="24 Pcs / 100 Pcs" class="w-full bg-white border border-zinc-300 rounded-lg px-2 py-0.5 text-[9.5px] text-zinc-900 focus:outline-none focus:border-amber-500 shadow-inner">
             </div>
           </div>
         </div>
       </div>
 
       <!-- SLIDE 8: SIGNAGE & NOMOR -->
-      <div id="slide-8" class="slide-section bg-ambient-black flex flex-col justify-between p-4 relative">
+      <div id="slide-8" class="slide-section bg-ambient-white flex flex-col justify-between p-4 relative">
         <div class="yellow-glow-layer"></div>
         <div class="relative z-20 flex items-center justify-between pt-1 pb-1">
           <div class="flex items-center gap-2.5">
-            <img src="logo test.png" alt="Logo" class="h-10 w-auto object-contain drop-shadow" onerror="this.style.display='none'">
+            <img src="logo test.png" alt="Logo" class="h-10 w-auto object-contain drop-shadow-sm" onerror="this.style.display='none'">
             <div>
-              <span class="font-extrabold text-base tracking-wider text-white block leading-none">ARCI</span>
-              <span class="text-[9px] font-medium text-yellow-400 tracking-tight block mt-0.5">Solusi Cetak & Digital Studio</span>
+              <span class="font-extrabold text-base tracking-wider text-zinc-900 block leading-none">ARCI</span>
+              <span class="text-[9px] font-semibold text-amber-600 tracking-tight block mt-0.5">Solusi Cetak & Digital Studio</span>
             </div>
           </div>
-          <span class="text-[8.5px] tracking-widest border border-yellow-400/30 rounded-full px-2.5 py-0.5 text-yellow-300 font-semibold bg-black/50 backdrop-blur-md">8/9 • SIGNAGE</span>
+          <span class="text-[8.5px] tracking-widest border border-amber-500/30 rounded-full px-2.5 py-0.5 text-amber-700 font-bold bg-amber-50/80 backdrop-blur-md">8/9 • SIGNAGE</span>
         </div>
 
         <div class="relative z-20 space-y-1.5">
-          <div class="relative h-[180px] w-full rounded-2xl overflow-hidden border border-white/15 bg-black/60 shadow-xl group">
+          <div class="relative h-[175px] w-full rounded-2xl overflow-hidden border border-zinc-200 bg-zinc-100 shadow-md group">
             <img id="prevImg8" src="gbr-vinyl.JPG" class="w-full h-full object-cover">
             <video id="prevVid8" autoplay loop muted playsinline poster="gbr-vinyl.JPG" class="hidden w-full h-full object-cover">
               <source id="prevVidSrc8" src="video-vinyl.mp4" type="video/mp4">
             </video>
 
-            <div class="absolute top-2 right-2 z-20 flex bg-black/70 p-0.5 rounded-xl border border-white/20 backdrop-blur-md shadow">
-              <button id="tabFoto8" onclick="switchMediaTab(8, 'foto')" class="px-2.5 py-0.5 rounded-lg text-[8.5px] font-bold bg-yellow-400 text-black shadow transition">📸 Foto</button>
-              <button id="tabVideo8" onclick="switchMediaTab(8, 'video')" class="px-2.5 py-0.5 rounded-lg text-[8.5px] font-bold text-gray-300 hover:text-white transition">🎥 Tekstur</button>
+            <div class="absolute top-2 right-2 z-20 flex bg-white/80 p-0.5 rounded-xl border border-zinc-200 backdrop-blur-md shadow-sm">
+              <button id="tabFoto8" onclick="switchMediaTab(8, 'foto')" class="px-2.5 py-0.5 rounded-lg text-[8.5px] font-bold bg-amber-400 text-zinc-900 shadow transition">📸 Foto</button>
+              <button id="tabVideo8" onclick="switchMediaTab(8, 'video')" class="px-2.5 py-0.5 rounded-lg text-[8.5px] font-bold text-zinc-600 hover:text-zinc-900 transition">🎥 Tekstur</button>
             </div>
 
-            <button onclick="openModalFromSlide(8)" class="absolute bottom-2 right-2 z-20 bg-black/70 hover:bg-black text-white text-[8px] font-bold px-2 py-0.5 rounded-lg border border-white/20 backdrop-blur-md">
+            <button onclick="openModalFromSlide(8)" class="absolute bottom-2 right-2 z-20 bg-white/80 hover:bg-white text-zinc-800 text-[8px] font-bold px-2 py-0.5 rounded-lg border border-zinc-200 backdrop-blur-md shadow-sm">
               🔍 Perbesar
             </button>
           </div>
 
-          <div class="p-2 rounded-xl bg-black/50 border border-white/10 text-[10px] leading-relaxed backdrop-blur-md">
-            <span class="font-extrabold text-yellow-400 text-[11px] uppercase block mb-0.5">Signage Akrilik & Nomor Custom</span>
-            <p class="text-neutral-300 font-normal">Nomor meja kafe estetik & plat nomor rumah akrilik timbul tahan cuaca hujan/panas outdoor.</p>
+          <div class="space-y-1">
+            <div class="grid grid-cols-3 gap-1.5">
+              <button onclick="showInfo(8, 'Tahan Segala Cuaca', 'Material akrilik tebal tahan panas terik matahari dan guyuran hujan deras tanpa melengkung.')" class="p-1.5 rounded-xl bg-white border border-zinc-200 hover:border-amber-400 shadow-sm flex flex-col items-center gap-0.5 transition">
+                <span class="text-sm">🌦️</span>
+                <span class="text-[7.5px] font-bold uppercase text-zinc-700">Tahan Cuaca</span>
+              </button>
+              <button onclick="showInfo(8, 'Timbul Estetik', 'Desain huruf atau nomor timbul 3D memberikan kesan modern, mewah, dan sangat mudah dibaca.')" class="p-1.5 rounded-xl bg-white border border-zinc-200 hover:border-amber-400 shadow-sm flex flex-col items-center gap-0.5 transition">
+                <span class="text-sm">🏷️</span>
+                <span class="text-[7.5px] font-bold uppercase text-zinc-700">Timbul 3D</span>
+              </button>
+              <button onclick="showInfo(8, 'Pemasangan Mudah', 'Sudah termasuk skrup penutup stainless atau double tape VHB superkuat untuk dinding.')" class="p-1.5 rounded-xl bg-white border border-zinc-200 hover:border-amber-400 shadow-sm flex flex-col items-center gap-0.5 transition">
+                <span class="text-sm">🔩</span>
+                <span class="text-[7.5px] font-bold uppercase text-zinc-700">Mudah Pasang</span>
+              </button>
+            </div>
+            <div id="infoBox8" class="p-2 rounded-lg bg-amber-50 border border-amber-200 text-[9px] text-amber-900 hidden">
+              <b id="infoTitle8" class="block font-bold text-[9.5px] mb-0.5">Info Bahan</b>
+              <span id="infoDesc8">Sentuh ikon di atas untuk melihat detail keunggulan bahan.</span>
+            </div>
           </div>
         </div>
 
-        <div class="relative z-20 space-y-1.5 pb-14">
+        <div class="relative z-20 space-y-1.5 pb-16">
           <div>
-            <span class="text-[8.5px] font-bold text-yellow-400 block mb-0.5 uppercase tracking-wider">1. Jenis Signage:</span>
+            <span class="text-[8.5px] font-bold text-amber-700 block mb-0.5 uppercase tracking-wider">1. Jenis Signage:</span>
             <div class="grid grid-cols-2 gap-1">
-              <label class="cursor-pointer"><input type="radio" name="prodSign" value="Nomor Meja Cafe" class="peer hidden" checked><div class="text-[7.5px] py-1 text-center rounded-xl border border-white/20 bg-white/5 peer-checked:border-yellow-400 peer-checked:bg-yellow-400 peer-checked:text-black font-extrabold">Nomor Meja Cafe</div></label>
-              <label class="cursor-pointer"><input type="radio" name="prodSign" value="Nomor Rumah Outdoor" class="peer hidden"><div class="text-[7.5px] py-1 text-center rounded-xl border border-white/20 bg-white/5 peer-checked:border-yellow-400 peer-checked:bg-yellow-400 peer-checked:text-black font-extrabold">Nomor Rumah Outdoor</div></label>
+              <label class="cursor-pointer"><input type="radio" name="prodSign" value="Nomor Meja Cafe" class="peer hidden" checked><div class="text-[7.5px] py-1 text-center rounded-xl border border-zinc-300 bg-white peer-checked:border-amber-500 peer-checked:bg-amber-400 peer-checked:text-zinc-950 font-extrabold shadow-sm">Nomor Meja Cafe</div></label>
+              <label class="cursor-pointer"><input type="radio" name="prodSign" value="Nomor Rumah Outdoor" class="peer hidden"><div class="text-[7.5px] py-1 text-center rounded-xl border border-zinc-300 bg-white peer-checked:border-amber-500 peer-checked:bg-amber-400 peer-checked:text-zinc-950 font-extrabold shadow-sm">Nomor Rumah Outdoor</div></label>
             </div>
           </div>
 
-          <div class="grid grid-cols-2 gap-1.5 pt-1 border-t border-white/10">
+          <div class="grid grid-cols-2 gap-1.5 pt-1 border-t border-zinc-200">
             <div>
-              <span class="text-[8.5px] font-bold text-yellow-400 block mb-0.5">📏 Ukuran Dimensi</span>
-              <input id="ukuran8" type="text" placeholder="10 x 15 cm / 30 x 20 cm" class="w-full bg-neutral-900 border border-white/20 rounded-lg px-2 py-0.5 text-[9.5px] text-white focus:outline-none focus:border-yellow-400">
+              <span class="text-[8.5px] font-bold text-amber-700 block mb-0.5">📏 Ukuran Dimensi</span>
+              <input id="ukuran8" type="text" placeholder="10 x 15 cm / 30 x 20 cm" class="w-full bg-white border border-zinc-300 rounded-lg px-2 py-0.5 text-[9.5px] text-zinc-900 focus:outline-none focus:border-amber-500 shadow-inner">
             </div>
             <div>
-              <span class="text-[8.5px] font-bold text-yellow-400 block mb-0.5">📦 Jumlah Order</span>
-              <input id="jumlah8" type="text" placeholder="10 Set / 1 Pcs" class="w-full bg-neutral-900 border border-white/20 rounded-lg px-2 py-0.5 text-[9.5px] text-white focus:outline-none focus:border-yellow-400">
+              <span class="text-[8.5px] font-bold text-amber-700 block mb-0.5">📦 Jumlah Order</span>
+              <input id="jumlah8" type="text" placeholder="10 Set / 1 Pcs" class="w-full bg-white border border-zinc-300 rounded-lg px-2 py-0.5 text-[9.5px] text-zinc-900 focus:outline-none focus:border-amber-500 shadow-inner">
             </div>
           </div>
         </div>
       </div>
 
       <!-- SLIDE 9: DISPLAY STAND -->
-      <div id="slide-9" class="slide-section bg-ambient-black flex flex-col justify-between p-4 relative">
+      <div id="slide-9" class="slide-section bg-ambient-white flex flex-col justify-between p-4 relative">
         <div class="yellow-glow-layer"></div>
         <div class="relative z-20 flex items-center justify-between pt-1 pb-1">
           <div class="flex items-center gap-2.5">
-            <img src="logo test.png" alt="Logo" class="h-10 w-auto object-contain drop-shadow" onerror="this.style.display='none'">
+            <img src="logo test.png" alt="Logo" class="h-10 w-auto object-contain drop-shadow-sm" onerror="this.style.display='none'">
             <div>
-              <span class="font-extrabold text-base tracking-wider text-white block leading-none">ARCI</span>
-              <span class="text-[9px] font-medium text-yellow-400 tracking-tight block mt-0.5">Solusi Cetak & Digital Studio</span>
+              <span class="font-extrabold text-base tracking-wider text-zinc-900 block leading-none">ARCI</span>
+              <span class="text-[9px] font-semibold text-amber-600 tracking-tight block mt-0.5">Solusi Cetak & Digital Studio</span>
             </div>
           </div>
-          <span class="text-[8.5px] tracking-widest border border-yellow-400/30 rounded-full px-2.5 py-0.5 text-yellow-300 font-semibold bg-black/50 backdrop-blur-md">9/9 • DISPLAY</span>
+          <span class="text-[8.5px] tracking-widest border border-amber-500/30 rounded-full px-2.5 py-0.5 text-amber-700 font-bold bg-amber-50/80 backdrop-blur-md">9/9 • DISPLAY</span>
         </div>
 
         <div class="relative z-20 space-y-1.5">
-          <div class="relative h-[180px] w-full rounded-2xl overflow-hidden border border-white/15 bg-black/60 shadow-xl group">
+          <div class="relative h-[175px] w-full rounded-2xl overflow-hidden border border-zinc-200 bg-zinc-100 shadow-md group">
             <img id="prevImg9" src="gbr-vinyl.JPG" class="w-full h-full object-cover">
             <video id="prevVid9" autoplay loop muted playsinline poster="gbr-vinyl.JPG" class="hidden w-full h-full object-cover">
               <source id="prevVidSrc9" src="video-vinyl.mp4" type="video/mp4">
             </video>
 
-            <div class="absolute top-2 right-2 z-20 flex bg-black/70 p-0.5 rounded-xl border border-white/20 backdrop-blur-md shadow">
-              <button id="tabFoto9" onclick="switchMediaTab(9, 'foto')" class="px-2.5 py-0.5 rounded-lg text-[8.5px] font-bold bg-yellow-400 text-black shadow transition">📸 Foto</button>
-              <button id="tabVideo9" onclick="switchMediaTab(9, 'video')" class="px-2.5 py-0.5 rounded-lg text-[8.5px] font-bold text-gray-300 hover:text-white transition">🎥 Tekstur</button>
+            <div class="absolute top-2 right-2 z-20 flex bg-white/80 p-0.5 rounded-xl border border-zinc-200 backdrop-blur-md shadow-sm">
+              <button id="tabFoto9" onclick="switchMediaTab(9, 'foto')" class="px-2.5 py-0.5 rounded-lg text-[8.5px] font-bold bg-amber-400 text-zinc-900 shadow transition">📸 Foto</button>
+              <button id="tabVideo9" onclick="switchMediaTab(9, 'video')" class="px-2.5 py-0.5 rounded-lg text-[8.5px] font-bold text-zinc-600 hover:text-zinc-900 transition">🎥 Tekstur</button>
             </div>
 
-            <button onclick="openModalFromSlide(9)" class="absolute bottom-2 right-2 z-20 bg-black/70 hover:bg-black text-white text-[8px] font-bold px-2 py-0.5 rounded-lg border border-white/20 backdrop-blur-md">
+            <button onclick="openModalFromSlide(9)" class="absolute bottom-2 right-2 z-20 bg-white/80 hover:bg-white text-zinc-800 text-[8px] font-bold px-2 py-0.5 rounded-lg border border-zinc-200 backdrop-blur-md shadow-sm">
               🔍 Perbesar
             </button>
           </div>
 
-          <div class="p-2 rounded-xl bg-black/50 border border-white/10 text-[10px] leading-relaxed backdrop-blur-md">
-            <span class="font-extrabold text-yellow-400 text-[11px] uppercase block mb-0.5">Display Stand & Board Promosi</span>
-            <p class="text-neutral-300 font-normal">Perlengkapan promosi pameran & event kantor. Stand rangka alumunium kokoh & papan rigid board ringan.</p>
+          <div class="space-y-1">
+            <div class="grid grid-cols-3 gap-1.5">
+              <button onclick="showInfo(9, 'Rangka Kokoh', 'Struktur kaki penyangga terbuat dari logam/aluminium pilihan, tidak mudah goyang saat dipajang.')" class="p-1.5 rounded-xl bg-white border border-zinc-200 hover:border-amber-400 shadow-sm flex flex-col items-center gap-0.5 transition">
+                <span class="text-sm">⚖️</span>
+                <span class="text-[7.5px] font-bold uppercase text-zinc-700">Rangka Kokoh</span>
+              </button>
+              <button onclick="showInfo(9, 'Praktis Portabel', 'Mudah dibongkar pasang dalam hitungan detik, lengkap dengan sarung tas kain untuk dibawa.')" class="p-1.5 rounded-xl bg-white border border-zinc-200 hover:border-amber-400 shadow-sm flex flex-col items-center gap-0.5 transition">
+                <span class="text-sm">🎒</span>
+                <span class="text-[7.5px] font-bold uppercase text-zinc-700">Mudah Bawa</span>
+              </button>
+              <button onclick="showInfo(9, 'Visual Maksimal', 'Ukuran tinggi pas untuk menarik perhatian pengunjung pameran atau event promosi toko.')" class="p-1.5 rounded-xl bg-white border border-zinc-200 hover:border-amber-400 shadow-sm flex flex-col items-center gap-0.5 transition">
+                <span class="text-sm">👁️</span>
+                <span class="text-[7.5px] font-bold uppercase text-zinc-700">Eye-Catching</span>
+              </button>
+            </div>
+            <div id="infoBox9" class="p-2 rounded-lg bg-amber-50 border border-amber-200 text-[9px] text-amber-900 hidden">
+              <b id="infoTitle9" class="block font-bold text-[9.5px] mb-0.5">Info Bahan</b>
+              <span id="infoDesc9">Sentuh ikon di atas untuk melihat detail keunggulan bahan.</span>
+            </div>
           </div>
         </div>
 
-        <div class="relative z-20 space-y-1.5 pb-14">
+        <div class="relative z-20 space-y-1.5 pb-16">
           <div>
-            <span class="text-[8.5px] font-bold text-yellow-400 block mb-0.5 uppercase tracking-wider">1. Tipe Display Stand:</span>
-            <select id="selectDisplay" class="w-full bg-neutral-900 border border-white/20 rounded-lg text-[9px] px-2 py-1 text-white focus:outline-none focus:border-yellow-400">
+            <span class="text-[8.5px] font-bold text-amber-700 block mb-0.5 uppercase tracking-wider">1. Tipe Display Stand:</span>
+            <select id="selectDisplay" class="w-full bg-white border border-zinc-300 rounded-lg text-[9px] px-2 py-1 text-zinc-900 focus:outline-none focus:border-amber-500 shadow-inner">
               <option value="Roll Up Banner Stand" selected>Roll Up Banner (Tarik Alumunium)</option>
               <option value="X-Banner Stand">X-Banner (Rangka Silang)</option>
               <option value="Tripod Display Stand">Tripod Display (Penyangga 2 Sisi)</option>
@@ -691,14 +837,14 @@
             </select>
           </div>
 
-          <div class="grid grid-cols-2 gap-1.5 pt-1 border-t border-white/10">
+          <div class="grid grid-cols-2 gap-1.5 pt-1 border-t border-zinc-200">
             <div>
-              <span class="text-[8.5px] font-bold text-yellow-400 block mb-0.5">📏 Ukuran Frame / Board</span>
-              <input id="ukuran9" type="text" placeholder="60 x 160 cm" class="w-full bg-neutral-900 border border-white/20 rounded-lg px-2 py-0.5 text-[9.5px] text-white focus:outline-none focus:border-yellow-400">
+              <span class="text-[8.5px] font-bold text-amber-700 block mb-0.5">📏 Ukuran Frame / Board</span>
+              <input id="ukuran9" type="text" placeholder="60 x 160 cm" class="w-full bg-white border border-zinc-300 rounded-lg px-2 py-0.5 text-[9.5px] text-zinc-900 focus:outline-none focus:border-amber-500 shadow-inner">
             </div>
             <div>
-              <span class="text-[8.5px] font-bold text-yellow-400 block mb-0.5">📦 Jumlah Stand</span>
-              <input id="jumlah9" type="text" placeholder="1 Set / 5 Set" class="w-full bg-neutral-900 border border-white/20 rounded-lg px-2 py-0.5 text-[9.5px] text-white focus:outline-none focus:border-yellow-400">
+              <span class="text-[8.5px] font-bold text-amber-700 block mb-0.5">📦 Jumlah Stand</span>
+              <input id="jumlah9" type="text" placeholder="1 Set / 5 Set" class="w-full bg-white border border-zinc-300 rounded-lg px-2 py-0.5 text-[9.5px] text-zinc-900 focus:outline-none focus:border-amber-500 shadow-inner">
             </div>
           </div>
         </div>
@@ -706,117 +852,117 @@
 
     </div> <!-- End Scroll Snap Container -->
 
-    <!-- FIXED BOTTOM BAR -->
-    <div class="absolute bottom-0 left-0 right-0 z-40 bg-neutral-900/95 border-t border-white/15 backdrop-blur-xl p-2.5 flex items-center justify-between gap-1.5 shadow-2xl">
-      <button onclick="toggleQuickMenu()" class="flex flex-col items-center justify-center w-11 h-11 rounded-xl bg-white/10 border border-white/15 text-white active:scale-95 transition">
-        <span class="text-base">☰</span>
-        <span class="text-[7.5px] font-bold uppercase mt-0.5">Menu</span>
+    <!-- FIXED BOTTOM BAR (SAFE AREA PADDED FOR IPHONE HOME BAR) -->
+    <div class="absolute bottom-0 left-0 right-0 z-40 bg-white/95 border-t border-zinc-200 backdrop-blur-xl px-3 pt-2 pb-5 sm:pb-3 flex items-center justify-between gap-2 shadow-lg">
+      <button onclick="toggleQuickMenu()" class="flex flex-col items-center justify-center w-10 h-10 rounded-xl bg-zinc-100 border border-zinc-300 text-zinc-800 active:scale-95 transition shadow-sm">
+        <span class="text-sm">☰</span>
+        <span class="text-[7px] font-bold uppercase mt-0.5">Menu</span>
       </button>
 
-      <button onclick="openOrderModal()" class="flex-1 h-11 rounded-xl bg-gradient-to-r from-yellow-400 to-amber-500 text-black font-extrabold text-xs tracking-wider flex items-center justify-center gap-1.5 shadow-lg shadow-yellow-400/20 active:scale-95 transition uppercase">
+      <button onclick="openOrderModal()" class="flex-1 h-11 rounded-xl bg-gradient-to-r from-amber-400 to-yellow-500 text-zinc-950 font-extrabold text-xs tracking-wider flex items-center justify-center gap-1.5 shadow-md active:scale-95 transition uppercase">
         <span>💬 PESAN VIA WA</span>
       </button>
 
-      <button onclick="openSosmedModal()" class="flex flex-col items-center justify-center w-11 h-11 rounded-xl bg-white/10 border border-white/15 text-white active:scale-95 transition">
-        <span class="text-base">📱</span>
-        <span class="text-[7.5px] font-bold uppercase mt-0.5">Sosmed</span>
+      <button onclick="openSosmedModal()" class="flex flex-col items-center justify-center w-10 h-10 rounded-xl bg-zinc-100 border border-zinc-300 text-zinc-800 active:scale-95 transition shadow-sm">
+        <span class="text-sm">📱</span>
+        <span class="text-[7px] font-bold uppercase mt-0.5">Sosmed</span>
       </button>
     </div>
 
     <!-- QUICK MENU DRAWER -->
-    <div id="quickMenuDrawer" class="hidden absolute bottom-16 left-3 right-3 z-50 bg-neutral-900/95 border border-yellow-400/40 rounded-2xl p-3 backdrop-blur-2xl shadow-2xl space-y-1">
-      <div class="flex items-center justify-between pb-1 border-b border-white/10 mb-1">
-        <span class="text-xs font-bold text-yellow-400 uppercase tracking-wider">Lompat ke Slide Produk:</span>
-        <button onclick="toggleQuickMenu()" class="text-white/60 text-xs font-bold px-1.5">✕ Close</button>
+    <div id="quickMenuDrawer" class="hidden absolute bottom-20 left-3 right-3 z-50 bg-white border border-amber-400/50 rounded-2xl p-3 backdrop-blur-2xl shadow-2xl space-y-1">
+      <div class="flex items-center justify-between pb-1 border-b border-zinc-200 mb-1">
+        <span class="text-xs font-bold text-amber-700 uppercase tracking-wider">Lompat ke Slide Produk:</span>
+        <button onclick="toggleQuickMenu()" class="text-zinc-500 text-xs font-bold px-1.5">✕ Close</button>
       </div>
       <div class="grid grid-cols-3 gap-1.5 text-[9px] font-semibold">
-        <button onclick="scrollToSlide(1)" class="p-2 rounded bg-white/5 border border-white/10 hover:border-yellow-400 text-left">1. Sticker A3+</button>
-        <button onclick="scrollToSlide(2)" class="p-2 rounded bg-white/5 border border-white/10 hover:border-yellow-400 text-left">2. Banner Spanduk</button>
-        <button onclick="scrollToSlide(3)" class="p-2 rounded bg-white/5 border border-white/10 hover:border-yellow-400 text-left">3. Kertas A3+</button>
-        <button onclick="scrollToSlide(4)" class="p-2 rounded bg-white/5 border border-white/10 hover:border-yellow-400 text-left">4. Indoor Meteran</button>
-        <button onclick="scrollToSlide(5)" class="p-2 rounded bg-white/5 border border-white/10 hover:border-yellow-400 text-left">5. Akrilik Display</button>
-        <button onclick="scrollToSlide(6)" class="p-2 rounded bg-white/5 border border-white/10 hover:border-yellow-400 text-left">6. Apparel Custom</button>
-        <button onclick="scrollToSlide(7)" class="p-2 rounded bg-white/5 border border-white/10 hover:border-yellow-400 text-left">7. Merchandise</button>
-        <button onclick="scrollToSlide(8)" class="p-2 rounded bg-white/5 border border-white/10 hover:border-yellow-400 text-left">8. Signage Nomor</button>
-        <button onclick="scrollToSlide(9)" class="p-2 rounded bg-white/5 border border-white/10 hover:border-yellow-400 text-left">9. Display Stand</button>
+        <button onclick="scrollToSlide(1)" class="p-2 rounded-lg bg-zinc-50 border border-zinc-200 hover:border-amber-500 text-left text-zinc-800">1. Sticker A3+</button>
+        <button onclick="scrollToSlide(2)" class="p-2 rounded-lg bg-zinc-50 border border-zinc-200 hover:border-amber-500 text-left text-zinc-800">2. Banner Spanduk</button>
+        <button onclick="scrollToSlide(3)" class="p-2 rounded-lg bg-zinc-50 border border-zinc-200 hover:border-amber-500 text-left text-zinc-800">3. Kertas A3+</button>
+        <button onclick="scrollToSlide(4)" class="p-2 rounded-lg bg-zinc-50 border border-zinc-200 hover:border-amber-500 text-left text-zinc-800">4. Indoor Meteran</button>
+        <button onclick="scrollToSlide(5)" class="p-2 rounded-lg bg-zinc-50 border border-zinc-200 hover:border-amber-500 text-left text-zinc-800">5. Akrilik Display</button>
+        <button onclick="scrollToSlide(6)" class="p-2 rounded-lg bg-zinc-50 border border-zinc-200 hover:border-amber-500 text-left text-zinc-800">6. Apparel Custom</button>
+        <button onclick="scrollToSlide(7)" class="p-2 rounded-lg bg-zinc-50 border border-zinc-200 hover:border-amber-500 text-left text-zinc-800">7. Merchandise</button>
+        <button onclick="scrollToSlide(8)" class="p-2 rounded-lg bg-zinc-50 border border-zinc-200 hover:border-amber-500 text-left text-zinc-800">8. Signage Nomor</button>
+        <button onclick="scrollToSlide(9)" class="p-2 rounded-lg bg-zinc-50 border border-zinc-200 hover:border-amber-500 text-left text-zinc-800">9. Display Stand</button>
       </div>
     </div>
 
     <!-- MODAL ORDER FORM VIA WA -->
-    <div id="orderModal" onclick="closeOrderModal()" class="invisible opacity-0 fixed inset-0 z-50 bg-black/90 backdrop-blur-md flex flex-col items-center justify-center p-4">
-      <div id="orderModalContent" onclick="event.stopPropagation()" class="relative w-full max-w-sm rounded-2xl overflow-hidden border border-yellow-400/50 shadow-2xl bg-neutral-900 p-4 space-y-3">
-        <div class="flex items-center justify-between border-b border-white/10 pb-2">
+    <div id="orderModal" onclick="closeOrderModal()" class="invisible opacity-0 fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex flex-col items-center justify-center p-4">
+      <div id="orderModalContent" onclick="event.stopPropagation()" class="relative w-full max-w-sm rounded-2xl overflow-hidden border border-zinc-200 shadow-2xl bg-white p-4 space-y-3">
+        <div class="flex items-center justify-between border-b border-zinc-200 pb-2">
           <div>
-            <h3 class="text-sm font-extrabold text-yellow-400 uppercase">Formulir Pemesanan</h3>
-            <p id="modalSlideTitle" class="text-[9.5px] text-neutral-300">Produk: Sticker Kustom A3+</p>
+            <h3 class="text-sm font-extrabold text-amber-700 uppercase">Formulir Pemesanan</h3>
+            <p id="modalSlideTitle" class="text-[9.5px] text-zinc-500">Produk: Sticker Kustom A3+</p>
           </div>
-          <button onclick="closeOrderModal()" class="text-white/60 hover:text-white font-bold text-sm bg-white/10 w-7 h-7 rounded-full">✕</button>
+          <button onclick="closeOrderModal()" class="text-zinc-500 hover:text-zinc-900 font-bold text-sm bg-zinc-100 w-7 h-7 rounded-full">✕</button>
         </div>
 
         <div class="space-y-2.5 text-left">
           <div>
-            <label class="text-[10px] font-bold text-yellow-400 block mb-0.5">👤 Nama Pemesan / Olshop / Instansi *</label>
-            <input id="modalNama" type="text" placeholder="Masukkan nama pemesan" class="w-full bg-neutral-950 border border-white/20 rounded-lg p-2 text-xs text-white focus:outline-none focus:border-yellow-400">
+            <label class="text-[10px] font-bold text-amber-800 block mb-0.5">👤 Nama Pemesan / Olshop / Instansi *</label>
+            <input id="modalNama" type="text" placeholder="Masukkan nama pemesan" class="w-full bg-zinc-50 border border-zinc-300 rounded-lg p-2 text-xs text-zinc-900 focus:outline-none focus:border-amber-500">
           </div>
 
           <div>
-            <label class="text-[10px] font-bold text-neutral-300 block mb-0.5">📝 Catatan Tambahan (Opsional)</label>
-            <textarea id="modalCatatan" rows="2" placeholder="Misal: Minta layout dulu / kirim file via email" class="w-full bg-neutral-950 border border-white/20 rounded-lg p-2 text-[10.5px] text-white focus:outline-none focus:border-yellow-400"></textarea>
+            <label class="text-[10px] font-bold text-zinc-700 block mb-0.5">📝 Catatan Tambahan (Opsional)</label>
+            <textarea id="modalCatatan" rows="2" placeholder="Misal: Minta layout dulu / kirim file via email" class="w-full bg-zinc-50 border border-zinc-300 rounded-lg p-2 text-[10.5px] text-zinc-900 focus:outline-none focus:border-amber-500"></textarea>
           </div>
 
-          <div class="p-2.5 rounded-xl bg-yellow-400/10 border border-yellow-400/30 text-[9.5px] leading-relaxed text-yellow-200">
+          <div class="p-2.5 rounded-xl bg-amber-50 border border-amber-200 text-[9.5px] leading-relaxed text-amber-900">
             💡 <b>Punya Contoh Foto / Desain?</b><br>
             Cukup kirimkan formulir ini dulu, lalu langsung lampirkan gambar/file kamu di chat WhatsApp admin ya!
           </div>
         </div>
 
-        <button onclick="submitWAOrder()" class="w-full py-2.5 rounded-xl bg-gradient-to-r from-yellow-400 to-amber-500 text-black font-extrabold text-xs tracking-wider uppercase shadow-lg active:scale-95 transition">
+        <button onclick="submitWAOrder()" class="w-full py-2.5 rounded-xl bg-gradient-to-r from-amber-400 to-yellow-500 text-zinc-950 font-extrabold text-xs tracking-wider uppercase shadow-md active:scale-95 transition">
           🚀 KIRIM SEKARANG VIA WHATSAPP
         </button>
       </div>
     </div>
 
     <!-- MODAL SOSMED -->
-    <div id="sosmedModal" onclick="closeSosmedModal()" class="invisible opacity-0 fixed inset-0 z-50 bg-black/90 backdrop-blur-md flex flex-col items-center justify-center p-4">
-      <div id="sosmedModalContent" onclick="event.stopPropagation()" class="relative w-full max-w-sm rounded-2xl overflow-hidden border border-yellow-400/50 shadow-2xl bg-neutral-900 p-5 space-y-4">
-        <div class="flex items-center justify-between border-b border-white/10 pb-2">
+    <div id="sosmedModal" onclick="closeSosmedModal()" class="invisible opacity-0 fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex flex-col items-center justify-center p-4">
+      <div id="sosmedModalContent" onclick="event.stopPropagation()" class="relative w-full max-w-sm rounded-2xl overflow-hidden border border-zinc-200 shadow-2xl bg-white p-5 space-y-4">
+        <div class="flex items-center justify-between border-b border-zinc-200 pb-2">
           <div>
-            <h3 class="text-sm font-extrabold text-yellow-400 uppercase">Sosial Media ARCI</h3>
-            <p class="text-[9.5px] text-neutral-400">Ikuti & Hubungi Kami di Platform Resmi</p>
+            <h3 class="text-sm font-extrabold text-amber-700 uppercase">Sosial Media ARCI</h3>
+            <p class="text-[9.5px] text-zinc-500">Ikuti & Hubungi Kami di Platform Resmi</p>
           </div>
-          <button onclick="closeSosmedModal()" class="text-white/60 hover:text-white font-bold text-sm bg-white/10 w-7 h-7 rounded-full">✕</button>
+          <button onclick="closeSosmedModal()" class="text-zinc-500 hover:text-zinc-900 font-bold text-sm bg-zinc-100 w-7 h-7 rounded-full">✕</button>
         </div>
 
         <div class="grid grid-cols-1 gap-2.5">
-          <a href="https://instagram.com" target="_blank" class="flex items-center gap-3 p-3 rounded-xl bg-white/5 border border-white/10 hover:border-yellow-400 transition">
+          <a href="https://instagram.com" target="_blank" class="flex items-center gap-3 p-3 rounded-xl bg-zinc-50 border border-zinc-200 hover:border-amber-400 transition">
             <span class="text-xl">📸</span>
             <div>
-              <span class="text-xs font-bold block text-white">Instagram</span>
-              <span class="text-[9px] text-gray-400">@arci.studio</span>
+              <span class="text-xs font-bold block text-zinc-900">Instagram</span>
+              <span class="text-[9px] text-zinc-500">@arci.studio</span>
             </div>
           </a>
-          <a href="https://tiktok.com" target="_blank" class="flex items-center gap-3 p-3 rounded-xl bg-white/5 border border-white/10 hover:border-yellow-400 transition">
+          <a href="https://tiktok.com" target="_blank" class="flex items-center gap-3 p-3 rounded-xl bg-zinc-50 border border-zinc-200 hover:border-amber-400 transition">
             <span class="text-xl">🎵</span>
             <div>
-              <span class="text-xs font-bold block text-white">TikTok</span>
-              <span class="text-[9px] text-gray-400">@arci.studio</span>
+              <span class="text-xs font-bold block text-zinc-900">TikTok</span>
+              <span class="text-[9px] text-zinc-500">@arci.studio</span>
             </div>
           </a>
-          <a href="https://facebook.com" target="_blank" class="flex items-center gap-3 p-3 rounded-xl bg-white/5 border border-white/10 hover:border-yellow-400 transition">
+          <a href="https://facebook.com" target="_blank" class="flex items-center gap-3 p-3 rounded-xl bg-zinc-50 border border-zinc-200 hover:border-amber-400 transition">
             <span class="text-xl">📘</span>
             <div>
-              <span class="text-xs font-bold block text-white">Facebook</span>
-              <span class="text-[9px] text-gray-400">ARCI Print Studio</span>
+              <span class="text-xs font-bold block text-zinc-900">Facebook</span>
+              <span class="text-[9px] text-zinc-500">@arci.studio</span>
             </div>
           </a>
         </div>
       </div>
     </div>
 
-    <!-- LIGHTBOX MEDIA MODAL (TANPA TULISAN PRATINJAU) -->
-    <div id="mediaModal" onclick="closeMediaModal()" class="invisible opacity-0 fixed inset-0 z-50 bg-black/90 backdrop-blur-md flex flex-col items-center justify-center p-4">
-      <button onclick="closeMediaModal()" class="absolute top-5 right-5 text-white/80 hover:text-white bg-white/10 rounded-full w-10 h-10 flex items-center justify-center text-lg font-bold border border-white/20 z-50">✕</button>
-      <div id="modalContent" onclick="event.stopPropagation()" class="relative max-w-full max-h-[85vh] rounded-2xl overflow-hidden border border-yellow-400/40 shadow-2xl bg-neutral-900 flex items-center justify-center">
+    <!-- LIGHTBOX MEDIA MODAL -->
+    <div id="mediaModal" onclick="closeMediaModal()" class="invisible opacity-0 fixed inset-0 z-50 bg-black/80 backdrop-blur-md flex flex-col items-center justify-center p-4">
+      <button onclick="closeMediaModal()" class="absolute top-5 right-5 text-zinc-900 bg-white rounded-full w-10 h-10 flex items-center justify-center text-lg font-bold border border-zinc-200 z-50 shadow-lg">✕</button>
+      <div id="modalContent" onclick="event.stopPropagation()" class="relative max-w-full max-h-[85vh] rounded-2xl overflow-hidden border border-zinc-300 shadow-2xl bg-white flex items-center justify-center">
         <img id="modalImg" src="" class="hidden w-auto h-auto max-h-[80vh] object-contain rounded-2xl">
         <video id="modalVideo" autoplay loop muted playsinline class="hidden w-auto h-auto max-h-[80vh] object-contain rounded-2xl">
           <source id="modalVideoSource" src="" type="video/mp4">
@@ -829,18 +975,16 @@
 <script>
   const WA_ADMIN_NUMBER = "6281234567890";
 
-  const productMatrix = {
-    "vinyl": { title: "Stiker Vinyl Premium ⭐ REKOMENDASI", desc: "Bahan basis plastik lentur, 100% tahan air & tidak mudah robek. Paling ideal untuk botol dingin & kemasan outdoor." },
-    "chromo": { title: "Stiker Kromo (Chromo) 🏷️ HEMAT", desc: "Bahan kertas mengkilap ekonomis. Cocok untuk label kemasan makanan kering & box kemasan." },
-    "transparan": { title: "Stiker Transparan ✨ BENING", desc: "Bening tembus pandang estetik. Sangat anggun untuk botol kaca, jar, & kosmetik." },
-    "hologram": { title: "Stiker Hologram 🔥 LARIS", desc: "Efek pelangi 3D mengkilap mencolok saat memantul cahaya. Favorit stiker komunitas & brand." },
-    "chrome": { title: "Stiker Chrome 👑 MEWAH", desc: "Bahan metallic mengkilap seperti cermin/besi. Kesan sangat eksklusif untuk logo produk." }
-  };
-
-  const bannerMatrix = {
-    "standar": { title: "Flexi Standar 280gr 🏷️ HEMAT", desc: "Tekstur berserat standar. Pilihan paling ramah di kantong untuk spanduk outdoor event singkat & acara toko." },
-    "korea": { title: "Flexi Korea 440gr ⭐ TEBAL", desc: "Bahan sangat tebal, berserat halus, & permukaan smooth doff. Tahan hujan deras & angin kencang." }
-  };
+  function showInfo(slideNum, title, desc) {
+    const box = document.getElementById(`infoBox${slideNum}`);
+    const t = document.getElementById(`infoTitle${slideNum}`);
+    const d = document.getElementById(`infoDesc${slideNum}`);
+    if (box && t && d) {
+      t.textContent = title;
+      d.textContent = desc;
+      box.classList.remove('hidden');
+    }
+  }
 
   function getCurrentActiveSlide() {
     const container = document.querySelector('.scroll-snap-container');
@@ -850,14 +994,10 @@
   }
 
   function getMediaElements(slideNum) {
-    if(slideNum === 1) return { img: document.getElementById('prevImg1'), vid: document.getElementById('prevVid1'), vidSrc: document.getElementById('prevVidSrc1'), tabF: document.getElementById('tabFoto1'), tabV: document.getElementById('tabVideo1') };
-    if(slideNum === 2) return { img: document.getElementById('bannerPrevImg'), vid: document.getElementById('bannerPrevVid'), vidSrc: document.getElementById('bannerPrevVidSrc'), tabF: document.getElementById('tabFoto2'), tabV: document.getElementById('tabVideo2') };
-    if(slideNum === 3) return { img: document.getElementById('paperPrevImg'), vid: document.getElementById('paperPrevVid'), vidSrc: document.getElementById('paperPrevVidSrc'), tabF: document.getElementById('tabFoto3'), tabV: document.getElementById('tabVideo3') };
-    if(slideNum === 4) return { img: document.getElementById('indoorPrevImg'), vid: document.getElementById('indoorPrevVid'), vidSrc: document.getElementById('indoorPrevVidSrc'), tabF: document.getElementById('tabFoto4'), tabV: document.getElementById('tabVideo4') };
     return { 
-      img: document.getElementById(`prevImg${slideNum}`), 
-      vid: document.getElementById(`prevVid${slideNum}`), 
-      vidSrc: document.getElementById(`prevVidSrc${slideNum}`), 
+      img: document.getElementById(slideNum === 1 ? 'prevImg1' : slideNum === 2 ? 'bannerPrevImg' : slideNum === 3 ? 'paperPrevImg' : slideNum === 4 ? 'indoorPrevImg' : `prevImg${slideNum}`), 
+      vid: document.getElementById(slideNum === 1 ? 'prevVid1' : slideNum === 2 ? 'bannerPrevVid' : slideNum === 3 ? 'paperPrevVid' : slideNum === 4 ? 'indoorPrevVid' : `prevVid${slideNum}`), 
+      vidSrc: document.getElementById(slideNum === 1 ? 'prevVidSrc1' : slideNum === 2 ? 'bannerPrevVidSrc' : slideNum === 3 ? 'paperPrevVidSrc' : slideNum === 4 ? 'indoorPrevVidSrc' : `prevVidSrc${slideNum}`), 
       tabF: document.getElementById(`tabFoto${slideNum}`), 
       tabV: document.getElementById(`tabVideo${slideNum}`) 
     };
@@ -870,36 +1010,15 @@
     if (type === 'foto') {
       els.img.classList.remove('hidden');
       els.vid.classList.add('hidden');
-      if(els.tabF) els.tabF.className = "px-2.5 py-0.5 rounded-lg text-[8.5px] font-bold bg-yellow-400 text-black shadow transition";
-      if(els.tabV) els.tabV.className = "px-2.5 py-0.5 rounded-lg text-[8.5px] font-bold text-gray-300 hover:text-white transition";
+      if(els.tabF) els.tabF.className = "px-2.5 py-0.5 rounded-lg text-[8.5px] font-bold bg-amber-400 text-zinc-900 shadow transition";
+      if(els.tabV) els.tabV.className = "px-2.5 py-0.5 rounded-lg text-[8.5px] font-bold text-zinc-600 hover:text-zinc-900 transition";
     } else {
       els.img.classList.add('hidden');
       els.vid.classList.remove('hidden');
-      if(els.tabV) els.tabV.className = "px-2.5 py-0.5 rounded-lg text-[8.5px] font-bold bg-yellow-400 text-black shadow transition";
-      if(els.tabF) els.tabF.className = "px-2.5 py-0.5 rounded-lg text-[8.5px] font-bold text-gray-300 hover:text-white transition";
+      if(els.tabV) els.tabV.className = "px-2.5 py-0.5 rounded-lg text-[8.5px] font-bold bg-amber-400 text-zinc-900 shadow transition";
+      if(els.tabF) els.tabF.className = "px-2.5 py-0.5 rounded-lg text-[8.5px] font-bold text-zinc-600 hover:text-zinc-900 transition";
     }
   }
-
-  function updateVisuals() {
-    const b = document.querySelector('input[name="bahan1"]:checked')?.value || "vinyl";
-    const data = productMatrix[b];
-    if (data) {
-      document.getElementById('descTitle1').textContent = data.title;
-      document.getElementById('descText1').textContent = data.desc;
-    }
-  }
-
-  function updateBannerVisuals() {
-    const b = document.querySelector('input[name="bahanBanner"]:checked')?.value || "standar";
-    const data = bannerMatrix[b];
-    if (data) {
-      document.getElementById('bannerDescTitle').textContent = data.title;
-      document.getElementById('bannerDescText').textContent = data.desc;
-    }
-  }
-
-  document.querySelectorAll('input[name="bahan1"]').forEach(el => el.addEventListener('change', updateVisuals));
-  document.querySelectorAll('input[name="bahanBanner"]').forEach(el => el.addEventListener('change', updateBannerVisuals));
 
   function toggleQuickMenu() { document.getElementById('quickMenuDrawer').classList.toggle('hidden'); }
   function scrollToSlide(num) {
@@ -964,7 +1083,7 @@
 
     const catatan = document.getElementById('modalCatatan').value.trim();
     const activeSlide = getCurrentActiveSlide();
-    let detailsText = "";
+    let detailsText = `📌 *PRODUK:* Slide ${activeSlide}`;
 
     if (activeSlide === 1) {
       const b = document.querySelector('input[name="bahan1"]:checked')?.value || "vinyl";
@@ -979,8 +1098,6 @@
       const uk = document.getElementById('ukuran2').value.trim() || "300 x 100 cm";
       const qty = document.getElementById('jumlah2').value.trim() || "1 Pcs";
       detailsText = `📌 *PRODUK:* Flexi Banner Spanduk\n🔹 *Bahan:* Flexi ${b === 'standar' ? '280gr' : 'Korea 440gr'}\n🔹 *Finishing:* ${f}\n📏 *Ukuran:* ${uk}\n📦 *Jumlah:* ${qty}`;
-    } else {
-      detailsText = `📌 *PRODUK:* Slide ${activeSlide}`;
     }
 
     let msg = `📋 *FORM ORDER ARCI STUDIO*\n━━━━━━━━━━━━━━━━━━\n👤 *Nama Pemesan:* ${nama}\n${detailsText}`;
