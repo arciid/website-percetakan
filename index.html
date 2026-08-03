@@ -84,30 +84,33 @@
         </div>
       </div>
 
-      <!-- KATEGORI PILILLS (HORIZONTAL SCROLL) -->
+      <!-- KATEGORI PILLS (HORIZONTAL SCROLL) -->
       <div>
         <div class="flex items-center justify-between mb-2">
-          <h3 class="text-xs font-extrabold text-zinc-900 uppercase tracking-wide">Kategori Produk</h3>
+          <h3 class="text-xs font-extrabold text-zinc-900 uppercase tracking-wide">Kategori Divisi</h3>
           <span class="text-[9px] text-amber-600 font-bold">Geser ➔</span>
         </div>
         <div class="flex gap-2 overflow-x-auto no-scrollbar py-1">
           <button onclick="filterCategory('all')" class="flex-none px-3 py-1.5 rounded-xl bg-zinc-900 text-amber-400 text-[9px] font-bold shadow-sm">Semua Produk</button>
-          <button onclick="filterCategory('stiker')" class="flex-none px-3 py-1.5 rounded-xl bg-white border border-zinc-200 text-zinc-700 text-[9px] font-bold shadow-sm">Stiker A3+</button>
+          <button onclick="filterCategory('stiker')" class="flex-none px-3 py-1.5 rounded-xl bg-white border border-zinc-200 text-zinc-700 text-[9px] font-bold shadow-sm">Stiker Kustom</button>
           <button onclick="filterCategory('banner')" class="flex-none px-3 py-1.5 rounded-xl bg-white border border-zinc-200 text-zinc-700 text-[9px] font-bold shadow-sm">Banner & Spanduk</button>
           <button onclick="filterCategory('kertas')" class="flex-none px-3 py-1.5 rounded-xl bg-white border border-zinc-200 text-zinc-700 text-[9px] font-bold shadow-sm">Kertas & Promosi</button>
+          <button onclick="filterCategory('indoor')" class="flex-none px-3 py-1.5 rounded-xl bg-white border border-zinc-200 text-zinc-700 text-[9px] font-bold shadow-sm">Indoor, Skotlite & Cutter</button>
           <button onclick="filterCategory('akrilik')" class="flex-none px-3 py-1.5 rounded-xl bg-white border border-zinc-200 text-zinc-700 text-[9px] font-bold shadow-sm">Akrilik & Plakat</button>
-          <button onclick="filterCategory('merch')" class="flex-none px-3 py-1.5 rounded-xl bg-white border border-zinc-200 text-zinc-700 text-[9px] font-bold shadow-sm">Merchandise</button>
+          <button onclick="filterCategory('merch')" class="flex-none px-3 py-1.5 rounded-xl bg-white border border-zinc-200 text-zinc-700 text-[9px] font-bold shadow-sm">Merchandise & Souvenir</button>
           <button onclick="filterCategory('pack')" class="flex-none px-3 py-1.5 rounded-xl bg-white border border-zinc-200 text-zinc-700 text-[9px] font-bold shadow-sm">Packaging & Apparel</button>
+          <button onclick="filterCategory('kantor')" class="flex-none px-3 py-1.5 rounded-xl bg-white border border-zinc-200 text-zinc-700 text-[9px] font-bold shadow-sm">Kantor & Buku</button>
+          <button onclick="filterCategory('event')" class="flex-none px-3 py-1.5 rounded-xl bg-white border border-zinc-200 text-zinc-700 text-[9px] font-bold shadow-sm">Kuliner & Event</button>
         </div>
       </div>
 
-      <!-- PRODUCT GRID (MARKETPLACE CARD STYLE) -->
+      <!-- PRODUCT GRID (MARKETPLACE CARD STYLE - FULL CATALOGUE) -->
       <div>
-        <h3 class="text-xs font-extrabold text-zinc-900 uppercase tracking-wide mb-2">Katalog Pilihan Populer</h3>
+        <h3 class="text-xs font-extrabold text-zinc-900 uppercase tracking-wide mb-2">Katalog Lengkap Produk ARCI</h3>
         
         <div class="grid grid-cols-2 gap-2.5" id="productGrid">
           
-          <!-- ITEM 1 -->
+          <!-- STIKER KUSTOM -->
           <div class="product-card stiker bg-white border border-zinc-200 rounded-2xl p-2.5 shadow-sm flex flex-col justify-between">
             <div>
               <div class="relative aspect-square rounded-xl overflow-hidden bg-zinc-100 border border-zinc-100 mb-2">
@@ -115,125 +118,191 @@
                 <span class="absolute top-1.5 left-1.5 bg-amber-400 text-zinc-950 text-[7px] font-extrabold px-1.5 py-0.5 rounded shadow">⭐ Favorit</span>
               </div>
               <span class="text-[7.5px] font-bold text-amber-600 uppercase">Stiker Kustom</span>
-              <h4 class="text-[11px] font-extrabold text-zinc-900 leading-tight line-clamp-1">Stiker Vinyl A3+ Premium</h4>
-              <p class="text-[8.5px] text-zinc-500 line-clamp-2 mt-0.5">Anti air, lentur, cocok untuk botol, kemasan & outdoor.</p>
+              <h4 class="text-[11px] font-extrabold text-zinc-900 leading-tight line-clamp-1">Stiker A3+ (Vinyl/Chromo/Hologram)</h4>
+              <p class="text-[8.5px] text-zinc-500 line-clamp-2 mt-0.5">Vinyl, Kromo, Transparan, Hologram, & Chrome.</p>
             </div>
             <div class="mt-3 flex items-center justify-between">
               <div>
-                <span class="text-[7px] text-zinc-400 block">Mulai dari</span>
-                <span class="text-[10px] font-extrabold text-amber-700">Rp 10.000/lbr</span>
+                <span class="text-[7px] text-zinc-400 block">Kategori</span>
+                <span class="text-[10px] font-extrabold text-amber-700">Custom A3+</span>
               </div>
-              <button onclick="openOrderModal('Stiker Vinyl A3+')" class="bg-zinc-900 hover:bg-amber-400 text-amber-400 hover:text-zinc-950 font-bold text-[8px] px-2.5 py-1.5 rounded-xl transition shadow">
+              <button onclick="openOrderModal('Stiker A3+ (Vinyl/Chromo/Hologram/Transparan/Chrome)')" class="bg-zinc-900 hover:bg-amber-400 text-amber-400 hover:text-zinc-950 font-bold text-[8px] px-2.5 py-1.5 rounded-xl transition shadow">
                 Pesan
               </button>
             </div>
           </div>
 
-          <!-- ITEM 2 -->
+          <!-- BANNER / SPANDUK OUTDOOR -->
           <div class="product-card banner bg-white border border-zinc-200 rounded-2xl p-2.5 shadow-sm flex flex-col justify-between">
             <div>
               <div class="relative aspect-square rounded-xl overflow-hidden bg-zinc-100 border border-zinc-100 mb-2">
                 <img src="flexi-280.jpg" class="w-full h-full object-cover" onerror="this.src='https://via.placeholder.com/150'">
-                <span class="absolute top-1.5 left-1.5 bg-amber-400 text-zinc-950 text-[7px] font-extrabold px-1.5 py-0.5 rounded shadow">🏷️ Hemat</span>
+                <span class="absolute top-1.5 left-1.5 bg-amber-400 text-zinc-950 text-[7px] font-extrabold px-1.5 py-0.5 rounded shadow">🖼️ Outdoor</span>
               </div>
-              <span class="text-[7.5px] font-bold text-amber-600 uppercase">Banner / Spanduk</span>
-              <h4 class="text-[11px] font-extrabold text-zinc-900 leading-tight line-clamp-1">Flexi Banner 280gr</h4>
-              <p class="text-[8.5px] text-zinc-500 line-clamp-2 mt-0.5">Spanduk warung, event, toko, sudah termasuk ring besi.</p>
+              <span class="text-[7.5px] font-bold text-amber-600 uppercase">Banner & Spanduk</span>
+              <h4 class="text-[11px] font-extrabold text-zinc-900 leading-tight line-clamp-1">Spanduk Outdoor (280gr/Korea/Backlite)</h4>
+              <p class="text-[8.5px] text-zinc-500 line-clamp-2 mt-0.5">Vinyl 280gr, Korea 440gr, Backlite, & Cloth Textile.</p>
             </div>
             <div class="mt-3 flex items-center justify-between">
               <div>
-                <span class="text-[7px] text-zinc-400 block">Mulai dari</span>
-                <span class="text-[10px] font-extrabold text-amber-700">Rp 20.000/m</span>
+                <span class="text-[7px] text-zinc-400 block">Kategori</span>
+                <span class="text-[10px] font-extrabold text-amber-700">Mesin Outdoor</span>
               </div>
-              <button onclick="openOrderModal('Flexi Banner Spanduk')" class="bg-zinc-900 hover:bg-amber-400 text-amber-400 hover:text-zinc-950 font-bold text-[8px] px-2.5 py-1.5 rounded-xl transition shadow">
+              <button onclick="openOrderModal('Spanduk Outdoor (280gr/Korea/Backlite/Cloth)')" class="bg-zinc-900 hover:bg-amber-400 text-amber-400 hover:text-zinc-950 font-bold text-[8px] px-2.5 py-1.5 rounded-xl transition shadow">
                 Pesan
               </button>
             </div>
           </div>
 
-          <!-- ITEM 3 -->
+          <!-- KERTAS & PROMOSI -->
           <div class="product-card kertas bg-white border border-zinc-200 rounded-2xl p-2.5 shadow-sm flex flex-col justify-between">
             <div>
               <div class="relative aspect-square rounded-xl overflow-hidden bg-zinc-100 border border-zinc-100 mb-2">
                 <img src="art-paper-260.jpg" class="w-full h-full object-cover" onerror="this.src='https://via.placeholder.com/150'">
-                <span class="absolute top-1.5 left-1.5 bg-amber-400 text-zinc-950 text-[7px] font-extrabold px-1.5 py-0.5 rounded shadow">📋 Best Seller</span>
+                <span class="absolute top-1.5 left-1.5 bg-amber-400 text-zinc-950 text-[7px] font-extrabold px-1.5 py-0.5 rounded shadow">📋 Cetak A3+</span>
               </div>
-              <span class="text-[7.5px] font-bold text-amber-600 uppercase">Cetak Kertas A3+</span>
-              <h4 class="text-[11px] font-extrabold text-zinc-900 leading-tight line-clamp-1">Art Carton 260gr</h4>
-              <p class="text-[8.5px] text-zinc-500 line-clamp-2 mt-0.5">Ideal untuk kartu nama profesional, sertifikat, & cover buku.</p>
+              <span class="text-[7.5px] font-bold text-amber-600 uppercase">Kertas & Promosi</span>
+              <h4 class="text-[11px] font-extrabold text-zinc-900 leading-tight line-clamp-1">Art Paper, Carton, Felt, Ivory & Duplex</h4>
+              <p class="text-[8.5px] text-zinc-500 line-clamp-2 mt-0.5">Brosur, Poster, Flyer, Sertifikat, Felt, Ivory & Duplex.</p>
             </div>
             <div class="mt-3 flex items-center justify-between">
               <div>
-                <span class="text-[7px] text-zinc-400 block">Mulai dari</span>
-                <span class="text-[10px] font-extrabold text-amber-700">Rp 5.000/lbr</span>
+                <span class="text-[7px] text-zinc-400 block">Kategori</span>
+                <span class="text-[10px] font-extrabold text-amber-700">Cetak Kertas</span>
               </div>
-              <button onclick="openOrderModal('Cetak Art Carton 260gr')" class="bg-zinc-900 hover:bg-amber-400 text-amber-400 hover:text-zinc-950 font-bold text-[8px] px-2.5 py-1.5 rounded-xl transition shadow">
+              <button onclick="openOrderModal('Cetak Kertas (Art Paper, Carton, Felt, Ivory, Duplex)')" class="bg-zinc-900 hover:bg-amber-400 text-amber-400 hover:text-zinc-950 font-bold text-[8px] px-2.5 py-1.5 rounded-xl transition shadow">
                 Pesan
               </button>
             </div>
           </div>
 
-          <!-- ITEM 4 -->
+          <!-- INDOOR, SKOTLITE & CUTTER -->
+          <div class="product-card indoor bg-white border border-zinc-200 rounded-2xl p-2.5 shadow-sm flex flex-col justify-between">
+            <div>
+              <div class="relative aspect-square rounded-xl overflow-hidden bg-zinc-100 border border-zinc-100 mb-2">
+                <img src="gbr-vinyl.JPG" class="w-full h-full object-cover" onerror="this.src='https://via.placeholder.com/150'">
+                <span class="absolute top-1.5 left-1.5 bg-amber-400 text-zinc-950 text-[7px] font-extrabold px-1.5 py-0.5 rounded shadow">⚡ Presisi</span>
+              </div>
+              <span class="text-[7.5px] font-bold text-amber-600 uppercase">Indoor & Skotlite</span>
+              <h4 class="text-[11px] font-extrabold text-zinc-900 leading-tight line-clamp-1">Maxdecal, Skotlite, Cutter & UV Print</h4>
+              <p class="text-[8.5px] text-zinc-500 line-clamp-2 mt-0.5">Eco Solvent, UV Print, Overprint, Event Desk, Skotlite & Cutter.</p>
+            </div>
+            <div class="mt-3 flex items-center justify-between">
+              <div>
+                <span class="text-[7px] text-zinc-400 block">Kategori</span>
+                <span class="text-[10px] font-extrabold text-amber-700">Indoor & Cutting</span>
+              </div>
+              <button onclick="openOrderModal('Indoor, Skotlite, Potong Cutter & UV Print')" class="bg-zinc-900 hover:bg-amber-400 text-amber-400 hover:text-zinc-950 font-bold text-[8px] px-2.5 py-1.5 rounded-xl transition shadow">
+                Pesan
+              </button>
+            </div>
+          </div>
+
+          <!-- AKRILIK & PLAKAT -->
           <div class="product-card akrilik bg-white border border-zinc-200 rounded-2xl p-2.5 shadow-sm flex flex-col justify-between">
             <div>
               <div class="relative aspect-square rounded-xl overflow-hidden bg-zinc-100 border border-zinc-100 mb-2">
                 <img src="gbr-vinyl.JPG" class="w-full h-full object-cover" onerror="this.src='https://via.placeholder.com/150'">
-                <span class="absolute top-1.5 left-1.5 bg-amber-400 text-zinc-950 text-[7px] font-extrabold px-1.5 py-0.5 rounded shadow">💎 Mewah</span>
+                <span class="absolute top-1.5 left-1.5 bg-amber-400 text-zinc-950 text-[7px] font-extrabold px-1.5 py-0.5 rounded shadow">💎 Eksklusif</span>
               </div>
               <span class="text-[7.5px] font-bold text-amber-600 uppercase">Akrilik & Plakat</span>
-              <h4 class="text-[11px] font-extrabold text-zinc-900 leading-tight line-clamp-1">Plakat Akrilik Custom</h4>
-              <p class="text-[8.5px] text-zinc-500 line-clamp-2 mt-0.5">Laser cut presisi, bening kristal untuk penghargaan & kenang-kenangan.</p>
+              <h4 class="text-[11px] font-extrabold text-zinc-900 leading-tight line-clamp-1">Plakat 8mm, Kaki Gold & Baut Dinding</h4>
+              <p class="text-[8.5px] text-zinc-500 line-clamp-2 mt-0.5">Plakat, Kaki Kotak+Gold, Akrilik Baut Dinding, Box & Tentcard.</p>
             </div>
             <div class="mt-3 flex items-center justify-between">
               <div>
-                <span class="text-[7px] text-zinc-400 block">Mulai dari</span>
-                <span class="text-[10px] font-extrabold text-amber-700">Rp 55.000</span>
+                <span class="text-[7px] text-zinc-400 block">Kategori</span>
+                <span class="text-[10px] font-extrabold text-amber-700">Akrilik Custom</span>
               </div>
-              <button onclick="openOrderModal('Plakat Akrilik Custom')" class="bg-zinc-900 hover:bg-amber-400 text-amber-400 hover:text-zinc-950 font-bold text-[8px] px-2.5 py-1.5 rounded-xl transition shadow">
+              <button onclick="openOrderModal('Akrilik, Plakat 8mm, Kaki Gold, Baut Dinding')" class="bg-zinc-900 hover:bg-amber-400 text-amber-400 hover:text-zinc-950 font-bold text-[8px] px-2.5 py-1.5 rounded-xl transition shadow">
                 Pesan
               </button>
             </div>
           </div>
 
-          <!-- ITEM 5 -->
+          <!-- MERCHANDISE & SOUVENIR -->
           <div class="product-card merch bg-white border border-zinc-200 rounded-2xl p-2.5 shadow-sm flex flex-col justify-between">
             <div>
               <div class="relative aspect-square rounded-xl overflow-hidden bg-zinc-100 border border-zinc-100 mb-2">
                 <img src="gbr-vinyl.JPG" class="w-full h-full object-cover" onerror="this.src='https://via.placeholder.com/150'">
-                <span class="absolute top-1.5 left-1.5 bg-amber-400 text-zinc-950 text-[7px] font-extrabold px-1.5 py-0.5 rounded shadow">🎁 Unik</span>
+                <span class="absolute top-1.5 left-1.5 bg-amber-400 text-zinc-950 text-[7px] font-extrabold px-1.5 py-0.5 rounded shadow">🎁 Souvenir</span>
               </div>
               <span class="text-[7.5px] font-bold text-amber-600 uppercase">Merchandise</span>
-              <h4 class="text-[11px] font-extrabold text-zinc-900 leading-tight line-clamp-1">Mug & Medali Custom</h4>
-              <p class="text-[8.5px] text-zinc-500 line-clamp-2 mt-0.5">Mug keramik full color & medali wisuda/event eksklusif.</p>
+              <h4 class="text-[11px] font-extrabold text-zinc-900 leading-tight line-clamp-1">Mug, Medali, Ganci UV, Pin & Stempel</h4>
+              <p class="text-[8.5px] text-zinc-500 line-clamp-2 mt-0.5">Flatbed Mug, Medali, Ganci UV, Stempel Flash, Kipas Kerang & Pin.</p>
             </div>
             <div class="mt-3 flex items-center justify-between">
               <div>
-                <span class="text-[7px] text-zinc-400 block">Mulai dari</span>
-                <span class="text-[10px] font-extrabold text-amber-700">Rp 25.000</span>
+                <span class="text-[7px] text-zinc-400 block">Kategori</span>
+                <span class="text-[10px] font-extrabold text-amber-700">Merchandise</span>
               </div>
-              <button onclick="openOrderModal('Merchandise / Mug / Medali')" class="bg-zinc-900 hover:bg-amber-400 text-amber-400 hover:text-zinc-950 font-bold text-[8px] px-2.5 py-1.5 rounded-xl transition shadow">
+              <button onclick="openOrderModal('Merchandise (Mug, Medali, Ganci UV, Stempel, Kipas, Pin)')" class="bg-zinc-900 hover:bg-amber-400 text-amber-400 hover:text-zinc-950 font-bold text-[8px] px-2.5 py-1.5 rounded-xl transition shadow">
                 Pesan
               </button>
             </div>
           </div>
 
-          <!-- ITEM 6 -->
+          <!-- PACKAGING & APPAREL -->
           <div class="product-card pack bg-white border border-zinc-200 rounded-2xl p-2.5 shadow-sm flex flex-col justify-between">
             <div>
               <div class="relative aspect-square rounded-xl overflow-hidden bg-zinc-100 border border-zinc-100 mb-2">
                 <img src="gbr-vinyl.JPG" class="w-full h-full object-cover" onerror="this.src='https://via.placeholder.com/150'">
-                <span class="absolute top-1.5 left-1.5 bg-amber-400 text-zinc-950 text-[7px] font-extrabold px-1.5 py-0.5 rounded shadow">📦 Bisnis</span>
+                <span class="absolute top-1.5 left-1.5 bg-amber-400 text-zinc-950 text-[7px] font-extrabold px-1.5 py-0.5 rounded shadow">📦 Kemasan</span>
               </div>
               <span class="text-[7.5px] font-bold text-amber-600 uppercase">Packaging & Apparel</span>
-              <h4 class="text-[11px] font-extrabold text-zinc-900 leading-tight line-clamp-1">Box Packaging & Kaos DTF</h4>
-              <p class="text-[8.5px] text-zinc-500 line-clamp-2 mt-0.5">Kotak kemasan produk UMKM & sablon kaos digital pekat.</p>
+              <h4 class="text-[11px] font-extrabold text-zinc-900 leading-tight line-clamp-1">Box Custom, DTF UV, Kaos & Lanyard</h4>
+              <p class="text-[8.5px] text-zinc-500 line-clamp-2 mt-0.5">Box Akrilik/Karton, DTF UV, Kaos DTF, Topi, Lanyard & ID Card.</p>
             </div>
             <div class="mt-3 flex items-center justify-between">
               <div>
-                <span class="text-[7px] text-zinc-400 block">Mulai dari</span>
-                <span class="text-[10px] font-extrabold text-amber-700">Rp 3.500</span>
+                <span class="text-[7px] text-zinc-400 block">Kategori</span>
+                <span class="text-[10px] font-extrabold text-amber-700">Packaging & Apparel</span>
               </div>
-              <button onclick="openOrderModal('Packaging / Kaos DTF')" class="bg-zinc-900 hover:bg-amber-400 text-amber-400 hover:text-zinc-950 font-bold text-[8px] px-2.5 py-1.5 rounded-xl transition shadow">
+              <button onclick="openOrderModal('Packaging, Box, DTF UV, Kaos, Lanyard & ID Card')" class="bg-zinc-900 hover:bg-amber-400 text-amber-400 hover:text-zinc-950 font-bold text-[8px] px-2.5 py-1.5 rounded-xl transition shadow">
+                Pesan
+              </button>
+            </div>
+          </div>
+
+          <!-- KANTOR & BUKU -->
+          <div class="product-card kantor bg-white border border-zinc-200 rounded-2xl p-2.5 shadow-sm flex flex-col justify-between">
+            <div>
+              <div class="relative aspect-square rounded-xl overflow-hidden bg-zinc-100 border border-zinc-100 mb-2">
+                <img src="art-paper-260.jpg" class="w-full h-full object-cover" onerror="this.src='https://via.placeholder.com/150'">
+                <span class="absolute top-1.5 left-1.5 bg-amber-400 text-zinc-950 text-[7px] font-extrabold px-1.5 py-0.5 rounded shadow">📚 Administrasi</span>
+              </div>
+              <span class="text-[7.5px] font-bold text-amber-600 uppercase">Kantor & Buku</span>
+              <h4 class="text-[11px] font-extrabold text-zinc-900 leading-tight line-clamp-1">Kartu Nama, Map, Amplop & Buku Yasin</h4>
+              <p class="text-[8.5px] text-zinc-500 line-clamp-2 mt-0.5">Kartu Nama, Map, Amplop, Buku, Majalah, Kalender & Buku Yasin.</p>
+            </div>
+            <div class="mt-3 flex items-center justify-between">
+              <div>
+                <span class="text-[7px] text-zinc-400 block">Kategori</span>
+                <span class="text-[10px] font-extrabold text-amber-700">Kantor & Buku</span>
+              </div>
+              <button onclick="openOrderModal('Kantor & Buku (Kartu Nama, Map, Amplop, Buku Yasin, Kalender)')" class="bg-zinc-900 hover:bg-amber-400 text-amber-400 hover:text-zinc-950 font-bold text-[8px] px-2.5 py-1.5 rounded-xl transition shadow">
+                Pesan
+              </button>
+            </div>
+          </div>
+
+          <!-- KULINER & EVENT -->
+          <div class="product-card event bg-white border border-zinc-200 rounded-2xl p-2.5 shadow-sm flex flex-col justify-between">
+            <div>
+              <div class="relative aspect-square rounded-xl overflow-hidden bg-zinc-100 border border-zinc-100 mb-2">
+                <img src="art-paper-260.jpg" class="w-full h-full object-cover" onerror="this.src='https://via.placeholder.com/150'">
+                <span class="absolute top-1.5 left-1.5 bg-amber-400 text-zinc-950 text-[7px] font-extrabold px-1.5 py-0.5 rounded shadow">🍽️ Resto & Event</span>
+              </div>
+              <span class="text-[7.5px] font-bold text-amber-600 uppercase">Kuliner & Event</span>
+              <h4 class="text-[11px] font-extrabold text-zinc-900 leading-tight line-clamp-1">Menu Resto, Hardcover & Undangan</h4>
+              <p class="text-[8.5px] text-zinc-500 line-clamp-2 mt-0.5">Menu Kafe, Hardcover, Undangan, Brosur, Poster, & Voucher.</p>
+            </div>
+            <div class="mt-3 flex items-center justify-between">
+              <div>
+                <span class="text-[7px] text-zinc-400 block">Kategori</span>
+                <span class="text-[10px] font-extrabold text-amber-700">Kuliner & Event</span>
+              </div>
+              <button onclick="openOrderModal('Kuliner & Event (Menu, Hardcover, Undangan, Brosur)')" class="bg-zinc-900 hover:bg-amber-400 text-amber-400 hover:text-zinc-950 font-bold text-[8px] px-2.5 py-1.5 rounded-xl transition shadow">
                 Pesan
               </button>
             </div>
@@ -248,7 +317,7 @@
     <div class="absolute bottom-0 left-0 right-0 z-40 bg-white/95 border-t border-zinc-200 backdrop-blur-xl px-4 pt-2.5 pb-6 sm:pb-3 flex items-center justify-between gap-3 shadow-lg">
       <button onclick="toggleQuickMenu()" class="flex flex-col items-center justify-center w-11 h-11 rounded-xl bg-zinc-100 border border-zinc-300 text-zinc-800 active:scale-95 transition shadow-sm">
         <span class="text-base">☰</span>
-        <span class="text-[7px] font-bold uppercase mt-0.5">Kategori</span>
+        <span class="text-[7px] font-bold uppercase mt-0.5">Divisi</span>
       </button>
 
       <button onclick="openOrderModal('Custom Order Umum')" class="flex-1 h-11 rounded-xl bg-gradient-to-r from-amber-400 to-yellow-500 text-zinc-950 font-extrabold text-xs tracking-wider flex items-center justify-center gap-1.5 shadow-md active:scale-95 transition uppercase">
@@ -264,7 +333,7 @@
     <!-- QUICK MENU DRAWER -->
     <div id="quickMenuDrawer" class="hidden absolute bottom-20 left-3 right-3 z-50 bg-white border border-amber-400/50 rounded-2xl p-3 backdrop-blur-2xl shadow-2xl space-y-1">
       <div class="flex items-center justify-between pb-1 border-b border-zinc-200 mb-1">
-        <span class="text-xs font-bold text-amber-700 uppercase tracking-wider">Filter Kategori Katalog:</span>
+        <span class="text-xs font-bold text-amber-700 uppercase tracking-wider">Filter Divisi Katalog:</span>
         <button onclick="toggleQuickMenu()" class="text-zinc-500 text-xs font-bold px-1.5">✕ Close</button>
       </div>
       <div class="grid grid-cols-2 gap-1.5 text-[10px] font-semibold">
@@ -272,9 +341,12 @@
         <button onclick="filterCategory('stiker'); toggleQuickMenu();" class="p-2 rounded-lg bg-zinc-50 border border-zinc-200 text-left text-zinc-800">🏷️ Stiker Kustom</button>
         <button onclick="filterCategory('banner'); toggleQuickMenu();" class="p-2 rounded-lg bg-zinc-50 border border-zinc-200 text-left text-zinc-800">🖼️ Banner Spanduk</button>
         <button onclick="filterCategory('kertas'); toggleQuickMenu();" class="p-2 rounded-lg bg-zinc-50 border border-zinc-200 text-left text-zinc-800">📋 Kertas & Promosi</button>
+        <button onclick="filterCategory('indoor'); toggleQuickMenu();" class="p-2 rounded-lg bg-zinc-50 border border-zinc-200 text-left text-zinc-800">⚡ Indoor & Cutter</button>
         <button onclick="filterCategory('akrilik'); toggleQuickMenu();" class="p-2 rounded-lg bg-zinc-50 border border-zinc-200 text-left text-zinc-800">💎 Akrilik & Plakat</button>
         <button onclick="filterCategory('merch'); toggleQuickMenu();" class="p-2 rounded-lg bg-zinc-50 border border-zinc-200 text-left text-zinc-800">🎁 Merchandise</button>
         <button onclick="filterCategory('pack'); toggleQuickMenu();" class="p-2 rounded-lg bg-zinc-50 border border-zinc-200 text-left text-zinc-800">📦 Packaging & Apparel</button>
+        <button onclick="filterCategory('kantor'); toggleQuickMenu();" class="p-2 rounded-lg bg-zinc-50 border border-zinc-200 text-left text-zinc-800">📚 Kantor & Buku</button>
+        <button onclick="filterCategory('event'); toggleQuickMenu();" class="p-2 rounded-lg bg-zinc-50 border border-zinc-200 text-left text-zinc-800">🍽️ Kuliner & Event</button>
       </div>
     </div>
 
