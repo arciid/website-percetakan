@@ -8,19 +8,19 @@
 <style>
   .no-scrollbar::-webkit-scrollbar { display: none; }
   .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
-  #productDetailModal, #sosmedModal {
+  #productDetailModal, #sosmedModal, #swatchModal {
     transition: opacity 0.25s ease, visibility 0.25s ease;
   }
-  #productDetailModal.show, #sosmedModal.show {
+  #productDetailModal.show, #sosmedModal.show, #swatchModal.show {
     opacity: 1 !important;
     visibility: visible !important;
     pointer-events: auto !important;
   }
-  #detailModalContent, #sosmedModalContent {
+  #detailModalContent, #sosmedModalContent, #swatchModalContent {
     transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
     transform: scale(0.9);
   }
-  #productDetailModal.show #detailModalContent, #sosmedModal.show #sosmedModalContent {
+  #productDetailModal.show #detailModalContent, #sosmedModal.show #sosmedModalContent, #swatchModal.show #swatchModalContent {
     transform: scale(1);
   }
 </style>
@@ -53,8 +53,8 @@
         <div class="absolute inset-0 opacity-20 bg-[radial-gradient(#facc15_1px,transparent_1px)] [background-size:16px_16px]"></div>
         <div class="relative z-10">
           <span class="text-[8px] font-bold tracking-widest text-amber-400 uppercase bg-amber-400/10 border border-amber-400/30 px-2 py-0.5 rounded-full">MARKETPLACE ARCI</span>
-          <h2 class="text-base font-extrabold mt-1 leading-tight">Pilih Produk & Atur Bahan Suka-Suka</h2>
-          <p class="text-[9px] text-zinc-300 mt-0.5 max-w-[220px]">Klik produk di bawah untuk melihat pilihan variasi bahan dan spesifikasi lengkapnya.</p>
+          <h2 class="text-base font-extrabold mt-1 leading-tight">Cek Sampel Bahan & Atur Suka-Suka</h2>
+          <p class="text-[9px] text-zinc-300 mt-0.5 max-w-[220px]">Klik produk untuk melihat variasi bahan murni dan tekstur aslinya.</p>
         </div>
         <div class="relative z-10 flex items-center justify-between">
           <span class="text-[8px] font-bold text-amber-400">⚡ Pengerjaan Cepat & Presisi</span>
@@ -95,7 +95,7 @@
               </div>
               <span class="text-[7.5px] font-bold text-amber-600 uppercase">Stiker Kustom A3+</span>
               <h4 class="text-[11px] font-extrabold text-zinc-900 leading-tight line-clamp-1">Stiker Label Vinyl, Kromo & Hologram</h4>
-              <p class="text-[8.5px] text-zinc-500 line-clamp-2 mt-0.5">Pilih bahan, laminasi, & tipe potong.</p>
+              <p class="text-[8.5px] text-zinc-500 line-clamp-2 mt-0.5">Pilih bahan murni, cek tekstur & cutting.</p>
             </div>
             <div class="mt-3 flex items-center justify-between">
               <span class="text-[9px] font-extrabold text-amber-700">Pilih Bahan ➔</span>
@@ -111,7 +111,7 @@
               </div>
               <span class="text-[7.5px] font-bold text-amber-600 uppercase">Banner & Spanduk</span>
               <h4 class="text-[11px] font-extrabold text-zinc-900 leading-tight line-clamp-1">Spanduk Vinyl 280gr, Korea & Backlite</h4>
-              <p class="text-[8.5px] text-zinc-500 line-clamp-2 mt-0.5">Pilih bahan outdoor & finishing ring.</p>
+              <p class="text-[8.5px] text-zinc-500 line-clamp-2 mt-0.5">Cek sampel bahan outdoor murni.</p>
             </div>
             <div class="mt-3 flex items-center justify-between">
               <span class="text-[9px] font-extrabold text-amber-700">Pilih Bahan ➔</span>
@@ -127,7 +127,7 @@
               </div>
               <span class="text-[7.5px] font-bold text-amber-600 uppercase">Cetak Kertas</span>
               <h4 class="text-[11px] font-extrabold text-zinc-900 leading-tight line-clamp-1">Art Paper, Carton, Felt, Ivory & Duplex</h4>
-              <p class="text-[8.5px] text-zinc-500 line-clamp-2 mt-0.5">Pilih jenis kertas & sisi cetak.</p>
+              <p class="text-[8.5px] text-zinc-500 line-clamp-2 mt-0.5">Cek sampel kertas fancy & tekstur.</p>
             </div>
             <div class="mt-3 flex items-center justify-between">
               <span class="text-[9px] font-extrabold text-amber-700">Pilih Jenis ➔</span>
@@ -143,7 +143,7 @@
               </div>
               <span class="text-[7.5px] font-bold text-amber-600 uppercase">Indoor & Cutter</span>
               <h4 class="text-[11px] font-extrabold text-zinc-900 leading-tight line-clamp-1">Maxdecal, Skotlite, Cutter & UV Print</h4>
-              <p class="text-[8.5px] text-zinc-500 line-clamp-2 mt-0.5">Pilih opsi bahan indoor & cutting.</p>
+              <p class="text-[8.5px] text-zinc-500 line-clamp-2 mt-0.5">Cek sampel material high-res.</p>
             </div>
             <div class="mt-3 flex items-center justify-between">
               <span class="text-[9px] font-extrabold text-amber-700">Pilih Opsi ➔</span>
@@ -159,7 +159,7 @@
               </div>
               <span class="text-[7.5px] font-bold text-amber-600 uppercase">Akrilik & Plakat</span>
               <h4 class="text-[11px] font-extrabold text-zinc-900 leading-tight line-clamp-1">Plakat 8mm, Kaki Gold & Baut Dinding</h4>
-              <p class="text-[8.5px] text-zinc-500 line-clamp-2 mt-0.5">Pilih ketebalan & jenis kaki.</p>
+              <p class="text-[8.5px] text-zinc-500 line-clamp-2 mt-0.5">Cek sampel ketebalan akrilik.</p>
             </div>
             <div class="mt-3 flex items-center justify-between">
               <span class="text-[9px] font-extrabold text-amber-700">Pilih Model ➔</span>
@@ -175,7 +175,7 @@
               </div>
               <span class="text-[7.5px] font-bold text-amber-600 uppercase">Merchandise</span>
               <h4 class="text-[11px] font-extrabold text-zinc-900 leading-tight line-clamp-1">Mug, Medali, Ganci UV, Pin & Stempel</h4>
-              <p class="text-[8.5px] text-zinc-500 line-clamp-2 mt-0.5">Pilih item souvenir event.</p>
+              <p class="text-[8.5px] text-zinc-500 line-clamp-2 mt-0.5">Cek material souvenir event.</p>
             </div>
             <div class="mt-3 flex items-center justify-between">
               <span class="text-[9px] font-extrabold text-amber-700">Pilih Item ➔</span>
@@ -191,7 +191,7 @@
               </div>
               <span class="text-[7.5px] font-bold text-amber-600 uppercase">Packaging & Apparel</span>
               <h4 class="text-[11px] font-extrabold text-zinc-900 leading-tight line-clamp-1">Box Custom, DTF UV, Kaos & Lanyard</h4>
-              <p class="text-[8.5px] text-zinc-500 line-clamp-2 mt-0.5">Pilih kemasan & atribut kantor.</p>
+              <p class="text-[8.5px] text-zinc-500 line-clamp-2 mt-0.5">Cek bahan kemasan & kain.</p>
             </div>
             <div class="mt-3 flex items-center justify-between">
               <span class="text-[9px] font-extrabold text-amber-700">Pilih Produk ➔</span>
@@ -207,7 +207,7 @@
               </div>
               <span class="text-[7.5px] font-bold text-amber-600 uppercase">Kantor, Buku & Kuliner</span>
               <h4 class="text-[11px] font-extrabold text-zinc-900 leading-tight line-clamp-1">Kartu Nama, Buku Yasin, Menu & Undangan</h4>
-              <p class="text-[8.5px] text-zinc-500 line-clamp-2 mt-0.5">Pilih spesifikasi administrasi.</p>
+              <p class="text-[8.5px] text-zinc-500 line-clamp-2 mt-0.5">Cek spesifikasi bahan buku & menu.</p>
             </div>
             <div class="mt-3 flex items-center justify-between">
               <span class="text-[9px] font-extrabold text-amber-700">Pilih Varian ➔</span>
@@ -254,7 +254,7 @@
       </div>
     </div>
 
-    <!-- PRODUCT DETAIL & VARIANT MODAL (MARKETPLACE STYLE) -->
+    <!-- PRODUCT DETAIL & VARIANT MODAL -->
     <div id="productDetailModal" onclick="closeProductDetail()" class="invisible opacity-0 fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex flex-col justify-end sm:justify-center p-0 sm:p-4">
       <div id="detailModalContent" onclick="event.stopPropagation()" class="relative w-full sm:max-w-sm rounded-t-3xl sm:rounded-2xl overflow-hidden border border-zinc-200 shadow-2xl bg-white p-5 space-y-4 max-h-[85vh] overflow-y-auto">
         
@@ -268,7 +268,7 @@
 
         <!-- CONTAINER VARIANT DINAMIS -->
         <div id="variantContainer" class="space-y-3 text-left">
-          <!-- Diisi lewat JavaScript berdasarkan produk yang diklik -->
+          <!-- Diisi lewat JavaScript -->
         </div>
 
         <div class="space-y-2 pt-2 border-t border-zinc-200">
@@ -285,6 +285,19 @@
         <button onclick="submitWAOrder()" class="w-full py-3 rounded-xl bg-gradient-to-r from-amber-400 to-yellow-500 text-zinc-950 font-extrabold text-xs tracking-wider uppercase shadow-md active:scale-95 transition">
           🚀 PESAN SEKARANG VIA WHATSAPP
         </button>
+      </div>
+    </div>
+
+    <!-- POP-UP SWATCH / SAMPEL BAHAN MURNI -->
+    <div id="swatchModal" onclick="closeSwatchModal()" class="invisible opacity-0 fixed inset-0 z-[60] bg-black/80 backdrop-blur-md flex flex-col items-center justify-center p-4">
+      <button onclick="closeSwatchModal()" class="absolute top-5 right-5 text-zinc-900 bg-white rounded-full w-10 h-10 flex items-center justify-center text-lg font-bold border border-zinc-200 z-50 shadow-lg">✕</button>
+      <div id="swatchModalContent" onclick="event.stopPropagation()" class="relative max-w-full max-w-sm rounded-2xl overflow-hidden border border-zinc-300 shadow-2xl bg-white p-4 text-center space-y-3">
+        <h4 id="swatchTitle" class="text-xs font-extrabold text-amber-700 uppercase">Sampel Bahan Murni</h4>
+        <div class="w-full aspect-square rounded-xl overflow-hidden bg-zinc-100 border border-zinc-200">
+          <img id="swatchImg" src="" class="w-full h-full object-cover">
+        </div>
+        <p id="swatchDesc" class="text-[10px] text-zinc-600 leading-relaxed">Deskripsi tekstur bahan murni.</p>
+        <button onclick="closeSwatchModal()" class="w-full py-2 rounded-xl bg-zinc-900 text-amber-400 font-bold text-[10px] uppercase">Tutup Sampel</button>
       </div>
     </div>
 
@@ -354,28 +367,51 @@
     document.getElementById('sosmedModal').classList.remove('show');
   }
 
-  // MARKETPLACE PRODUCT DETAIL & VARIANTS
+  // FUNGSI POP-UP SWATCH (SAMPEL BAHAN MURNI)
+  function openSwatch(title, desc, imgSrc) {
+    document.getElementById('swatchTitle').textContent = "Sampel Bahan: " + title;
+    document.getElementById('swatchDesc').textContent = desc;
+    document.getElementById('swatchImg').src = imgSrc || 'gbr-vinyl.JPG';
+    document.getElementById('swatchModal').classList.add('show');
+  }
+
+  function closeSwatchModal() {
+    document.getElementById('swatchModal').classList.remove('show');
+  }
+
+  // DATABASE PRODUK & SAMPEL BAHAN MURNI
   const productDatabase = {
     'stiker': {
       category: 'Stiker Kustom A3+',
       title: 'Stiker Label Vinyl, Kromo & Hologram',
       html: `
         <div>
-          <label class="text-[10px] font-bold text-amber-800 block mb-1">1. Pilih Jenis Bahan Stiker:</label>
+          <label class="text-[10px] font-bold text-amber-800 block mb-1">1. Pilih Jenis Bahan Stiker (Klik cek sampel):</label>
           <div class="grid grid-cols-2 gap-1.5">
-            <label class="cursor-pointer"><input type="radio" name="var1" value="Vinyl (Tahan Air)" class="peer hidden" checked><div class="text-[9px] py-1.5 text-center rounded-lg border border-zinc-300 bg-white peer-checked:border-amber-500 peer-checked:bg-amber-400 peer-checked:text-zinc-950 font-bold shadow-sm">Vinyl (Tahan Air) ⭐</div></label>
-            <label class="cursor-pointer"><input type="radio" name="var1" value="Kromo (Ekonomis)" class="peer hidden"><div class="text-[9px] py-1.5 text-center rounded-lg border border-zinc-300 bg-white peer-checked:border-amber-500 peer-checked:bg-amber-400 peer-checked:text-zinc-950 font-bold shadow-sm">Kromo (Ekonomis)</div></label>
-            <label class="cursor-pointer"><input type="radio" name="var1" value="Transparan Bening" class="peer hidden"><div class="text-[9px] py-1.5 text-center rounded-lg border border-zinc-300 bg-white peer-checked:border-amber-500 peer-checked:bg-amber-400 peer-checked:text-zinc-950 font-bold shadow-sm">Transparan Bening</div></label>
-            <label class="cursor-pointer"><input type="radio" name="var1" value="Hologram 3D" class="peer hidden"><div class="text-[9px] py-1.5 text-center rounded-lg border border-zinc-300 bg-white peer-checked:border-amber-500 peer-checked:bg-amber-400 peer-checked:text-zinc-950 font-bold shadow-sm">Hologram 3D 🔥</div></label>
-            <label class="cursor-pointer"><input type="radio" name="var1" value="Chrome Mewah" class="peer hidden"><div class="text-[9px] py-1.5 text-center rounded-lg border border-zinc-300 bg-white peer-checked:border-amber-500 peer-checked:bg-amber-400 peer-checked:text-zinc-950 font-bold shadow-sm">Chrome Mewah</div></label>
+            <div class="flex items-center justify-between p-1.5 rounded-lg border border-zinc-300 bg-white">
+              <label class="cursor-pointer text-[9px] font-bold text-zinc-800"><input type="radio" name="var1" value="Vinyl (Tahan Air)" class="mr-1" checked> Vinyl</label>
+              <button type="button" onclick="openSwatch('Stiker Vinyl', 'Bahan dasar plastik lentur, 100% tahan air, tidak mudah robek, ideal untuk botol & outdoor.', 'gbr-vinyl.JPG')" class="text-[8px] bg-amber-100 text-amber-800 font-bold px-1.5 py-0.5 rounded">🔍 Cek</button>
+            </div>
+            <div class="flex items-center justify-between p-1.5 rounded-lg border border-zinc-300 bg-white">
+              <label class="cursor-pointer text-[9px] font-bold text-zinc-800"><input type="radio" name="var1" value="Kromo (Ekonomis)" class="mr-1"> Kromo</label>
+              <button type="button" onclick="openSwatch('Stiker Kromo', 'Bahan berbasis kertas licin ekonomis untuk label kemasan kering.', 'art-paper-260.jpg')" class="text-[8px] bg-amber-100 text-amber-800 font-bold px-1.5 py-0.5 rounded">🔍 Cek</button>
+            </div>
+            <div class="flex items-center justify-between p-1.5 rounded-lg border border-zinc-300 bg-white">
+              <label class="cursor-pointer text-[9px] font-bold text-zinc-800"><input type="radio" name="var1" value="Transparan Bening" class="mr-1"> Transparan</label>
+              <button type="button" onclick="openSwatch('Stiker Transparan', 'Bahan bening tembus pandang estetik untuk botol kaca & kosmetik.', 'gbr-vinyl.JPG')" class="text-[8px] bg-amber-100 text-amber-800 font-bold px-1.5 py-0.5 rounded">🔍 Cek</button>
+            </div>
+            <div class="flex items-center justify-between p-1.5 rounded-lg border border-zinc-300 bg-white">
+              <label class="cursor-pointer text-[9px] font-bold text-zinc-800"><input type="radio" name="var1" value="Hologram 3D" class="mr-1"> Hologram</label>
+              <button type="button" onclick="openSwatch('Stiker Hologram 3D', 'Efek pelangi 3D mengkilap mencolok saat memantul cahaya.', 'flexi-280.jpg')" class="text-[8px] bg-amber-100 text-amber-800 font-bold px-1.5 py-0.5 rounded">🔍 Cek</button>
+            </div>
           </div>
         </div>
         <div>
           <label class="text-[10px] font-bold text-zinc-700 block mb-1">2. Finishing Permukaan:</label>
           <div class="grid grid-cols-3 gap-1">
-            <label class="cursor-pointer"><input type="radio" name="var2" value="Glossy" class="peer hidden" checked><div class="text-[8px] py-1 text-center rounded border border-zinc-300 bg-white peer-checked:border-amber-500 peer-checked:bg-amber-50 font-bold">Glossy</div></label>
-            <label class="cursor-pointer"><input type="radio" name="var2" value="Doff" class="peer hidden"><div class="text-[8px] py-1 text-center rounded border border-zinc-300 bg-white peer-checked:border-amber-500 peer-checked:bg-amber-50 font-bold">Doff</div></label>
-            <label class="cursor-pointer"><input type="radio" name="var2" value="Glitter" class="peer hidden"><div class="text-[8px] py-1 text-center rounded border border-zinc-300 bg-white peer-checked:border-amber-500 peer-checked:bg-amber-50 font-bold">Glitter</div></label>
+            <label class="cursor-pointer"><input type="radio" name="var2" value="Glossy" class="peer hidden" checked><div class="text-[8px] py-1 text-center rounded border border-zinc-300 bg-white peer-checked:border-amber-500 font-bold">Glossy</div></label>
+            <label class="cursor-pointer"><input type="radio" name="var2" value="Doff" class="peer hidden"><div class="text-[8px] py-1 text-center rounded border border-zinc-300 bg-white peer-checked:border-amber-500 font-bold">Doff</div></label>
+            <label class="cursor-pointer"><input type="radio" name="var2" value="Glitter" class="peer hidden"><div class="text-[8px] py-1 text-center rounded border border-zinc-300 bg-white peer-checked:border-amber-500 font-bold">Glitter</div></label>
           </div>
         </div>
         <div class="grid grid-cols-2 gap-2">
@@ -397,17 +433,22 @@
         <div>
           <label class="text-[10px] font-bold text-amber-800 block mb-1">1. Pilih Bahan Outdoor:</label>
           <div class="grid grid-cols-2 gap-1.5">
-            <label class="cursor-pointer"><input type="radio" name="var1" value="Vinyl 280gr (Standar)" class="peer hidden" checked><div class="text-[9px] py-1.5 text-center rounded-lg border border-zinc-300 bg-white peer-checked:border-amber-500 peer-checked:bg-amber-400 peer-checked:text-zinc-950 font-bold shadow-sm">Vinyl 280gr (Standar)</div></label>
-            <label class="cursor-pointer"><input type="radio" name="var1" value="Korea 440gr (Tebal)" class="peer hidden"><div class="text-[9px] py-1.5 text-center rounded-lg border border-zinc-300 bg-white peer-checked:border-amber-500 peer-checked:bg-amber-400 peer-checked:text-zinc-950 font-bold shadow-sm">Korea 440gr ⭐</div></label>
-            <label class="cursor-pointer"><input type="radio" name="var1" value="Backlite (Tembus Cahaya)" class="peer hidden"><div class="text-[9px] py-1.5 text-center rounded-lg border border-zinc-300 bg-white peer-checked:border-amber-500 peer-checked:bg-amber-400 peer-checked:text-zinc-950 font-bold shadow-sm">Backlite (Neon Box)</div></label>
-            <label class="cursor-pointer"><input type="radio" name="var1" value="Cloth (Kain Spanduk)" class="peer hidden"><div class="text-[9px] py-1.5 text-center rounded-lg border border-zinc-300 bg-white peer-checked:border-amber-500 peer-checked:bg-amber-400 peer-checked:text-zinc-950 font-bold shadow-sm">Cloth (Spanduk Kain)</div></label>
-          </div>
-        </div>
-        <div>
-          <label class="text-[10px] font-bold text-zinc-700 block mb-1">2. Finishing Sisi:</label>
-          <div class="grid grid-cols-2 gap-1">
-            <label class="cursor-pointer"><input type="radio" name="var2" value="Mata Ayam (Ring Besi)" class="peer hidden" checked><div class="text-[8px] py-1 text-center rounded border border-zinc-300 bg-white peer-checked:border-amber-500 font-bold">Mata Ayam (Ring Besi)</div></label>
-            <label class="cursor-pointer"><input type="radio" name="var2" value="Selongsong Tiang" class="peer hidden"><div class="text-[8px] py-1 text-center rounded border border-zinc-300 bg-white peer-checked:border-amber-500 font-bold">Selongsong Tiang</div></label>
+            <div class="flex items-center justify-between p-1.5 rounded-lg border border-zinc-300 bg-white">
+              <label class="cursor-pointer text-[9px] font-bold text-zinc-800"><input type="radio" name="var1" value="Vinyl 280gr (Standar)" class="mr-1" checked> Vinyl 280gr</label>
+              <button type="button" onclick="openSwatch('Vinyl 280gr', 'Serat standar yang ekonomis untuk spanduk event luar ruangan.', 'flexi-280.jpg')" class="text-[8px] bg-amber-100 text-amber-800 font-bold px-1.5 py-0.5 rounded">🔍 Cek</button>
+            </div>
+            <div class="flex items-center justify-between p-1.5 rounded-lg border border-zinc-300 bg-white">
+              <label class="cursor-pointer text-[9px] font-bold text-zinc-800"><input type="radio" name="var1" value="Korea 440gr (Tebal)" class="mr-1"> Korea 440gr</label>
+              <button type="button" onclick="openSwatch('Korea 440gr', 'Bahan ekstra tebal, berserat halus, permukaan smooth doff.', 'flexi-280.jpg')" class="text-[8px] bg-amber-100 text-amber-800 font-bold px-1.5 py-0.5 rounded">🔍 Cek</button>
+            </div>
+            <div class="flex items-center justify-between p-1.5 rounded-lg border border-zinc-300 bg-white">
+              <label class="cursor-pointer text-[9px] font-bold text-zinc-800"><input type="radio" name="var1" value="Backlite" class="mr-1"> Backlite</label>
+              <button type="button" onclick="openSwatch('Backlite Outdoor', 'Bahan khusus tembus cahaya lampu untuk neon box.', 'flexi-280.jpg')" class="text-[8px] bg-amber-100 text-amber-800 font-bold px-1.5 py-0.5 rounded">🔍 Cek</button>
+            </div>
+            <div class="flex items-center justify-between p-1.5 rounded-lg border border-zinc-300 bg-white">
+              <label class="cursor-pointer text-[9px] font-bold text-zinc-800"><input type="radio" name="var1" value="Cloth" class="mr-1"> Cloth Textile</label>
+              <button type="button" onclick="openSwatch('Cloth Spanduk Kain', 'Bahan berbasis kain fleksibel, elegan, tidak mudah kusut.', 'flexi-280.jpg')" class="text-[8px] bg-amber-100 text-amber-800 font-bold px-1.5 py-0.5 rounded">🔍 Cek</button>
+            </div>
           </div>
         </div>
         <div class="grid grid-cols-2 gap-2">
@@ -428,14 +469,15 @@
       html: `
         <div>
           <label class="text-[10px] font-bold text-amber-800 block mb-1">1. Pilih Jenis Kertas:</label>
-          <select id="detailSelectOpt" class="w-full bg-zinc-50 border border-zinc-300 rounded-lg p-2 text-xs font-semibold">
-            <option value="Art Carton 260gr" selected>Art Carton 260gr / 300gr (Kartu Nama / Cover)</option>
-            <option value="Art Paper 120/150gr">Art Paper 120gr / 150gr (Brosur / Flyer)</option>
-            <option value="Paper Felt (Textured)">Paper Felt / Fancy Textured (Undangan Eksklusif)</option>
-            <option value="Ivory Paper">Ivory Paper (Box Makanan Higienis)</option>
-            <option value="Duplex Paper">Duplex Paper (Box Produk Kemasan)</option>
-            <option value="HVS 100gr">HVS 100gr (Dokumen / Buku)</option>
-          </select>
+          <div class="flex gap-2">
+            <select id="detailSelectOpt" class="flex-1 bg-zinc-50 border border-zinc-300 rounded-lg p-2 text-xs font-semibold">
+              <option value="Art Carton 260gr" selected>Art Carton 260gr / 300gr</option>
+              <option value="Paper Felt (Fancy)">Paper Felt / Fancy Textured (Tekstur Kain)</option>
+              <option value="Ivory Paper">Ivory Paper (Box Makanan)</option>
+              <option value="Duplex Paper">Duplex Paper (Box Produk)</option>
+            </select>
+            <button type="button" onclick="openSwatch('Kertas Fancy / Felt', 'Kertas dengan tekstur rabaan kain/garis timbul lembut yang sangat elegan untuk undangan.', 'art-paper-260.jpg')" class="bg-amber-100 text-amber-800 font-bold text-[9px] px-2.5 rounded-lg border border-amber-300">🔍 Cek Sampel</button>
+          </div>
         </div>
         <div class="grid grid-cols-2 gap-2">
           <div>
@@ -458,9 +500,8 @@
           <select id="detailSelectOpt" class="w-full bg-zinc-50 border border-zinc-300 rounded-lg p-2 text-xs font-semibold">
             <option value="Maxdecal Vinyl Indoor" selected>Maxdecal / Ritrama (High-Res Indoor)</option>
             <option value="Skotlite / Oracal">Skotlite / Oracal (Stiker Kaca & Cutting)</option>
-            <option value="Layanan Potong Cutter">Layanan Potong Cutter (Plotter Presisi)</option>
             <option value="UV Print Flatbed">UV Print Flatbed (Media Keras)</option>
-            <option value="Albatros & Backlit">Albatros & Backlit (Roll Up & Neon Box)</option>
+            <option value="Albatros & Backlit">Albatros & Backlit (Neon Box)</option>
           </select>
         </div>
         <div class="grid grid-cols-2 gap-2">
@@ -486,7 +527,6 @@
             <option value="Plakat Eksklusif 8mm">Plakat Tebal Eksklusif 8mm</option>
             <option value="Plakat Kaki Kotak Gold">Plakat Kaki Kotak + Aksen Gold</option>
             <option value="Signage Baut Stainless">Akrilik Signage Baut Dinding Stainless</option>
-            <option value="Box Akrilik Custom">Box Akrilik Custom (Kotak Amal/Saran)</option>
           </select>
         </div>
         <div class="grid grid-cols-2 gap-2">
@@ -509,10 +549,9 @@
           <label class="text-[10px] font-bold text-amber-800 block mb-1">1. Pilih Item Souvenir:</label>
           <select id="detailSelectOpt" class="w-full bg-zinc-50 border border-zinc-300 rounded-lg p-2 text-xs font-semibold">
             <option value="Flatbed Mug Custom" selected>Flatbed Mug Custom Full Color</option>
-            <option value="Medali Wisuda / Event">Medali Wisuda / Event (Akrilik & Logam)</option>
-            <option value="Ganti UV Bolak-balik">Ganci UV (Print UV Akrilik)</option>
-            <option value="Stempel Flash Otomatis">Stempel Flash Otomatis (Tanpa Bantalan)</option>
-            <option value="Kipas Kerang Promosi">Kipas Kerang / Kipas Promosi Event</option>
+            <option value="Medali Wisuda / Event">Medali Wisuda / Event</option>
+            <option value="Ganci UV Bolak-balik">Ganci UV (Print UV Akrilik)</option>
+            <option value="Stempel Flash Otomatis">Stempel Flash Otomatis</option>
           </select>
         </div>
         <div class="grid grid-cols-2 gap-2">
@@ -535,10 +574,9 @@
           <label class="text-[10px] font-bold text-amber-800 block mb-1">1. Pilih Produk:</label>
           <select id="detailSelectOpt" class="w-full bg-zinc-50 border border-zinc-300 rounded-lg p-2 text-xs font-semibold">
             <option value="Box Packaging Ivory/Duplex" selected>Box Packaging Custom (Ivory/Duplex)</option>
-            <option value="Stiker DTF UV Timbul">DTF UV (Stiker Transfer Timbul Berkilau)</option>
+            <option value="Stiker DTF UV Timbul">DTF UV (Stiker Transfer Timbul)</option>
             <option value="Kaos Custom Sablon DTF">Kaos Custom Sablon DTF</option>
-            <option value="Lanyard ID Card Printing">Lanyard Tali ID Card Printing 2 Sisi</option>
-            <option value="ID Card PVC ATM">ID Card PVC Standar ATM</option>
+            <option value="Lanyard ID Card Printing">Lanyard Tali ID Card 2 Sisi</option>
           </select>
         </div>
         <div class="grid grid-cols-2 gap-2">
@@ -558,13 +596,12 @@
       title: 'Kartu Nama, Buku Yasin, Menu & Undangan',
       html: `
         <div>
-          <label class="text-[10px] font-bold text-amber-800 block mb-1">1. Pilih Produk Administrasi / Event:</label>
+          <label class="text-[10px] font-bold text-amber-800 block mb-1">1. Pilih Produk:</label>
           <select id="detailSelectOpt" class="w-full bg-zinc-50 border border-zinc-300 rounded-lg p-2 text-xs font-semibold">
-            <option value="Kartu Nama Premium" selected>Kartu Nama Premium (Laminasi Doff/Glossy)</option>
-            <option value="Buku Yasin & Majalah">Cetak Buku Yasin / Majalah / Buku Tamu</option>
-            <option value="Menu Makanan Kafe (Anti Air)">Menu Makanan Kafe (Laminasi Anti Air)</option>
-            <option value="Undangan Pernikahan Custom">Undangan Pernikahan & Event Custom</option>
-            <option value="Kalender Meja / Dinding">Kalender Meja & Dinding Custom</option>
+            <option value="Kartu Nama Premium" selected>Kartu Nama Premium (Doff/Glossy)</option>
+            <option value="Buku Yasin & Majalah">Cetak Buku Yasin / Majalah</option>
+            <option value="Menu Makanan Kafe (Anti Air)">Menu Makanan Kafe (Anti Air)</option>
+            <option value="Undangan Pernikahan Custom">Undangan Pernikahan Custom</option>
           </select>
         </div>
         <div class="grid grid-cols-2 gap-2">
@@ -584,7 +621,7 @@
       title: 'Konsultasi Kebutuhan Cetak ARCI',
       html: `
         <div class="p-2.5 rounded-xl bg-amber-50 border border-amber-200 text-[10px] text-amber-900 leading-relaxed">
-          💬 Mau konsultasi langsung mengenai desain, bahan khusus, atau estimasi harga borongan partai besar? Kirim pesan ke admin sekarang!
+          💬 Mau konsultasi langsung mengenai desain, bahan khusus, atau estimasi harga borongan? Kirim pesan ke admin sekarang!
         </div>
         <div>
           <label class="text-[9px] font-bold text-zinc-700 block mb-0.5">📝 Pertanyaan / Detail Kebutuhan</label>
