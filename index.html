@@ -23,6 +23,10 @@
   #productDetailModal.show #detailModalContent, #swatchModal.show #swatchModalContent {
     transform: scale(1);
   }
+  /* Slider transition */
+  .slider-track {
+    transition: transform 0.5s ease-in-out;
+  }
 </style>
 </head>
 <body class="bg-zinc-950 flex items-center justify-center min-h-screen font-sans select-none text-zinc-100 uppercase">
@@ -30,32 +34,68 @@
   <!-- WRAPPER UTAMA: RESPONSIF MOBILE & DESKTOP VISUAL -->
   <div class="w-full h-[100dvh] sm:h-auto sm:min-h-[85vh] sm:max-w-5xl sm:my-6 relative overflow-hidden sm:rounded-[2.5rem] bg-zinc-900 text-zinc-100 flex flex-col justify-between shadow-2xl border border-zinc-800">
 
-    <!-- HEADER MARKETPLACE -->
-    <div class="sticky top-0 z-40 bg-zinc-900/95 border-b border-zinc-800 backdrop-blur-md px-4 sm:px-8 py-3.5 flex items-center justify-between shadow-sm">
-      <div class="flex items-center gap-3">
+    <!-- HEADER MARKETPLACE DENGAN SEARCH BAR DI TENGAH ATAS -->
+    <div class="sticky top-0 z-40 bg-zinc-900/95 border-b border-zinc-800 backdrop-blur-md px-4 sm:px-8 py-3.5 flex items-center justify-between gap-3 shadow-sm">
+      <div class="flex items-center gap-3 flex-shrink-0">
         <img src="logo test.png" alt="Logo" class="h-8 sm:h-10 w-auto object-contain" onerror="this.style.display='none'">
-        <div>
+        <div class="hidden xs:block">
           <span class="font-extrabold text-sm sm:text-lg tracking-wider text-amber-400 block leading-none">ARCI</span>
           <span class="text-[7.5px] sm:text-[10px] font-semibold text-zinc-400 tracking-tight block mt-0.5">DIGITAL PRINT & STUDIO</span>
         </div>
       </div>
-      <div class="hidden sm:flex items-center gap-2 text-[10px] text-zinc-400 font-bold bg-zinc-800/80 px-3 py-1.5 rounded-full border border-zinc-700">
+
+      <!-- SEARCH BAR DI TENGAH ATAS -->
+      <div class="flex-1 max-w-md mx-2">
+        <div class="relative">
+          <span class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-zinc-400">🔍</span>
+          <input type="text" id="searchInput" oninput="handleSearch(this.value)" placeholder="CARI PRODUK (MISAL: STIKER, BANNER, AKRILIK)..." class="w-full bg-zinc-800/90 border border-zinc-700 rounded-full pl-9 pr-4 py-1.5 text-[10px] sm:text-xs text-zinc-100 placeholder-zinc-500 focus:outline-none focus:border-amber-400 uppercase shadow-inner">
+        </div>
+      </div>
+
+      <div class="hidden sm:flex items-center gap-2 text-[10px] text-zinc-400 font-bold bg-zinc-800/80 px-3 py-1.5 rounded-full border border-zinc-700 flex-shrink-0">
         <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-        <span>STUDIO ONLINE • SIAP ORDER</span>
+        <span>STUDIO ONLINE</span>
       </div>
     </div>
 
-    <!-- MAIN CONTENT SCROLLABLE FEED (GRID DI DESKTOP UNTUK TONJOLKAN VISUAL) -->
+    <!-- MAIN CONTENT SCROLLABLE FEED -->
     <div class="flex-1 overflow-y-auto overflow-x-hidden p-4 sm:p-8 space-y-4 sm:space-y-6 pb-24 sm:pb-28 no-scrollbar">
 
-      <!-- HERO BANNER UTAMA (LEBIH CINEMATIK DI PC) -->
+      <!-- SLIDER PORTOFOLIO HASIL CETAK NYATA (GANTI BANNER STATIS) -->
       <div class="relative w-full rounded-2xl sm:rounded-3xl overflow-hidden bg-zinc-900 border border-amber-500/30 shadow-2xl group">
-        <img src="landing_page.jpg" alt="ARCI LANDING PAGE" class="w-full h-auto sm:max-h-[360px] sm:object-cover group-hover:scale-105 transition duration-700" onerror="this.src='https://via.placeholder.com/400x200?text=ARCI+STUDIO'">
-        <div class="absolute inset-0 bg-gradient-to-t from-zinc-950/80 via-transparent to-transparent opacity-60 sm:opacity-40"></div>
-        <div class="absolute bottom-3 left-3 sm:bottom-6 sm:left-6 hidden sm:block">
-          <span class="bg-amber-400 text-zinc-950 text-[9px] font-extrabold px-2.5 py-1 rounded-md shadow uppercase tracking-widest">PUSAT CETAK & STUDIO KUSTOM</span>
-          <h2 class="text-xl sm:text-2xl font-black text-zinc-100 tracking-wide mt-1">KUALITAS PREMIUM, HASIL TAJAM & PRESISI</h2>
+        <div id="sliderTrack" class="flex slider-track w-full h-[180px] sm:h-[320px]">
+          <!-- Slide 1 -->
+          <div class="w-full flex-shrink-0 relative">
+            <img src="vinyl.jpg" class="w-full h-full object-cover" onerror="this.src='https://via.placeholder.com/800x320?text=ARCI+PORTOFOLIO+1'">
+            <div class="absolute inset-0 bg-gradient-to-t from-zinc-950/90 via-zinc-950/20 to-transparent"></div>
+            <div class="absolute bottom-3 left-3 sm:bottom-6 sm:left-6">
+              <span class="bg-amber-400 text-zinc-950 text-[8px] sm:text-[10px] font-extrabold px-2.5 py-1 rounded-md shadow uppercase tracking-widest">HASIL CETAK NYATA</span>
+              <h2 class="text-sm sm:text-2xl font-black text-zinc-100 tracking-wide mt-1">STIKER VINYL KISSCUT TAJAM & PRESISI</h2>
+            </div>
+          </div>
+          <!-- Slide 2 -->
+          <div class="w-full flex-shrink-0 relative">
+            <img src="flexi-280.jpg" class="w-full h-full object-cover" onerror="this.src='https://via.placeholder.com/800x320?text=ARCI+PORTOFOLIO+2'">
+            <div class="absolute inset-0 bg-gradient-to-t from-zinc-950/90 via-zinc-950/20 to-transparent"></div>
+            <div class="absolute bottom-3 left-3 sm:bottom-6 sm:left-6">
+              <span class="bg-amber-400 text-zinc-950 text-[8px] sm:text-[10px] font-extrabold px-2.5 py-1 rounded-md shadow uppercase tracking-widest">HASIL CETAK NYATA</span>
+              <h2 class="text-sm sm:text-2xl font-black text-zinc-100 tracking-wide mt-1">BANNER OUTDOOR AWET & WARNA PEKAT</h2>
+            </div>
+          </div>
+          <!-- Slide 3 -->
+          <div class="w-full flex-shrink-0 relative">
+            <img src="ivory.jpg" class="w-full h-full object-cover" onerror="this.src='https://via.placeholder.com/800x320?text=ARCI+PORTOFOLIO+3'">
+            <div class="absolute inset-0 bg-gradient-to-t from-zinc-950/90 via-zinc-950/20 to-transparent"></div>
+            <div class="absolute bottom-3 left-3 sm:bottom-6 sm:left-6">
+              <span class="bg-amber-400 text-zinc-950 text-[8px] sm:text-[10px] font-extrabold px-2.5 py-1 rounded-md shadow uppercase tracking-widest">HASIL CETAK NYATA</span>
+              <h2 class="text-sm sm:text-2xl font-black text-zinc-100 tracking-wide mt-1">PLAKAT AKRILIK MEWAH & KEMASAN PRODUK</h2>
+            </div>
+          </div>
         </div>
+
+        <!-- Tombol Navigasi Slider -->
+        <button onclick="prevSlide()" class="absolute left-2 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-amber-400 hover:text-zinc-950 text-zinc-100 p-2 rounded-full text-xs font-bold transition shadow">❮</button>
+        <button onclick="nextSlide()" class="absolute right-2 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-amber-400 hover:text-zinc-950 text-zinc-100 p-2 rounded-full text-xs font-bold transition shadow">❯</button>
       </div>
 
       <!-- KATEGORI PILLS -->
@@ -65,38 +105,38 @@
           <span class="text-[9px] sm:text-xs text-amber-400 font-bold">GESER ➔</span>
         </div>
         <div class="flex gap-2 overflow-x-auto no-scrollbar py-1">
-          <button onclick="filterCategory('all')" class="flex-none px-3.5 py-2 rounded-xl bg-amber-400 text-zinc-950 text-[9px] sm:text-xs font-extrabold shadow-sm active:scale-95 transition">SEMUA</button>
-          <button onclick="filterCategory('stiker')" class="flex-none px-3.5 py-2 rounded-xl bg-zinc-800 border border-zinc-700 text-zinc-300 text-[9px] sm:text-xs font-bold shadow-sm hover:border-amber-400 transition">STIKER</button>
-          <button onclick="filterCategory('banner')" class="flex-none px-3.5 py-2 rounded-xl bg-zinc-800 border border-zinc-700 text-zinc-300 text-[9px] sm:text-xs font-bold shadow-sm hover:border-amber-400 transition">BANNER</button>
-          <button onclick="filterCategory('kertas')" class="flex-none px-3.5 py-2 rounded-xl bg-zinc-800 border border-zinc-700 text-zinc-300 text-[9px] sm:text-xs font-bold shadow-sm hover:border-amber-400 transition">KERTAS A3+</button>
-          <button onclick="filterCategory('indoor')" class="flex-none px-3.5 py-2 rounded-xl bg-zinc-800 border border-zinc-700 text-zinc-300 text-[9px] sm:text-xs font-bold shadow-sm hover:border-amber-400 transition">INDOOR</button>
-          <button onclick="filterCategory('akrilik')" class="flex-none px-3.5 py-2 rounded-xl bg-zinc-800 border border-zinc-700 text-zinc-300 text-[9px] sm:text-xs font-bold shadow-sm hover:border-amber-400 transition">AKRILIK</button>
-          <button onclick="filterCategory('merch')" class="flex-none px-3.5 py-2 rounded-xl bg-zinc-800 border border-zinc-700 text-zinc-300 text-[9px] sm:text-xs font-bold shadow-sm hover:border-amber-400 transition">MERCHANDISE</button>
-          <button onclick="filterCategory('pack')" class="flex-none px-3.5 py-2 rounded-xl bg-zinc-800 border border-zinc-700 text-zinc-300 text-[9px] sm:text-xs font-bold shadow-sm hover:border-amber-400 transition">PACKAGING</button>
+          <button onclick="filterCategory('all')" class="cat-btn flex-none px-3.5 py-2 rounded-xl bg-amber-400 text-zinc-950 text-[9px] sm:text-xs font-extrabold shadow-sm active:scale-95 transition">SEMUA</button>
+          <button onclick="filterCategory('stiker')" class="cat-btn flex-none px-3.5 py-2 rounded-xl bg-zinc-800 border border-zinc-700 text-zinc-300 text-[9px] sm:text-xs font-bold shadow-sm hover:border-amber-400 transition">STIKER</button>
+          <button onclick="filterCategory('banner')" class="cat-btn flex-none px-3.5 py-2 rounded-xl bg-zinc-800 border border-zinc-700 text-zinc-300 text-[9px] sm:text-xs font-bold shadow-sm hover:border-amber-400 transition">BANNER</button>
+          <button onclick="filterCategory('kertas')" class="cat-btn flex-none px-3.5 py-2 rounded-xl bg-zinc-800 border border-zinc-700 text-zinc-300 text-[9px] sm:text-xs font-bold shadow-sm hover:border-amber-400 transition">KERTAS A3+</button>
+          <button onclick="filterCategory('indoor')" class="cat-btn flex-none px-3.5 py-2 rounded-xl bg-zinc-800 border border-zinc-700 text-zinc-300 text-[9px] sm:text-xs font-bold shadow-sm hover:border-amber-400 transition">INDOOR</button>
+          <button onclick="filterCategory('akrilik')" class="cat-btn flex-none px-3.5 py-2 rounded-xl bg-zinc-800 border border-zinc-700 text-zinc-300 text-[9px] sm:text-xs font-bold shadow-sm hover:border-amber-400 transition">AKRILIK</button>
+          <button onclick="filterCategory('merch')" class="cat-btn flex-none px-3.5 py-2 rounded-xl bg-zinc-800 border border-zinc-700 text-zinc-300 text-[9px] sm:text-xs font-bold shadow-sm hover:border-amber-400 transition">MERCHANDISE</button>
+          <button onclick="filterCategory('pack')" class="cat-btn flex-none px-3.5 py-2 rounded-xl bg-zinc-800 border border-zinc-700 text-zinc-300 text-[9px] sm:text-xs font-bold shadow-sm hover:border-amber-400 transition">PACKAGING</button>
         </div>
       </div>
 
-      <!-- PRODUCT GRID (2 KOLOM DI HP, 3-4 KOLOM DI PC UNTUK MAKSIMALKAN VISUAL) -->
+      <!-- PRODUCT GRID -->
       <div>
         <h3 class="text-xs sm:text-sm font-extrabold text-zinc-100 tracking-wide mb-3">KATALOG INTERAKTIF</h3>
         <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4" id="productGrid">
           
           <!-- STIKER -->
-          <div onclick="openProductDetail('stiker')" class="product-card stiker bg-zinc-900 border border-zinc-800 rounded-2xl p-3 sm:p-4 shadow-sm flex flex-col justify-between cursor-pointer hover:border-amber-400 hover:shadow-amber-400/10 hover:-translate-y-1 transition duration-300">
+          <div onclick="openProductDetail('stiker')" data-name="stiker vinyl scotlite hologram kromo" class="product-card stiker bg-zinc-900 border border-zinc-800 rounded-2xl p-3 sm:p-4 shadow-sm flex flex-col justify-between cursor-pointer hover:border-amber-400 hover:shadow-amber-400/10 hover:-translate-y-1 transition duration-300">
             <div>
               <div class="relative aspect-square rounded-xl overflow-hidden bg-zinc-800 border border-zinc-700 mb-2.5">
-                <img src="vinyl.jpg" class="w-full h-full object-cover group-hover:scale-105 transition" onerror="this.src='https://via.placeholder.com/150'">
+                <img src="vinyl.jpg" class="w-full h-full object-cover" onerror="this.src='https://via.placeholder.com/150'">
                 <span class="absolute top-1.5 left-1.5 bg-amber-400 text-zinc-950 text-[7px] sm:text-[9px] font-extrabold px-1.5 py-0.5 rounded shadow">⭐ FAVORIT</span>
               </div>
               <span class="text-[7.5px] sm:text-[9px] font-bold text-amber-400">STIKER KUSTOM A3+</span>
               <h4 class="text-[11px] sm:text-xs font-extrabold text-zinc-100 leading-tight line-clamp-1 mt-0.5">VINYL, SCOTLITE, HOLOGRAM, KROMO</h4>
               <p class="text-[8.5px] sm:text-[10px] text-zinc-400 line-clamp-2 mt-1">LENGKAP DENGAN LAMINASI & KISSCUT/DIECUT.</p>
             </div>
-            <div class="mt-3 flex items-center justify-between"><span class="text-[9px] sm:text-[10px] font-extrabold text-amber-400 group-hover:translate-x-1 transition">PILIH BAHAN ➔</span></div>
+            <div class="mt-3 flex items-center justify-between"><span class="text-[9px] sm:text-[10px] font-extrabold text-amber-400">PILIH BAHAN ➔</span></div>
           </div>
 
           <!-- BANNER -->
-          <div onclick="openProductDetail('banner')" class="product-card banner bg-zinc-900 border border-zinc-800 rounded-2xl p-3 sm:p-4 shadow-sm flex flex-col justify-between cursor-pointer hover:border-amber-400 hover:shadow-amber-400/10 hover:-translate-y-1 transition duration-300">
+          <div onclick="openProductDetail('banner')" data-name="banner spanduk xbanner roll banner tripod" class="product-card banner bg-zinc-900 border border-zinc-800 rounded-2xl p-3 sm:p-4 shadow-sm flex flex-col justify-between cursor-pointer hover:border-amber-400 hover:shadow-amber-400/10 hover:-translate-y-1 transition duration-300">
             <div>
               <div class="relative aspect-square rounded-xl overflow-hidden bg-zinc-800 border border-zinc-700 mb-2.5">
                 <img src="flexi-280.jpg" class="w-full h-full object-cover" onerror="this.src='https://via.placeholder.com/150'">
@@ -110,7 +150,7 @@
           </div>
 
           <!-- KERTAS A3+ -->
-          <div onclick="openProductDetail('kertas')" class="product-card kertas bg-zinc-900 border border-zinc-800 rounded-2xl p-3 sm:p-4 shadow-sm flex flex-col justify-between cursor-pointer hover:border-amber-400 hover:shadow-amber-400/10 hover:-translate-y-1 transition duration-300">
+          <div onclick="openProductDetail('kertas')" data-name="cetak kertas a3+ art carton felt ivory duplex hvs" class="product-card kertas bg-zinc-900 border border-zinc-800 rounded-2xl p-3 sm:p-4 shadow-sm flex flex-col justify-between cursor-pointer hover:border-amber-400 hover:shadow-amber-400/10 hover:-translate-y-1 transition duration-300">
             <div>
               <div class="relative aspect-square rounded-xl overflow-hidden bg-zinc-800 border border-zinc-700 mb-2.5">
                 <img src="260.jpg" class="w-full h-full object-cover" onerror="this.src='https://via.placeholder.com/150'">
@@ -124,7 +164,7 @@
           </div>
 
           <!-- INDOOR -->
-          <div onclick="openProductDetail('indoor')" class="product-card indoor bg-zinc-900 border border-zinc-800 rounded-2xl p-3 sm:p-4 shadow-sm flex flex-col justify-between cursor-pointer hover:border-amber-400 hover:shadow-amber-400/10 hover:-translate-y-1 transition duration-300">
+          <div onclick="openProductDetail('indoor')" data-name="indoor stiker kaca maxdecal ritrama one way albatros" class="product-card indoor bg-zinc-900 border border-zinc-800 rounded-2xl p-3 sm:p-4 shadow-sm flex flex-col justify-between cursor-pointer hover:border-amber-400 hover:shadow-amber-400/10 hover:-translate-y-1 transition duration-300">
             <div>
               <div class="relative aspect-square rounded-xl overflow-hidden bg-zinc-800 border border-zinc-700 mb-2.5">
                 <img src="transparan.jpg" class="w-full h-full object-cover" onerror="this.src='https://via.placeholder.com/150'">
@@ -138,7 +178,7 @@
           </div>
 
           <!-- AKRILIK -->
-          <div onclick="openProductDetail('akrilik')" class="product-card akrilik bg-zinc-900 border border-zinc-800 rounded-2xl p-3 sm:p-4 shadow-sm flex flex-col justify-between cursor-pointer hover:border-amber-400 hover:shadow-amber-400/10 hover:-translate-y-1 transition duration-300">
+          <div onclick="openProductDetail('akrilik')" data-name="akrilik plakat bening putih hitam gold" class="product-card akrilik bg-zinc-900 border border-zinc-800 rounded-2xl p-3 sm:p-4 shadow-sm flex flex-col justify-between cursor-pointer hover:border-amber-400 hover:shadow-amber-400/10 hover:-translate-y-1 transition duration-300">
             <div>
               <div class="relative aspect-square rounded-xl overflow-hidden bg-zinc-800 border border-zinc-700 mb-2.5">
                 <img src="ivory.jpg" class="w-full h-full object-cover" onerror="this.src='https://via.placeholder.com/150'">
@@ -152,7 +192,7 @@
           </div>
 
           <!-- MERCHANDISE -->
-          <div onclick="openProductDetail('merch')" class="product-card merch bg-zinc-900 border border-zinc-800 rounded-2xl p-3 sm:p-4 shadow-sm flex flex-col justify-between cursor-pointer hover:border-amber-400 hover:shadow-amber-400/10 hover:-translate-y-1 transition duration-300">
+          <div onclick="openProductDetail('merch')" data-name="merchandise mug medali ganci uv pulpen pin" class="product-card merch bg-zinc-900 border border-zinc-800 rounded-2xl p-3 sm:p-4 shadow-sm flex flex-col justify-between cursor-pointer hover:border-amber-400 hover:shadow-amber-400/10 hover:-translate-y-1 transition duration-300">
             <div>
               <div class="relative aspect-square rounded-xl overflow-hidden bg-zinc-800 border border-zinc-700 mb-2.5">
                 <img src="hologram.jpg" class="w-full h-full object-cover" onerror="this.src='https://via.placeholder.com/150'">
@@ -166,7 +206,7 @@
           </div>
 
           <!-- PACKAGING -->
-          <div onclick="openProductDetail('pack')" class="product-card pack bg-zinc-900 border border-zinc-800 rounded-2xl p-3 sm:p-4 shadow-sm flex flex-col justify-between cursor-pointer hover:border-amber-400 hover:shadow-amber-400/10 hover:-translate-y-1 transition duration-300">
+          <div onclick="openProductDetail('pack')" data-name="packaging box custom dtf uv kaos lanyard" class="product-card pack bg-zinc-900 border border-zinc-800 rounded-2xl p-3 sm:p-4 shadow-sm flex flex-col justify-between cursor-pointer hover:border-amber-400 hover:shadow-amber-400/10 hover:-translate-y-1 transition duration-300">
             <div>
               <div class="relative aspect-square rounded-xl overflow-hidden bg-zinc-800 border border-zinc-700 mb-2.5">
                 <img src="ivory.jpg" class="w-full h-full object-cover" onerror="this.src='https://via.placeholder.com/150'">
@@ -180,7 +220,7 @@
           </div>
 
           <!-- KANTOR & EVENT -->
-          <div onclick="openProductDetail('kantor')" class="product-card kantor bg-zinc-900 border border-zinc-800 rounded-2xl p-3 sm:p-4 shadow-sm flex flex-col justify-between cursor-pointer hover:border-amber-400 hover:shadow-amber-400/10 hover:-translate-y-1 transition duration-300">
+          <div onclick="openProductDetail('kantor')" data-name="kantor buku yasin kartu nama menu undangan" class="product-card kantor bg-zinc-900 border border-zinc-800 rounded-2xl p-3 sm:p-4 shadow-sm flex flex-col justify-between cursor-pointer hover:border-amber-400 hover:shadow-amber-400/10 hover:-translate-y-1 transition duration-300">
             <div>
               <div class="relative aspect-square rounded-xl overflow-hidden bg-zinc-800 border border-zinc-700 mb-2.5">
                 <img src="concord.jpg" class="w-full h-full object-cover" onerror="this.src='https://via.placeholder.com/150'">
@@ -253,11 +293,49 @@
 <script>
   const WA_ADMIN_NUMBER = "6289672657354";
   let currentProductKey = "";
+  let currentSlide = 0;
+  const totalSlides = 3;
+
+  function nextSlide() {
+    currentSlide = (currentSlide + 1) % totalSlides;
+    updateSlider();
+  }
+
+  function prevSlide() {
+    currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+    updateSlider();
+  }
+
+  function updateSlider() {
+    const track = document.getElementById('sliderTrack');
+    if (track) {
+      track.style.transform = `translateX(-${currentSlide * 100}%)`;
+    }
+  }
+
+  // Auto slide tiap 4 detik
+  setInterval(() => {
+    nextSlide();
+  }, 4000);
 
   function filterCategory(cat) {
     const cards = document.querySelectorAll('.product-card');
     cards.forEach(card => {
       if (cat === 'all' || card.classList.contains(cat)) {
+        card.style.display = 'flex';
+      } else {
+        card.style.display = 'none';
+      }
+    });
+  }
+
+  function handleSearch(keyword) {
+    const q = keyword.toLowerCase().trim();
+    const cards = document.querySelectorAll('.product-card');
+    cards.forEach(card => {
+      const name = card.getAttribute('data-name') || "";
+      const text = card.textContent.toLowerCase();
+      if (name.includes(q) || text.includes(q) || q === "") {
         card.style.display = 'flex';
       } else {
         card.style.display = 'none';
@@ -678,7 +756,8 @@
 
     let msg = `📋 *ORDER MARKETPLACE ARCI STUDIO*\n━━━━━━━━━━━━━━━━━━\n👤 *NAMA:* ${nama}\n${detailInfo}\n━━━━━━━━━━━━━━━━━━\n*MOHON INFO TOTAL ESTIMASI HARGA & INSTRUKSI KIRIM FILE. TERIMA KASIH!*`;
 
-    window.open(`https://wa.me/${WA_ADMIN_NUMBER}?text=${encodeURIComponent(msg)}`, '_blank');
+    // Arahkan ke API WhatsApp / WhatsApp Web
+    window.open(`https://api.whatsapp.com/send?phone=${WA_ADMIN_NUMBER}&text=${encodeURIComponent(msg)}`, '_blank');
     closeProductDetail();
   }
 
