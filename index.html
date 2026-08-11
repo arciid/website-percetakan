@@ -2,6 +2,8 @@
 <html lang="id">
 <head>
 <meta charset="UTF-8">
+<meta name="theme-color" content="#090909">
+<meta name="color-scheme" content="dark">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
 <title>ARCI — DIGITAL PRINT & STUDIO CATALOG</title>
 <script src="https://cdn.tailwindcss.com"></script>
@@ -41,6 +43,58 @@
     animation-play-state: paused;
   }
 </style>
+
+<style id="arci-premium-overrides">
+:root{--gold:#f5c451;--gold2:#dcae38;--bg:#090909;--panel:#111112;--line:rgba(255,255,255,.08)}
+html{background:var(--bg)}
+body{background:radial-gradient(900px 420px at 50% -80px,rgba(245,196,81,.09),transparent 65%),#090909!important;letter-spacing:.01em}
+body:before{content:"";position:fixed;inset:0;pointer-events:none;background:linear-gradient(rgba(255,255,255,.018) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.014) 1px,transparent 1px);background-size:44px 44px;mask-image:linear-gradient(to bottom,black,transparent 75%);z-index:0}
+body>div{position:relative;z-index:1}
+/* premium header */
+.sticky{background:rgba(9,9,9,.78)!important;border-color:var(--line)!important;box-shadow:0 10px 40px rgba(0,0,0,.22)!important}
+.sticky img{filter:drop-shadow(0 0 16px rgba(245,196,81,.12))}
+#searchInput{background:rgba(255,255,255,.045)!important;border-color:rgba(255,255,255,.1)!important;box-shadow:inset 0 1px 0 rgba(255,255,255,.04),0 8px 30px rgba(0,0,0,.15)!important}
+#searchInput:focus{border-color:rgba(245,196,81,.65)!important;box-shadow:0 0 0 4px rgba(245,196,81,.08)!important}
+/* hero */
+.relative.w-full.rounded-2xl{border-color:rgba(245,196,81,.18)!important;box-shadow:0 24px 70px rgba(0,0,0,.4),0 0 80px rgba(245,196,81,.035)!important}
+.slider-track img{filter:saturate(.9) contrast(1.04)}
+.slider-track h2{max-width:850px;text-shadow:0 4px 24px rgba(0,0,0,.8);letter-spacing:-.02em}
+/* category */
+.cat-btn{background:rgba(255,255,255,.045)!important;border-color:rgba(255,255,255,.08)!important;backdrop-filter:blur(12px);transition:all .2s ease!important}
+.cat-btn:first-child{background:linear-gradient(135deg,var(--gold),#ffd977)!important;border-color:transparent!important}
+.cat-btn:hover{transform:translateY(-1px);border-color:rgba(245,196,81,.45)!important}
+/* product cards */
+.product-card{background:linear-gradient(180deg,rgba(255,255,255,.045),rgba(255,255,255,.018))!important;border-color:rgba(255,255,255,.075)!important;border-radius:22px!important;box-shadow:0 12px 35px rgba(0,0,0,.18)!important;overflow:hidden}
+.product-card:hover{border-color:rgba(245,196,81,.42)!important;box-shadow:0 20px 50px rgba(0,0,0,.35),0 0 35px rgba(245,196,81,.06)!important;transform:translateY(-4px)!important}
+.product-card .relative{border-color:rgba(255,255,255,.08)!important}
+.product-card img{transition:transform .45s cubic-bezier(.2,.7,.2,1),filter .3s ease;filter:saturate(.92)}
+.product-card:hover img{transform:scale(1.045);filter:saturate(1.05)}
+.product-card span.bg-amber-400{box-shadow:0 8px 20px rgba(0,0,0,.25)!important}
+/* portfolio */
+.animate-marquee{animation-duration:42s!important;will-change:transform}
+.animate-marquee>div{border-color:rgba(255,255,255,.08)!important;box-shadow:0 12px 35px rgba(0,0,0,.28)!important}
+/* bottom action */
+.fixed,.absolute.bottom-0{background:rgba(9,9,9,.82)!important;border-color:rgba(255,255,255,.08)!important;backdrop-filter:blur(18px)!important}
+/* modal */
+#detailModalContent,#swatchModalContent{background:linear-gradient(180deg,#151516,#0f0f10)!important;border-color:rgba(255,255,255,.1)!important;box-shadow:0 30px 100px rgba(0,0,0,.7)!important}
+#detailModalContent input,#detailModalContent select,#detailModalContent textarea{background:rgba(255,255,255,.045)!important;border-color:rgba(255,255,255,.09)!important}
+#detailModalContent input:focus,#detailModalContent select:focus,#detailModalContent textarea:focus{border-color:rgba(245,196,81,.6)!important;box-shadow:0 0 0 3px rgba(245,196,81,.07)}
+#detailModalContent button[onclick="submitWAOrder()"]{box-shadow:0 12px 30px rgba(245,196,81,.14)!important}
+@media(max-width:640px){
+  .sticky{padding:11px 14px!important;gap:10px!important}
+  .sticky img{height:38px!important}
+  .sticky .flex-1{margin:0!important}
+  #searchInput{font-size:10px!important;padding-top:10px!important;padding-bottom:10px!important}
+  .main-content{padding:14px!important}
+  .product-card{padding:10px!important;border-radius:18px!important}
+  .product-card .relative{border-radius:13px!important}
+  .product-card h4{font-size:10px!important}
+  .product-card p{font-size:8px!important}
+  .product-card .mt-4{margin-top:10px!important}
+  #detailModalContent{border-radius:26px 26px 0 0!important;padding:17px!important;max-height:90vh!important}
+}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}}
+</style>
 </head>
 <body class="bg-zinc-950 font-sans select-none text-zinc-100 uppercase min-h-screen flex flex-col">
 
@@ -50,7 +104,7 @@
     <!-- HEADER MARKETPLACE -->
     <div class="sticky top-0 z-40 bg-zinc-900/95 border-b border-zinc-800 backdrop-blur-md px-6 sm:px-16 py-4 flex items-center justify-between gap-6 shadow-sm">
       <div class="flex items-center gap-3.5 flex-shrink-0">
-        <img src="logo test.png" alt="Logo" class="h-10 sm:h-12 w-auto object-contain" onerror="this.style.display='none'">
+        <img loading="lazy" src="logo test.png" alt="Logo" class="h-10 sm:h-12 w-auto object-contain" onerror="this.style.display='none'">
         <div class="hidden xs:block">
           <span class="font-extrabold text-lg sm:text-2xl tracking-wider text-amber-400 block leading-none">ARCI</span>
           <span class="text-[9px] sm:text-[11px] font-semibold text-zinc-400 tracking-tight block mt-0.5">DIGITAL PRINT & STUDIO</span>
@@ -83,7 +137,7 @@
           <div id="sliderTrack" class="flex slider-track w-full h-[220px] sm:h-[450px]">
             <!-- Slide 1 -->
             <div class="w-full flex-shrink-0 relative">
-              <img src="vinyl.jpg" class="w-full h-full object-cover" onerror="this.src='https://via.placeholder.com/1400x450?text=ARCI+PORTOFOLIO+1'">
+              <img loading="eager" fetchpriority="high" src="vinyl.jpg" class="w-full h-full object-cover" onerror="this.src='https://via.placeholder.com/1400x450?text=ARCI+PORTOFOLIO+1'">
               <div class="absolute inset-0 bg-gradient-to-t from-zinc-950/90 via-zinc-950/20 to-transparent"></div>
               <div class="absolute bottom-6 left-6 sm:bottom-10 sm:left-10">
                 <span class="bg-amber-400 text-zinc-950 text-[10px] sm:text-xs font-extrabold px-3.5 py-1.5 rounded-md shadow uppercase tracking-widest">HASIL CETAK NYATA</span>
@@ -92,7 +146,7 @@
             </div>
             <!-- Slide 2 -->
             <div class="w-full flex-shrink-0 relative">
-              <img src="flexi-280.jpg" class="w-full h-full object-cover" onerror="this.src='https://via.placeholder.com/1400x450?text=ARCI+PORTOFOLIO+2'">
+              <img loading="eager" fetchpriority="high" src="flexi-280.jpg" class="w-full h-full object-cover" onerror="this.src='https://via.placeholder.com/1400x450?text=ARCI+PORTOFOLIO+2'">
               <div class="absolute inset-0 bg-gradient-to-t from-zinc-950/90 via-zinc-950/20 to-transparent"></div>
               <div class="absolute bottom-6 left-6 sm:bottom-10 sm:left-10">
                 <span class="bg-amber-400 text-zinc-950 text-[10px] sm:text-xs font-extrabold px-3.5 py-1.5 rounded-md shadow uppercase tracking-widest">HASIL CETAK NYATA</span>
@@ -101,7 +155,7 @@
             </div>
             <!-- Slide 3 -->
             <div class="w-full flex-shrink-0 relative">
-              <img src="ivory.jpg" class="w-full h-full object-cover" onerror="this.src='https://via.placeholder.com/1400x450?text=ARCI+PORTOFOLIO+3'">
+              <img loading="eager" fetchpriority="high" src="ivory.jpg" class="w-full h-full object-cover" onerror="this.src='https://via.placeholder.com/1400x450?text=ARCI+PORTOFOLIO+3'">
               <div class="absolute inset-0 bg-gradient-to-t from-zinc-950/90 via-zinc-950/20 to-transparent"></div>
               <div class="absolute bottom-6 left-6 sm:bottom-10 sm:left-10">
                 <span class="bg-amber-400 text-zinc-950 text-[10px] sm:text-xs font-extrabold px-3.5 py-1.5 rounded-md shadow uppercase tracking-widest">HASIL CETAK NYATA</span>
@@ -142,7 +196,7 @@
             <div onclick="openProductDetail('stiker')" data-key="stiker" data-name="stiker vinyl scotlite hologram kromo" class="product-card stiker bg-zinc-900 border border-zinc-800 rounded-2xl p-4 sm:p-5 shadow-sm flex flex-col justify-between cursor-pointer hover:border-amber-400 hover:shadow-amber-400/10 hover:-translate-y-1 transition duration-300">
               <div>
                 <div class="relative aspect-square rounded-xl overflow-hidden bg-zinc-800 border border-zinc-700 mb-3">
-                  <img src="vinyl.jpg" class="w-full h-full object-cover" onerror="this.src='https://via.placeholder.com/200'">
+                  <img loading="lazy" src="vinyl.jpg" class="w-full h-full object-cover" onerror="this.src='https://via.placeholder.com/200'">
                   <span class="absolute top-2 left-2 bg-amber-400 text-zinc-950 text-[9px] font-extrabold px-2 py-0.5 rounded shadow">⭐ FAVORIT</span>
                 </div>
                 <span class="text-[9px] font-bold text-amber-400">STIKER KUSTOM A3+</span>
@@ -156,7 +210,7 @@
             <div onclick="openProductDetail('banner')" data-key="banner" data-name="banner spanduk xbanner roll banner tripod" class="product-card banner bg-zinc-900 border border-zinc-800 rounded-2xl p-4 sm:p-5 shadow-sm flex flex-col justify-between cursor-pointer hover:border-amber-400 hover:shadow-amber-400/10 hover:-translate-y-1 transition duration-300">
               <div>
                 <div class="relative aspect-square rounded-xl overflow-hidden bg-zinc-800 border border-zinc-700 mb-3">
-                  <img src="flexi-280.jpg" class="w-full h-full object-cover" onerror="this.src='https://via.placeholder.com/200'">
+                  <img loading="lazy" src="flexi-280.jpg" class="w-full h-full object-cover" onerror="this.src='https://via.placeholder.com/200'">
                   <span class="absolute top-2 left-2 bg-amber-400 text-zinc-950 text-[9px] font-extrabold px-2 py-0.5 rounded shadow">🖼️ OUTDOOR</span>
                 </div>
                 <span class="text-[9px] font-bold text-amber-400">BANNER & STAND</span>
@@ -170,7 +224,7 @@
             <div onclick="openProductDetail('kertas')" data-key="kertas" data-name="cetak kertas a3+ art carton felt ivory duplex hvs" class="product-card kertas bg-zinc-900 border border-zinc-800 rounded-2xl p-4 sm:p-5 shadow-sm flex flex-col justify-between cursor-pointer hover:border-amber-400 hover:shadow-amber-400/10 hover:-translate-y-1 transition duration-300">
               <div>
                 <div class="relative aspect-square rounded-xl overflow-hidden bg-zinc-800 border border-zinc-700 mb-3">
-                  <img src="260.jpg" class="w-full h-full object-cover" onerror="this.src='https://via.placeholder.com/200'">
+                  <img loading="lazy" src="260.jpg" class="w-full h-full object-cover" onerror="this.src='https://via.placeholder.com/200'">
                   <span class="absolute top-2 left-2 bg-amber-400 text-zinc-950 text-[9px] font-extrabold px-2 py-0.5 rounded shadow">📋 CETAK A3+</span>
                 </div>
                 <span class="text-[9px] font-bold text-amber-400">CETAK KERTAS A3+</span>
@@ -184,7 +238,7 @@
             <div onclick="openProductDetail('indoor')" data-key="indoor" data-name="indoor stiker kaca maxdecal ritrama one way albatros" class="product-card indoor bg-zinc-900 border border-zinc-800 rounded-2xl p-4 sm:p-5 shadow-sm flex flex-col justify-between cursor-pointer hover:border-amber-400 hover:shadow-amber-400/10 hover:-translate-y-1 transition duration-300">
               <div>
                 <div class="relative aspect-square rounded-xl overflow-hidden bg-zinc-800 border border-zinc-700 mb-3">
-                  <img src="transparan.jpg" class="w-full h-full object-cover" onerror="this.src='https://via.placeholder.com/200'">
+                  <img loading="lazy" src="transparan.jpg" class="w-full h-full object-cover" onerror="this.src='https://via.placeholder.com/200'">
                   <span class="absolute top-2 left-2 bg-amber-400 text-zinc-950 text-[9px] font-extrabold px-2 py-0.5 rounded shadow">⚡ PRESISI</span>
                 </div>
                 <span class="text-[9px] font-bold text-amber-400">INDOOR & STIKER KACA</span>
@@ -198,7 +252,7 @@
             <div onclick="openProductDetail('akrilik')" data-key="akrilik" data-name="akrilik plakat bening putih hitam gold" class="product-card akrilik bg-zinc-900 border border-zinc-800 rounded-2xl p-4 sm:p-5 shadow-sm flex flex-col justify-between cursor-pointer hover:border-amber-400 hover:shadow-amber-400/10 hover:-translate-y-1 transition duration-300">
               <div>
                 <div class="relative aspect-square rounded-xl overflow-hidden bg-zinc-800 border border-zinc-700 mb-3">
-                  <img src="ivory.jpg" class="w-full h-full object-cover" onerror="this.src='https://via.placeholder.com/200'">
+                  <img loading="lazy" src="ivory.jpg" class="w-full h-full object-cover" onerror="this.src='https://via.placeholder.com/200'">
                   <span class="absolute top-2 left-2 bg-amber-400 text-zinc-950 text-[9px] font-extrabold px-2 py-0.5 rounded shadow">💎 MEWAH</span>
                 </div>
                 <span class="text-[9px] font-bold text-amber-400">AKRILIK & PLAKAT</span>
@@ -212,7 +266,7 @@
             <div onclick="openProductDetail('merch')" data-key="merch" data-name="merchandise mug medali ganci uv pulpen pin" class="product-card merch bg-zinc-900 border border-zinc-800 rounded-2xl p-4 sm:p-5 shadow-sm flex flex-col justify-between cursor-pointer hover:border-amber-400 hover:shadow-amber-400/10 hover:-translate-y-1 transition duration-300">
               <div>
                 <div class="relative aspect-square rounded-xl overflow-hidden bg-zinc-800 border border-zinc-700 mb-3">
-                  <img src="hologram.jpg" class="w-full h-full object-cover" onerror="this.src='https://via.placeholder.com/200'">
+                  <img loading="lazy" src="hologram.jpg" class="w-full h-full object-cover" onerror="this.src='https://via.placeholder.com/200'">
                   <span class="absolute top-2 left-2 bg-amber-400 text-zinc-950 text-[9px] font-extrabold px-2 py-0.5 rounded shadow">🎁 SOUVENIR</span>
                 </div>
                 <span class="text-[9px] font-bold text-amber-400">MERCHANDISE</span>
@@ -226,7 +280,7 @@
             <div onclick="openProductDetail('pack')" data-key="pack" data-name="packaging box custom dtf uv kaos lanyard" class="product-card pack bg-zinc-900 border border-zinc-800 rounded-2xl p-4 sm:p-5 shadow-sm flex flex-col justify-between cursor-pointer hover:border-amber-400 hover:shadow-amber-400/10 hover:-translate-y-1 transition duration-300">
               <div>
                 <div class="relative aspect-square rounded-xl overflow-hidden bg-zinc-800 border border-zinc-700 mb-3">
-                  <img src="ivory.jpg" class="w-full h-full object-cover" onerror="this.src='https://via.placeholder.com/200'">
+                  <img loading="lazy" src="ivory.jpg" class="w-full h-full object-cover" onerror="this.src='https://via.placeholder.com/200'">
                   <span class="absolute top-2 left-2 bg-amber-400 text-zinc-950 text-[9px] font-extrabold px-2 py-0.5 rounded shadow">📦 KEMASAN</span>
                 </div>
                 <span class="text-[9px] font-bold text-amber-400">PACKAGING & APPAREL</span>
@@ -240,7 +294,7 @@
             <div onclick="openProductDetail('kantor')" data-key="kantor" data-name="kantor buku yasin kartu nama menu undangan" class="product-card kantor bg-zinc-900 border border-zinc-800 rounded-2xl p-4 sm:p-5 shadow-sm flex flex-col justify-between cursor-pointer hover:border-amber-400 hover:shadow-amber-400/10 hover:-translate-y-1 transition duration-300">
               <div>
                 <div class="relative aspect-square rounded-xl overflow-hidden bg-zinc-800 border border-zinc-700 mb-3">
-                  <img src="concord.jpg" class="w-full h-full object-cover" onerror="this.src='https://via.placeholder.com/200'">
+                  <img loading="lazy" src="concord.jpg" class="w-full h-full object-cover" onerror="this.src='https://via.placeholder.com/200'">
                   <span class="absolute top-2 left-2 bg-amber-400 text-zinc-950 text-[9px] font-extrabold px-2 py-0.5 rounded shadow">📚 BUKU & KULINER</span>
                 </div>
                 <span class="text-[9px] font-bold text-amber-400">KANTOR, BUKU & KULINER</span>
@@ -269,17 +323,17 @@
             
             <div class="animate-marquee gap-5">
               <!-- Item Marquee -->
-              <div class="w-44 h-28 sm:w-64 sm:h-36 rounded-2xl bg-zinc-800 border border-zinc-700 flex-shrink-0 overflow-hidden shadow-lg"><img src="vinyl.jpg" class="w-full h-full object-cover" onerror="this.src='https://via.placeholder.com/300'"></div>
-              <div class="w-44 h-28 sm:w-64 sm:h-36 rounded-2xl bg-zinc-800 border border-zinc-700 flex-shrink-0 overflow-hidden shadow-lg"><img src="flexi-280.jpg" class="w-full h-full object-cover" onerror="this.src='https://via.placeholder.com/300'"></div>
-              <div class="w-44 h-28 sm:w-64 sm:h-36 rounded-2xl bg-zinc-800 border border-zinc-700 flex-shrink-0 overflow-hidden shadow-lg"><img src="ivory.jpg" class="w-full h-full object-cover" onerror="this.src='https://via.placeholder.com/300'"></div>
-              <div class="w-44 h-28 sm:w-64 sm:h-36 rounded-2xl bg-zinc-800 border border-zinc-700 flex-shrink-0 overflow-hidden shadow-lg"><img src="hologram.jpg" class="w-full h-full object-cover" onerror="this.src='https://via.placeholder.com/300'"></div>
-              <div class="w-44 h-28 sm:w-64 sm:h-36 rounded-2xl bg-zinc-800 border border-zinc-700 flex-shrink-0 overflow-hidden shadow-lg"><img src="transparan.jpg" class="w-full h-full object-cover" onerror="this.src='https://via.placeholder.com/300'"></div>
+              <div class="w-44 h-28 sm:w-64 sm:h-36 rounded-2xl bg-zinc-800 border border-zinc-700 flex-shrink-0 overflow-hidden shadow-lg"><img loading="lazy" src="vinyl.jpg" class="w-full h-full object-cover" onerror="this.src='https://via.placeholder.com/300'"></div>
+              <div class="w-44 h-28 sm:w-64 sm:h-36 rounded-2xl bg-zinc-800 border border-zinc-700 flex-shrink-0 overflow-hidden shadow-lg"><img loading="lazy" src="flexi-280.jpg" class="w-full h-full object-cover" onerror="this.src='https://via.placeholder.com/300'"></div>
+              <div class="w-44 h-28 sm:w-64 sm:h-36 rounded-2xl bg-zinc-800 border border-zinc-700 flex-shrink-0 overflow-hidden shadow-lg"><img loading="lazy" src="ivory.jpg" class="w-full h-full object-cover" onerror="this.src='https://via.placeholder.com/300'"></div>
+              <div class="w-44 h-28 sm:w-64 sm:h-36 rounded-2xl bg-zinc-800 border border-zinc-700 flex-shrink-0 overflow-hidden shadow-lg"><img loading="lazy" src="hologram.jpg" class="w-full h-full object-cover" onerror="this.src='https://via.placeholder.com/300'"></div>
+              <div class="w-44 h-28 sm:w-64 sm:h-36 rounded-2xl bg-zinc-800 border border-zinc-700 flex-shrink-0 overflow-hidden shadow-lg"><img loading="lazy" src="transparan.jpg" class="w-full h-full object-cover" onerror="this.src='https://via.placeholder.com/300'"></div>
               <!-- Duplikasi loop -->
-              <div class="w-44 h-28 sm:w-64 sm:h-36 rounded-2xl bg-zinc-800 border border-zinc-700 flex-shrink-0 overflow-hidden shadow-lg"><img src="vinyl.jpg" class="w-full h-full object-cover" onerror="this.src='https://via.placeholder.com/300'"></div>
-              <div class="w-44 h-28 sm:w-64 sm:h-36 rounded-2xl bg-zinc-800 border border-zinc-700 flex-shrink-0 overflow-hidden shadow-lg"><img src="flexi-280.jpg" class="w-full h-full object-cover" onerror="this.src='https://via.placeholder.com/300'"></div>
-              <div class="w-44 h-28 sm:w-64 sm:h-36 rounded-2xl bg-zinc-800 border border-zinc-700 flex-shrink-0 overflow-hidden shadow-lg"><img src="ivory.jpg" class="w-full h-full object-cover" onerror="this.src='https://via.placeholder.com/300'"></div>
-              <div class="w-44 h-28 sm:w-64 sm:h-36 rounded-2xl bg-zinc-800 border border-zinc-700 flex-shrink-0 overflow-hidden shadow-lg"><img src="hologram.jpg" class="w-full h-full object-cover" onerror="this.src='https://via.placeholder.com/300'"></div>
-              <div class="w-44 h-28 sm:w-64 sm:h-36 rounded-2xl bg-zinc-800 border border-zinc-700 flex-shrink-0 overflow-hidden shadow-lg"><img src="transparan.jpg" class="w-full h-full object-cover" onerror="this.src='https://via.placeholder.com/300'"></div>
+              <div class="w-44 h-28 sm:w-64 sm:h-36 rounded-2xl bg-zinc-800 border border-zinc-700 flex-shrink-0 overflow-hidden shadow-lg"><img loading="lazy" src="vinyl.jpg" class="w-full h-full object-cover" onerror="this.src='https://via.placeholder.com/300'"></div>
+              <div class="w-44 h-28 sm:w-64 sm:h-36 rounded-2xl bg-zinc-800 border border-zinc-700 flex-shrink-0 overflow-hidden shadow-lg"><img loading="lazy" src="flexi-280.jpg" class="w-full h-full object-cover" onerror="this.src='https://via.placeholder.com/300'"></div>
+              <div class="w-44 h-28 sm:w-64 sm:h-36 rounded-2xl bg-zinc-800 border border-zinc-700 flex-shrink-0 overflow-hidden shadow-lg"><img loading="lazy" src="ivory.jpg" class="w-full h-full object-cover" onerror="this.src='https://via.placeholder.com/300'"></div>
+              <div class="w-44 h-28 sm:w-64 sm:h-36 rounded-2xl bg-zinc-800 border border-zinc-700 flex-shrink-0 overflow-hidden shadow-lg"><img loading="lazy" src="hologram.jpg" class="w-full h-full object-cover" onerror="this.src='https://via.placeholder.com/300'"></div>
+              <div class="w-44 h-28 sm:w-64 sm:h-36 rounded-2xl bg-zinc-800 border border-zinc-700 flex-shrink-0 overflow-hidden shadow-lg"><img loading="lazy" src="transparan.jpg" class="w-full h-full object-cover" onerror="this.src='https://via.placeholder.com/300'"></div>
             </div>
           </div>
         </div>
