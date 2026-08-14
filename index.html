@@ -220,8 +220,7 @@ h2{font-size:clamp(34px,4vw,56px);letter-spacing:-.04em;line-height:1;margin:8px
       <div class="kicker" id="modalCat"></div>
       <h2 id="modalTitle" style="font-size:40px;margin-top:8px"></h2>
       <p id="modalSub" style="color:var(--muted)"></p>
-      <div class="option-group"><label>BAHAN</label><div class="options" id="materialOptions"></div></div>
-      <div class="option-group"><label>FINISHING</label><div class="options" id="finishOptions"></div></div>
+      <div id="configOptions"></div>
       <div class="option-group"><label>JUMLAH</label><div class="qty"><button onclick="changeQty(-1)">−</button><span id="qty">100</span><button onclick="changeQty(1)">+</button></div></div>
       <button class="btn btn-primary" style="width:100%;margin-top:10px" onclick="sendCurrentOrder()">ORDER VIA WHATSAPP →</button>
     </div>
@@ -229,65 +228,56 @@ h2{font-size:clamp(34px,4vw,56px);letter-spacing:-.04em;line-height:1;margin:8px
 </div>
 
 <script>
-const products = [{"id": "stiker", "name": "Stiker Vinyl", "sub": "Custom • Full Color", "category": "STIKER", "image": "images/stiker-vinyl.webp"}, {"id": "banner", "name": "Banner Flexi", "sub": "Indoor / Outdoor", "category": "BANNER", "image": "images/banner-flexi.webp"}, {"id": "akrilik", "name": "Ganci Akrilik", "sub": "Custom Shape", "category": "AKRILIK", "image": "images/ganci-akrilik.webp"}, {"id": "medali", "name": "Medali Akrilik", "sub": "Event • Award", "category": "AKRILIK", "image": "images/medali-akrilik.webp"}, {"id": "merch", "name": "Merchandise Custom", "sub": "Branding • Event", "category": "MERCH", "image": "images/merch.webp"}, {"id": "pack", "name": "Packaging Custom", "sub": "Box • Sleeve", "category": "PACKAGING", "image": "images/packaging.webp"}];
-let activeCategory = "SEMUA";
-let currentProduct = null;
-let qty = 100;
-const cats = ["SEMUA", ...new Set(products.map(p => p.category))];
-
-function renderFilters(){
-  document.getElementById("filters").innerHTML = cats.map(c =>
-    `<button class="filter ${c===activeCategory?"active":""}" onclick="setCategory('${c}')">${c}</button>`
-  ).join("");
-}
-function setCategory(c){ activeCategory=c; renderFilters(); renderProducts(); }
-function renderProducts(){
-  const q = document.getElementById("search").value.toLowerCase().trim();
-  const list = products.filter(p => (activeCategory==="SEMUA" || p.category===activeCategory) &&
-    (!q || (p.name+" "+p.sub+" "+p.category).toLowerCase().includes(q)));
-  document.getElementById("grid").innerHTML = list.map(p => `
-    <article class="card" onclick="openProduct('${p.id}')">
-      <div class="product-photo">
-        <img loading="lazy" src="${p.image}" alt="${p.name}" onerror="this.style.display='none';this.nextElementSibling.style.display='grid'">
-        <div class="photo-fallback" style="display:none">${p.name.toUpperCase()}<br>FOTO PRODUK</div>
-      </div>
-      <div class="card-body">
-        <div class="badge">${p.category}</div>
-        <h3>${p.name}</h3><p>${p.sub}</p>
-        <div class="card-link"><span>LIHAT PRODUK</span><span>→</span></div>
-      </div>
-    </article>`).join("") || `<div style="grid-column:1/-1;padding:60px;text-align:center;color:#777">Produk tidak ditemukan.</div>`;
-}
-function openProduct(id){
-  currentProduct = products.find(p=>p.id===id);
-  qty=100; document.getElementById("qty").textContent=qty;
-  document.getElementById("modalTitle").textContent=currentProduct.name;
-  document.getElementById("modalSub").textContent=currentProduct.sub;
-  document.getElementById("modalCat").textContent=currentProduct.category;
-  document.getElementById("modalImg").src=currentProduct.image;
-  document.getElementById("modalImg").onerror=()=>{document.getElementById("modalImg").style.opacity=".12"};
-  setOptions("materialOptions",["Vinyl","Kromo","Hologram","Akrilik Bening"]);
-  setOptions("finishOptions",["Glossy","Doff","Standard"]);
-  document.getElementById("modal").classList.add("open");
-  document.body.style.overflow="hidden";
-}
-function setOptions(id,items){
-  document.getElementById(id).innerHTML=items.map((x,i)=>`<button class="option ${i===0?"selected":""}" onclick="selectOption(this)">${x}</button>`).join("");
-}
+const products = [
+  {id:"stiker",name:"Stiker Custom",sub:"Vinyl • Kromo • Hologram",category:"STIKER",image:"images/stiker-vinyl.webp",options:[
+    ["BAHAN",["Vinyl","Kromo","Hologram"]],["LAMINASI",["Tanpa Laminasi","Glossy","Doff"]],["FINISHING",["Potong Cutter","Die Cut"]]]},
+  {id:"banner",name:"Banner Flexi",sub:"Indoor / Outdoor",category:"BANNER",image:"images/banner-flexi.webp",options:[
+    ["BAHAN",["Flexi 280gr","Flexi 340gr","Flexi 440gr"]],["FINISHING",["Potong","Mata Ayam","Selongsong"]]]},
+  {id:"indoor",name:"Cetak Indoor",sub:"Visual • Detail • Event",category:"INDOOR",image:"images/banner-flexi.webp",options:[
+    ["MESIN / VISUAL",["Standard","High Detail","Premium"]],["FINISHING",["Potong Cutter","Potong Bentuk"]]]},
+  {id:"rollbanner",name:"Roll Banner",sub:"Siap Display • Event",category:"INDOOR",image:"images/banner-flexi.webp",options:[
+    ["MESIN / VISUAL",["Standard","High Detail","Premium"]],["UKURAN",["60 × 160 cm","80 × 200 cm","85 × 200 cm"]]]},
+  {id:"eventdesk",name:"Event Desk",sub:"Display • Branding Event",category:"INDOOR",image:"images/banner-flexi.webp",options:[
+    ["MESIN / VISUAL",["Standard","High Detail","Premium"]],["FINISHING",["Potong","Rakit"]]]},
+  {id:"kertas",name:"Cetak Kertas A3+",sub:"Buku • Brosur • Kartu • Custom",category:"KERTAS",image:"images/merch.webp",options:[
+    ["BAHAN",["Art Carton 260","Paper Felt","Linen","Concord","Ivory","HVS 100gr","Duplex"]],["CETAK",["1 Sisi","2 Sisi"]],["LAMINASI",["Tanpa Laminasi","Glossy","Doff","Glitter"]],["FINISHING",["Potong Cutter","Staples Tengah","Jilid Samping","Spiral","Die Cut"]]]},
+  {id:"akrilik-gold",name:"Akrilik + Kaki Kotak + Gold",sub:"Display • Premium",category:"AKRILIK",image:"images/medali-akrilik.webp",options:[
+    ["MATERIAL",["Bening 2mm","Bening 3mm","Bening 5mm","Putih 2mm","Putih 3mm","Hitam 2mm","Hitam 3mm","Gold 2mm"]],["ADD-ON",["Tanpa Box","Box Akrilik"]]]},
+  {id:"akrilik-kotak",name:"Akrilik + Kaki Kotak",sub:"Display • Custom",category:"AKRILIK",image:"images/medali-akrilik.webp",options:[
+    ["MATERIAL",["Bening 2mm","Bening 3mm","Bening 5mm","Putih 2mm","Putih 3mm","Hitam 2mm","Hitam 3mm","Gold 2mm"]],["ADD-ON",["Tanpa Box","Box Akrilik"]]]},
+  {id:"akrilik-timpa",name:"Akrilik + Kaki Timpa 2",sub:"Display • Layered",category:"AKRILIK",image:"images/medali-akrilik.webp",options:[
+    ["MATERIAL",["Bening 2mm","Bening 3mm","Bening 5mm","Putih 2mm","Putih 3mm","Hitam 2mm","Hitam 3mm","Gold 2mm"]],["ADD-ON",["Tanpa Box","Box Akrilik"]]]},
+  {id:"tentcard",name:"Tent Card",sub:"Table Display • Custom",category:"AKRILIK",image:"images/medali-akrilik.webp",options:[
+    ["MATERIAL",["Bening 2mm","Bening 3mm","Putih 2mm","Hitam 2mm"]],["ADD-ON",["Tanpa Box","Box Akrilik"]]]},
+  {id:"nomor-rumah",name:"Nomor Rumah",sub:"Signage • Custom",category:"AKRILIK",image:"images/medali-akrilik.webp",options:[
+    ["MATERIAL",["Bening 2mm","Bening 3mm","Putih 2mm","Hitam 2mm","Gold 2mm"]],["ADD-ON",["Tanpa Box","Box Akrilik"]]]},
+  {id:"nomor-meja",name:"Nomor Meja",sub:"Table Number • Custom",category:"AKRILIK",image:"images/medali-akrilik.webp",options:[
+    ["MATERIAL",["Bening 2mm","Bening 3mm","Putih 2mm","Hitam 2mm","Gold 2mm"]],["ADD-ON",["Tanpa Box","Box Akrilik"]]]},
+  {id:"mug",name:"Mug Custom",sub:"Souvenir • Branding",category:"MERCHANDISE",image:"images/merch.webp",options:[["MODEL",["Mug Standard","Mug Custom"]],["CETAK",["1 Sisi","2 Sisi"]]]},
+  {id:"medali",name:"Medali Wisuda / Event",sub:"Award • Event",category:"MERCHANDISE",image:"images/medali-akrilik.webp",options:[["MODEL",["Custom"]],["FINISHING",["Standard","Premium"]]]},
+  {id:"ganci",name:"Ganci UV Bolak-Balik",sub:"Souvenir • Custom Shape",category:"MERCHANDISE",image:"images/ganci-akrilik.webp",options:[["CETAK",["1 Sisi","2 Sisi"]],["FINISHING",["Potong Bentuk","Die Cut"]]]},
+  {id:"plakat-souvenir",name:"Plakat Souvenir",sub:"Award • Souvenir",category:"MERCHANDISE",image:"images/medali-akrilik.webp",options:[["MODEL",["Custom"]],["ADD-ON",["Tanpa Box","Box"]]]},
+  {id:"topi",name:"Topi Custom",sub:"Branding • Event",category:"MERCHANDISE",image:"images/merch.webp",options:[["MODEL",["Topi Custom"]],["FINISHING",["Print","Bordir"]]]},
+  {id:"pulpen",name:"Pulpen Print",sub:"Corporate • Souvenir",category:"MERCHANDISE",image:"images/merch.webp",options:[["MODEL",["Pulpen Standard","Pulpen Premium"]]]},
+  {id:"pin",name:"Pin Bros",sub:"Event • Souvenir",category:"MERCHANDISE",image:"images/merch.webp",options:[["UKURAN",["25mm","32mm","44mm","58mm"]]]},
+  {id:"stempel",name:"Stempel",sub:"Flash • Custom",category:"STEMPEL",image:"images/merch.webp",options:[["MODEL",["Stempel Flash"]],["UKURAN",["Kecil","Sedang","Besar"]]]},
+  {id:"packaging",name:"Packaging Custom",sub:"Box • Sleeve",category:"PACKAGING",image:"images/packaging.webp",options:[["MODEL",["Box","Sleeve","Custom"]],["BAHAN",["Art Carton","Ivory","Duplex"]]]},
+  {id:"kantor",name:"Kebutuhan Kantor",sub:"Print • Branding • Stationery",category:"KANTOR",image:"images/merch.webp",options:[["MODEL",["Custom"]]]}
+];
+let activeCategory="SEMUA", currentProduct=null, qty=100;
+const cats=["SEMUA",...new Set(products.map(p=>p.category))];
+function renderFilters(){document.getElementById("filters").innerHTML=cats.map(c=>`<button class="filter ${c===activeCategory?"active":""}" onclick="setCategory('${c}')">${c}</button>`).join("")}
+function setCategory(c){activeCategory=c;renderFilters();renderProducts()}
+function renderProducts(){const q=document.getElementById("search").value.toLowerCase().trim();const list=products.filter(p=>(activeCategory==="SEMUA"||p.category===activeCategory)&&(!q||(p.name+" "+p.sub+" "+p.category).toLowerCase().includes(q)));document.getElementById("grid").innerHTML=list.map(p=>`<article class="card" onclick="openProduct('${p.id}')"><div class="product-photo"><img loading="lazy" src="${p.image}" alt="${p.name}" onerror="this.style.display='none';this.nextElementSibling.style.display='grid'"><div class="photo-fallback" style="display:none">${p.name.toUpperCase()}<br>FOTO PRODUK</div></div><div class="card-body"><div class="badge">${p.category}</div><h3>${p.name}</h3><p>${p.sub}</p><div class="card-link"><span>LIHAT PRODUK</span><span>→</span></div></div></article>`).join("")||`<div style="grid-column:1/-1;padding:60px;text-align:center;color:#777">Produk tidak ditemukan.</div>`}
+function setOptions(id,items){document.getElementById(id).innerHTML=items.map((x,i)=>`<button class="option ${i===0?"selected":""}" onclick="selectOption(this)">${x}</button>`).join("")}
+function openProduct(id){currentProduct=products.find(p=>p.id===id);qty=100;document.getElementById("qty").textContent=qty;document.getElementById("modalTitle").textContent=currentProduct.name;document.getElementById("modalSub").textContent=currentProduct.sub;document.getElementById("modalCat").textContent=currentProduct.category;document.getElementById("modalImg").src=currentProduct.image;document.getElementById("configOptions").innerHTML=currentProduct.options.map((g,i)=>`<div class="option-group"><label>${g[0]}</label><div class="options" id="opt-${i}"></div></div>`).join("");currentProduct.options.forEach((g,i)=>setOptions("opt-"+i,g[1]));document.getElementById("modal").classList.add("open");document.body.style.overflow="hidden"}
 function selectOption(el){[...el.parentElement.children].forEach(x=>x.classList.remove("selected"));el.classList.add("selected")}
 function changeQty(delta){qty=Math.max(1,qty+delta*10);document.getElementById("qty").textContent=qty}
 function closeModal(){document.getElementById("modal").classList.remove("open");document.body.style.overflow=""}
-function sendCurrentOrder(){
-  const selected=[...document.querySelectorAll(".option.selected")].map(x=>x.textContent);
-  orderWhatsApp(`${currentProduct.name} | Bahan: ${selected[0]} | Finishing: ${selected[1]} | Jumlah: ${qty}`);
-}
-function orderWhatsApp(text){
-  const phone="6280000000000";
-  const message=encodeURIComponent("Halo Borneo Grafisindo, saya mau konsultasi/order.\n\n"+text);
-  window.open("https://wa.me/"+phone+"?text="+message,"_blank");
-}
+function sendCurrentOrder(){const groups=[...document.querySelectorAll("#configOptions .option-group")];const selected=groups.map(g=>`${g.querySelector("label").textContent}: ${g.querySelector(".selected")?.textContent||"-"}`);orderWhatsApp(`${currentProduct.name}\n${selected.join("\n")}\nJumlah: ${qty}`)}
+function orderWhatsApp(text){const phone="6280000000000";const message=encodeURIComponent("Halo Borneo Grafisindo, saya mau konsultasi/order.\n\n"+text);window.open("https://wa.me/"+phone+"?text="+message,"_blank")}
 function scrollToOrder(){document.getElementById("order").scrollIntoView({behavior:"smooth"})}
-renderFilters(); renderProducts();
+renderFilters();renderProducts();
 </script>
 </body>
 </html>
