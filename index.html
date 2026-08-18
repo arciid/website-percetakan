@@ -93,7 +93,7 @@ h2{font-size:clamp(32px,4vw,52px);letter-spacing:-.04em;line-height:1;margin:8px
 .modal-media{min-height:450px;background:linear-gradient(135deg,#ddd,#fff);display:grid;place-items:center;padding:24px}
 .modal-media img{width:100%;height:100%;object-fit:cover;border-radius:18px;min-height:400px}
 .modal-content{padding:34px}
-.close{float:right;border:0;background:#e7e7e1;border-radius:50%;width:38px;height:38px;font-size:20px;font-weight:700}
+.close{float:right;border:0;background:#e7e7e1;border-radius:50%;width:38px;height:38px;font-size:20px;font-weight:700;display:inline-flex;align-items:center;justify-content:center;line-height:1;padding:0}
 .option-group{margin:20px 0}
 .option-group label{font-size:11px;font-weight:900;letter-spacing:.12em;color:#777;display:block;margin-bottom:9px}
 .options{display:flex;gap:8px;flex-wrap:wrap}
@@ -212,7 +212,7 @@ h2{font-size:clamp(32px,4vw,52px);letter-spacing:-.04em;line-height:1;margin:8px
       <h2 id="modalTitle" style="font-size:36px;margin-top:8px"></h2>
       <p id="modalSub" style="color:var(--muted)"></p>
       <div id="configOptions"></div>
-      <div class="option-group">
+      <div class="option-group" id="qtyGroup">
         <label>JUMLAH</label>
         <div class="qty"><button onclick="changeQty(-1)">−</button><span id="qty">100</span><button onclick="changeQty(1)">+</button></div>
       </div>
@@ -234,6 +234,18 @@ const products = [
       ["BAHAN", ["Vinyl", "Scotlite", "Kromo", "Transparan", "Hologram", "Chrome"]],
       ["LAMINASI", ["Tanpa Laminasi", "Glossy", "Doff", "Glitter"]],
       ["FINISHING", ["Potong Kotak / Strip", "Kisscut", "Diecut Pola"]]
+    ]
+  },
+  {
+    id: "stiker-timbul",
+    name: "Stiker Timbul Resin",
+    sub: "Efek 3D Tebal • Dome / Resin Finish",
+    category: "STIKER",
+    image: "images/stiker-vinyl.webp",
+    options: [
+      ["BAHAN DASAR", ["Vinyl Putih", "Hologram", "Chrome", "Gold"]],
+      ["FINISHING", ["Resin"]],
+      ["BENTUK POTONG", ["Sesuai Pola"]]
     ]
   },
 
@@ -306,7 +318,7 @@ const products = [
     category: "KERTAS",
     image: "images/merch.webp",
     options: [
-      ["BAHAN", ["Art Carton 260", "Paper Felt", "Linen", "Concord", "Ivory", "HVS 100gr", "Duplex"]],
+      ["BAHAN", ["Artpaper 260 gr", "Artpaper 190 gr", "Artpaper 120 gr", "Pindo Cad", "Concord", "HVS 100 gr", "Linen", "Rajawali", "Duplex", "Artpaper 300 gr", "New Top 200 gr", "Ivory 230 gr", "Via Felt 216 gr"]],
       ["SISI CETAK", ["1 Sisi", "2 Sisi"]],
       ["LAMINASI", ["Tanpa Laminasi", "Glossy", "Doff", "Glitter"]],
       ["FINISHING", ["Potong Cutter", "Staples Tengah", "Jilid Samping", "Spiral", "Die Cut"]]
@@ -366,7 +378,7 @@ const products = [
     category: "AKRILIK",
     image: "images/medali-akrilik.webp",
     options: [
-      ["ADD-ON", ["Tanpa Box", "Box Akrilik"]]
+      ["UKURAN", ["A6", "A5", "A4"]]
     ]
   },
   {
@@ -375,9 +387,7 @@ const products = [
     sub: "Signage Nomor Rumah Custom",
     category: "AKRILIK",
     image: "images/medali-akrilik.webp",
-    options: [
-      ["ADD-ON", ["Tanpa Box", "Box Akrilik"]]
-    ]
+    options: []
   },
   {
     id: "nomor-meja",
@@ -385,9 +395,7 @@ const products = [
     sub: "Sign Meja Cafe & Resto",
     category: "AKRILIK",
     image: "images/medali-akrilik.webp",
-    options: [
-      ["ADD-ON", ["Tanpa Box", "Box Akrilik"]]
-    ]
+    options: []
   },
 
   // MERCHANDISE
@@ -429,16 +437,6 @@ const products = [
     image: "images/ganci-akrilik.webp",
     options: [
       ["SISI CETAK", ["1 Sisi", "2 Sisi (Bolak-Balik)"]]
-    ]
-  },
-  {
-    id: "plakat-souvenir",
-    name: "Plakat Souvenir",
-    sub: "Penghargaan & Cinderamata",
-    category: "MERCHANDISE",
-    image: "images/medali-akrilik.webp",
-    options: [
-      ["ADD-ON", ["Tanpa Box", "Box Bludru / Box Custom"]]
     ]
   },
   {
@@ -529,14 +527,18 @@ function openProduct(id) {
   document.getElementById("modalCat").textContent = currentProduct.category;
   document.getElementById("modalImg").src = currentProduct.image;
   
-  document.getElementById("configOptions").innerHTML = currentProduct.options.map((g, i) => `
-    <div class="option-group">
-      <label>${g[0]}</label>
-      <div class="options" id="opt-${i}"></div>
-    </div>
-  `).join("");
-  
-  currentProduct.options.forEach((g, i) => setOptions("opt-" + i, g[1]));
+  if (currentProduct.options && currentProduct.options.length > 0) {
+    document.getElementById("configOptions").innerHTML = currentProduct.options.map((g, i) => `
+      <div class="option-group">
+        <label>${g[0]}</label>
+        <div class="options" id="opt-${i}"></div>
+      </div>
+    `).join("");
+    currentProduct.options.forEach((g, i) => setOptions("opt-" + i, g[1]));
+  } else {
+    document.getElementById("configOptions").innerHTML = "";
+  }
+
   document.getElementById("modal").classList.add("open");
   document.body.style.overflow = "hidden";
 }
@@ -559,7 +561,8 @@ function closeModal() {
 function sendCurrentOrder() {
   const groups = [...document.querySelectorAll("#configOptions .option-group")];
   const selected = groups.map(g => `${g.querySelector("label").textContent}: ${g.querySelector(".selected")?.textContent || "-"}`);
-  orderWhatsApp(`${currentProduct.name}\n${selected.join("\n")}\nJumlah: ${qty}`);
+  const specText = selected.length > 0 ? selected.join("\n") + "\n" : "";
+  orderWhatsApp(`${currentProduct.name}\n${specText}Jumlah: ${qty}`);
 }
 
 function orderWhatsApp(text) {
