@@ -229,18 +229,30 @@ h2{font-size:clamp(34px,4vw,56px);letter-spacing:-.04em;line-height:1;margin:8px
 
 <script>
 const products = [
-  {id:"stiker",name:"Stiker Custom",sub:"Vinyl • Kromo • Hologram",category:"STIKER",image:"images/stiker-vinyl.webp",options:[["BAHAN",["Vinyl","Kromo","Hologram"]],["LAMINASI",["Tanpa Laminasi","Glossy","Doff"]],["FINISHING",["Potong Cutter","Die Cut"]]]},
-  {id:"banner",name:"Banner Flexi",sub:"Indoor / Outdoor",category:"BANNER",image:"images/banner-flexi.webp",options:[["BAHAN",["Flexi 280gr","Flexi 340gr","Flexi 440gr"]],["FINISHING",["Potong","Mata Ayam","Selongsong"]]]},
-  {id:"indoor",name:"Cetak Indoor",sub:"Visual • Detail • Event",category:"INDOOR",image:"images/banner-flexi.webp",options:[["MESIN / VISUAL",["Standard","High Detail","Premium"]],["FINISHING",["Cetak Potong"]]]},
-  {id:"rollbanner",name:"Roll Banner",sub:"Siap Display • Event",category:"INDOOR",image:"images/banner-flexi.webp",options:[["MESIN / VISUAL",["Standard","High Detail","Premium"]],["UKURAN",["60 × 160 cm","80 × 200 cm","85 × 200 cm"]]]},
-  {id:"eventdesk",name:"Event Desk",sub:"Display • Branding Event",category:"INDOOR",image:"images/banner-flexi.webp",options:[["MESIN / VISUAL",["Standard","High Detail","Premium"]]]},
-  {id:"kertas",name:"Cetak Kertas",sub:"Brosur • Buku • Kartu • Custom",category:"KERTAS",image:"images/merch.webp",options:[["BAHAN",["Duplex"]],["CETAK",["1 Sisi","2 Sisi"]],["FINISHING",["Potong Cutter","Staples Tengah","Jilid Samping","Spiral","Die Cut"]]]},
-  {id:"akrilik-gold",name:"Akrilik + Kaki Kotak + Gold",sub:"Display • Premium",category:"AKRILIK",image:"images/medali-akrilik.webp",options:[["MATERIAL",["Bening 2mm","Bening 3mm","Bening 5mm","Bening 8mm","Putih 2mm","Putih 3mm","Hitam 2mm","Hitam 3mm","Gold 2mm"]],["ADD-ON",["Tanpa Box","Box Akrilik"]]]},
-  {id:"akrilik-kotak",name:"Akrilik + Kaki Kotak",sub:"Display • Custom",category:"AKRILIK",image:"images/medali-akrilik.webp",options:[["MATERIAL",["Bening 2mm","Bening 3mm","Bening 5mm","Putih 2mm","Putih 3mm","Hitam 2mm","Hitam 3mm","Gold 2mm"]],["ADD-ON",["Tanpa Box","Box Akrilik"]]]},
-  {id:"akrilik-timpa",name:"Akrilik + Kaki Timpa 2",sub:"Display • Layered",category:"AKRILIK",image:"images/medali-akrilik.webp",options:[["MATERIAL",["Bening 2mm","Bening 3mm","Bening 5mm","Putih 2mm","Putih 3mm","Hitam 2mm","Hitam 3mm","Gold 2mm"]],["ADD-ON",["Tanpa Box","Box Akrilik"]]]},
-  {id:"tentcard",name:"Tent Card",sub:"Table Display • Custom",category:"AKRILIK",image:"images/medali-akrilik.webp",options:[["MATERIAL",["Bening 2mm","Bening 3mm","Putih 2mm","Hitam 2mm"]],["ADD-ON",["Tanpa Box","Box Akrilik"]]]},
-  {id:"nomor-rumah",name:"Nomor Rumah",sub:"Signage • Custom",category:"AKRILIK",image:"images/medali-akrilik.webp",options:[["MATERIAL",["Bening 2mm","Bening 3mm","Putih 2mm","Hitam 2mm","Gold 2mm"]],["ADD-ON",["Tanpa Box","Box Akrilik"]]]},
-  {id:"nomor-meja",name:"Nomor Meja",sub:"Table Number • Custom",category:"AKRILIK",image:"images/medali-akrilik.webp",options:[["MATERIAL",["Bening 2mm","Bening 3mm","Putih 2mm","Hitam 2mm","Gold 2mm"]],["ADD-ON",["Tanpa Box","Box Akrilik"]]]},
+  {id:"stiker",name:"Stiker Custom",sub:"Vinyl • Kromo • Hologram",category:"STIKER",image:"images/stiker-vinyl.webp",options:[
+    ["BAHAN",["Vinyl","Kromo","Hologram"]],["LAMINASI",["Tanpa Laminasi","Glossy","Doff"]],["FINISHING",["Potong Cutter","Die Cut"]]]},
+  {id:"banner",name:"Banner Flexi",sub:"Indoor / Outdoor",category:"BANNER",image:"images/banner-flexi.webp",options:[
+    ["BAHAN",["Flexi 280gr","Flexi 340gr","Flexi 440gr"]],["FINISHING",["Potong","Mata Ayam","Selongsong"]]]},
+  {id:"indoor",name:"Cetak Indoor",sub:"Visual • Detail • Event",category:"INDOOR",image:"images/banner-flexi.webp",options:[
+    ["MESIN / VISUAL",["Standard","High Detail","Premium"]],["FINISHING",["Potong Cutter","Potong Bentuk"]]]},
+  {id:"rollbanner",name:"Roll Banner",sub:"Siap Display • Event",category:"INDOOR",image:"images/banner-flexi.webp",options:[
+    ["MESIN / VISUAL",["Standard","High Detail","Premium"]],["UKURAN",["60 × 160 cm","80 × 200 cm","85 × 200 cm"]]]},
+  {id:"eventdesk",name:"Event Desk",sub:"Display • Branding Event",category:"INDOOR",image:"images/banner-flexi.webp",options:[
+    ["MESIN / VISUAL",["Standard","High Detail","Premium"]],["FINISHING",["Potong","Rakit"]]]},
+  {id:"kertas",name:"Cetak Kertas A3+",sub:"Buku • Brosur • Kartu • Custom",category:"KERTAS",image:"images/merch.webp",options:[
+    ["BAHAN",["Art Carton 260","Paper Felt","Linen","Concord","Ivory","HVS 100gr","Duplex"]],["CETAK",["1 Sisi","2 Sisi"]],["LAMINASI",["Tanpa Laminasi","Glossy","Doff","Glitter"]],["FINISHING",["Potong Cutter","Staples Tengah","Jilid Samping","Spiral","Die Cut"]]]},
+  {id:"akrilik-gold",name:"Akrilik + Kaki Kotak + Gold",sub:"Display • Premium",category:"AKRILIK",image:"images/medali-akrilik.webp",options:[
+    ["MATERIAL",["Bening 2mm","Bening 3mm","Bening 5mm","Putih 2mm","Putih 3mm","Hitam 2mm","Hitam 3mm","Gold 2mm"]],["ADD-ON",["Tanpa Box","Box Akrilik"]]]},
+  {id:"akrilik-kotak",name:"Akrilik + Kaki Kotak",sub:"Display • Custom",category:"AKRILIK",image:"images/medali-akrilik.webp",options:[
+    ["MATERIAL",["Bening 2mm","Bening 3mm","Bening 5mm","Putih 2mm","Putih 3mm","Hitam 2mm","Hitam 3mm","Gold 2mm"]],["ADD-ON",["Tanpa Box","Box Akrilik"]]]},
+  {id:"akrilik-timpa",name:"Akrilik + Kaki Timpa 2",sub:"Display • Layered",category:"AKRILIK",image:"images/medali-akrilik.webp",options:[
+    ["MATERIAL",["Bening 2mm","Bening 3mm","Bening 5mm","Putih 2mm","Putih 3mm","Hitam 2mm","Hitam 3mm","Gold 2mm"]],["ADD-ON",["Tanpa Box","Box Akrilik"]]]},
+  {id:"tentcard",name:"Tent Card",sub:"Table Display • Custom",category:"AKRILIK",image:"images/medali-akrilik.webp",options:[
+    ["MATERIAL",["Bening 2mm","Bening 3mm","Putih 2mm","Hitam 2mm"]],["ADD-ON",["Tanpa Box","Box Akrilik"]]]},
+  {id:"nomor-rumah",name:"Nomor Rumah",sub:"Signage • Custom",category:"AKRILIK",image:"images/medali-akrilik.webp",options:[
+    ["MATERIAL",["Bening 2mm","Bening 3mm","Putih 2mm","Hitam 2mm","Gold 2mm"]],["ADD-ON",["Tanpa Box","Box Akrilik"]]]},
+  {id:"nomor-meja",name:"Nomor Meja",sub:"Table Number • Custom",category:"AKRILIK",image:"images/medali-akrilik.webp",options:[
+    ["MATERIAL",["Bening 2mm","Bening 3mm","Putih 2mm","Hitam 2mm","Gold 2mm"]],["ADD-ON",["Tanpa Box","Box Akrilik"]]]},
   {id:"mug",name:"Mug Custom",sub:"Souvenir • Branding",category:"MERCHANDISE",image:"images/merch.webp",options:[["MODEL",["Mug Standard","Mug Custom"]],["CETAK",["1 Sisi","2 Sisi"]]]},
   {id:"medali",name:"Medali Wisuda / Event",sub:"Award • Event",category:"MERCHANDISE",image:"images/medali-akrilik.webp",options:[["MODEL",["Custom"]],["FINISHING",["Standard","Premium"]]]},
   {id:"ganci",name:"Ganci UV Bolak-Balik",sub:"Souvenir • Custom Shape",category:"MERCHANDISE",image:"images/ganci-akrilik.webp",options:[["CETAK",["1 Sisi","2 Sisi"]],["FINISHING",["Potong Bentuk","Die Cut"]]]},
@@ -263,7 +275,7 @@ function selectOption(el){[...el.parentElement.children].forEach(x=>x.classList.
 function changeQty(delta){qty=Math.max(1,qty+delta*10);document.getElementById("qty").textContent=qty}
 function closeModal(){document.getElementById("modal").classList.remove("open");document.body.style.overflow=""}
 function sendCurrentOrder(){const groups=[...document.querySelectorAll("#configOptions .option-group")];const selected=groups.map(g=>`${g.querySelector("label").textContent}: ${g.querySelector(".selected")?.textContent||"-"}`);orderWhatsApp(`${currentProduct.name}\n${selected.join("\n")}\nJumlah: ${qty}`)}
-function orderWhatsApp(text){const phone="628XXXXXXXXXX"; // GANTI dengan nomor WhatsApp bisnisconst message=encodeURIComponent("Halo Borneo Grafisindo, saya mau konsultasi/order.\n\n"+text);window.open("https://wa.me/"+phone+"?text="+message,"_blank")}
+function orderWhatsApp(text){const phone="6280000000000";const message=encodeURIComponent("Halo Borneo Grafisindo, saya mau konsultasi/order.\n\n"+text);window.open("https://wa.me/"+phone+"?text="+message,"_blank")}
 function scrollToOrder(){document.getElementById("order").scrollIntoView({behavior:"smooth"})}
 renderFilters();renderProducts();
 </script>
