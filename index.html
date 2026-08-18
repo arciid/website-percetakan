@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Borneo Grafisindo — Premium Catalog Prototype</title>
-<meta name="description" content="Premium catalog prototype for Borneo Grafisindo">
+<title>Borneo Grafisindo — Premium Catalog</title>
+<meta name="description" content="Custom Printing & Creative Production">
 <style>
 :root{
   --black:#171719; --black2:#222226; --yellow:#ffc900; --red:#e52b32;
@@ -21,7 +21,8 @@ a{color:inherit;text-decoration:none}
 .topline{height:4px;background:linear-gradient(90deg,var(--yellow) 0 70%,var(--red) 70%)}
 .nav{position:sticky;top:0;z-index:30;background:rgba(23,23,25,.88);backdrop-filter:blur(16px);border-bottom:1px solid rgba(255,255,255,.08)}
 .nav-inner{height:76px;display:flex;align-items:center;justify-content:space-between;gap:24px}
-.logo{height:48px;width:auto;display:block;object-fit:contain;background:#fff;border-radius:10px;padding:2px}
+.logo-text{font-size:20px;font-weight:900;letter-spacing:-.03em;color:#fff;display:flex;align-items:center;gap:6px}
+.logo-text span{color:var(--yellow)}
 .navlinks{display:flex;gap:28px;color:#eee;font-size:14px;font-weight:700}
 .navlinks a:hover{color:var(--yellow)}
 .nav-cta{background:var(--yellow);color:var(--black);padding:12px 18px;border-radius:12px;font-weight:900;border:0}
@@ -31,43 +32,45 @@ a{color:inherit;text-decoration:none}
   radial-gradient(circle at 82% 20%,rgba(255,201,0,.15),transparent 28%),
   linear-gradient(130deg,transparent 0 62%,rgba(229,43,50,.08) 62% 64%,transparent 64% 100%);
   pointer-events:none}
-.hero-inner{min-height:690px;display:grid;grid-template-columns:1.05fr .95fr;align-items:center;gap:50px;position:relative}
+.hero-inner{min-height:600px;display:grid;grid-template-columns:1.1fr .9fr;align-items:center;gap:50px;position:relative}
 .eyebrow{display:inline-flex;align-items:center;gap:9px;font-size:12px;letter-spacing:.18em;font-weight:900;color:var(--yellow);text-transform:uppercase}
 .eyebrow:before{content:"";width:28px;height:3px;background:var(--red)}
-h1{font-size:clamp(48px,7vw,88px);line-height:.92;letter-spacing:-.055em;margin:20px 0 24px;max-width:780px}
+h1{font-size:clamp(44px,6vw,76px);line-height:.95;letter-spacing:-.055em;margin:20px 0 24px;max-width:780px}
 h1 span{color:var(--yellow)}
-.hero-copy{font-size:18px;line-height:1.7;color:#c8c8cb;max-width:600px}
+.hero-copy{font-size:17px;line-height:1.7;color:#c8c8cb;max-width:560px}
 .actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:30px}
-.btn{border:0;border-radius:14px;padding:15px 20px;font-weight:900}
+.btn{border:0;border-radius:14px;padding:15px 22px;font-weight:900;display:inline-flex;align-items:center;justify-content:center}
 .btn-primary{background:var(--yellow);color:var(--black)}
 .btn-secondary{background:transparent;color:#fff;border:1px solid #4b4b50}
-.hero-art{position:relative;min-height:470px;display:grid;place-items:center}
-.logo-orbit{position:absolute;width:min(450px,78vw);aspect-ratio:1;border:1px solid rgba(255,255,255,.12);border-radius:50%}
+.hero-art{position:relative;min-height:400px;display:grid;place-items:center}
+.logo-orbit{position:absolute;width:min(380px,78vw);aspect-ratio:1;border:1px solid rgba(255,255,255,.12);border-radius:50%}
 .logo-orbit:before,.logo-orbit:after{content:"";position:absolute;inset:9%;border-radius:50%;border:1px solid rgba(255,201,0,.2)}
 .logo-orbit:after{inset:20%;border-color:rgba(229,43,50,.2)}
-.hero-logo{width:min(390px,72vw);border-radius:24px;box-shadow:0 30px 90px rgba(0,0,0,.45);position:relative;z-index:2}
-.floating-tag{position:absolute;right:0;bottom:28px;background:#fff;color:var(--black);padding:13px 16px;border-radius:14px;font-size:12px;font-weight:900;box-shadow:var(--shadow)}
+.hero-badge-box{background:var(--black2);border:1px solid rgba(255,255,255,.15);border-radius:24px;padding:40px;text-align:center;box-shadow:0 30px 90px rgba(0,0,0,.45);z-index:2}
+.hero-badge-box h3{margin:0;font-size:28px;font-weight:900;letter-spacing:-.03em}
+.hero-badge-box p{margin:8px 0 0;color:var(--yellow);font-weight:700;font-size:14px}
+.floating-tag{position:absolute;right:0;bottom:10px;background:#fff;color:var(--black);padding:13px 16px;border-radius:14px;font-size:12px;font-weight:900;box-shadow:var(--shadow)}
 .section{padding:92px 0}
 .section-head{display:flex;align-items:end;justify-content:space-between;gap:24px;margin-bottom:34px}
 .kicker{font-size:12px;font-weight:900;letter-spacing:.16em;color:#777;text-transform:uppercase}
-h2{font-size:clamp(34px,4vw,56px);letter-spacing:-.04em;line-height:1;margin:8px 0 0}
+h2{font-size:clamp(32px,4vw,52px);letter-spacing:-.04em;line-height:1;margin:8px 0 0}
 .search{display:flex;align-items:center;gap:12px;background:#fff;border:1px solid var(--line);border-radius:16px;padding:0 17px;height:56px;box-shadow:0 10px 30px rgba(0,0,0,.04)}
 .search:focus-within{border-color:var(--yellow);box-shadow:0 0 0 4px rgba(255,201,0,.14)}
 .search input{border:0;outline:0;background:transparent;width:100%;font-size:15px}
 .filters{display:flex;gap:9px;overflow:auto;padding-bottom:8px;margin-bottom:28px;scrollbar-width:none}
 .filters::-webkit-scrollbar{display:none}
-.filter{border:1px solid #d6d6d0;background:transparent;border-radius:999px;padding:10px 16px;font-weight:800;white-space:nowrap}
+.filter{border:1px solid #d6d6d0;background:transparent;border-radius:999px;padding:10px 18px;font-weight:800;white-space:nowrap;transition:all .2s ease}
 .filter.active{background:var(--black);color:var(--yellow);border-color:var(--black)}
 .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
-.card{background:#fff;border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;transition:transform .25s ease,box-shadow .25s ease,border-color .25s ease}
+.card{background:#fff;border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;transition:transform .25s ease,box-shadow .25s ease,border-color .25s ease;cursor:pointer}
 .card:hover{transform:translateY(-6px);box-shadow:var(--shadow);border-color:#cfcfc8}
-.product-photo{aspect-ratio:4/3;background:linear-gradient(135deg,#ddd,#fff);position:relative;overflow:hidden}
+.product-photo{aspect-ratio:4/3;background:linear-gradient(135deg,#e8e8e4,#f5f5f2);position:relative;overflow:hidden;display:grid;place-items:center}
 .product-photo img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .45s ease}
 .card:hover .product-photo img{transform:scale(1.05)}
-.photo-fallback{position:absolute;inset:0;display:grid;place-items:center;color:#777;font-weight:900;letter-spacing:.08em;font-size:12px}
-.card-body{padding:19px}
-.badge{font-size:10px;letter-spacing:.12em;font-weight:900;color:#8b8b8d}
-.card h3{margin:8px 0 4px;font-size:22px;letter-spacing:-.03em}
+.photo-fallback{position:absolute;inset:0;display:grid;place-items:center;color:#777;font-weight:900;letter-spacing:.08em;font-size:12px;text-align:center;padding:15px}
+.card-body{padding:20px}
+.badge{font-size:11px;letter-spacing:.12em;font-weight:900;color:var(--muted);text-transform:uppercase}
+.card h3{margin:8px 0 4px;font-size:21px;letter-spacing:-.03em}
 .card p{margin:0;color:var(--muted);font-size:13px}
 .card-link{display:flex;justify-content:space-between;align-items:center;margin-top:20px;font-weight:900;font-size:13px}
 .card-link span:last-child{color:var(--red);font-size:20px}
@@ -87,48 +90,33 @@ h2{font-size:clamp(34px,4vw,56px);letter-spacing:-.04em;line-height:1;margin:8px
 .modal{position:fixed;inset:0;background:rgba(0,0,0,.7);backdrop-filter:blur(10px);display:none;align-items:center;justify-content:center;padding:20px;z-index:50}
 .modal.open{display:flex}
 .modal-box{width:min(920px,100%);max-height:90vh;overflow:auto;background:var(--paper);border-radius:26px;box-shadow:0 40px 120px rgba(0,0,0,.35);display:grid;grid-template-columns:1fr 1fr}
-.modal-media{min-height:480px;background:linear-gradient(135deg,#ddd,#fff);display:grid;place-items:center;padding:24px}
-.modal-media img{width:100%;height:100%;object-fit:cover;border-radius:18px;min-height:430px}
+.modal-media{min-height:450px;background:linear-gradient(135deg,#ddd,#fff);display:grid;place-items:center;padding:24px}
+.modal-media img{width:100%;height:100%;object-fit:cover;border-radius:18px;min-height:400px}
 .modal-content{padding:34px}
-.close{float:right;border:0;background:#e7e7e1;border-radius:50%;width:40px;height:40px;font-size:20px}
-.option-group{margin:24px 0}
+.close{float:right;border:0;background:#e7e7e1;border-radius:50%;width:38px;height:38px;font-size:20px;font-weight:700}
+.option-group{margin:20px 0}
 .option-group label{font-size:11px;font-weight:900;letter-spacing:.12em;color:#777;display:block;margin-bottom:9px}
 .options{display:flex;gap:8px;flex-wrap:wrap}
-.option{border:1px solid #ccc;background:#fff;border-radius:11px;padding:11px 13px;font-weight:800}
+.option{border:1px solid #ccc;background:#fff;border-radius:11px;padding:9px 13px;font-weight:800;font-size:13px;transition:all .15s ease}
 .option.selected{background:var(--black);color:var(--yellow);border-color:var(--black)}
 .qty{display:flex;align-items:center;width:max-content;border:1px solid #ccc;border-radius:12px;overflow:hidden;background:#fff}
-.qty button{width:42px;height:42px;border:0;background:#fff;font-weight:900}
-.qty span{min-width:52px;text-align:center;font-weight:900}
-.mobile-order{display:none}
+.qty button{width:40px;height:40px;border:0;background:#fff;font-weight:900}
+.qty span{min-width:48px;text-align:center;font-weight:900}
 @media(max-width:850px){
  .container{width:min(100% - 28px,700px)}
  .navlinks,.nav-cta{display:none} .menu{display:block}
- .hero-inner{grid-template-columns:1fr;min-height:auto;padding:75px 0 50px}
- .hero-art{min-height:330px;order:-1}
- .hero-logo{width:min(300px,80vw)}
- .logo-orbit{width:340px}
- .section{padding:65px 0}
- .section-head{display:block}
- .search{margin-top:20px}
+ .hero-inner{grid-template-columns:1fr;min-height:auto;padding:60px 0 40px}
+ .hero-art{min-height:280px;order:-1}
  .grid{grid-template-columns:repeat(2,1fr);gap:13px}
- .card-body{padding:15px} .card h3{font-size:18px}
- .portfolio{grid-template-columns:1fr 1fr} .port-card.tall{min-height:360px}
- .features{grid-template-columns:1fr}
- .cta-inner{display:block}
  .modal-box{grid-template-columns:1fr;max-height:94vh}
- .modal-media{min-height:250px} .modal-media img{min-height:250px}
+ .modal-media{min-height:220px}
+ .features{grid-template-columns:1fr}
 }
 @media(max-width:520px){
- h1{font-size:50px}
- .hero-copy{font-size:16px}
- .grid{grid-template-columns:1fr 1fr}
- .product-photo{aspect-ratio:1}
- .portfolio{grid-template-columns:1fr}
- .port-card.tall{min-height:300px}
- .port-card{min-height:200px}
+ h1{font-size:42px}
+ .grid{grid-template-columns:1fr}
  .modal-content{padding:22px}
 }
-@media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;transition:none!important}}
 </style>
 </head>
 <body>
@@ -136,4 +124,418 @@ h2{font-size:clamp(34px,4vw,56px);letter-spacing:-.04em;line-height:1;margin:8px
 
 <nav class="nav">
   <div class="container nav-inner">
-    <img class="logo" src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAMCAggICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAoICAgICgkJCAgNDQoIDQgICggBAwQEBgUGCgYGCg0NCg0NDQ0NDQ0NDQ0NDQ0NDQ0NDQ0NDQ0NDQ0NDQ0NDQ0NDQ0NDQ0NDQ0NDQ0NDQ0NDQ0NDf/AABEIAogEAAMBIgACEQEDEQH/xAAeAAACAQUBAQEAAAAAAAAAAAAAAQkCAwYHCAQFCv/EAGIQAAEDAgIEBgsLBwkGBAUDBQEAAgMEEQUSBgchMQgTQVFhcQkUIThis request was blocked by Gemini's filters. They can occasionally trigger by mistake on safe coding, security, or biology-related queries. Please try rephrasing your prompt. You can [send feedback](https://ai.google.dev/gemini-api/docs/troubleshooting#file-bug) or read more about [our policies here](https://policies.google.com/terms/generative-ai/use-policy).Saya hanya model bahasa dan tidak bisa membantu Anda untuk itu.
+    <div class="logo-text">BORNEO <span>GRAFISINDO</span></div>
+    <div class="navlinks">
+      <a href="#produk">Produk</a><a href="#portfolio">Portfolio</a><a href="#kenapa">Kenapa Kami</a>
+    </div>
+    <button class="nav-cta" onclick="scrollToOrder()">ORDER SEKARANG</button>
+    <button class="menu" aria-label="Menu" onclick="scrollToOrder()">☰</button>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="container hero-inner">
+    <div>
+      <div class="eyebrow">Modern Print Studio</div>
+      <h1>Bikin ide lo jadi <span>produk nyata.</span></h1>
+      <p class="hero-copy">Custom printing untuk branding, bisnis, event, merchandise, packaging, dan kebutuhan personal dengan hasil presisi.</p>
+      <div class="actions">
+        <a class="btn btn-primary" href="#produk">JELAJAHI PRODUK →</a>
+        <button class="btn btn-secondary" onclick="orderWhatsApp('Konsultasi umum')">WHATSAPP ↗</button>
+      </div>
+    </div>
+    <div class="hero-art">
+      <div class="logo-orbit"></div>
+      <div class="hero-badge-box">
+        <h3>BORNEO GRAFISINDO</h3>
+        <p>PREMIUM PRINTING STUDIO</p>
+      </div>
+      <div class="floating-tag">CUSTOM • PRINT • FINISH</div>
+    </div>
+  </div>
+</header>
+
+<main>
+<section class="section" id="produk">
+  <div class="container">
+    <div class="section-head">
+      <div><div class="kicker">Catalog</div><h2>Produk yang bisa lo buat.</h2></div>
+      <div class="search"><span>⌕</span><input id="search" type="search" placeholder="Cari stiker, banner, akrilik..." oninput="renderProducts()"></div>
+    </div>
+    <div class="filters" id="filters"></div>
+    <div class="grid" id="grid"></div>
+  </div>
+</section>
+
+<section class="section dark-section" id="kenapa">
+  <div class="container">
+    <div class="section-head"><div><div class="kicker">Why Borneo</div><h2>Visual yang bikin produk lo kelihatan serius.</h2></div></div>
+    <div class="features">
+      <div class="feature"><strong>Hasil jadi sebagai fokus</strong><p>Pilih produk yang lo inginkan, lalu tentukan bahan, finishing, dan jumlah sesuai kebutuhan.</p></div>
+      <div class="feature"><strong>Custom sesuai kebutuhan</strong><p>Pilihan opsi spesifikasi yang simpel dan jelas tanpa membingungkan istilah teknis percetakan.</p></div>
+      <div class="feature"><strong>Order langsung terhubung</strong><p>Setelah memilih spesifikasi, rincian pesanan langsung dirangkum otomatis ke WhatsApp.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="section dark-section" id="portfolio" style="padding-top:0">
+  <div class="container">
+    <div class="section-head"><div><div class="kicker">Selected Works</div><h2>Hasil karya kami.</h2></div></div>
+    <div class="portfolio">
+      <div class="port-card tall"><div class="port-label">STIKER • BRANDING PACKAGING</div></div>
+      <div class="port-card"><div class="port-label">AKRILIK DISPLAY • SIGNAGE</div></div>
+      <div class="port-card"><div class="port-label">MERCHANDISE & PROMOTION</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="cta" id="order">
+  <div class="container cta-inner">
+    <div><div class="kicker" style="color:#5d5100">Need custom?</div><h2>Belum tahu produk atau bahan yang cocok?</h2></div>
+    <button class="btn" style="background:var(--black);color:var(--yellow)" onclick="orderWhatsApp('Saya mau konsultasi produk custom')">KONSULTASI VIA WHATSAPP →</button>
+  </div>
+</section>
+</main>
+
+<footer style="background:var(--black);color:#aaa;padding:34px 0">
+  <div class="container" style="display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap">
+    <strong style="color:#fff">BORNEO GRAFISINDO</strong><span>© 2026 • Custom Print Studio</span>
+  </div>
+</footer>
+
+<div class="modal" id="modal" onclick="if(event.target===this)closeModal()">
+  <div class="modal-box">
+    <div class="modal-media"><img id="modalImg" alt=""></div>
+    <div class="modal-content">
+      <button class="close" onclick="closeModal()">×</button>
+      <div class="kicker" id="modalCat"></div>
+      <h2 id="modalTitle" style="font-size:36px;margin-top:8px"></h2>
+      <p id="modalSub" style="color:var(--muted)"></p>
+      <div id="configOptions"></div>
+      <div class="option-group">
+        <label>JUMLAH</label>
+        <div class="qty"><button onclick="changeQty(-1)">−</button><span id="qty">100</span><button onclick="changeQty(1)">+</button></div>
+      </div>
+      <button class="btn btn-primary" style="width:100%;margin-top:10px" onclick="sendCurrentOrder()">ORDER VIA WHATSAPP →</button>
+    </div>
+  </div>
+</div>
+
+<script>
+const products = [
+  // STIKER
+  {
+    id: "stiker",
+    name: "Stiker Custom",
+    sub: "Vinyl • Scotlite • Hologram • Chrome",
+    category: "STIKER",
+    image: "images/stiker-vinyl.webp",
+    options: [
+      ["BAHAN", ["Vinyl", "Scotlite", "Kromo", "Transparan", "Hologram", "Chrome"]],
+      ["LAMINASI", ["Tanpa Laminasi", "Glossy", "Doff", "Glitter"]],
+      ["FINISHING", ["Potong Kotak / Strip", "Kisscut", "Diecut Pola"]]
+    ]
+  },
+
+  // BANNER
+  {
+    id: "banner",
+    name: "Banner Outdoor / Event",
+    sub: "Flexi • X-Banner • Roll Banner",
+    category: "BANNER",
+    image: "images/banner-flexi.webp",
+    options: [
+      ["JENIS", ["Vinyl 280gr", "Korea 440gr", "X-Banner", "Roll Banner"]],
+      ["FINISHING", ["Mata Ayam", "Les Putih", "Lipat Keliling", "Lipat Keliling + Mata Ayam", "Selongsong Tiang"]]
+    ]
+  },
+
+  // CETAK INDOOR & DISPLAY MANDIRI
+  {
+    id: "indoor",
+    name: "Cetak Indoor",
+    sub: "High Detail Visual • Indoor Grade",
+    category: "INDOOR",
+    image: "images/banner-flexi.webp",
+    options: [
+      ["VISUAL HASIL", ["Eco Solvent", "Print UV"]],
+      ["BAHAN", ["Maxdecal", "Ritrama", "Transparan", "Hologram", "One Way", "Albatros", "Chrome"]],
+      ["LAMINASI", ["Tanpa Laminasi", "Glossy", "Doff", "Glitter"]],
+      ["FINISHING", ["Potong"]]
+    ]
+  },
+  {
+    id: "rollbanner",
+    name: "Roll Banner Indoor",
+    sub: "Siap Display • Promosi & Event",
+    category: "INDOOR",
+    image: "images/banner-flexi.webp",
+    options: [
+      ["UKURAN", ["60 × 160 cm", "80 × 200 cm", "85 × 200 cm"]]
+    ]
+  },
+  {
+    id: "eventdesk",
+    name: "Event Desk Portable",
+    sub: "Meja Display Booth Promosi",
+    category: "INDOOR",
+    image: "images/banner-flexi.webp",
+    options: [
+      ["FINISHING", ["Potong", "Rakit"]]
+    ]
+  },
+
+  // CETAK KERTAS A3+
+  {
+    id: "kertas-a3",
+    name: "Cetak Kertas A3+",
+    sub: "Brosur • Sertifikat • Kartu • Cover",
+    category: "KERTAS",
+    image: "images/merch.webp",
+    options: [
+      ["BAHAN", ["Art Carton 260", "Paper Felt", "Linen", "Concord", "Ivory", "HVS 100gr", "Duplex"]],
+      ["SISI CETAK", ["1 Sisi", "2 Sisi"]],
+      ["LAMINASI", ["Tanpa Laminasi", "Glossy", "Doff", "Glitter"]],
+      ["FINISHING", ["Potong Cutter", "Staples Tengah", "Jilid Samping", "Spiral", "Die Cut"]]
+    ]
+  },
+
+  // AKRILIK
+  {
+    id: "akrilik-gold",
+    name: "Akrilik + Kaki Kotak + Gold",
+    sub: "Display Eksklusif Kaki Gold",
+    category: "AKRILIK",
+    image: "images/medali-akrilik.webp",
+    options: [
+      ["ADD-ON", ["Tanpa Box", "Box Akrilik"]]
+    ]
+  },
+  {
+    id: "akrilik-kotak",
+    name: "Akrilik + Kaki Kotak",
+    sub: "Display Akrilik Standing",
+    category: "AKRILIK",
+    image: "images/medali-akrilik.webp",
+    options: [
+      ["ADD-ON", ["Tanpa Box", "Box Akrilik"]]
+    ]
+  },
+  {
+    id: "akrilik-timpa",
+    name: "Akrilik + Kaki Timpa 2",
+    sub: "Display Layered 2 Tingkat",
+    category: "AKRILIK",
+    image: "images/medali-akrilik.webp",
+    options: [
+      ["ADD-ON", ["Tanpa Box", "Box Akrilik"]]
+    ]
+  },
+  {
+    id: "tentcard",
+    name: "Tent Card Akrilik",
+    sub: "Daftar Menu & Table Display",
+    category: "AKRILIK",
+    image: "images/medali-akrilik.webp",
+    options: [
+      ["ADD-ON", ["Tanpa Box", "Box Akrilik"]]
+    ]
+  },
+  {
+    id: "nomor-rumah",
+    name: "Nomor Rumah Akrilik",
+    sub: "Signage Nomor Rumah Custom",
+    category: "AKRILIK",
+    image: "images/medali-akrilik.webp",
+    options: [
+      ["ADD-ON", ["Tanpa Box", "Box Akrilik"]]
+    ]
+  },
+  {
+    id: "nomor-meja",
+    name: "Nomor Meja Akrilik",
+    sub: "Sign Meja Cafe & Resto",
+    category: "AKRILIK",
+    image: "images/medali-akrilik.webp",
+    options: [
+      ["ADD-ON", ["Tanpa Box", "Box Akrilik"]]
+    ]
+  },
+
+  // MERCHANDISE
+  {
+    id: "mug",
+    name: "Mug Custom",
+    sub: "Souvenir Keramik Custom",
+    category: "MERCHANDISE",
+    image: "images/merch.webp",
+    options: [
+      ["MODEL", ["Mug Standard", "Mug Custom"]]
+    ]
+  },
+  {
+    id: "medali",
+    name: "Medali Wisuda / Event",
+    sub: "Award Akrilik / Logam",
+    category: "MERCHANDISE",
+    image: "images/medali-akrilik.webp",
+    options: [
+      ["MODEL", ["Custom"]]
+    ]
+  },
+  {
+    id: "ganci",
+    name: "Ganci UV Bolak-Balik",
+    sub: "Gantungan Kunci Print 2 Sisi",
+    category: "MERCHANDISE",
+    image: "images/ganci-akrilik.webp",
+    options: [
+      ["CETAK", ["Bolak-Balik (2 Sisi)"]]
+    ]
+  },
+  {
+    id: "plakat-souvenir",
+    name: "Plakat Souvenir",
+    sub: "Penghargaan & Cinderamata",
+    category: "MERCHANDISE",
+    image: "images/medali-akrilik.webp",
+    options: [
+      ["ADD-ON", ["Tanpa Box", "Box Bludru / Box Custom"]]
+    ]
+  },
+  {
+    id: "topi",
+    name: "Topi Custom",
+    sub: "Branding & Event Merchandise",
+    category: "MERCHANDISE",
+    image: "images/merch.webp",
+    options: [
+      ["FINISHING", ["Print", "Bordir"]]
+    ]
+  },
+  {
+    id: "pulpen",
+    name: "Pulpen Print",
+    sub: "Corporate Gift & Event",
+    category: "MERCHANDISE",
+    image: "images/merch.webp",
+    options: [
+      ["MODEL", ["Pulpen Standard", "Pulpen Premium"]]
+    ]
+  },
+  {
+    id: "pin",
+    name: "Pin Bros",
+    sub: "Pin Peniti Souvenir",
+    category: "MERCHANDISE",
+    image: "images/merch.webp",
+    options: [
+      ["UKURAN", ["25mm", "32mm", "44mm", "58mm"]]
+    ]
+  }
+];
+
+let activeCategory = "SEMUA", currentProduct = null, qty = 100;
+const cats = ["SEMUA", ...new Set(products.map(p => p.category))];
+
+function renderFilters() {
+  document.getElementById("filters").innerHTML = cats.map(c => `
+    <button class="filter ${c === activeCategory ? "active" : ""}" onclick="setCategory('${c}')">${c}</button>
+  `).join("");
+}
+
+function setCategory(c) {
+  activeCategory = c;
+  renderFilters();
+  renderProducts();
+}
+
+function renderProducts() {
+  const q = document.getElementById("search").value.toLowerCase().trim();
+  const list = products.filter(p => 
+    (activeCategory === "SEMUA" || p.category === activeCategory) &&
+    (!q || (p.name + " " + p.sub + " " + p.category).toLowerCase().includes(q))
+  );
+
+  document.getElementById("grid").innerHTML = list.map(p => `
+    <article class="card" onclick="openProduct('${p.id}')">
+      <div class="product-photo">
+        <img loading="lazy" src="${p.image}" alt="${p.name}" onerror="this.style.display='none';this.nextElementSibling.style.display='grid'">
+        <div class="photo-fallback" style="display:none">${p.name.toUpperCase()}<br><span style="font-size:10px;font-weight:400;color:#999">Klik untuk spesifikasi</span></div>
+      </div>
+      <div class="card-body">
+        <div class="badge">${p.category}</div>
+        <h3>${p.name}</h3>
+        <p>${p.sub}</p>
+        <div class="card-link">
+          <span>PILIH & ORDER</span>
+          <span>→</span>
+        </div>
+      </div>
+    </article>
+  `).join("") || `<div style="grid-column:1/-1;padding:60px;text-align:center;color:#777">Produk tidak ditemukan.</div>`;
+}
+
+function setOptions(id, items) {
+  document.getElementById(id).innerHTML = items.map((x, i) => `
+    <button class="option ${i === 0 ? "selected" : ""}" onclick="selectOption(this)">${x}</button>
+  `).join("");
+}
+
+function openProduct(id) {
+  currentProduct = products.find(p => p.id === id);
+  qty = 100;
+  document.getElementById("qty").textContent = qty;
+  document.getElementById("modalTitle").textContent = currentProduct.name;
+  document.getElementById("modalSub").textContent = currentProduct.sub;
+  document.getElementById("modalCat").textContent = currentProduct.category;
+  document.getElementById("modalImg").src = currentProduct.image;
+  
+  document.getElementById("configOptions").innerHTML = currentProduct.options.map((g, i) => `
+    <div class="option-group">
+      <label>${g[0]}</label>
+      <div class="options" id="opt-${i}"></div>
+    </div>
+  `).join("");
+  
+  currentProduct.options.forEach((g, i) => setOptions("opt-" + i, g[1]));
+  document.getElementById("modal").classList.add("open");
+  document.body.style.overflow = "hidden";
+}
+
+function selectOption(el) {
+  [...el.parentElement.children].forEach(x => x.classList.remove("selected"));
+  el.classList.add("selected");
+}
+
+function changeQty(delta) {
+  qty = Math.max(1, qty + delta * 10);
+  document.getElementById("qty").textContent = qty;
+}
+
+function closeModal() {
+  document.getElementById("modal").classList.remove("open");
+  document.body.style.overflow = "";
+}
+
+function sendCurrentOrder() {
+  const groups = [...document.querySelectorAll("#configOptions .option-group")];
+  const selected = groups.map(g => `${g.querySelector("label").textContent}: ${g.querySelector(".selected")?.textContent || "-"}`);
+  orderWhatsApp(`${currentProduct.name}\n${selected.join("\n")}\nJumlah: ${qty}`);
+}
+
+function orderWhatsApp(text) {
+  const phone = "6280000000000"; // Ganti nomor WhatsApp toko kamu di sini
+  const message = encodeURIComponent("Halo Borneo Grafisindo, saya mau order/tanya:\n\n" + text);
+  window.open("https://wa.me/" + phone + "?text=" + message, "_blank");
+}
+
+function scrollToOrder() {
+  document.getElementById("produk").scrollIntoView({behavior: "smooth"});
+}
+
+renderFilters();
+renderProducts();
+</script>
+</body>
+</html>
