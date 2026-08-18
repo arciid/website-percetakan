@@ -160,7 +160,7 @@ h2{font-size:clamp(32px,4vw,52px);letter-spacing:-.04em;line-height:1;margin:8px
   <div class="container">
     <div class="section-head">
       <div><div class="kicker">Catalog</div><h2>Produk yang bisa lo buat.</h2></div>
-      <div class="search"><span>⌕</span><input id="search" type="search" placeholder="Cari stiker, banner, akrilik..." oninput="renderProducts()"></div>
+      <div class="search"><span>⌕</span><input id="search" type="search" placeholder="Cari stiker, banner, akrilik, nota..." oninput="renderProducts()"></div>
     </div>
     <div class="filters" id="filters"></div>
     <div class="grid" id="grid"></div>
@@ -241,12 +241,25 @@ const products = [
   {
     id: "banner",
     name: "Banner Outdoor / Event",
-    sub: "Flexi • X-Banner • Roll Banner",
+    sub: "Flexi • Backlite • Display",
     category: "BANNER",
     image: "images/banner-flexi.webp",
     options: [
-      ["JENIS", ["Vinyl 280gr", "Korea 440gr", "X-Banner", "Roll Banner"]],
+      ["JENIS", ["Vinyl 280gr", "Korea 440gr", "Backlite", "X-Banner", "Roll Banner"]],
       ["FINISHING", ["Mata Ayam", "Les Putih", "Lipat Keliling", "Lipat Keliling + Mata Ayam", "Selongsong Tiang"]]
+    ]
+  },
+
+  // BENDERA
+  {
+    id: "bendera",
+    name: "Bendera & Umbul-Umbul",
+    sub: "Kain Cloth • TC • Satin",
+    category: "BENDERA",
+    image: "images/banner-flexi.webp",
+    options: [
+      ["BAHAN", ["Cloth Banner", "Kain TC", "Kain Satin"]],
+      ["FINISHING", ["Lem Tali / Keliling", "Selongsong Tiang", "Tanpa Finishing (Potong Pas)"]]
     ]
   },
 
@@ -281,7 +294,7 @@ const products = [
     category: "INDOOR",
     image: "images/banner-flexi.webp",
     options: [
-      ["FINISHING", ["Potong", "Rakit"]]
+      ["LAMINATING", ["Tanpa Laminating", "Glossy", "Doff"]]
     ]
   },
 
@@ -297,6 +310,21 @@ const products = [
       ["SISI CETAK", ["1 Sisi", "2 Sisi"]],
       ["LAMINASI", ["Tanpa Laminasi", "Glossy", "Doff", "Glitter"]],
       ["FINISHING", ["Potong Cutter", "Staples Tengah", "Jilid Samping", "Spiral", "Die Cut"]]
+    ]
+  },
+
+  // NOTA & KWITANSI
+  {
+    id: "nota-kwitansi",
+    name: "Nota & Kwitansi",
+    sub: "NCR Custom • Buku Pembukuan",
+    category: "KERTAS",
+    image: "images/merch.webp",
+    options: [
+      ["BAHAN / PLY", ["NCR 1 Ply (HVS)", "NCR 2 Ply", "NCR 3 Ply", "NCR 4 Ply"]],
+      ["UKURAN", ["1 Folio (F4)", "1/2 Folio", "1/3 Folio", "1/4 Folio"]],
+      ["CETAK", ["1 Warna", "Full Color"]],
+      ["FINISHING", ["Lem Samping (Bloklem)", "Porporasi + Penomoran", "Porporasi (Tanpa Penomoran)"]]
     ]
   },
 
@@ -364,6 +392,16 @@ const products = [
 
   // MERCHANDISE
   {
+    id: "tumbler",
+    name: "Tumbler Custom",
+    sub: "Souvenir • Custom Print UV",
+    category: "MERCHANDISE",
+    image: "images/merch.webp",
+    options: [
+      ["SISI CETAK", ["1 Sisi", "2 Sisi", "Print Keliling (Rotary)"]]
+    ]
+  },
+  {
     id: "mug",
     name: "Mug Custom",
     sub: "Souvenir Keramik Custom",
@@ -385,12 +423,12 @@ const products = [
   },
   {
     id: "ganci",
-    name: "Ganci UV Bolak-Balik",
-    sub: "Gantungan Kunci Print 2 Sisi",
+    name: "Ganci UV",
+    sub: "Gantungan Kunci Print UV Custom",
     category: "MERCHANDISE",
     image: "images/ganci-akrilik.webp",
     options: [
-      ["CETAK", ["Bolak-Balik (2 Sisi)"]]
+      ["SISI CETAK", ["1 Sisi", "2 Sisi (Bolak-Balik)"]]
     ]
   },
   {
@@ -525,7 +563,7 @@ function sendCurrentOrder() {
 }
 
 function orderWhatsApp(text) {
-  const phone = "6280000000000"; // Ganti nomor WhatsApp toko kamu di sini
+  const phone = "6280000000000";
   const message = encodeURIComponent("Halo Borneo Grafisindo, saya mau order/tanya:\n\n" + text);
   window.open("https://wa.me/" + phone + "?text=" + message, "_blank");
 }
