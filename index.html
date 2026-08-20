@@ -234,7 +234,8 @@ h2{font-size:clamp(32px,4vw,52px);letter-spacing:-.04em;line-height:1;margin:8px
 
 <script>
 // DAFTAR PRODUK BORNEO GRAFISINDO
-// Struktur path gambar: images/{kategori}/{nama-file}.webp
+// cover  : Foto showcase / kompilasi untuk Card Depan Katalog
+// images : Foto detail varian bahan/opsi di dalam Modal
 const products = [
   // STIKER
   {
@@ -242,6 +243,7 @@ const products = [
     name: "Stiker Custom",
     sub: "Vinyl • Scotlite • Hologram • Chrome",
     category: "STIKER",
+    cover: "images/stiker/cover.webp",
     images: [
       "images/stiker/vinyl.webp",
       "images/stiker/scotlite.webp",
@@ -266,6 +268,7 @@ const products = [
     name: "Stiker Timbul Resin",
     sub: "Efek 3D Tebal • Dome / Resin Finish",
     category: "STIKER",
+    cover: "images/stiker/timbul-cover.webp",
     images: [
       "images/stiker/timbul-resin.webp",
       "images/stiker/vinyl.webp",
@@ -286,6 +289,7 @@ const products = [
     name: "Banner Outdoor / Event",
     sub: "Flexi • Backlite • Display",
     category: "BANNER",
+    cover: "images/banner/cover.webp",
     images: [
       "images/banner/vinyl-280gr.webp",
       "images/banner/korea-440gr.webp",
@@ -305,6 +309,7 @@ const products = [
     name: "Bendera & Umbul-Umbul",
     sub: "Kain Cloth • TC • Satin",
     category: "BENDERA",
+    cover: "images/bendera/cover.webp",
     images: [
       "images/bendera/cloth-banner.webp",
       "images/bendera/kain-tc.webp",
@@ -322,6 +327,7 @@ const products = [
     name: "Cetak Indoor",
     sub: "High Detail Visual • Indoor Grade",
     category: "INDOOR",
+    cover: "images/indoor/cover.webp",
     images: [
       "images/indoor/maxdecal.webp",
       "images/indoor/ritrama.webp",
@@ -343,6 +349,7 @@ const products = [
     name: "Roll Banner Indoor",
     sub: "Siap Display • Promosi & Event",
     category: "INDOOR",
+    cover: "images/indoor/roll-banner-cover.webp",
     images: [
       "images/indoor/roll-banner.webp"
     ],
@@ -355,6 +362,7 @@ const products = [
     name: "Event Desk Portable",
     sub: "Meja Display Booth Promosi",
     category: "INDOOR",
+    cover: "images/indoor/event-desk-cover.webp",
     images: [
       "images/indoor/event-desk.webp"
     ],
@@ -369,6 +377,7 @@ const products = [
     name: "Cetak Kertas A3+",
     sub: "Brosur • Sertifikat • Kartu • Cover",
     category: "KERTAS",
+    cover: "images/kertas/cover.webp",
     images: [
       "images/kertas/artpaper-260-gr.webp",
       "images/kertas/artpaper-190-gr.webp",
@@ -398,6 +407,7 @@ const products = [
     name: "Nota & Kwitansi",
     sub: "NCR Custom • Buku Pembukuan",
     category: "KERTAS",
+    cover: "images/kertas/nota-cover.webp",
     images: [
       "images/kertas/ncr-1-ply.webp",
       "images/kertas/ncr-2-ply.webp",
@@ -418,6 +428,7 @@ const products = [
     name: "Akrilik + Kaki Kotak + Gold",
     sub: "Display Eksklusif Kaki Gold",
     category: "AKRILIK",
+    cover: "images/akrilik/kaki-gold-cover.webp",
     images: [
       "images/akrilik/kaki-gold.webp",
       "images/akrilik/box-akrilik.webp"
@@ -431,6 +442,7 @@ const products = [
     name: "Akrilik + Kaki Kotak",
     sub: "Display Akrilik Standing",
     category: "AKRILIK",
+    cover: "images/akrilik/kaki-kotak-cover.webp",
     images: [
       "images/akrilik/kaki-kotak.webp",
       "images/akrilik/box-akrilik.webp"
@@ -444,6 +456,7 @@ const products = [
     name: "Akrilik + Kaki Timpa 2",
     sub: "Display Layered 2 Tingkat",
     category: "AKRILIK",
+    cover: "images/akrilik/timpa-2-cover.webp",
     images: [
       "images/akrilik/timpa-2.webp",
       "images/akrilik/box-akrilik.webp"
@@ -457,6 +470,7 @@ const products = [
     name: "Tent Card Akrilik",
     sub: "Daftar Menu & Table Display",
     category: "AKRILIK",
+    cover: "images/akrilik/tent-card-cover.webp",
     images: [
       "images/akrilik/a6.webp",
       "images/akrilik/a5.webp",
@@ -471,6 +485,7 @@ const products = [
     name: "Nomor Rumah Akrilik",
     sub: "Signage Nomor Rumah Custom",
     category: "AKRILIK",
+    cover: "images/akrilik/nomor-rumah-cover.webp",
     images: [
       "images/akrilik/nomor-rumah.webp"
     ],
@@ -481,6 +496,7 @@ const products = [
     name: "Nomor Meja Akrilik",
     sub: "Sign Meja Cafe & Resto",
     category: "AKRILIK",
+    cover: "images/akrilik/nomor-meja-cover.webp",
     images: [
       "images/akrilik/nomor-meja.webp"
     ],
@@ -493,6 +509,7 @@ const products = [
     name: "Tumbler Custom",
     sub: "Souvenir • Custom Print UV",
     category: "MERCHANDISE",
+    cover: "images/merchandise/tumbler-cover.webp",
     images: [
       "images/merchandise/tumbler.webp",
       "images/merchandise/tumbler-1-sisi.webp",
@@ -508,6 +525,7 @@ const products = [
     name: "Mug Custom",
     sub: "Souvenir Keramik Custom",
     category: "MERCHANDISE",
+    cover: "images/merchandise/mug-cover.webp",
     images: [
       "images/merchandise/mug-standard.webp",
       "images/merchandise/mug-custom.webp"
@@ -521,6 +539,7 @@ const products = [
     name: "Medali Wisuda / Event",
     sub: "Award Akrilik / Logam",
     category: "MERCHANDISE",
+    cover: "images/merchandise/medali-cover.webp",
     images: [
       "images/merchandise/medali.webp"
     ],
@@ -533,6 +552,7 @@ const products = [
     name: "Ganci UV",
     sub: "Gantungan Kunci Print UV Custom",
     category: "MERCHANDISE",
+    cover: "images/merchandise/ganci-cover.webp",
     images: [
       "images/merchandise/ganci-1-sisi.webp",
       "images/merchandise/ganci-2-sisi.webp"
@@ -546,6 +566,7 @@ const products = [
     name: "Topi Custom",
     sub: "Branding & Event Merchandise",
     category: "MERCHANDISE",
+    cover: "images/merchandise/topi-cover.webp",
     images: [
       "images/merchandise/topi-print.webp",
       "images/merchandise/topi-bordir.webp"
@@ -559,6 +580,7 @@ const products = [
     name: "Pulpen Print",
     sub: "Corporate Gift & Event",
     category: "MERCHANDISE",
+    cover: "images/merchandise/pulpen-cover.webp",
     images: [
       "images/merchandise/pulpen-standard.webp",
       "images/merchandise/pulpen-premium.webp"
@@ -572,6 +594,7 @@ const products = [
     name: "Pin Bros",
     sub: "Pin Peniti Souvenir",
     category: "MERCHANDISE",
+    cover: "images/merchandise/pin-cover.webp",
     images: [
       "images/merchandise/pin-25mm.webp",
       "images/merchandise/pin-32mm.webp",
@@ -607,11 +630,11 @@ function renderProducts() {
   );
 
   document.getElementById("grid").innerHTML = list.map(p => {
-    const mainImg = p.images && p.images.length > 0 ? p.images[0] : "";
+    const displayImg = p.cover ? p.cover : (p.images && p.images.length > 0 ? p.images[0] : "");
     return `
       <article class="card" onclick="openProduct('${p.id}')">
         <div class="product-photo">
-          <img loading="lazy" src="${mainImg}" alt="${p.name}" onerror="this.style.display='none';this.nextElementSibling.style.display='grid'">
+          <img loading="lazy" src="${displayImg}" alt="${p.name}" onerror="this.style.display='none';this.nextElementSibling.style.display='grid'">
           <div class="photo-fallback" style="display:none">${p.name.toUpperCase()}<br><span style="font-size:10px;font-weight:400;color:#999">Klik untuk spesifikasi</span></div>
         </div>
         <div class="card-body">
