@@ -93,7 +93,7 @@ h2{font-size:clamp(32px,4vw,52px);letter-spacing:-.04em;line-height:1;margin:8px
 .modal-media{min-height:450px;background:linear-gradient(135deg,#e2e2de,#efefe9);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px;position:relative;gap:14px}
 .modal-media-main{width:100%;height:380px;border-radius:18px;overflow:hidden;background:#fff;position:relative;box-shadow:0 10px 25px rgba(0,0,0,.06)}
 .modal-media-main img{width:100%;height:100%;object-fit:cover;display:block}
-.gallery-dots{display:flex;gap:8px;justify-content:center;align-items:center}
+.gallery-dots{display:flex;gap:8px;justify-content:center;align-items:center;flex-wrap:wrap}
 .dot{width:10px;height:10px;border-radius:50%;background:#ccc;cursor:pointer;border:0;padding:0;transition:all .2s ease}
 .dot.active{background:var(--black);transform:scale(1.25);border-radius:6px;width:24px}
 .modal-content{padding:34px}
@@ -248,11 +248,16 @@ const products = [
       "images/stiker/kromo.webp",
       "images/stiker/transparan.webp",
       "images/stiker/hologram.webp",
-      "images/stiker/chrome.webp"
+      "images/stiker/chrome.webp",
+      "images/stiker/laminating-glossy.webp",
+      "images/stiker/laminating-doff.webp",
+      "images/stiker/laminating-glitter.webp",
+      "images/stiker/kisscut.webp",
+      "images/stiker/diecut.webp"
     ],
     options: [
       ["BAHAN", ["Vinyl", "Scotlite", "Kromo", "Transparan", "Hologram", "Chrome"]],
-      ["LAMINASI", ["Tanpa Laminasi", "Glossy", "Doff", "Glitter"]],
+      ["LAMINATING", ["Tanpa Laminating", "Glossy", "Doff", "Glitter"]],
       ["FINISHING", ["Potong Kotak / Strip", "Kisscut", "Diecut Pola"]]
     ]
   },
@@ -262,7 +267,11 @@ const products = [
     sub: "Efek 3D Tebal • Dome / Resin Finish",
     category: "STIKER",
     images: [
-      "images/stiker/timbul-resin.webp"
+      "images/stiker/timbul-resin.webp",
+      "images/stiker/vinyl.webp",
+      "images/stiker/hologram.webp",
+      "images/stiker/chrome.webp",
+      "images/stiker/gold.webp"
     ],
     options: [
       ["BAHAN DASAR", ["Vinyl Putih", "Hologram", "Chrome", "Gold"]],
@@ -278,8 +287,11 @@ const products = [
     sub: "Flexi • Backlite • Display",
     category: "BANNER",
     images: [
-      "images/banner/flexi.webp",
-      "images/banner/backlite.webp"
+      "images/banner/vinyl-280gr.webp",
+      "images/banner/korea-440gr.webp",
+      "images/banner/backlite.webp",
+      "images/banner/x-banner.webp",
+      "images/banner/roll-banner.webp"
     ],
     options: [
       ["JENIS", ["Vinyl 280gr", "Korea 440gr", "Backlite", "X-Banner", "Roll Banner"]],
@@ -294,8 +306,9 @@ const products = [
     sub: "Kain Cloth • TC • Satin",
     category: "BENDERA",
     images: [
-      "images/bendera/umbul-umbul.webp",
-      "images/bendera/satin.webp"
+      "images/bendera/cloth-banner.webp",
+      "images/bendera/kain-tc.webp",
+      "images/bendera/kain-satin.webp"
     ],
     options: [
       ["BAHAN", ["Cloth Banner", "Kain TC", "Kain Satin"]],
@@ -310,13 +323,18 @@ const products = [
     sub: "High Detail Visual • Indoor Grade",
     category: "INDOOR",
     images: [
+      "images/indoor/maxdecal.webp",
+      "images/indoor/ritrama.webp",
+      "images/indoor/transparan.webp",
+      "images/indoor/hologram.webp",
+      "images/indoor/one-way.webp",
       "images/indoor/albatros.webp",
-      "images/indoor/maxdecal.webp"
+      "images/indoor/chrome.webp"
     ],
     options: [
       ["VISUAL HASIL", ["Eco Solvent", "Print UV"]],
       ["BAHAN", ["Maxdecal", "Ritrama", "Transparan", "Hologram", "One Way", "Albatros", "Chrome"]],
-      ["LAMINASI", ["Tanpa Laminasi", "Glossy", "Doff", "Glitter"]],
+      ["LAMINATING", ["Tanpa Laminating", "Glossy", "Doff", "Glitter"]],
       ["FINISHING", ["Potong"]]
     ]
   },
@@ -352,13 +370,24 @@ const products = [
     sub: "Brosur • Sertifikat • Kartu • Cover",
     category: "KERTAS",
     images: [
-      "images/kertas/artpaper.webp",
-      "images/kertas/linen.webp"
+      "images/kertas/artpaper-260-gr.webp",
+      "images/kertas/artpaper-190-gr.webp",
+      "images/kertas/artpaper-120-gr.webp",
+      "images/kertas/pindo-cad.webp",
+      "images/kertas/concord.webp",
+      "images/kertas/hvs-100-gr.webp",
+      "images/kertas/linen.webp",
+      "images/kertas/rajawali.webp",
+      "images/kertas/duplex.webp",
+      "images/kertas/artpaper-300-gr.webp",
+      "images/kertas/new-top-200-gr.webp",
+      "images/kertas/ivory-230-gr.webp",
+      "images/kertas/via-felt-216-gr.webp"
     ],
     options: [
       ["BAHAN", ["Artpaper 260 gr", "Artpaper 190 gr", "Artpaper 120 gr", "Pindo Cad", "Concord", "HVS 100 gr", "Linen", "Rajawali", "Duplex", "Artpaper 300 gr", "New Top 200 gr", "Ivory 230 gr", "Via Felt 216 gr"]],
       ["SISI CETAK", ["1 Sisi", "2 Sisi"]],
-      ["LAMINASI", ["Tanpa Laminasi", "Glossy", "Doff", "Glitter"]],
+      ["LAMINATING", ["Tanpa Laminating", "Glossy", "Doff", "Glitter"]],
       ["FINISHING", ["Potong Cutter", "Staples Tengah", "Jilid Samping", "Spiral", "Die Cut"]]
     ]
   },
@@ -370,7 +399,10 @@ const products = [
     sub: "NCR Custom • Buku Pembukuan",
     category: "KERTAS",
     images: [
-      "images/kertas/nota.webp"
+      "images/kertas/ncr-1-ply.webp",
+      "images/kertas/ncr-2-ply.webp",
+      "images/kertas/ncr-3-ply.webp",
+      "images/kertas/ncr-4-ply.webp"
     ],
     options: [
       ["BAHAN / PLY", ["NCR 1 Ply (HVS)", "NCR 2 Ply", "NCR 3 Ply", "NCR 4 Ply"]],
@@ -388,7 +420,7 @@ const products = [
     category: "AKRILIK",
     images: [
       "images/akrilik/kaki-gold.webp",
-      "images/akrilik/kaki-gold-02.webp"
+      "images/akrilik/box-akrilik.webp"
     ],
     options: [
       ["ADD-ON", ["Tanpa Box", "Box Akrilik"]]
@@ -400,7 +432,8 @@ const products = [
     sub: "Display Akrilik Standing",
     category: "AKRILIK",
     images: [
-      "images/akrilik/kaki-kotak.webp"
+      "images/akrilik/kaki-kotak.webp",
+      "images/akrilik/box-akrilik.webp"
     ],
     options: [
       ["ADD-ON", ["Tanpa Box", "Box Akrilik"]]
@@ -412,7 +445,8 @@ const products = [
     sub: "Display Layered 2 Tingkat",
     category: "AKRILIK",
     images: [
-      "images/akrilik/timpa-2.webp"
+      "images/akrilik/timpa-2.webp",
+      "images/akrilik/box-akrilik.webp"
     ],
     options: [
       ["ADD-ON", ["Tanpa Box", "Box Akrilik"]]
@@ -424,7 +458,9 @@ const products = [
     sub: "Daftar Menu & Table Display",
     category: "AKRILIK",
     images: [
-      "images/akrilik/tent-card.webp"
+      "images/akrilik/a6.webp",
+      "images/akrilik/a5.webp",
+      "images/akrilik/a4.webp"
     ],
     options: [
       ["UKURAN", ["A6", "A5", "A4"]]
@@ -459,7 +495,9 @@ const products = [
     category: "MERCHANDISE",
     images: [
       "images/merchandise/tumbler.webp",
-      "images/merchandise/tumbler-02.webp"
+      "images/merchandise/tumbler-1-sisi.webp",
+      "images/merchandise/tumbler-2-sisi.webp",
+      "images/merchandise/tumbler-keliling.webp"
     ],
     options: [
       ["SISI CETAK", ["1 Sisi", "2 Sisi", "Print Keliling (Rotary)"]]
@@ -471,7 +509,8 @@ const products = [
     sub: "Souvenir Keramik Custom",
     category: "MERCHANDISE",
     images: [
-      "images/merchandise/mug.webp"
+      "images/merchandise/mug-standard.webp",
+      "images/merchandise/mug-custom.webp"
     ],
     options: [
       ["MODEL", ["Mug Standard", "Mug Custom"]]
@@ -495,7 +534,8 @@ const products = [
     sub: "Gantungan Kunci Print UV Custom",
     category: "MERCHANDISE",
     images: [
-      "images/merchandise/ganci.webp"
+      "images/merchandise/ganci-1-sisi.webp",
+      "images/merchandise/ganci-2-sisi.webp"
     ],
     options: [
       ["SISI CETAK", ["1 Sisi", "2 Sisi (Bolak-Balik)"]]
@@ -507,7 +547,8 @@ const products = [
     sub: "Branding & Event Merchandise",
     category: "MERCHANDISE",
     images: [
-      "images/merchandise/topi.webp"
+      "images/merchandise/topi-print.webp",
+      "images/merchandise/topi-bordir.webp"
     ],
     options: [
       ["FINISHING", ["Print", "Bordir"]]
@@ -519,7 +560,8 @@ const products = [
     sub: "Corporate Gift & Event",
     category: "MERCHANDISE",
     images: [
-      "images/merchandise/pulpen.webp"
+      "images/merchandise/pulpen-standard.webp",
+      "images/merchandise/pulpen-premium.webp"
     ],
     options: [
       ["MODEL", ["Pulpen Standard", "Pulpen Premium"]]
@@ -531,7 +573,10 @@ const products = [
     sub: "Pin Peniti Souvenir",
     category: "MERCHANDISE",
     images: [
-      "images/merchandise/pin.webp"
+      "images/merchandise/pin-25mm.webp",
+      "images/merchandise/pin-32mm.webp",
+      "images/merchandise/pin-44mm.webp",
+      "images/merchandise/pin-58mm.webp"
     ],
     options: [
       ["UKURAN", ["25mm", "32mm", "44mm", "58mm"]]
@@ -583,9 +628,9 @@ function renderProducts() {
   }).join("") || `<div style="grid-column:1/-1;padding:60px;text-align:center;color:#777">Produk tidak ditemukan.</div>`;
 }
 
-function setOptions(id, items) {
+function setOptions(id, items, groupName) {
   document.getElementById(id).innerHTML = items.map((x, i) => `
-    <button class="option ${i === 0 ? "selected" : ""}" onclick="selectOption(this)">${x}</button>
+    <button class="option ${i === 0 ? "selected" : ""}" onclick="selectOption(this, '${groupName}', '${x.replace(/'/g, "\\'")}')">${x}</button>
   `).join("");
 }
 
@@ -608,7 +653,7 @@ function openProduct(id) {
         <div class="options" id="opt-${i}"></div>
       </div>
     `).join("");
-    currentProduct.options.forEach((g, i) => setOptions("opt-" + i, g[1]));
+    currentProduct.options.forEach((g, i) => setOptions("opt-" + i, g[1], g[0]));
   } else {
     document.getElementById("configOptions").innerHTML = "";
   }
@@ -652,9 +697,24 @@ function setModalImage(idx) {
   updateModalGallery();
 }
 
-function selectOption(el) {
+function selectOption(el, groupName, optValue) {
   [...el.parentElement.children].forEach(x => x.classList.remove("selected"));
   el.classList.add("selected");
+
+  // Fitur Otomatis Ganti Visual Foto saat Tombol Opsi Diklik
+  if (currentProduct && currentProduct.images && currentProduct.images.length > 1) {
+    const rawTerms = optValue.toLowerCase().replace(/[^a-z0-9]/g, " ").trim().split(/\s+/);
+    
+    // Cari index gambar yang paling cocok dengan opsi tombol yang diklik
+    let matchIdx = currentProduct.images.findIndex(img => {
+      const imgLower = img.toLowerCase();
+      return rawTerms.some(term => term.length > 2 && imgLower.includes(term));
+    });
+
+    if (matchIdx !== -1) {
+      setModalImage(matchIdx);
+    }
+  }
 }
 
 function changeQty(delta) {
