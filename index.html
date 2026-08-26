@@ -131,7 +131,7 @@ h2{font-size:clamp(32px,4vw,52px);letter-spacing:-.04em;line-height:1;margin:8px
   <div class="container nav-inner">
     <div class="logo-text">BORNEO <span>GRAFISINDO</span></div>
     <div class="navlinks">
-      <a href="#kenapa">Kenapa Kami</a><a href="#produk">Produk</a><a href="#portfolio">Portfolio</a>
+      <a href="#portfolio">Portfolio</a><a href="#kenapa">Kenapa Kami</a><a href="#produk">Produk</a>
     </div>
     <button class="nav-cta" onclick="scrollToOrder()">ORDER SEKARANG</button>
     <button class="menu" aria-label="Menu" onclick="scrollToOrder()">☰</button>
@@ -161,8 +161,20 @@ h2{font-size:clamp(32px,4vw,52px);letter-spacing:-.04em;line-height:1;margin:8px
 </header>
 
 <main>
-<!-- SECTION WHY BORNEO (Pindah ke atas) -->
-<section class="section dark-section" id="kenapa">
+<!-- SECTION PORTFOLIO / HASIL KARYA KAMI (Naik di bawah Hero) -->
+<section class="section dark-section" id="portfolio">
+  <div class="container">
+    <div class="section-head"><div><div class="kicker">Selected Works</div><h2>Hasil karya kami.</h2></div></div>
+    <div class="portfolio">
+      <div class="port-card tall"><div class="port-label">STIKER • BRANDING PACKAGING</div></div>
+      <div class="port-card"><div class="port-label">AKRILIK DISPLAY • SIGNAGE</div></div>
+      <div class="port-card"><div class="port-label">MERCHANDISE & PROMOTION</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION WHY BORNEO -->
+<section class="section dark-section" id="kenapa" style="padding-top:0">
   <div class="container">
     <div class="section-head"><div><div class="kicker">Why Borneo</div><h2>Visual yang bikin produk lo kelihatan serius.</h2></div></div>
     <div class="features">
@@ -182,18 +194,6 @@ h2{font-size:clamp(32px,4vw,52px);letter-spacing:-.04em;line-height:1;margin:8px
     </div>
     <div class="filters" id="filters"></div>
     <div class="grid" id="grid"></div>
-  </div>
-</section>
-
-<!-- SECTION PORTFOLIO -->
-<section class="section dark-section" id="portfolio">
-  <div class="container">
-    <div class="section-head"><div><div class="kicker">Selected Works</div><h2>Hasil karya kami.</h2></div></div>
-    <div class="portfolio">
-      <div class="port-card tall"><div class="port-label">STIKER • BRANDING PACKAGING</div></div>
-      <div class="port-card"><div class="port-label">AKRILIK DISPLAY • SIGNAGE</div></div>
-      <div class="port-card"><div class="port-label">MERCHANDISE & PROMOTION</div></div>
-    </div>
   </div>
 </section>
 
@@ -762,7 +762,6 @@ function changeQty(delta) {
 }
 
 function closeModal() {
-  document.getElementById("modal").classList.remove("remove");
   document.getElementById("modal").classList.remove("open");
   document.body.style.overflow = "";
 }
