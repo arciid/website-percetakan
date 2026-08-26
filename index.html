@@ -81,9 +81,9 @@ h2{font-size:clamp(32px,4vw,52px);letter-spacing:-.04em;line-height:1;margin:8px
 .port-card:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 50%,rgba(0,0,0,.65))}
 .port-label{position:absolute;left:22px;bottom:20px;z-index:2;font-weight:900}
 .features{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
-.feature{background:#fff;border-radius:18px;padding:28px;border:1px solid var(--line)}
-.feature strong{font-size:18px;display:block;margin-bottom:8px}
-.feature p{margin:0;color:var(--muted);line-height:1.6;font-size:14px}
+.feature{background:var(--black2);border-radius:18px;padding:28px;border:1px solid rgba(255,255,255,.1)}
+.feature strong{font-size:18px;display:block;margin-bottom:8px;color:#fff}
+.feature p{margin:0;color:#a1a1a6;line-height:1.6;font-size:14px}
 .cta{background:var(--yellow);padding:60px 0}
 .cta-inner{display:flex;align-items:center;justify-content:space-between;gap:30px}
 .cta h2{max-width:650px}
@@ -131,7 +131,7 @@ h2{font-size:clamp(32px,4vw,52px);letter-spacing:-.04em;line-height:1;margin:8px
   <div class="container nav-inner">
     <div class="logo-text">BORNEO <span>GRAFISINDO</span></div>
     <div class="navlinks">
-      <a href="#produk">Produk</a><a href="#portfolio">Portfolio</a><a href="#kenapa">Kenapa Kami</a>
+      <a href="#kenapa">Kenapa Kami</a><a href="#produk">Produk</a><a href="#portfolio">Portfolio</a>
     </div>
     <button class="nav-cta" onclick="scrollToOrder()">ORDER SEKARANG</button>
     <button class="menu" aria-label="Menu" onclick="scrollToOrder()">☰</button>
@@ -161,17 +161,7 @@ h2{font-size:clamp(32px,4vw,52px);letter-spacing:-.04em;line-height:1;margin:8px
 </header>
 
 <main>
-<section class="section" id="produk">
-  <div class="container">
-    <div class="section-head">
-      <div><div class="kicker">Catalog</div><h2>Produk yang bisa lo buat.</h2></div>
-      <div class="search"><span>⌕</span><input id="search" type="search" placeholder="Cari stiker, banner, akrilik, nota..." oninput="renderProducts()"></div>
-    </div>
-    <div class="filters" id="filters"></div>
-    <div class="grid" id="grid"></div>
-  </div>
-</section>
-
+<!-- SECTION WHY BORNEO (Pindah ke atas) -->
 <section class="section dark-section" id="kenapa">
   <div class="container">
     <div class="section-head"><div><div class="kicker">Why Borneo</div><h2>Visual yang bikin produk lo kelihatan serius.</h2></div></div>
@@ -183,7 +173,20 @@ h2{font-size:clamp(32px,4vw,52px);letter-spacing:-.04em;line-height:1;margin:8px
   </div>
 </section>
 
-<section class="section dark-section" id="portfolio" style="padding-top:0">
+<!-- SECTION KATALOG PRODUK -->
+<section class="section" id="produk">
+  <div class="container">
+    <div class="section-head">
+      <div><div class="kicker">Catalog</div><h2>Produk yang bisa lo buat.</h2></div>
+      <div class="search"><span>⌕</span><input id="search" type="search" placeholder="Cari stiker, banner, akrilik, nota..." oninput="renderProducts()"></div>
+    </div>
+    <div class="filters" id="filters"></div>
+    <div class="grid" id="grid"></div>
+  </div>
+</section>
+
+<!-- SECTION PORTFOLIO -->
+<section class="section dark-section" id="portfolio">
   <div class="container">
     <div class="section-head"><div><div class="kicker">Selected Works</div><h2>Hasil karya kami.</h2></div></div>
     <div class="portfolio">
@@ -194,6 +197,7 @@ h2{font-size:clamp(32px,4vw,52px);letter-spacing:-.04em;line-height:1;margin:8px
   </div>
 </section>
 
+<!-- SECTION ORDER CTA -->
 <section class="cta" id="order">
   <div class="container cta-inner">
     <div><div class="kicker" style="color:#5d5100">Need custom?</div><h2>Belum tahu produk atau bahan yang cocok?</h2></div>
@@ -234,8 +238,6 @@ h2{font-size:clamp(32px,4vw,52px);letter-spacing:-.04em;line-height:1;margin:8px
 
 <script>
 // DAFTAR PRODUK BORNEO GRAFISINDO
-// cover  : Foto showcase / kompilasi untuk Card Depan Katalog
-// images : Foto detail varian bahan/opsi di dalam Modal
 const products = [
   // STIKER
   {
@@ -740,11 +742,9 @@ function selectOption(el, groupName, optValue) {
   [...el.parentElement.children].forEach(x => x.classList.remove("selected"));
   el.classList.add("selected");
 
-  // Fitur Otomatis Ganti Visual Foto saat Tombol Opsi Diklik
   if (currentProduct && currentProduct.images && currentProduct.images.length > 1) {
     const rawTerms = optValue.toLowerCase().replace(/[^a-z0-9]/g, " ").trim().split(/\s+/);
     
-    // Cari index gambar yang paling cocok dengan opsi tombol yang diklik
     let matchIdx = currentProduct.images.findIndex(img => {
       const imgLower = img.toLowerCase();
       return rawTerms.some(term => term.length > 2 && imgLower.includes(term));
@@ -762,6 +762,7 @@ function changeQty(delta) {
 }
 
 function closeModal() {
+  document.getElementById("modal").classList.remove("remove");
   document.getElementById("modal").classList.remove("open");
   document.body.style.overflow = "";
 }
@@ -774,7 +775,7 @@ function sendCurrentOrder() {
 }
 
 function orderWhatsApp(text) {
-  const phone = "6280000000000"; // Ganti dengan nomor WhatsApp Borneo Grafisindo (format: 628xxxxxxxxxx)
+  const phone = "6280000000000";
   const message = encodeURIComponent("Halo Borneo Grafisindo, saya mau order/tanya:\n\n" + text);
   window.open("https://wa.me/" + phone + "?text=" + message, "_blank");
 }
