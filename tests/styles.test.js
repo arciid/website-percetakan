@@ -17,3 +17,7 @@ test('interactive CSS retains compact controls and user preferences', () => {
   assert.match(css, /:focus-visible/);
   assert.match(css, /@media \(prefers-reduced-motion:\s*reduce\)/);
 });
+
+test('portrait gallery images are constrained to the modal frame', () => {
+  assert.match(css, /\.modal-media-main img\s*\{[^}]*position:\s*absolute[^}]*inset:\s*0[^}]*object-fit:\s*contain/s);
+});
