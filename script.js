@@ -101,6 +101,28 @@ const products = [
   },
 ];
 
+const imageMaps = {
+  stiker: { Vinyl: 0, Scotlite: 1, Kromo: 2, Transparan: 3, Hologram: 4, Chrome: 5, Glossy: 6, Doff: 7, Glitter: 8, Kisscut: 9, 'Diecut Pola': 10 },
+  'name-tag-resin': { Resin: 0, 'Vinyl Putih': 1, Chrome: 2, Gold: 3 },
+  banner: { 'Vinyl 280gr': 0, 'Korea 440gr': 1, Backlite: 2 },
+  xbanner: { Vinyl: 0, Korea: 1, Albatros: 2 },
+  rollbanner: { '60 × 160 cm': 0, '85 × 200 cm': 1 },
+  bendera: { 'Cloth Banner': 0, 'Kain TC': 1, 'Kain Satin': 2 },
+  indoor: { Maxdecal: 0, Ritrama: 1, Transparan: 2, Hologram: 3, 'One Way': 4, Albatros: 5, Chrome: 6 },
+  'kertas-a3': { 'Artpaper 260 gr': 0, 'Artpaper 190 gr': 1, 'Artpaper 120 gr': 2, 'Pindo Cad': 3, Concord: 4, 'HVS 100 gr': 5, Linen: 6, Rajawali: 7, Duplex: 8, 'Artpaper 300 gr': 9, 'New Top 200 gr': 10, 'Ivory 230 gr': 11, 'Via Felt 216 gr': 12 },
+  'nota-kwitansi': { 'NCR 1 Ply (HVS)': 0, 'NCR 2 Ply': 1, 'NCR 3 Ply': 2, 'NCR 4 Ply': 3 },
+  'akrilik-gold': { 'Tanpa Box': 0, 'Box Akrilik': 1 },
+  'akrilik-kotak': { 'Tanpa Box': 0, 'Box Akrilik': 1 },
+  'akrilik-timpa': { 'Tanpa Box': 0, 'Box Akrilik': 1 },
+  tentcard: { A6: 0, A5: 1, A4: 2 },
+  tumbler: { '1 Sisi': 1, '2 Sisi': 2, 'Print Keliling (Rotary)': 3 },
+  mug: { 'Mug Standard': 0, 'Mug Custom': 1 },
+  ganci: { '1 Sisi': 0, '2 Sisi (Bolak-Balik)': 1 },
+  topi: { Print: 0, Bordir: 1 },
+  pulpen: { 'Pulpen Standard': 0, 'Pulpen Premium': 1 },
+  pin: { '25mm': 0, '32mm': 1, '44mm': 2, '58mm': 3 },
+};
+
 function getCategories(items) {
   return [...new Set(items.map((product) => product.category))];
 }
@@ -125,6 +147,11 @@ function normalizePhone(value) {
 
 function changeQuantity(current, direction, rules) {
   return Math.max(rules.minQty, current + direction * rules.qtyStep);
+}
+
+function resolveImageIndex(product, optionValue) {
+  const index = imageMaps[product.id]?.[optionValue];
+  return Number.isInteger(index) && index >= 0 && index < product.images.length ? index : null;
 }
 
 function validateOrder(product, order) {
@@ -327,6 +354,11 @@ function initApp() {
           button.classList.add('selected');
           button.setAttribute('aria-pressed', 'true');
           selections[group] = value;
+          const imageIndex = resolveImageIndex(currentProduct, value);
+          if (imageIndex !== null) {
+            currentImageIndex = imageIndex;
+            renderGallery();
+          }
         });
         options.append(button);
       });
@@ -449,6 +481,7 @@ const publicApi = {
   searchProducts,
   normalizePhone,
   changeQuantity,
+  resolveImageIndex,
   validateOrder,
   buildWhatsAppMessage,
   buildWhatsAppUrl,

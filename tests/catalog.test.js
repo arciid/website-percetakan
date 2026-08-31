@@ -11,6 +11,7 @@ const {
   buildWhatsAppMessage,
   buildWhatsAppUrl,
   productCardMarkup,
+  resolveImageIndex,
 } = require('../script.js');
 
 test('catalog exposes 23 unique products across seven categories', () => {
@@ -84,4 +85,15 @@ test('product card keeps flow content outside its interactive button', () => {
   assert.match(button, /<span class="sr-only">Lihat dan pesan Stiker Custom<\/span>/);
   assert.doesNotMatch(button, /<(?:div|h[1-6]|p|article)\b/);
   assert.match(markup, /<h3>Stiker Custom<\/h3>/);
+});
+
+test('option images use explicit mappings without fuzzy filename guesses', () => {
+  const sticker = products.find((product) => product.id === 'stiker');
+  const tumbler = products.find((product) => product.id === 'tumbler');
+
+  assert.equal(resolveImageIndex(sticker, 'Scotlite'), 1);
+  assert.equal(resolveImageIndex(sticker, 'Doff'), 7);
+  assert.equal(resolveImageIndex(sticker, 'Tanpa Laminating'), null);
+  assert.equal(resolveImageIndex(tumbler, '2 Sisi'), 2);
+  assert.equal(resolveImageIndex(tumbler, 'sisi'), null);
 });
