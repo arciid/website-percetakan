@@ -65,8 +65,8 @@ h1 span { color: var(--yellow); }
 .hero-art { min-height: 440px; display: grid; place-items: center; position: relative; }
 .orbit { position: absolute; aspect-ratio: 1; border: 1px solid rgba(255, 255, 255, .13); border-radius: 50%; }
 .orbit-one { width: 410px; }
-.orbit-two { width: 310px; border-color: rgba(255, 201, 0, .2); }
-.hero-logo-card { width: 270px; aspect-ratio: 1; display: grid; place-items: center; z-index: 1; padding: 40px; border: 1px solid rgba(255, 255, 255, .14); border-radius: 28px; background: var(--ink-soft); box-shadow: 0 34px 100px rgba(0, 0, 0, .45); }
+.orbit-two { width: 350px; border-color: rgba(255, 201, 0, .2); }
+.hero-logo-card { width: 310px; aspect-ratio: 1; display: grid; place-items: center; z-index: 1; padding: 28px; border: 1px solid rgba(255, 201, 0, .42); border-radius: 50%; background: rgba(35, 35, 38, .88); box-shadow: 0 34px 100px rgba(0, 0, 0, .45); }
 .hero-logo-card img { width: 100%; height: 100%; object-fit: contain; }
 .floating-tag { position: absolute; right: 0; bottom: 36px; z-index: 2; padding: 13px 16px; border-radius: 12px; background: #fff; color: var(--ink); font-size: 11px; font-weight: 900; letter-spacing: .08em; }
 
@@ -198,7 +198,7 @@ h1 span { color: var(--yellow); }
   .hero-copy-wrap { padding: 76px 0 32px; }
   .hero-art { min-height: 330px; }
   .orbit-one { width: min(380px, 90vw); }
-  .hero-logo-card { width: 210px; padding: 32px; }
+  .hero-logo-card { width: 220px; padding: 20px; }
   .floating-tag { right: 5%; bottom: 26px; }
   .section { padding-block: 86px; }
   .section-heading { align-items: start; flex-direction: column; gap: 28px; margin-bottom: 40px; }
@@ -214,8 +214,10 @@ h1 span { color: var(--yellow); }
   .footer-inner { align-items: flex-start; flex-direction: column; }
   .modal { padding: 12px; }
   .modal-dialog { max-height: calc(100vh - 24px); grid-template-columns: 1fr; }
+  .modal-close { position: fixed; top: 22px; right: 22px; }
   .modal-media { min-height: auto; padding: 22px; }
   .modal-content { padding: 34px 24px 28px; }
+  .order-button { position: sticky; bottom: 0; z-index: 3; box-shadow: 0 -10px 24px rgba(244, 243, 238, .9); }
 }
 
 @media (max-width: 520px) {
@@ -226,7 +228,7 @@ h1 span { color: var(--yellow); }
   .product-photo { padding: 28px; }
   .modal-media-main { aspect-ratio: 1 / 1; }
   .modal-media-main img { padding: 14px; }
-  .modal-close { top: 10px; right: 10px; }
+  .modal-close { top: 22px; right: 22px; }
 }
 
 @media (prefers-reduced-motion: reduce) {

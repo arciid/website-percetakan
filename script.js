@@ -191,7 +191,7 @@ function productCardMarkup(product) {
   return `
     <article class="product-card">
       <div class="product-photo">
-        <img loading="lazy" src="${product.cover}" alt="Mockup ${product.name}">
+        <img loading="lazy" decoding="async" src="${product.cover}" alt="Mockup ${product.name}">
         ${productFallbackMarkup(product)}
       </div>
       <div class="product-body">
