@@ -10,6 +10,7 @@ const {
   validateOrder,
   buildWhatsAppMessage,
   buildWhatsAppUrl,
+  productCardMarkup,
 } = require('../script.js');
 
 test('catalog exposes 23 unique products across seven categories', () => {
@@ -74,4 +75,13 @@ test('WhatsApp message contains the complete customer configuration', () => {
   const url = buildWhatsAppUrl('082250965219', message);
   assert.ok(url.startsWith('https://wa.me/6282250965219?text='));
   assert.equal(decodeURIComponent(url.split('?text=')[1]), message);
+});
+
+test('product card keeps flow content outside its interactive button', () => {
+  const markup = productCardMarkup(products[0]);
+  const button = markup.match(/<button\b[\s\S]*?<\/button>/)?.[0] || '';
+
+  assert.match(button, /<span class="sr-only">Lihat dan pesan Stiker Custom<\/span>/);
+  assert.doesNotMatch(button, /<(?:div|h[1-6]|p|article)\b/);
+  assert.match(markup, /<h3>Stiker Custom<\/h3>/);
 });

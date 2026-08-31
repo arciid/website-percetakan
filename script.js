@@ -151,6 +151,34 @@ function buildWhatsAppUrl(phone, message) {
   return `https://wa.me/${normalizePhone(phone)}?text=${encodeURIComponent(message)}`;
 }
 
+function productFallbackMarkup(product) {
+  return `
+    <div class="image-fallback" data-accent="${product.accent}" hidden>
+      <span class="fallback-category">${product.category}</span>
+      <strong class="fallback-name">${product.name}</strong>
+      <span class="fallback-note">Foto segera tersedia</span>
+    </div>`;
+}
+
+function productCardMarkup(product) {
+  return `
+    <article class="product-card">
+      <div class="product-photo">
+        <img loading="lazy" src="${product.cover}" alt="Mockup ${product.name}">
+        ${productFallbackMarkup(product)}
+      </div>
+      <div class="product-body">
+        <span class="product-category">${product.category}</span>
+        <h3>${product.name}</h3>
+        <p>${product.sub}</p>
+        <span class="product-action"><span>PILIH & ORDER</span><span aria-hidden="true">→</span></span>
+      </div>
+      <button class="product-open" type="button" data-product-id="${product.id}">
+        <span class="sr-only">Lihat dan pesan ${product.name}</span>
+      </button>
+    </article>`;
+}
+
 function initApp() {
   const elements = {
     menuToggle: document.getElementById('menuToggle'),
@@ -187,15 +215,6 @@ function initApp() {
   let triggerElement = null;
 
   const categories = ['SEMUA', ...getCategories(products)];
-
-  function fallbackMarkup(product) {
-    return `
-      <div class="image-fallback" data-accent="${product.accent}" hidden>
-        <span class="fallback-category">${product.category}</span>
-        <strong class="fallback-name">${product.name}</strong>
-        <span class="fallback-note">Foto segera tersedia</span>
-      </div>`;
-  }
 
   function attachImageFallback(container) {
     const image = container.querySelector('img');
@@ -234,22 +253,7 @@ function initApp() {
       return;
     }
 
-    elements.grid.innerHTML = list.map((product) => `
-      <article class="product-card">
-        <button class="product-open" type="button" data-product-id="${product.id}" aria-label="Lihat dan pesan ${product.name}">
-          <div class="product-photo">
-            <img loading="lazy" src="${product.cover}" alt="Mockup ${product.name}">
-            ${fallbackMarkup(product)}
-          </div>
-          <div class="product-body">
-            <span class="product-category">${product.category}</span>
-            <h3>${product.name}</h3>
-            <p>${product.sub}</p>
-            <span class="product-action"><span>PILIH & ORDER</span><span aria-hidden="true">→</span></span>
-          </div>
-        </button>
-      </article>
-    `).join('');
+    elements.grid.innerHTML = list.map(productCardMarkup).join('');
 
     elements.grid.querySelectorAll('.product-photo').forEach(attachImageFallback);
     elements.grid.querySelectorAll('.product-open').forEach((button) => {
@@ -448,6 +452,7 @@ const publicApi = {
   validateOrder,
   buildWhatsAppMessage,
   buildWhatsAppUrl,
+  productCardMarkup,
   initApp,
 };
 
