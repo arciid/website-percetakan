@@ -151,6 +151,294 @@ function buildWhatsAppUrl(phone, message) {
   return `https://wa.me/${normalizePhone(phone)}?text=${encodeURIComponent(message)}`;
 }
 
+function initApp() {
+  const elements = {
+    menuToggle: document.getElementById('menuToggle'),
+    navLinks: document.getElementById('navLinks'),
+    search: document.getElementById('search'),
+    filters: document.getElementById('filters'),
+    productCount: document.getElementById('productCount'),
+    grid: document.getElementById('grid'),
+    modal: document.getElementById('modal'),
+    modalClose: document.getElementById('modalClose'),
+    modalTitle: document.getElementById('modalTitle'),
+    modalSub: document.getElementById('modalSub'),
+    modalCat: document.getElementById('modalCat'),
+    modalImg: document.getElementById('modalImg'),
+    modalFallback: document.getElementById('modalFallback'),
+    galleryDots: document.getElementById('galleryDots'),
+    configOptions: document.getElementById('configOptions'),
+    sizeGroup: document.getElementById('sizeGroup'),
+    sizeInput: document.getElementById('sizeInput'),
+    qty: document.getElementById('qty'),
+    qtyUnit: document.getElementById('qtyUnit'),
+    qtyMinus: document.getElementById('qtyMinus'),
+    qtyPlus: document.getElementById('qtyPlus'),
+    notes: document.getElementById('notes'),
+    orderError: document.getElementById('orderError'),
+    orderButton: document.getElementById('orderButton'),
+  };
+
+  let activeCategory = 'SEMUA';
+  let currentProduct = null;
+  let currentImageIndex = 0;
+  let quantity = 1;
+  let selections = {};
+  let triggerElement = null;
+
+  const categories = ['SEMUA', ...getCategories(products)];
+
+  function fallbackMarkup(product) {
+    return `
+      <div class="image-fallback" data-accent="${product.accent}" hidden>
+        <span class="fallback-category">${product.category}</span>
+        <strong class="fallback-name">${product.name}</strong>
+        <span class="fallback-note">Foto segera tersedia</span>
+      </div>`;
+  }
+
+  function attachImageFallback(container) {
+    const image = container.querySelector('img');
+    const fallback = container.querySelector('.image-fallback');
+    if (!image || !fallback) return;
+    const revealFallback = () => {
+      image.hidden = true;
+      fallback.hidden = false;
+    };
+    image.addEventListener('error', revealFallback, { once: true });
+    if (image.complete && image.naturalWidth === 0) revealFallback();
+  }
+
+  function renderFilters() {
+    elements.filters.replaceChildren(...categories.map((category) => {
+      const button = document.createElement('button');
+      button.type = 'button';
+      button.className = `filter${category === activeCategory ? ' active' : ''}`;
+      button.textContent = category;
+      button.setAttribute('aria-pressed', String(category === activeCategory));
+      button.addEventListener('click', () => {
+        activeCategory = category;
+        renderFilters();
+        renderProducts();
+      });
+      return button;
+    }));
+  }
+
+  function renderProducts() {
+    const list = searchProducts(products, activeCategory, elements.search.value);
+    elements.productCount.textContent = `${list.length} produk`;
+
+    if (!list.length) {
+      elements.grid.innerHTML = '<div class="empty-state"><strong>Produk tidak ditemukan.</strong><br>Coba kata kunci atau kategori lain.</div>';
+      return;
+    }
+
+    elements.grid.innerHTML = list.map((product) => `
+      <article class="product-card">
+        <button class="product-open" type="button" data-product-id="${product.id}" aria-label="Lihat dan pesan ${product.name}">
+          <div class="product-photo">
+            <img loading="lazy" src="${product.cover}" alt="Mockup ${product.name}">
+            ${fallbackMarkup(product)}
+          </div>
+          <div class="product-body">
+            <span class="product-category">${product.category}</span>
+            <h3>${product.name}</h3>
+            <p>${product.sub}</p>
+            <span class="product-action"><span>PILIH & ORDER</span><span aria-hidden="true">→</span></span>
+          </div>
+        </button>
+      </article>
+    `).join('');
+
+    elements.grid.querySelectorAll('.product-photo').forEach(attachImageFallback);
+    elements.grid.querySelectorAll('.product-open').forEach((button) => {
+      button.addEventListener('click', () => openProduct(button.dataset.productId, button));
+    });
+  }
+
+  function modalFallbackMarkup(product) {
+    elements.modalFallback.dataset.accent = product.accent;
+    elements.modalFallback.innerHTML = `
+      <span class="fallback-category">${product.category}</span>
+      <strong class="fallback-name">${product.name}</strong>
+      <span class="fallback-note">Foto segera tersedia</span>`;
+  }
+
+  function renderGallery() {
+    const images = currentProduct.images || [];
+    elements.modalImg.hidden = false;
+    elements.modalFallback.hidden = true;
+    modalFallbackMarkup(currentProduct);
+
+    if (!images.length) {
+      elements.modalImg.hidden = true;
+      elements.modalFallback.hidden = false;
+      elements.galleryDots.replaceChildren();
+      return;
+    }
+
+    elements.modalImg.src = images[currentImageIndex];
+    elements.modalImg.alt = `Mockup ${currentProduct.name}, gambar ${currentImageIndex + 1}`;
+    elements.modalImg.onerror = () => {
+      elements.modalImg.hidden = true;
+      elements.modalFallback.hidden = false;
+    };
+
+    elements.galleryDots.replaceChildren(...images.map((_, index) => {
+      const dot = document.createElement('button');
+      dot.type = 'button';
+      dot.className = `gallery-dot${index === currentImageIndex ? ' active' : ''}`;
+      dot.setAttribute('aria-label', `Tampilkan gambar ${index + 1} dari ${images.length}`);
+      dot.setAttribute('aria-current', index === currentImageIndex ? 'true' : 'false');
+      dot.addEventListener('click', () => {
+        currentImageIndex = index;
+        renderGallery();
+      });
+      return dot;
+    }));
+  }
+
+  function renderOptions() {
+    elements.configOptions.replaceChildren(...currentProduct.options.map(([group, values]) => {
+      selections[group] = values[0];
+      const wrapper = document.createElement('fieldset');
+      wrapper.className = 'option-group';
+      const legend = document.createElement('legend');
+      legend.className = 'option-group-label';
+      legend.textContent = group;
+      const options = document.createElement('div');
+      options.className = 'options';
+      values.forEach((value, index) => {
+        const button = document.createElement('button');
+        button.type = 'button';
+        button.className = `option${index === 0 ? ' selected' : ''}`;
+        button.textContent = value;
+        button.setAttribute('aria-pressed', String(index === 0));
+        button.addEventListener('click', () => {
+          options.querySelectorAll('.option').forEach((item) => {
+            item.classList.remove('selected');
+            item.setAttribute('aria-pressed', 'false');
+          });
+          button.classList.add('selected');
+          button.setAttribute('aria-pressed', 'true');
+          selections[group] = value;
+        });
+        options.append(button);
+      });
+      wrapper.append(legend, options);
+      return wrapper;
+    }));
+  }
+
+  function openProduct(productId, trigger) {
+    const product = products.find((item) => item.id === productId);
+    if (!product) return;
+    currentProduct = product;
+    currentImageIndex = 0;
+    quantity = product.defaultQty;
+    selections = {};
+    triggerElement = trigger;
+
+    elements.modalCat.textContent = product.category;
+    elements.modalTitle.textContent = product.name;
+    elements.modalSub.textContent = product.sub;
+    elements.qty.textContent = quantity;
+    elements.qtyUnit.textContent = product.unit;
+    elements.sizeGroup.hidden = !product.requiresSize;
+    elements.sizeInput.required = product.requiresSize;
+    elements.sizeInput.value = '';
+    elements.notes.value = '';
+    elements.orderError.hidden = true;
+    elements.orderError.textContent = '';
+    renderOptions();
+    renderGallery();
+
+    elements.modal.hidden = false;
+    document.body.classList.add('modal-open');
+    requestAnimationFrame(() => elements.modalClose.focus());
+  }
+
+  function closeModal() {
+    if (elements.modal.hidden) return;
+    elements.modal.hidden = true;
+    document.body.classList.remove('modal-open');
+    elements.modalImg.onerror = null;
+    if (triggerElement) triggerElement.focus();
+  }
+
+  function handleModalKeys(event) {
+    if (elements.modal.hidden) return;
+    if (event.key === 'Escape') {
+      closeModal();
+      return;
+    }
+    if (event.key !== 'Tab') return;
+    const focusable = [...elements.modal.querySelectorAll('button:not([disabled]), input:not([disabled]), textarea:not([disabled])')].filter((item) => !item.hidden && item.offsetParent !== null);
+    if (!focusable.length) return;
+    const first = focusable[0];
+    const last = focusable[focusable.length - 1];
+    if (event.shiftKey && document.activeElement === first) {
+      event.preventDefault();
+      last.focus();
+    } else if (!event.shiftKey && document.activeElement === last) {
+      event.preventDefault();
+      first.focus();
+    }
+  }
+
+  function updateQuantity(direction) {
+    quantity = changeQuantity(quantity, direction, currentProduct);
+    elements.qty.textContent = quantity;
+  }
+
+  function submitOrder() {
+    const order = {
+      size: elements.sizeInput.value,
+      quantity,
+      notes: elements.notes.value,
+    };
+    const errors = validateOrder(currentProduct, order);
+    if (errors.length) {
+      elements.orderError.textContent = errors.join(' ');
+      elements.orderError.hidden = false;
+      elements.sizeInput.focus();
+      return;
+    }
+    elements.orderError.hidden = true;
+    const message = buildWhatsAppMessage(currentProduct, selections, order);
+    window.open(buildWhatsAppUrl(BUSINESS_PHONE, message), '_blank', 'noopener,noreferrer');
+  }
+
+  elements.search.addEventListener('input', renderProducts);
+  elements.menuToggle.addEventListener('click', () => {
+    const expanded = elements.menuToggle.getAttribute('aria-expanded') === 'true';
+    elements.menuToggle.setAttribute('aria-expanded', String(!expanded));
+    elements.navLinks.classList.toggle('open', !expanded);
+    elements.menuToggle.querySelector('.sr-only').textContent = expanded ? 'Buka menu' : 'Tutup menu';
+  });
+  elements.navLinks.querySelectorAll('a').forEach((link) => link.addEventListener('click', () => {
+    elements.menuToggle.setAttribute('aria-expanded', 'false');
+    elements.navLinks.classList.remove('open');
+  }));
+  elements.modalClose.addEventListener('click', closeModal);
+  elements.modal.querySelector('[data-close-modal]').addEventListener('click', closeModal);
+  elements.qtyMinus.addEventListener('click', () => updateQuantity(-1));
+  elements.qtyPlus.addEventListener('click', () => updateQuantity(1));
+  elements.orderButton.addEventListener('click', submitOrder);
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape' && elements.navLinks.classList.contains('open')) {
+      elements.menuToggle.setAttribute('aria-expanded', 'false');
+      elements.navLinks.classList.remove('open');
+      elements.menuToggle.focus();
+    }
+    handleModalKeys(event);
+  });
+
+  renderFilters();
+  renderProducts();
+}
+
 const publicApi = {
   products,
   getCategories,
@@ -160,6 +448,8 @@ const publicApi = {
   validateOrder,
   buildWhatsAppMessage,
   buildWhatsAppUrl,
+  initApp,
 };
 
 if (typeof module !== 'undefined' && module.exports) module.exports = publicApi;
+if (typeof document !== 'undefined') document.addEventListener('DOMContentLoaded', initApp);
