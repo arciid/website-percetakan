@@ -37,10 +37,46 @@ test('quantity follows product increments without crossing its minimum', () => {
   const sticker = products.find((product) => product.id === 'stiker');
   const eventDesk = products.find((product) => product.id === 'eventdesk');
 
-  assert.equal(changeQuantity(100, -1, sticker), 90);
-  assert.equal(changeQuantity(10, -1, sticker), 10);
+  assert.equal(changeQuantity(1, -1, sticker), 1);
+  assert.equal(changeQuantity(1, 1, sticker), 2);
   assert.equal(changeQuantity(1, -1, eventDesk), 1);
   assert.equal(changeQuantity(1, 1, eventDesk), 2);
+});
+
+test('every product can be ordered from one in increments of one', () => {
+  products.forEach((product) => {
+    assert.equal(product.defaultQty, 1, `${product.id} default quantity`);
+    assert.equal(product.minQty, 1, `${product.id} minimum quantity`);
+    assert.equal(product.qtyStep, 1, `${product.id} quantity step`);
+  });
+});
+
+test('print products expose the agreed customer-facing units', () => {
+  const units = Object.fromEntries(products.map((product) => [product.id, product.unit]));
+
+  assert.equal(units.stiker, 'lembar');
+  assert.equal(units['name-tag-resin'], 'pcs');
+  assert.equal(units.banner, 'meter');
+  assert.equal(units.bendera, 'meter');
+  assert.equal(units.indoor, 'meter');
+  assert.equal(units['kertas-a3'], 'lembar');
+  assert.equal(units['nota-kwitansi'], 'rim');
+  assert.equal(units.xbanner, 'set');
+  assert.equal(units.rollbanner, 'set');
+  assert.equal(units.eventdesk, 'set');
+});
+
+test('name tag resin uses a fixed 8 × 5 cm size without free-size validation', () => {
+  const nameTag = products.find((product) => product.id === 'name-tag-resin');
+  const sizeOption = nameTag.options.find(([group]) => group === 'UKURAN');
+
+  assert.deepEqual(sizeOption, ['UKURAN', ['8 × 5 cm']]);
+  assert.equal(nameTag.requiresSize, false);
+  assert.deepEqual(validateOrder(nameTag, { size: '' }), []);
+
+  const message = buildWhatsAppMessage(nameTag, { UKURAN: '8 × 5 cm' }, { quantity: 1 });
+  assert.match(message, /UKURAN: 8 × 5 cm/);
+  assert.match(message, /Jumlah: 1 pcs/);
 });
 
 test('products that require dimensions reject an empty size', () => {
@@ -57,7 +93,7 @@ test('WhatsApp message contains the complete customer configuration', () => {
   const message = buildWhatsAppMessage(
     sticker,
     { BAHAN: 'Vinyl', LAMINATING: 'Doff', FINISHING: 'Diecut Pola' },
-    { size: '10 × 10 cm', quantity: 100, notes: 'Potong rapi' },
+    { size: '10 × 10 cm', quantity: 1, notes: 'Potong rapi' },
   );
 
   assert.equal(message, [
@@ -69,7 +105,7 @@ test('WhatsApp message contains the complete customer configuration', () => {
     'LAMINATING: Doff',
     'FINISHING: Diecut Pola',
     'Ukuran: 10 × 10 cm',
-    'Jumlah: 100 pcs',
+    'Jumlah: 1 lembar',
     'Catatan: Potong rapi',
   ].join('\n'));
 
