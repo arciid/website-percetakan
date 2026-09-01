@@ -87,6 +87,12 @@ test('product card keeps flow content outside its interactive button', () => {
   assert.match(markup, /<h3>Stiker Custom<\/h3>/);
 });
 
+test('product thumbnails load lazily without blocking image decoding', () => {
+  const markup = productCardMarkup(products[0]);
+
+  assert.match(markup, /<img[^>]*loading="lazy"[^>]*decoding="async"/);
+});
+
 test('option images use explicit mappings without fuzzy filename guesses', () => {
   const sticker = products.find((product) => product.id === 'stiker');
   const tumbler = products.find((product) => product.id === 'tumbler');

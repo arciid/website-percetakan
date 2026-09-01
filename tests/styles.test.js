@@ -17,3 +17,17 @@ test('interactive CSS retains compact controls and user preferences', () => {
   assert.match(css, /:focus-visible/);
   assert.match(css, /@media \(prefers-reduced-motion:\s*reduce\)/);
 });
+
+test('portrait gallery images are constrained to the modal frame', () => {
+  assert.match(css, /\.modal-media-main img\s*\{[^}]*position:\s*absolute[^}]*inset:\s*0[^}]*object-fit:\s*contain/s);
+});
+
+test('hero logo uses a proportional circular frame across breakpoints', () => {
+  assert.match(css, /\.hero-logo-card\s*\{[^}]*width:\s*310px[^}]*border-radius:\s*50%/s);
+  assert.match(css, /@media \(max-width:\s*780px\)[\s\S]*?\.hero-logo-card\s*\{[^}]*width:\s*220px/);
+});
+
+test('mobile modal keeps primary controls reachable while scrolling', () => {
+  assert.match(css, /@media \(max-width:\s*780px\)[\s\S]*?\.modal-close\s*\{[^}]*position:\s*fixed/);
+  assert.match(css, /@media \(max-width:\s*780px\)[\s\S]*?\.order-button\s*\{[^}]*position:\s*sticky[^}]*bottom:\s*0/);
+});
