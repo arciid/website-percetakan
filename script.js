@@ -8,19 +8,19 @@ const products = [
     cover: 'images/stiker/cover.webp',
     images: ['images/stiker/vinyl.webp', 'images/stiker/scotlite.webp', 'images/stiker/kromo.webp', 'images/stiker/transparan.webp', 'images/stiker/hologram.webp', 'images/stiker/chrome.webp', 'images/stiker/laminating-glossy.webp', 'images/stiker/laminating-doff.webp', 'images/stiker/laminating-glitter.webp', 'images/stiker/kisscut.webp', 'images/stiker/diecut.webp'],
     options: [['BAHAN', ['Vinyl', 'Scotlite', 'Kromo', 'Transparan', 'Hologram', 'Chrome']], ['LAMINATING', ['Tanpa Laminating', 'Glossy', 'Doff', 'Glitter']], ['FINISHING', ['Potong Kotak / Strip', 'Kisscut', 'Diecut Pola']]],
-    unit: 'pcs', defaultQty: 100, qtyStep: 10, minQty: 10, requiresSize: true, accent: 'yellow',
+    unit: 'lembar', defaultQty: 1, qtyStep: 1, minQty: 1, requiresSize: true, accent: 'yellow',
   },
   {
     id: 'name-tag-resin', name: 'Name Tag Resin', sub: 'Efek 3D Tebal • Dome / Resin Finish', category: 'STIKER',
     cover: 'images/stiker/timbul-cover.webp', images: ['images/stiker/timbul-resin.webp', 'images/stiker/vinyl.webp', 'images/stiker/chrome.webp', 'images/stiker/gold.webp'],
-    options: [['BAHAN DASAR', ['Vinyl Putih', 'Chrome', 'Gold']], ['FINISHING', ['Resin']], ['BENTUK POTONG', ['Sesuai Pola']]],
-    unit: 'pcs', defaultQty: 50, qtyStep: 10, minQty: 10, requiresSize: true, accent: 'yellow',
+    options: [['BAHAN DASAR', ['Vinyl Putih', 'Chrome', 'Gold']], ['FINISHING', ['Resin']], ['BENTUK POTONG', ['Sesuai Pola']], ['UKURAN', ['8 × 5 cm']]],
+    unit: 'pcs', defaultQty: 1, qtyStep: 1, minQty: 1, requiresSize: false, accent: 'yellow',
   },
   {
     id: 'banner', name: 'Banner Outdoor / Event', sub: 'Flexi Standar • Korea • Backlite', category: 'BANNER',
     cover: 'images/banner/cover.webp', images: ['images/banner/vinyl-280gr.webp', 'images/banner/korea-440gr.webp', 'images/banner/backlite.webp'],
     options: [['BAHAN', ['Vinyl 280gr', 'Korea 440gr', 'Backlite']], ['FINISHING', ['Mata Ayam', 'Les Putih', 'Lipat Keliling', 'Lipat Keliling + Mata Ayam', 'Selongsong Tiang']]],
-    unit: 'lembar', defaultQty: 1, qtyStep: 1, minQty: 1, requiresSize: true, accent: 'red',
+    unit: 'meter', defaultQty: 1, qtyStep: 1, minQty: 1, requiresSize: true, accent: 'red',
   },
   {
     id: 'xbanner', name: 'X-Banner', sub: 'Display Portable + Rangka X-Stand (60 × 160 cm)', category: 'BANNER',
@@ -38,13 +38,13 @@ const products = [
     id: 'bendera', name: 'Bendera & Umbul-Umbul', sub: 'Kain Cloth • TC • Satin', category: 'BENDERA',
     cover: 'images/bendera/cover.webp', images: ['images/bendera/cloth-banner.webp', 'images/bendera/kain-tc.webp', 'images/bendera/kain-satin.webp'],
     options: [['BAHAN', ['Cloth Banner', 'Kain TC', 'Kain Satin']], ['FINISHING', ['Lem Tali / Keliling', 'Selongsong Tiang', 'Tanpa Finishing (Potong Pas)']]],
-    unit: 'pcs', defaultQty: 1, qtyStep: 1, minQty: 1, requiresSize: true, accent: 'yellow',
+    unit: 'meter', defaultQty: 1, qtyStep: 1, minQty: 1, requiresSize: true, accent: 'yellow',
   },
   {
     id: 'indoor', name: 'Cetak Indoor', sub: 'High Detail Visual • Indoor Grade', category: 'INDOOR',
     cover: 'images/indoor/cover.webp', images: ['images/indoor/maxdecal.webp', 'images/indoor/ritrama.webp', 'images/indoor/transparan.webp', 'images/indoor/hologram.webp', 'images/indoor/one-way.webp', 'images/indoor/albatros.webp', 'images/indoor/chrome.webp'],
     options: [['VISUAL HASIL', ['Eco Solvent', 'Print UV']], ['BAHAN', ['Maxdecal', 'Ritrama', 'Transparan', 'Hologram', 'One Way', 'Albatros', 'Chrome']], ['LAMINATING', ['Tanpa Laminating', 'Glossy', 'Doff', 'Glitter']], ['FINISHING', ['Potong']]],
-    unit: 'lembar', defaultQty: 1, qtyStep: 1, minQty: 1, requiresSize: true, accent: 'yellow',
+    unit: 'meter', defaultQty: 1, qtyStep: 1, minQty: 1, requiresSize: true, accent: 'yellow',
   },
   {
     id: 'eventdesk', name: 'Event Desk Portable', sub: 'Meja Display Booth Promosi', category: 'INDOOR',
@@ -56,13 +56,13 @@ const products = [
     id: 'kertas-a3', name: 'Cetak Kertas A3+', sub: 'Brosur • Sertifikat • Kartu • Cover', category: 'KERTAS',
     cover: 'images/kertas/cover.webp', images: ['images/kertas/artpaper-260-gr.webp', 'images/kertas/artpaper-190-gr.webp', 'images/kertas/artpaper-120-gr.webp', 'images/kertas/pindo-cad.webp', 'images/kertas/concord.webp', 'images/kertas/hvs-100-gr.webp', 'images/kertas/linen.webp', 'images/kertas/rajawali.webp', 'images/kertas/duplex.webp', 'images/kertas/artpaper-300-gr.webp', 'images/kertas/new-top-200-gr.webp', 'images/kertas/ivory-230-gr.webp', 'images/kertas/via-felt-216-gr.webp'],
     options: [['BAHAN', ['Artpaper 260 gr', 'Artpaper 190 gr', 'Artpaper 120 gr', 'Pindo Cad', 'Concord', 'HVS 100 gr', 'Linen', 'Rajawali', 'Duplex', 'Artpaper 300 gr', 'New Top 200 gr', 'Ivory 230 gr', 'Via Felt 216 gr']], ['SISI CETAK', ['1 Sisi', '2 Sisi']], ['LAMINATING', ['Tanpa Laminating', 'Glossy', 'Doff', 'Glitter']], ['FINISHING', ['Potong Cutter', 'Staples Tengah', 'Jilid Samping', 'Spiral', 'Die Cut']]],
-    unit: 'lembar', defaultQty: 100, qtyStep: 10, minQty: 10, requiresSize: false, accent: 'red',
+    unit: 'lembar', defaultQty: 1, qtyStep: 1, minQty: 1, requiresSize: false, accent: 'red',
   },
   {
     id: 'nota-kwitansi', name: 'Nota & Kwitansi', sub: 'NCR Custom • Buku Pembukuan', category: 'KERTAS',
     cover: 'images/kertas/nota-cover.webp', images: ['images/kertas/ncr-1-ply.webp', 'images/kertas/ncr-2-ply.webp', 'images/kertas/ncr-3-ply.webp', 'images/kertas/ncr-4-ply.webp'],
     options: [['BAHAN / PLY', ['NCR 1 Ply (HVS)', 'NCR 2 Ply', 'NCR 3 Ply', 'NCR 4 Ply']], ['UKURAN', ['1 Folio (F4)', '1/2 Folio', '1/3 Folio', '1/4 Folio']], ['CETAK', ['1 Warna', 'Full Color']], ['FINISHING', ['Lem Samping (Bloklem)', 'Porporasi + Penomoran', 'Porporasi (Tanpa Penomoran)']]],
-    unit: 'buku', defaultQty: 10, qtyStep: 10, minQty: 10, requiresSize: false, accent: 'red',
+    unit: 'rim', defaultQty: 1, qtyStep: 1, minQty: 1, requiresSize: false, accent: 'red',
   },
   ...[
     ['akrilik-gold', 'Akrilik + Kaki Kotak + Gold', 'Display Eksklusif Kaki Gold', 'images/akrilik/kaki-gold-cover.webp', ['images/akrilik/kaki-gold.webp', 'images/akrilik/box-akrilik.webp']],
@@ -79,25 +79,25 @@ const products = [
     id: 'nomor-meja', name: 'Nomor Meja Akrilik', sub: 'Sign Meja Cafe & Resto', category: 'AKRILIK', cover: 'images/akrilik/nomor-meja-cover.webp', images: ['images/akrilik/nomor-meja.webp'], options: [], unit: 'pcs', defaultQty: 1, qtyStep: 1, minQty: 1, requiresSize: true, accent: 'yellow',
   },
   {
-    id: 'tumbler', name: 'Tumbler Custom', sub: 'Souvenir • Custom Print UV', category: 'MERCHANDISE', cover: 'images/merchandise/tumbler-cover.webp', images: ['images/merchandise/tumbler.webp', 'images/merchandise/tumbler-1-sisi.webp', 'images/merchandise/tumbler-2-sisi.webp', 'images/merchandise/tumbler-keliling.webp'], options: [['SISI CETAK', ['1 Sisi', '2 Sisi', 'Print Keliling (Rotary)']]], unit: 'pcs', defaultQty: 12, qtyStep: 1, minQty: 1, requiresSize: false, accent: 'red',
+    id: 'tumbler', name: 'Tumbler Custom', sub: 'Souvenir • Custom Print UV', category: 'MERCHANDISE', cover: 'images/merchandise/tumbler-cover.webp', images: ['images/merchandise/tumbler.webp', 'images/merchandise/tumbler-1-sisi.webp', 'images/merchandise/tumbler-2-sisi.webp', 'images/merchandise/tumbler-keliling.webp'], options: [['SISI CETAK', ['1 Sisi', '2 Sisi', 'Print Keliling (Rotary)']]], unit: 'pcs', defaultQty: 1, qtyStep: 1, minQty: 1, requiresSize: false, accent: 'red',
   },
   {
-    id: 'mug', name: 'Mug Custom', sub: 'Souvenir Keramik Custom', category: 'MERCHANDISE', cover: 'images/merchandise/mug-cover.webp', images: ['images/merchandise/mug-standard.webp', 'images/merchandise/mug-custom.webp'], options: [['MODEL', ['Mug Standard', 'Mug Custom']]], unit: 'pcs', defaultQty: 12, qtyStep: 1, minQty: 1, requiresSize: false, accent: 'red',
+    id: 'mug', name: 'Mug Custom', sub: 'Souvenir Keramik Custom', category: 'MERCHANDISE', cover: 'images/merchandise/mug-cover.webp', images: ['images/merchandise/mug-standard.webp', 'images/merchandise/mug-custom.webp'], options: [['MODEL', ['Mug Standard', 'Mug Custom']]], unit: 'pcs', defaultQty: 1, qtyStep: 1, minQty: 1, requiresSize: false, accent: 'red',
   },
   {
-    id: 'medali', name: 'Medali Wisuda / Event', sub: 'Award Akrilik / Logam', category: 'MERCHANDISE', cover: 'images/merchandise/medali-cover.webp', images: ['images/merchandise/medali.webp'], options: [['MODEL', ['Custom']]], unit: 'pcs', defaultQty: 10, qtyStep: 10, minQty: 10, requiresSize: true, accent: 'red',
+    id: 'medali', name: 'Medali Wisuda / Event', sub: 'Award Akrilik / Logam', category: 'MERCHANDISE', cover: 'images/merchandise/medali-cover.webp', images: ['images/merchandise/medali.webp'], options: [['MODEL', ['Custom']]], unit: 'pcs', defaultQty: 1, qtyStep: 1, minQty: 1, requiresSize: true, accent: 'red',
   },
   {
-    id: 'ganci', name: 'Ganci UV', sub: 'Gantungan Kunci Print UV Custom', category: 'MERCHANDISE', cover: 'images/merchandise/ganci-cover.webp', images: ['images/merchandise/ganci-1-sisi.webp', 'images/merchandise/ganci-2-sisi.webp'], options: [['SISI CETAK', ['1 Sisi', '2 Sisi (Bolak-Balik)']]], unit: 'pcs', defaultQty: 50, qtyStep: 10, minQty: 10, requiresSize: true, accent: 'red',
+    id: 'ganci', name: 'Ganci UV', sub: 'Gantungan Kunci Print UV Custom', category: 'MERCHANDISE', cover: 'images/merchandise/ganci-cover.webp', images: ['images/merchandise/ganci-1-sisi.webp', 'images/merchandise/ganci-2-sisi.webp'], options: [['SISI CETAK', ['1 Sisi', '2 Sisi (Bolak-Balik)']]], unit: 'pcs', defaultQty: 1, qtyStep: 1, minQty: 1, requiresSize: true, accent: 'red',
   },
   {
-    id: 'topi', name: 'Topi Custom', sub: 'Branding & Event Merchandise', category: 'MERCHANDISE', cover: 'images/merchandise/topi-cover.webp', images: ['images/merchandise/topi-print.webp', 'images/merchandise/topi-bordir.webp'], options: [['FINISHING', ['Print', 'Bordir']]], unit: 'pcs', defaultQty: 12, qtyStep: 1, minQty: 1, requiresSize: false, accent: 'red',
+    id: 'topi', name: 'Topi Custom', sub: 'Branding & Event Merchandise', category: 'MERCHANDISE', cover: 'images/merchandise/topi-cover.webp', images: ['images/merchandise/topi-print.webp', 'images/merchandise/topi-bordir.webp'], options: [['FINISHING', ['Print', 'Bordir']]], unit: 'pcs', defaultQty: 1, qtyStep: 1, minQty: 1, requiresSize: false, accent: 'red',
   },
   {
-    id: 'pulpen', name: 'Pulpen Print', sub: 'Corporate Gift & Event', category: 'MERCHANDISE', cover: 'images/merchandise/pulpen-cover.webp', images: ['images/merchandise/pulpen-standard.webp', 'images/merchandise/pulpen-premium.webp'], options: [['MODEL', ['Pulpen Standard', 'Pulpen Premium']]], unit: 'pcs', defaultQty: 50, qtyStep: 10, minQty: 10, requiresSize: false, accent: 'red',
+    id: 'pulpen', name: 'Pulpen Print', sub: 'Corporate Gift & Event', category: 'MERCHANDISE', cover: 'images/merchandise/pulpen-cover.webp', images: ['images/merchandise/pulpen-standard.webp', 'images/merchandise/pulpen-premium.webp'], options: [['MODEL', ['Pulpen Standard', 'Pulpen Premium']]], unit: 'pcs', defaultQty: 1, qtyStep: 1, minQty: 1, requiresSize: false, accent: 'red',
   },
   {
-    id: 'pin', name: 'Pin Bros', sub: 'Pin Peniti Souvenir', category: 'MERCHANDISE', cover: 'images/merchandise/pin-cover.webp', images: ['images/merchandise/pin-25mm.webp', 'images/merchandise/pin-32mm.webp', 'images/merchandise/pin-44mm.webp', 'images/merchandise/pin-58mm.webp'], options: [['UKURAN', ['25mm', '32mm', '44mm', '58mm']]], unit: 'pcs', defaultQty: 50, qtyStep: 10, minQty: 10, requiresSize: false, accent: 'red',
+    id: 'pin', name: 'Pin Bros', sub: 'Pin Peniti Souvenir', category: 'MERCHANDISE', cover: 'images/merchandise/pin-cover.webp', images: ['images/merchandise/pin-25mm.webp', 'images/merchandise/pin-32mm.webp', 'images/merchandise/pin-44mm.webp', 'images/merchandise/pin-58mm.webp'], options: [['UKURAN', ['25mm', '32mm', '44mm', '58mm']]], unit: 'pcs', defaultQty: 1, qtyStep: 1, minQty: 1, requiresSize: false, accent: 'red',
   },
 ];
 
