@@ -27,3 +27,15 @@ test('every DOM id consumed by the controller exists in the page', () => {
   ];
   ids.forEach((id) => assert.match(html, new RegExp(`id="${id}"`), `missing #${id}`));
 });
+
+test('portfolio presents six accessible, lazy-loaded work images', () => {
+  const portfolio = html.match(/<section class="section works"[\s\S]*?<\/section>/)?.[0] || '';
+  const images = [...portfolio.matchAll(/<img\b[^>]*>/g)].map((match) => match[0]);
+
+  assert.equal(images.length, 6);
+  images.forEach((image) => {
+    assert.match(image, /alt="[^"]+"/);
+    assert.match(image, /loading="lazy"/);
+    assert.match(image, /decoding="async"/);
+  });
+});

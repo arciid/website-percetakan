@@ -31,3 +31,9 @@ test('mobile modal keeps primary controls reachable while scrolling', () => {
   assert.match(css, /@media \(max-width:\s*780px\)[\s\S]*?\.modal-close\s*\{[^}]*position:\s*fixed/);
   assert.match(css, /@media \(max-width:\s*780px\)[\s\S]*?\.order-button\s*\{[^}]*position:\s*sticky[^}]*bottom:\s*0/);
 });
+
+test('portfolio gallery keeps a featured desktop composition and a mobile column', () => {
+  assert.match(css, /\.portfolio-grid\s*\{[^}]*grid-template-columns:\s*repeat\(12,/s);
+  assert.match(css, /\.portfolio-card:first-child\s*\{[^}]*grid-column:\s*span 7/s);
+  assert.match(css, /@media \(max-width:\s*520px\)[\s\S]*?\.portfolio-grid\s*\{[^}]*grid-template-columns:\s*1fr/);
+});
